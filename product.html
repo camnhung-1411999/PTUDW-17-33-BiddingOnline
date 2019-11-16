@@ -19,61 +19,243 @@
   <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
     type='text/css'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
   <!-- Custom styles for this template -->
   <link href="css/agency.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/product.css">
 
 </head>
+
 <body id="page-top">
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top " id="mainNav">
-                <div class="container">
-                  <a class="navbar-brand js-scroll-trigger" href="#page-top">Bidding Together</a>
-                  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                  </button>
-                  <div class="collapse navbar-collapse " id="navbarResponsive">
-                      <form class="form-inline my-2 my-lg-0">
-                          
-                          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-                    <ul class="navbar-nav text-uppercase ml-auto">
-                      <!--??????????? không làm được -->
-                      <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#topbid">TOP BID</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#team">Team</a>
-                      </li>
-                      <!--Sign in sign up-->
-                      
-                      <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger login-window button" href="#login-box" >Sign in</a>
-                      </li>
-            
-                      <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#signup">Sign up</a>
-                      </li>
-                    </ul>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top " id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Bidding Together</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse " id="navbarResponsive">
+        <form class="form-inline my-2 my-lg-0">
+
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav text-uppercase ml-auto">
+          <!--??????????? không làm được -->
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#topbid">TOP BID</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#team">Team</a>
+          </li>
+          <!--Sign in sign up-->
+
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger login-window button" href="#login-box">Sign in</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#signup">Sign up</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- <div class="container-fluid mt-12">
+    <div class="row">
+      <div class="col-3">
+        <div class="card" style="width: 18rem;">
+          <div class="card-header">
+            Featured
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+          </ul>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="container-fluid mt-12">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="card shadow">
+          <h5 class="card-header">
+            Categories
+          </h5>
+          <div class="list-group list-group-flush">
+            <a href="#" class="list-group-item list-group-item-action active"> All</a>
+            <a href="#" class="list-group-item list-group-item-action">Laptop</a>
+            <a href="#" class="list-group-item list-group-item-action ">Mobile</a>
+            <a href="#" class="list-group-item list-group-item-action">Tablet</a>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-9">
+
+        <section class="bg-light page-section" id="topbid">
+          <div class="row">
+            <!-- chèn cho khỏi trống -->
+            <div class="col-md-1"></div>
+            <div class="col-md-2 col-sm-6 topbid-item">
+              <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
+                <div class="topbid-hover">
+                  <div class="topbid-hover-content">
+                    <i class="fas fa-plus fa-3x"></i>
                   </div>
                 </div>
-        </nav>
-        
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <img class="img-fluid"
+                  src="https://cdn.fptshop.com.vn/Uploads/Originals/2019/9/11/637037687765081535_11-pro-max-vang.png"
+                  alt="">
+              </a>
+              <div class="topbid-caption">
+                <h5>iPhone 11 Pro Max</h5>
+                <p class="text-muted">37,990,000 ₫</p>
+                <p class="settime">02:00:30</p>
+              </div>
+            </div>
 
-  <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+            <div class="col-md-2 col-sm-6 topbid-item">
+              <a class="topbid-link" data-toggle="modal" href="#topbidModal2">
+                <div class="topbid-hover">
+                  <div class="topbid-hover-content">
+                    <i class="fas fa-plus fa-3x"></i>
+                  </div>
+                </div>
+                <img class="img-fluid"
+                  src="https://product.hstatic.net/1000337134/product/1024e34a20f1da3c195ce4c_master_112c442a9817466eb1de8ac23fd6f593_master_027d12a707d944b38602059a3e40e665_master.jpg"
+                  alt="">
+              </a>
+              <div class="topbid-caption">
+                <h5>MacBook Pro 15"2019</h5>
+                <p class="text-muted">66,000,000₫</p>
+                <p class="settime">21:12:19</p>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-6 topbid-item ">
+              <a class="topbid-link" data-toggle="modal" href="#topbidModal3">
+                <div class="topbid-hover">
+                  <div class="topbid-hover-content">
+                    <i class="fas fa-plus fa-3x"></i>
+                  </div>
+                </div>
+                <img class="img-fluid"
+                  src="https://product.hstatic.net/1000233206/product/msi-gt76-titan-dt-9sg-097vn_6e77dffe3a3448199c2ae3743e13a2e9_master.png"
+                  alt="">
+              </a>
+              <div class="topbid-caption">
+                <h5> Laptop MSI GT76</h5>
+                <p class="text-muted">111,990,000₫</p>
+                <p class="settime">3 days</p>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-6 topbid-item">
+              <a class="topbid-link" data-toggle="modal" href="#topbidModal4">
+                <div class="topbid-hover">
+                  <div class="topbid-hover-content">
+                    <i class="fas fa-plus fa-3x"></i>
+                  </div>
+                </div>
+                <img class="img-fluid"
+                  src="https://minmobile.net/image/catalog/Samsung/Galaxy-Fold-5G/samsung-galaxy-fold-5g-gia-re-han-quoc-xach-tay-uy-tin-hai-phong.jpg"
+                  alt="">
+              </a>
+              <div class="topbid-caption">
+                <h5><br>Samsung Galaxy Fold 5G</h5>
+                <p class="text-muted">49.900.000 đ</p>
+                <p class="settime">3 days</p>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-6 topbid-item">
+              <a class="topbid-link" data-toggle="modal" href="#topbidModal5">
+                <div class="topbid-hover">
+                  <div class="topbid-hover-content">
+                    <i class="fas fa-plus fa-3x"></i>
+                  </div>
+                </div>
+                <img class="img-fluid"
+                  src="https://img.nhabanhang.com/c/i/19086/aHR0cHM6Ly9zYWx0LnRpa2ljZG4uY29tL3RzL3Byb2R1Y3QvZGYvODkvNDYvNWZmZDA0YTYxYzljMjRhYzZiMWQ4Yzk4YjdhM2FiYTAuanBn.jpg"
+                  alt="">
+              </a>
+              <div class="topbid-caption">
+                <h5>IPAD PRO 12.9 INCH </h5>
+                <p class="text-muted">35,990,000 đ</p>
+                <p class="settime">25:00:27</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
 
-  <!-- Contact form JavaScript -->
-  <script src="js/jqBootstrapValidation.js"></script>
-  <script src="js/contact_me.js"></script>
+    <!-- Modal -->
+    <script>
+      for (var i = 0; i < 5; i++) {
+        document.write(`<div class="topbid-modal modal fade" id="topbidModal${i+1}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="close-modal" data-dismiss="modal">
+          <div class="lr">
+            <div class="rl"></div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <div class="modal-body">
+                <!-- Project Details Go Here -->
+                <h2 class="text-uppercase">Project Name</h2>
+                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                <img class="img-fluid d-block mx-auto" src="img/portfolio/05-full.jpg" alt="">
+                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est
+                  blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia
+                  expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                <ul class="list-inline">
+                  <li>Date: January 2017</li>
+                  <li>Client: Southwest</li>
+                  <li>Category: Website Design</li>
+                </ul>
+                <button class="btn btn-primary" data-dismiss="modal" type="button">
+                  <i class="fas fa-times"></i>
+                  Close Project</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`);
+      }
+    </script>
 
-  <!-- Custom scripts for this template -->
-  <script src="js/agency.min.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Contact form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/agency.min.js"></script>
 </body>
+
 </html>
