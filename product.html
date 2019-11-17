@@ -34,7 +34,7 @@
 <body id="page-top">
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top " id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">Bidding Together</a>
+      <a class="navbar-brand js-scroll-trigger" href="index.html">Bidding Together</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
         aria-label="Toggle navigation">
@@ -58,11 +58,7 @@
           <!--Sign in sign up-->
 
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger login-window button" href="#login-box">Sign in</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#signup">Sign up</a>
+            <a class="nav-link js-scroll-trigger" href="signup_in.html">Sign in/Sign up</a>
           </li>
         </ul>
       </div>
@@ -292,7 +288,7 @@
     <!-- Modal -->
     <script>
       for (var i = 0; i < 5; i++) {
-        document.write(`<div class="topbid-modal modal fade" id="topbidModal${i+1}" tabindex="-1" role="dialog" aria-hidden="true">
+        document.write(` <div class="topbid-modal modal fade" id="topbidModal1" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="close-modal" data-dismiss="modal">
@@ -300,29 +296,496 @@
             <div class="rl"></div>
           </div>
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8 mx-auto">
-              <div class="modal-body">
-                <!-- Project Details Go Here -->
-                <h2 class="text-uppercase">Project Name</h2>
-                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                <img class="img-fluid d-block mx-auto" src="img/portfolio/05-full.jpg" alt="">
-                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est
-                  blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia
-                  expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                <ul class="list-inline">
-                  <li>Date: January 2017</li>
-                  <li>Client: Southwest</li>
-                  <li>Category: Website Design</li>
-                </ul>
-                <button class="btn btn-primary" data-dismiss="modal" type="button">
-                  <i class="fas fa-times"></i>
-                  Close Project</button>
+        <nav class="navbar navbar-inverse bg-inverse sticky-top">
+          <div class="container p-0 relative">
+              <div class="row navbar navbar-toggleable-sm">
+                  
+                  <div class="collapse navbar-collapse" id="nava">
+                      <div class="col-12">
+                          <ul class="mr-list-20px navbar-nav my-2 my-md-0 float-md-right">
+                              <li class="nav-item">
+                                  <a class="nav-link dropdown-toggle" role="button" id="mega-menu-btn">Categories</a>
+                              </li>
+                              <li class="nav-item ">
+                                  <a class="nav-link " href="# ">Account</a>
+                              </li>
+                              <li class="nav-item ">
+                                  <a class="nav-link " href="# ">Cart
+                              <span class="badge badge-danger badge-pill mx-1" style="min-width:30px;">
+                                  0
+                              
+                              </span>
+                              </a>
+                              </li>
+                              <li class="hidden-sm-down ml-4">
+                                  <button class="btn" id="search-click-list" style="background:none;">
+                                      <img class="" href="" src="https://dummyimage.com/40x40/9ed442/ffffff.png&text=search ">
+                                  </button>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
               </div>
-            </div>
+              <div class="row no-gutters collapse " id="searchform" style="">
+                  <div class="col-12">
+                      <form action="" method="get" class="w-100 mt-3">
+                          <div class="row no-gutters search-group">
+                              <div class="col-12 col-md-11">
+                                  <input type="search" name="search" placeholder="Search Here" class="search-input bg-inverse text-color-a0 col-12">
+                              </div>
+                              <div class="col-12 col-md-1 justify-content-center justify-content-md-end  mt-3 mt-md-0 ">
+                                  <button type="submit" class="btn-search text-color-a0 bg-success">Go</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
           </div>
-        </div>
+      </nav>
+      <!--   Main Content====================================================-->
+      <main>
+          <div class="container mb-4">
+              <!--       Detail Product-->
+              <div class="row no-gutters mt-4">
+                  <!--               picture product-->
+                  <div class="col-12 col-md-7">
+                      <div class="row no-gutters w-100">
+                          <!--                       Main picture-->
+                          <div class="col-12 col-lg-10 flex-lg-last border-full-1px-solid border-color-a0">
+                              <div class="d-flex justify-content-center align-items-center w-100 px-5">
+                                  <img src="https://cdn.fptshop.com.vn/Uploads/Originals/2019/9/11/637037687765081535_11-pro-max-vang.png" class="img-fluid" id="main-image" style="max-height:600px;">
+                              </div>
+                          </div>
+                          <!--                           side picture-->
+                          <div class=" col-12 col-lg-2 flex-lg-first mb-md-0 mb-4" style="display:block">
+                              <div class="row no-gutters ">
+  
+                                  <div class="col-4 col-sm-3 col-lg-12 border-full-1px-solid border-color-a0 justify-content-center side-picture active" role="button" data-target="side-1">
+                                      <div class="p-2 w-75">
+                                          <img src="https://cdn.fptshop.com.vn/Uploads/Originals/2019/9/11/637037687765081535_11-pro-max-vang.png" class="img-fluid ">
+                                      </div>
+                                  </div>
+  
+                                  <div class="col-4 col-sm-3 col-lg-12 border-full-1px-solid border-color-a0 justify-content-center side-picture" role="button" data-target="side-2">
+                                      <div class="p-2 w-75">
+                                          <img src="https://cdn.cellphones.com.vn/media/catalog/product/cache/7/thumbnail/9df78eab33525d08d6e5fb8d27136e95/i/p/iphone-11-pro-max-midnight-green-select-2019.png" class="img-fluid ">
+                                      </div>
+                                  </div>
+                                  <div class="col-4 col-sm-3 col-lg-12 border-full-1px-solid border-color-a0 justify-content-center side-picture" role="button" data-target="side-3">
+                                      <div class="p-2 w-75">
+                                          <img src="https://cdn.cellphones.com.vn/media/catalog/product/cache/7/thumbnail/9df78eab33525d08d6e5fb8d27136e95/i/p/iphone-11-pro-max-silver-select-2019.png" class="img-fluid ">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <!--                Options Product-->
+                  <div class="col-12 col-md-5">
+                      <div class="pt-0 pr-2 pb-2 pl-1 pl-md-5">
+                          <!--                       Judul-->
+                          <div class="mb-4 border-full-2px-solid border-top-0 border-left-0 border-right-0 border-color-inverse">
+                              <h1>iPhone 11 Pro Max</h1>
+                          </div>
+                    
+                          <!--                        Select color-->
+                          <div class="mb-4 ">
+                              <h6 class="text-uppercase ">Select Color :</h6>
+                              <div class="d-flex align-content-center ">
+                                  <ul class="list-unstyled list-inline ">
+                                      <li class="list-inline-item ">
+                                          <div class="p-1 " style="width:60px; height:40px;border:1px solid #f808c4 ">
+                                              <div class="w-100 h-100 " style="background-color:rgba(250, 197, 21, 0.438)"></div>
+                                          </div>
+                                      </li>
+                                      <li class="list-inline-item ">
+                                          <div class="p-1 " style="width:60px; height:40px; ">
+                                              <div class="w-100 h-100 " style="background-color:rgb(12, 12, 12) "></div>
+                                          </div>
+                                      </li>
+                                      <li class="list-inline-item ">
+                                        <div class="p-1 " style="width:60px; height:40px; ">
+                                            <div class="w-100 h-100 " style="background-color:rgba(148, 145, 141, 0.438) "></div>
+                                        </div>
+                                    </li>
+                                  </ul>
+                              </div>
+                          </div>
+                          <!--                   Price-->
+                          <div class="row">
+                              <div class="mb-4 ">
+                                  <h6 class="text-muted font-size-08 text-uppercase ">Current bid:</h6>
+                                  <h4>39,990,000 ₫</h4>
+                              </div>
+                              <div class="mb-4 ">
+                                <h6 class="text-muted font-size-08 text-uppercase ml-5">Current winner:</h6>
+                                <h4>toanlong.123</h4>
+                            </div>
+                          </div>
+                          <div class="row">
+                              <div class="mb-5 ">
+                                <h6 class="text-muted font-size-04  ">PLACE YOUR BID:</h6>
+                                <input type="text" name="bidprice" id="bidprice">
+                                <button type="submit">Bid</button>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="mb-5 ">
+                              <h6 class=" font-size-08 text-uppercase ">DEFAULT PRICE:</h6>
+                              <h4>37,990,000 ₫</h4>
+                              </div>
+                            <!--Button-->
+                                <div class=" ">
+                                    <button type="button " class="mb-1 btn py-3 px-5 bg-inverse text-color-a0 text-uppercase font-weight-bold " style="border-radius:0px; ">Add to chart</button>
+                                </div>
+                           </div>
+                           <a href="# ">
+                            <h6 class="text-uppercase text-muted font-size-08 "><u>Save to Wishlist</u></h6>
+                        </a>
+                  </div>
+              </div>
+          </div>
+          <!--    Description / Details / shipping -->
+          <div class="container">
+              <div class="my-5">
+                  <ul class="nav nav-tabs" role="tablist">
+                      <li class="nav-item">
+                          <a class="nav-link text-color-a1  active" data-toggle="tab" href="#deskripsi" role="tab">Description</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link text-color-a1" data-toggle="tab" href="#detail" role="tab">Details</a>
+                      </li>
+                      <li class="nav-item ">
+                          <a class="nav-link text-color-a1" data-toggle="tab" href="#shipping" role="tab">Shipping</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link text-color-a1" data-toggle="tab" href="#seller" role="tab">Seller</a>
+                      </li>
+                  </ul>
+                  <!-- Tab panes -->
+                  <div class="tab-content font-size-09" style="background-color:#fafafa">
+                      <div class="tab-pane fade show active px-3 py-4 text-color-a2" id="deskripsi" role="tabpanel">
+                      
+                        Hãng sản xuất	Apple<br>
+                        Kích thước	158.0mm - 77.8mm - 8.1mm<br>
+                        Trọng lượng	226g<br>
+                        Bộ nhớ đệm / Ram	4 GB<br>
+                        Bộ nhớ trong	64 GB<br>
+                        Loại SIM	Nano-SIM + eSIM<br>
+                        Loại màn hình	Super Retina XDR<br>
+                        Kích thước màn hình	6.5 inches<br>
+                        Độ phân giải màn hình	2688 x 1242 pixels<br>
+                        Hệ điều hành	iOS    <br>
+                      </div>
+                      <div class="tab-pane fade px-3 py-4 text-color-a2" id="detail" role="tabpanel">
+                        iPhone 11 Pro Max chính hãng Vn/a – Trải nghiệm chụp ảnh đỉnh cao với 3 camera sau
+                        <br> iPhone 11 Pro Max là mẫu smartphone cao cấp nhất của Apple được ra mắt năm 2019. Với thiết kế cao cấp, hệ thống camera 3 camera cùng cấu hình siêu mạnh mẽ thì iPhone 11 Pro Max chính là một chiếc smartphone đáp ứng mọi trải nghiệm của người dùng.
+                        
+                        <br> iPhone 11 Pro Max có kích thước to hơn với chất liệu thép không gỉ bền bỉ
+                        <br> iPhone 11 Pro Max có thiết kế tương tự như iPhone 11 Pro nhưng kích thước thì to hơn với kích thước màn hình 6.5 inch và toàn bộ máy có kích thước 158 x 77.8 x 8.1 mm. Thiết kế không có nhiều thay đổi trừ hệ thống camera sau được nâng cấp thành 3 camera. Màn hình tai thỏ vẫn được giữ nguyên và chất liệu thép không gỉ giúp iPhone 11 Pro Max bền bỉ hơn.
+                      </div>
+                      <div class="tab-pane fade px-3 py-4 text-color-a2" id="shipping" role="tabpanel">
+                       + Đơn vị vận chuyển: Vận chuyển nhanh quốc tế (Standard Express)<br>
+                       + Đơn vị vận chuyển: Vận Chuyển Nhanh (Giao Hàng Tiết Kiệm)<br>
+                       + Đơn vị vận chuyển: Vận Chuyển Nhanh (Giao Hàng Nhanh)
+                      </div>
+                      <div class="tab-pane fade px-3 py-4 text-color-a2" id="seller" role="tabpanel"></div>
+                      <h4>Information seller</h4>
+                      - Name seller: Nguyen Ngo Ngoc Nga <br>
+                      - Point      : 10/10
+                  </div>
+              </div>
+          </div>
+          <!--        Review ========================================================================================-->
+          <section class="mb-5">
+              <h4 class="text-center">REVIEW</h4>
+              <div class=" mt-5 container">
+                  <div class="row no-gutters gutter-20 mb-5">
+                      <div class="col-12 col-sm-4  mb-4 mb-sm-0 justify-content-center">
+                          <div class="row ">
+                              <div class="col-12 mb-4 justify-content-center">
+                                  <h5 class="">Rating</h5>
+                              </div>
+                              <div class="col-12  justify-content-center">
+                                  <div class="w-75">
+                                      <img class="img-fluid w-100" src="img/rating.jpg" alt="Rating image">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-12 col-sm-4  mb-4 mb-sm-0 justify-content-center">
+                          <div class="row ">
+                              <div class="col-12 mb-4 justify-content-center">
+                                  <h5 class="">Reviewers</h5>
+                              </div>
+                              <div class="col-12  justify-content-center">
+                                  <h1 class="font-szie-4">2</h1>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="" style="background-color:#fafafa">
+                  <div class="container review py-3">
+                      <div class="row review " style="">
+                          <div class="col-12 col-lg-6 py-3">
+                              <div class="row pb-3 border-full-1px-solid border-color-inverse border-top-0 border-right-0 border-left-0">
+                                  <div class="col-12 col-sm-8">
+                                      <div class="row">
+                                          <h3 class="col-12">Obama Obama</h3>
+                                          <h6 class="col-12 font-size-08">On <span>17 October, 1999</span></h6>
+                                      </div>
+                                  </div>
+                                  <div class="col-12 col-sm-4 justify-content-start justify-content-sm-end">
+                                      <div>
+                                          <img class="img-fluid" src="img/rating.jpg" alt="rating give">
+                                      </div>
+                                  </div>
+                                  <div class="col-12 mt-3 mb-2">
+                                      <div class="row">
+                                          <div class="col-12">
+                                              <h6>Comment:</h6>
+                                          </div>
+                                          <div class="col-12">
+                                              <p class="font-size-09">"<span> This is the best product i have boungt!!
+                                          </span>"</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-12 mb-3">
+                                      <div class="">
+                                          <h6 class="font-size-09 d-inline-block">Was the review helpful ?</h6>
+                                          <div class="ml-3 d-inline-block">
+                                              <button class="btn btn-sm btn-secondary border-rad-0" role="button" style="width:40px;">Yes</button>
+                                              <button class="btn btn-sm btn-secondary border-rad-0" role="button" style="width:40px;">No</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-12">
+                                      <div class="">
+                                          <h6 class="font-size-08 float-right">1 of 5 found this review helpful</h6>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-12 col-lg-6 py-3">
+                              <div class="row pb-3 border-full-1px-solid border-color-inverse border-top-0 border-right-0 border-left-0">
+                                  <div class="col-12 col-sm-8">
+                                      <div class="row">
+                                          <h3 class="col-12">Anna Hathaway</h3>
+                                          <h6 class="col-12 font-size-08">On <span>17 October, 1999</span></h6>
+                                      </div>
+                                  </div>
+                                  <div class="col-12 col-sm-4 justify-content-start justify-content-sm-end">
+                                      <div>
+                                          <img class="img-fluid" src="img/rating.jpg" alt="rating give">
+                                      </div>
+                                  </div>
+                                  <div class="col-12 mt-3 mb-2">
+                                      <div class="row">
+                                          <div class="col-12">
+                                              <h6>Comment:</h6>
+                                          </div>
+                                          <div class="col-12">
+                                              <p class="font-size-09">"<span>I really like this product!! its so amazing
+                                         </span>"</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-12 mb-3">
+                                      <div class="">
+                                          <h6 class="font-size-09 d-inline-block">Was the review helpful ?</h6>
+                                          <div class="ml-3 d-inline-block">
+                                              <button class="btn btn-sm btn-secondary border-rad-0" role="button" style="width:40px;">Yes</button>
+                                              <button class="btn btn-sm btn-secondary border-rad-0" role="button" style="width:40px;">No</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-12">
+                                      <div class="">
+                                          <h6 class="font-size-08 float-right">2 of 5 found this review helpful</h6>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          
+                      </div>
+                      <nav aria-label="">
+                          <div class="pagination justify-content-end border-rad-0 align-items-center">
+                              <div class="mr-4">
+                                  <h6 class="text-color-a1">More Review :</h6>
+                              </div>
+                              <div class="border-full-1px-solid border-inverse" style="padding: 6px 14px">
+                                  <a class="text-color-a1" href="#" tabindex="-1">&lang;</a>
+                              </div>
+                              <div class="mx-3">
+                                  <a class="text-color-a1" href="#">1 </a>
+                              </div>
+                              <div class="border-full-1px-solid border-inverse" style="padding: 6px 14px">
+                                  <a class="text-color-a1" href="#" tabindex="-1">&rang;</a>
+                              </div>
+                          </div>
+                      </nav>
+                  </div>
+              </div>
+          </section>
+          <!--        You may also like-->
+          <div class="container mb-4 ">
+              <h4 class="text-center text-uppercase ">You May Also Like</h4>
+              <div class="row ">
+                <div class="col-md-3 col-6 topbid-item">
+                  <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
+                    <div class="topbid-hover">
+                      <div class="topbid-hover-content">
+                        <i class="fas fa-plus fa-3x"></i>
+                      </div>
+                    </div>
+                    <img class="img-fluid"
+                      src="https://bachlongmobile.com/media/catalog/product/cache/1/image/040ec09b1e35df139433887a97daa66f/7/p/7psilver_2.jpg"
+                      alt="">
+                  </a>
+                  <div class="topbid-caption">
+                    <h4>IPhone7 Plus</h4>
+                    <p class="text-muted">5,850,000₫</p>
+                    <p class="settime">02:00:30</p>
+                  </div>
+        
+                </div>
+                <div class="col-md-3 col-6 topbid-item">
+                  <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
+                    <div class="topbid-hover">
+                      <div class="topbid-hover-content">
+                        <i class="fas fa-plus fa-3x"></i>
+                      </div>
+                    </div>
+                    <img class="img-fluid"
+                      src="https://bachlongmobile.com/media/catalog/product/cache/1/image/040ec09b1e35df139433887a97daa66f/7/p/7psilver_2.jpg"
+                      alt="">
+                  </a>
+                  <div class="topbid-caption">
+                    <h4>IPhone7 Plus</h4>
+                    <p class="text-muted">5,850,000₫</p>
+                    <p class="settime">02:00:30</p>
+                  </div>
+        
+                </div>
+                <div class="col-md-3 col-6 topbid-item">
+                  <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
+                    <div class="topbid-hover">
+                      <div class="topbid-hover-content">
+                        <i class="fas fa-plus fa-3x"></i>
+                      </div>
+                    </div>
+                    <img class="img-fluid"
+                      src="https://bachlongmobile.com/media/catalog/product/cache/1/image/040ec09b1e35df139433887a97daa66f/7/p/7psilver_2.jpg"
+                      alt="">
+                  </a>
+                  <div class="topbid-caption">
+                    <h4>IPhone7 Plus</h4>
+                    <p class="text-muted">5,850,000₫</p>
+                    <p class="settime">02:00:30</p>
+                  </div>
+        
+                </div>
+                <div class="col-md-3 col-6 topbid-item">
+                  <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
+                    <div class="topbid-hover">
+                      <div class="topbid-hover-content">
+                        <i class="fas fa-plus fa-3x"></i>
+                      </div>
+                    </div>
+                    <img class="img-fluid"
+                      src="https://bachlongmobile.com/media/catalog/product/cache/1/image/040ec09b1e35df139433887a97daa66f/7/p/7psilver_2.jpg"
+                      alt="">
+                  </a>
+                  <div class="topbid-caption">
+                    <h4>IPhone7 Plus</h4>
+                    <p class="text-muted">5,850,000₫</p>
+                    <p class="settime">02:00:30</p>
+                  </div>
+        
+                </div>
+              </div>
+          </div>
+      </main>
+      <!--   Footer==============================================-->
+      <footer class="bg-inverse pt-5 ">
+          <div class="container p-0 ">
+              <div class="row m-0 mb-5 pb-3 mb-20px ">
+                  <div class="col-12 col-sm-6 col-md-3 text-white justify-content-center justify-content-sm-start text-sm-left text-center ">
+                      <ul class="list-unstyled ">
+                          <li>
+                              <h5>About</h5>
+                          </li>
+                          <li class="pt-3 ">
+                              <ul class="list-unstyled ">
+                                  <li>About us</li>
+                                  <li>Blog</li>
+                                  <li>Career</li>
+                                  <li>Seller Stories</li>
+                                  <li>About us</li>
+                              </ul>
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-3 text-white justify-content-center justify-content-sm-start text-sm-left text-center ">
+                      <ul class="list-unstyled ">
+                          <li>
+                              <h5>Help</h5>
+                          </li>
+                          <li class="pt-3 ">
+                              <ul class="list-unstyled ">
+                                  <li>Terms and Conditions</li>
+                                  <li>Privacy Policy</li>
+                                  <li>Resolution Center</li>
+                                  <li>Contact us</li>
+                              </ul>
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-3 text-white justify-content-center justify-content-sm-start text-sm-left text-center ">
+                      <ul class="list-unstyled ">
+                          <li>
+                              <h5>Support</h5>
+                          </li>
+                          <li class="pt-3 ">
+                              <ul class="list-unstyled ">
+                                  <li>Send Ticket</li>
+                                  <li>Chat</li>
+                                  <li>Costumer Service</li>
+                              </ul>
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-3 text-white justify-content-center justify-content-sm-start text-sm-left text-center ">
+                      <ul class="list-unstyled ">
+                          <li>
+                              <h5>Follow</h5>
+                          </li>
+                          <li class="pt-3 ">
+                              <ul class="list-unstyled list-inline ">
+                                  <li class="list-inline-item "><img src="https://dummyimage.com/50x50/7767eb/ffffff.png&text=icon" width="30px "></li>
+                                  <li class="list-inline-item "><img src="https://dummyimage.com/50x50/7767eb/ffffff.png&text=icon" width="30px "></li>
+                                  <li class="list-inline-item "><img src="https://dummyimage.com/50x50/7767eb/ffffff.png&text=icon" width="30px "></li>
+                                  <li class="list-inline-item "><img src="https://dummyimage.com/50x50/7767eb/ffffff.png&text=icon" width="30px "></li>
+                                  <li class="list-inline-item "><img src="https://dummyimage.com/50x50/7767eb/ffffff.png&text=icon" width="30px "></li>
+                              </ul>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <!--    copyright-->
+          <div class="border-top-footer ">
+              <div class="container ">
+                  <div class="row m-0 ">
+                      <div class="col h-copyright ">
+                          <p class="text-white text-center " style="margin-top:25px ">&copy; PT. Ayo Techno Idea</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </footer>
       </div>
     </div>
   </div>`);
