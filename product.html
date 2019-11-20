@@ -288,7 +288,7 @@
     <!-- Modal -->
     <script>
       for (var i = 0; i < 5; i++) {
-        document.write(` <div class="topbid-modal modal fade" id="topbidModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        document.write(`  <div class="topbid-modal modal fade" id="topbidModal1" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="close-modal" data-dismiss="modal">
@@ -296,52 +296,7 @@
             <div class="rl"></div>
           </div>
         </div>
-        <nav class="navbar navbar-inverse bg-inverse sticky-top">
-          <div class="container p-0 relative">
-              <div class="row navbar navbar-toggleable-sm">
-                  
-                  <div class="collapse navbar-collapse" id="nava">
-                      <div class="col-12">
-                          <ul class="mr-list-20px navbar-nav my-2 my-md-0 float-md-right">
-                              <li class="nav-item">
-                                  <a class="nav-link dropdown-toggle" role="button" id="mega-menu-btn">Categories</a>
-                              </li>
-                              <li class="nav-item ">
-                                  <a class="nav-link " href="# ">Account</a>
-                              </li>
-                              <li class="nav-item ">
-                                  <a class="nav-link " href="# ">Cart
-                              <span class="badge badge-danger badge-pill mx-1" style="min-width:30px;">
-                                  0
-                              
-                              </span>
-                              </a>
-                              </li>
-                              <li class="hidden-sm-down ml-4">
-                                  <button class="btn" id="search-click-list" style="background:none;">
-                                      <img class="" href="" src="https://dummyimage.com/40x40/9ed442/ffffff.png&text=search ">
-                                  </button>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-              <div class="row no-gutters collapse " id="searchform" style="">
-                  <div class="col-12">
-                      <form action="" method="get" class="w-100 mt-3">
-                          <div class="row no-gutters search-group">
-                              <div class="col-12 col-md-11">
-                                  <input type="search" name="search" placeholder="Search Here" class="search-input bg-inverse text-color-a0 col-12">
-                              </div>
-                              <div class="col-12 col-md-1 justify-content-center justify-content-md-end  mt-3 mt-md-0 ">
-                                  <button type="submit" class="btn-search text-color-a0 bg-success">Go</button>
-                              </div>
-                          </div>
-                      </form>
-                  </div>
-              </div>
-          </div>
-      </nav>
+       
       <!--   Main Content====================================================-->
       <main>
           <div class="container mb-4">
@@ -384,13 +339,19 @@
                   <div class="col-12 col-md-5">
                       <div class="pt-0 pr-2 pb-2 pl-1 pl-md-5">
                           <!--                       Judul-->
+                          
                           <div class="mb-4 border-full-2px-solid border-top-0 border-left-0 border-right-0 border-color-inverse">
                               <h1>iPhone 11 Pro Max</h1>
+                              <!-- favorite product <3 -->
+                              <span class="center-content heart heart-inner">tym</span>
                           </div>
                     
                           <!--                        Select color-->
                           <div class="mb-4 ">
-                              <h6 class="text-uppercase ">Select Color :</h6>
+                              <div class="row">
+                                  <h6 class="text-uppercase ">Select Color :</h6>
+                                  <div class="mb-4"></div>
+                              </div>
                               <div class="d-flex align-content-center ">
                                   <ul class="list-unstyled list-inline ">
                                       <li class="list-inline-item ">
@@ -423,26 +384,28 @@
                             </div>
                           </div>
                           <div class="row">
-                              <div class="mb-5 ">
-                                <h6 class="text-muted font-size-04  ">PLACE YOUR BID:</h6>
-                                <input type="text" name="bidprice" id="bidprice">
-                                <button type="submit">Bid</button>
-                            </div>
+                              <h6 class="font-size-04  mb-4 ">PLACE YOUR BID:</h6>
+                              <div class="mb-4"></div>
                           </div>
-                          <div class="row">
-                            <div class="mb-5 ">
-                              <h6 class=" font-size-08 text-uppercase ">DEFAULT PRICE:</h6>
-                              <h4>37,990,000 ₫</h4>
-                              </div>
-                            <!--Button-->
-                                <div class=" ">
-                                    <button type="button " class="mb-1 btn py-3 px-5 bg-inverse text-color-a0 text-uppercase font-weight-bold " style="border-radius:0px; ">Add to chart</button>
+                          
+                          <div class="row text-muted ml-7">
+                              <div class="mb-5 ">
+                                <input type="number" placeholder="0" id="add-to-cart-qty" min="0" max="999" value="0">
+                            </div>
+                            <div class="mb-4"><span class="font-size-04 ">K</span></div>
+                            <div class="mb-4 ml-3 font-size-04"> 
+                              <button type="submit">Bid</button></div>
+                          </div>
+                          <input type="checkbox" id="subscribe-btn"> &nbsp;<span class="align-middle"><label for="subscribe-btn">Do you want to buy this product right now?</label></span>
+                            <div id="text">
+                                <div class="mb-4">
+                                    <h6 class="text-muted font-size-08 text-uppercase ">Price buy now!</h6>
+                                    <h4>45,000,000 ₫</h4>
                                 </div>
-                           </div>
-                           <a href="# ">
-                            <h6 class="text-uppercase text-muted font-size-08 "><u>Save to Wishlist</u></h6>
-                        </a>
-                  </div>
+                                <button class="add-to-cart"> Add to Cart</button>
+                             
+                            </div>
+                          
               </div>
           </div>
           <!--    Description / Details / shipping -->
@@ -632,80 +595,100 @@
           <!--        You may also like-->
           <div class="container mb-4 ">
               <h4 class="text-center text-uppercase ">You May Also Like</h4>
-              <div class="row ">
-                <div class="col-md-3 col-6 topbid-item">
-                  <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
-                    <div class="topbid-hover">
-                      <div class="topbid-hover-content">
-                        <i class="fas fa-plus fa-3x"></i>
+              <section class="bg-light page-section" id="topbid">
+                  <div class="container">
+                    <div class="row">
+                      <!-- chèn cho khỏi trống -->
+                      <div class="col-md-1"></div>
+                      <div class="col-md-2 col-sm-6 topbid-item">
+                        <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
+                          <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                              <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                          </div>
+                          <img class="img-fluid"
+                            src="https://cdn.fptshop.com.vn/Uploads/Originals/2019/9/11/637037687765081535_11-pro-max-vang.png"
+                            alt="">
+                        </a>
+                        <div class="topbid-caption">
+                          <h4>iPhone 11 Pro Max</h4>
+                          <p class="text-muted">37,990,000 ₫</p>
+                          <p class="settime">02:00:30</p>
+                        </div>
+                      </div>
+              
+                      <div class="col-md-2 col-sm-6 topbid-item">
+                        <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
+                          <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                              <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                          </div>
+                          <img class="img-fluid"
+                            src="https://product.hstatic.net/1000337134/product/1024e34a20f1da3c195ce4c_master_112c442a9817466eb1de8ac23fd6f593_master_027d12a707d944b38602059a3e40e665_master.jpg"
+                            alt="">
+                        </a>
+                        <div class="topbid-caption">
+                          <h4>MacBook Pro 15"2019</h4>
+                          <p class="text-muted">66,000,000₫</p>
+                          <p class="settime">21:12:19</p>
+                        </div>
+                      </div>
+                      <div class="col-md-2 col-sm-6 topbid-item ">
+                        <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
+                          <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                              <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                          </div>
+                          <img class="img-fluid"
+                            src="https://product.hstatic.net/1000233206/product/msi-gt76-titan-dt-9sg-097vn_6e77dffe3a3448199c2ae3743e13a2e9_master.png"
+                            alt="">
+                        </a>
+                        <div class="topbid-caption">
+                          <h4> Laptop MSI GT76</h4>
+                          <p class="text-muted">111,990,000₫</p>
+                          <p class="settime">3 days</p>
+                        </div>
+                      </div>
+                      <div class="col-md-2 col-sm-6 topbid-item">
+                        <a class="topbid-link" data-toggle="modal" href="#topbidModal2">
+                          <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                              <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                          </div>
+                          <img class="img-fluid"
+                            src="https://minmobile.net/image/catalog/Samsung/Galaxy-Fold-5G/samsung-galaxy-fold-5g-gia-re-han-quoc-xach-tay-uy-tin-hai-phong.jpg"
+                            alt="">
+                        </a>
+                        <div class="topbid-caption">
+                          <h4><br>Samsung Galaxy Fold 5G</h4>
+                          <p class="text-muted">49.900.000 đ</p>
+                          <p class="settime">3 days</p>
+                        </div>
+                      </div>
+                      <div class="col-md-2 col-sm-6 topbid-item">
+                        <a class="topbid-link" data-toggle="modal" href="#topbidModal3">
+                          <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                              <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                          </div>
+                          <img class="img-fluid"
+                            src="https://img.nhabanhang.com/c/i/19086/aHR0cHM6Ly9zYWx0LnRpa2ljZG4uY29tL3RzL3Byb2R1Y3QvZGYvODkvNDYvNWZmZDA0YTYxYzljMjRhYzZiMWQ4Yzk4YjdhM2FiYTAuanBn.jpg"
+                            alt="">
+                        </a>
+                        <div class="topbid-caption">
+                          <h4>IPAD PRO 12.9 INCH </h4>
+                          <p class="text-muted">35,990,000 đ</p>
+                          <p class="settime">25:00:27</p>
+                        </div>
                       </div>
                     </div>
-                    <img class="img-fluid"
-                      src="https://bachlongmobile.com/media/catalog/product/cache/1/image/040ec09b1e35df139433887a97daa66f/7/p/7psilver_2.jpg"
-                      alt="">
-                  </a>
-                  <div class="topbid-caption">
-                    <h4>IPhone7 Plus</h4>
-                    <p class="text-muted">5,850,000₫</p>
-                    <p class="settime">02:00:30</p>
                   </div>
-        
-                </div>
-                <div class="col-md-3 col-6 topbid-item">
-                  <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
-                    <div class="topbid-hover">
-                      <div class="topbid-hover-content">
-                        <i class="fas fa-plus fa-3x"></i>
-                      </div>
-                    </div>
-                    <img class="img-fluid"
-                      src="https://bachlongmobile.com/media/catalog/product/cache/1/image/040ec09b1e35df139433887a97daa66f/7/p/7psilver_2.jpg"
-                      alt="">
-                  </a>
-                  <div class="topbid-caption">
-                    <h4>IPhone7 Plus</h4>
-                    <p class="text-muted">5,850,000₫</p>
-                    <p class="settime">02:00:30</p>
-                  </div>
-        
-                </div>
-                <div class="col-md-3 col-6 topbid-item">
-                  <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
-                    <div class="topbid-hover">
-                      <div class="topbid-hover-content">
-                        <i class="fas fa-plus fa-3x"></i>
-                      </div>
-                    </div>
-                    <img class="img-fluid"
-                      src="https://bachlongmobile.com/media/catalog/product/cache/1/image/040ec09b1e35df139433887a97daa66f/7/p/7psilver_2.jpg"
-                      alt="">
-                  </a>
-                  <div class="topbid-caption">
-                    <h4>IPhone7 Plus</h4>
-                    <p class="text-muted">5,850,000₫</p>
-                    <p class="settime">02:00:30</p>
-                  </div>
-        
-                </div>
-                <div class="col-md-3 col-6 topbid-item">
-                  <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
-                    <div class="topbid-hover">
-                      <div class="topbid-hover-content">
-                        <i class="fas fa-plus fa-3x"></i>
-                      </div>
-                    </div>
-                    <img class="img-fluid"
-                      src="https://bachlongmobile.com/media/catalog/product/cache/1/image/040ec09b1e35df139433887a97daa66f/7/p/7psilver_2.jpg"
-                      alt="">
-                  </a>
-                  <div class="topbid-caption">
-                    <h4>IPhone7 Plus</h4>
-                    <p class="text-muted">5,850,000₫</p>
-                    <p class="settime">02:00:30</p>
-                  </div>
-        
-                </div>
-              </div>
+                </section>
           </div>
       </main>
       <!--   Footer==============================================-->
