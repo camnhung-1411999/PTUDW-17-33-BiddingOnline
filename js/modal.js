@@ -216,10 +216,14 @@ $('#favorite-button').on('click', function(){
     $(this).toggleClass('active');
 })
 
-function changeImg(){
-    var showing = $('.side-picture').find("img").attr("src");
-    document.getElementById('main-image').src=""+showing;
-   var  mainImg=document.getElementById('main-image');
+// function changeImg(){
+//     var showing = $(this).find("img").attr("src");
+//     alert(showing+"");
+  //   document.getElementById('main-image').src=""+showing;
+  //  var  mainImg=document.getElementById('main-image');
     //alert(mainImg.src);
     
-}
+    $('.side-picture').click(function () {
+      var showing = $(this).find("img").attr("src");
+      document.getElementById('main-image').src=""+showing;
+    });
