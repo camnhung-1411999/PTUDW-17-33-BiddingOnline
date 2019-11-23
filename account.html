@@ -2,25 +2,78 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Account</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
-        type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <link rel="stylesheet" href="css/account.css">
+  <title>Agency - Start Bootstrap Theme</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
+    type='text/css'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+
+  <!-- Custom styles for this template -->
+  <link href="css/agency.css" rel="stylesheet">
+
+
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+
+  <link rel="stylesheet" href="css/account.css">
+
+  
 </head>
 
-<body>
-
+<body id="page-top">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top " id="mainNav">
     <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="index.html">Bidding Together</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse " id="navbarResponsive">
+        <form class="form-inline my-2 my-lg-0">
+
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav text-uppercase ml-auto">
+          <!--??????????? không làm được -->
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#topbid">TOP BID</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#team">Team</a>
+          </li>
+          <!--Sign in sign up-->
+
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#">Marcus Doe</a>
+          </li>
+          <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="signup_in.html">Log out</a>
+              </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container" style="margin-top: 130px;">
         <div class="row profile">
             <div class="col-md-3">
                 <div class="profile-sidebar">
@@ -49,31 +102,42 @@
                     <!-- SIDEBAR MENU -->
                     <div class="profile-usermenu">
                         <ul class="nav">
-                            <li class="active">
+                            <li id="acc_detail">
                                 <a href="#">
-                                    <i class="glyphicon glyphicon-home"></i>
+                                    <i class="fas fa-user"></i>
                                     Detail Information </a>
                             </li>
-                            <li>
+                            <li id="acc_favorite">
                                 <a href="#">
-                                    <i class="glyphicon glyphicon-heart"></i>
+                                    <i class="fas fa-heart-broken"></i>
                                     Favorite Product </a>
                             </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class="glyphicon glyphicon-shopping-cart"></i>
-                                    My Cart </a>
+                            <li id="acc_cart">
+                                <a href="#">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    My Cart</a>
                             </li>
-                            <li>
+
+                            <!-- <li id="acc_cart">
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-shopping-cart"></i>
+
+                                    My Cart</a>
+                            </li> -->
+                            <li id="acc_auction">
                                 <a href="#">
                                     <i class="fas fa-gavel"></i>
-                                    <!-- <i class="glyphicon glyphicon-gavel"></i> -->
                                     My Auctions </a>
                             </li>
-                            <li>
+                            <li id="acc_product">
                                 <a href="#">
-                                    <i class="glyphicon glyphicon-saved"></i>
+                                    <i class="fas fa-clipboard-check"></i>
                                     My Product( of bidder) </a>
+                            </li>
+                            <li>
+                                <a href="index.html">
+                                    <i class="fas fa-home"></i>
+                                    Home </a>
                             </li>
 
                         </ul>
@@ -82,11 +146,12 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="profile-content">
+                <!-- detail infor -->
+                <div class="profile-content" id="detailinfor">
                     <div class="container-fluid">
 
                         <h2 class="text-danger">Detail Information</h2>
-                        <table class="table table-bordered success">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>Full Name</th>
@@ -117,25 +182,61 @@
                                     <th class="info">Status</th>
                                     <td>Bidder/Seller</td>
                                 </tr>
-                               
+
                             </thead>
 
                         </table>
                     </div>
                 </div>
+                <!-- favorite product -->
+                <div id="favoriteproduct">
+                    <h2 class="text-danger">Favorite product</h2>
+                    <div class="row profile-content" style="background-color:rgb(89, 0, 255)(111, 0, 255);">
+                        <img class="col-md-3" src="img/product/macbookpro_13.jpg" alt="" width="50px" height="100px">
+                        <h3 class="text-danger col-md-5">Macbook pro 13</h3>
+                        <h3 class=" text-danger col-md-3">Price:45,000,000 đ</h3>
+
+                    </div>
+                    <div class="row profile-content mt-3" style="background-color:rgb(89, 0, 255)(111, 0, 255);">
+                        <img class="col-md-3" src="img/product/macbookpro_13.jpg" alt="" width="50px" height="100px">
+                        <h3 class="text-danger col-md-5">Macbook pro 13</h3>
+                        <h3 class=" text-danger col-md-3">Price:45,000,000 đ</h3>
+                    </div>
+                    <div class="row profile-content" style="background-color:rgb(89, 0, 255)(111, 0, 255);">
+                        <img class="col-md-3" src="img/product/macbookpro_13.jpg" alt="" width="50px" height="100px">
+                        <h3 class="text-danger col-md-5">Macbook pro 13</h3>
+                        <h3 class=" text-danger col-md-3">Price:45,000,000 đ</h3>
+                    </div>
+                </div>
+                <div id="mycart">
+                    YOUR CART IS EMPTY.
+                </div>
             </div>
         </div>
     </div>
-    <center>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <!------ Include the above in your HEAD tag ---------->
 
-        <!--
-    User Profile Sidebar by @keenthemes
-    A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
-    Licensed under MIT
-    -->
+
+    <script src="js/product.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Contact form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/agency.min.js"></script>
+    <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+    <!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+    <script src="js/account.js"></script>
 </body>
 
 </html>

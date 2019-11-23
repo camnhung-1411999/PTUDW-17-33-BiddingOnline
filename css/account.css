@@ -15,7 +15,8 @@ body {
   
   .profile-userpic img {
     float: none;
-    margin: 0 auto;
+    /* margin: 0 auto; */
+    margin-left: 60px;
     width: 50%;
     height: 50%;
     -webkit-border-radius: 50% !important;
@@ -76,6 +77,8 @@ body {
     color: #93a3b5;
     font-size: 14px;
     font-weight: 400;
+    /* vừa thêm để căn chỉnh */
+    margin-left: 40px;
   }
   
   .profile-usermenu ul li a i {
@@ -103,7 +106,6 @@ body {
   .profile-content {
     padding: 20px;
     background: #fff;
-    min-height: 460px;
   }
 
   tr td b{ color:green ;}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,20 @@
     <title>SignUp</title>
     <link rel="stylesheet" href="css/signup.css">
     
-    <script src="js/signup.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btnSignup').click(function () {
+                alert("The paragraph was clicked.");
+            });
+        });
+    </script>
 </head>
+
 <body>
     <div class="login-wrap">
         <div class="login-html">
-            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign
+                In</label>
             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
             <div class="login-form">
                 <div class="sign-in-htm">
@@ -29,8 +38,9 @@
                         <label for="check"><span class="icon"></span> Keep me Signed in</label>
                     </div>
                     <div class="group">
-                        <input type="submit" class="button" value="Sign In" onclick="window.location.href= 'index.html'">
+                        <input type="submit" id="btnSignin" class="button" value="Sign In">
                     </div>
+                    
                     <div class="hr"></div>
                     <div class="foot-lnk">
                         <a href="#forgot">Forgot Password?</a>
@@ -55,16 +65,17 @@
                     </div>
 
                     <div class="group">
-                        <label for="pass" class="label"><span id="a"></span><span> + </span><span id="b"></span><span> = ?</span></label>
-                            <script>
-                                var a,b;
-                                a=""+ Math.floor(Math.random() * 10);  
-                                b=""+ Math.floor(Math.random() * 10);
-                                document.getElementById("a").innerHTML=""+a;
-                                document.getElementById("b").innerHTML=""+b;
-                                </script>
+                        <label for="pass" class="label"><span id="a"></span><span> + </span><span id="b"></span><span> =
+                                ?</span></label>
+                        <script>
+                            var a, b;
+                            a = "" + Math.floor(Math.random() * 10);
+                            b = "" + Math.floor(Math.random() * 10);
+                            document.getElementById("a").innerHTML = "" + a;
+                            document.getElementById("b").innerHTML = "" + b;
+                        </script>
                         <input id="pass" type="text" class="input">
-                    </div>    
+                    </div>
                     <div class="group">
                         <input type="submit" class="button" onclick="window.location.href='index.html'" value="Sign Up">
                     </div>
@@ -76,6 +87,10 @@
             </div>
         </div>
     </div>
-    
+
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="js/signup.js"></script>
+    <script src="js/signin.js"></script>
 </body>
+
 </html>
