@@ -9,6 +9,7 @@ body {
   
   /* Profile sidebar */
   .profile-sidebar {
+    margin-top: 130px;
     padding: 20px 0 10px 0;
     background: #fff;
   }
@@ -16,7 +17,7 @@ body {
   .profile-userpic img {
     float: none;
     /* margin: 0 auto; */
-    margin-left: 60px;
+    margin-left: 70px;
     width: 50%;
     height: 50%;
     -webkit-border-radius: 50% !important;
@@ -31,7 +32,7 @@ body {
   
   .profile-usertitle-name {
     color: #5a7391;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     margin-bottom: 7px;
   }
@@ -39,7 +40,7 @@ body {
   .profile-usertitle-job {
     text-transform: uppercase;
     color: #5b9bd1;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 600;
     margin-bottom: 15px;
   }
@@ -75,7 +76,7 @@ body {
   
   .profile-usermenu ul li a {
     color: #93a3b5;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     /* vừa thêm để căn chỉnh */
     margin-left: 40px;
@@ -104,6 +105,7 @@ body {
   
   /* Profile Content */
   .profile-content {
+    margin-top:130px;
     padding: 20px;
     background: #fff;
   }
