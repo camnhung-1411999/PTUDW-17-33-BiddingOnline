@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Agency - Start Bootstrap Theme</title>
+    <title>Upload product</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -66,69 +65,104 @@
         </div>
     </nav>
 
-    <div class="container" style="margin-top: 130px;">
-        <p class="h2 text-center">Form</p>
+    <div class="container" style="margin-top: 150px;">
+        <p class="h2 text-center">Upload product</p>
         <form action="account.html" method="post">
             <div class="preview text-center">
                 <img class="preview-img" src="http://simpleicon.com/wp-content/uploads/account.png" alt="Preview Image"
                     width="200" height="200" />
-                <div class="browse-button">
+                <div class="browse-button"
+                    style="width: 200px !important; height: 200px !important; left: 135px !important;">
                     <i class="fa fa-pencil-alt"></i>
-                    <input class="browse-input" type="file" required name="UploadedFile" id="UploadedFile" />
+                    <input class="browse-input" style="width: 200px !important; height: 200px !important;" type="file"
+                        required name="UploadedFile" id="UploadedFile" />
                 </div>
                 <span class="Error"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="preview text-center">
+                        <img class="preview-img" src="http://simpleicon.com/wp-content/uploads/account.png"
+                            alt="Preview Image" width="100" height="100" />
+                        <div class="browse-button">
+                            <i class="fa fa-pencil-alt"></i>
+                            <input class="browse-input" type="file" required name="UploadedFile" id="UploadedFile" />
+                        </div>
+                        <span class="Error"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="preview text-center">
+                        <img class="preview-img" src="http://simpleicon.com/wp-content/uploads/account.png"
+                            alt="Preview Image" width="100" height="100" />
+                        <div class="browse-button">
+                            <i class="fa fa-pencil-alt"></i>
+                            <input class="browse-input" type="file" required name="UploadedFile" id="UploadedFile" />
+                        </div>
+                        <span class="Error"></span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label>Name product:</label>
-                <input class="form-control" type="text" name="nameproduct" required placeholder="Enter Your Name Product" />
+                <input class="form-control" type="text" name="nameproduct" required
+                    placeholder="Enter Your Name Product" />
                 <span class="Error"></span>
-                
+
             </div>
             <div class="form-group">
-                    <label>Begin price:</label>
-                    <input class="form-control" type="number" min="100000" step="1000" name="beginprice" required
-                        placeholder="Enter begin price" />
-                    <span class="Error"></span>
+                <label>Begin price:</label>
+                <input class="form-control" type="number" min="100000" step="1000" name="beginprice" required
+                    placeholder="Enter begin price" />
+                <span class="Error"></span>
             </div>
             <div class="form-group">
-                    <label>Minimum price:</label>
-                    <input class="form-control" type="number" min="100000" step="1000" name="beginprice" required
-                        placeholder="Enter begin price" />
-                    <span class="Error"></span>
+                <label>Minimum price:</label>
+                <input class="form-control" type="number" min="100000" step="1000" name="beginprice" required
+                    placeholder="Enter begin price" />
+                <span class="Error"></span>
             </div>
             <div class="form-group">
-                    <label>Purchase price now:</label>
-                    <input class="form-control" type="number" min="100000" step="1000" name="buynow" required
-                        placeholder="Enter begin price" />
-                    <span class="Error"></span>
+                <label>Purchase price now:</label>
+                <input class="form-control" type="number" min="100000" step="1000" name="buynow" required
+                    placeholder="Enter begin price" />
+                <span class="Error"></span>
             </div>
             <div class="form-group">
-                    <label>Step price:</label>
-                    <input class="form-control" type="number" min="100000" step="100000" name="stepprice" required
-                        placeholder="Enter step price" value="100000" />
-                    <span class="Error"></span>
-                </div>
-            <div class="form-group">
-                    <label>Type product:</label>
-                    <select class="form-control" name="selName" size="1">
-                        <option value="laptop">LAPTOP</option>
-                        <option value="tablet">TABLET</option>
-                        <option value="mobile">MOBILE</option>
-                    </select>
-                    <span class="Error"></span>
+                <label>Step price:</label>
+                <input class="form-control" type="number" min="100000" step="100000" name="stepprice" required
+                    placeholder="Enter step price" value="100000" />
+                <span class="Error"></span>
             </div>
             <div class="form-group">
-                    <input type="checkbox"> Do you want to automatically extend time?
-                </div>
-            <div class="form-group">
-                <button class="btn btn-primary btn-block" type="submit" >Submit</button>
+                <label>Type product:</label>
+                <select class="form-control" name="selName" size="1">
+                    <option value="laptop">LAPTOP</option>
+                    <option value="tablet">TABLET</option>
+                    <option value="mobile">MOBILE</option>
+                </select>
+                <span class="Error"></span>
             </div>
-  
+
+
+            <div class="form-group">
+                <label for="my-textarea">Text</label>
+                <textarea id="my-textarea" class="form-control" name="" rows="3"></textarea>
+                <span class="Error"></span>
+            </div>
+            <div class="form-group">
+                <input type="checkbox"> Do you want to automatically extend time?
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" id="uploadProduct" type="submit">Submit</button>
+            </div>
+
         </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
+    <script src="js/upload.js"></script>
     <!-- couple -->
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="js/agency.min.js"></script>
