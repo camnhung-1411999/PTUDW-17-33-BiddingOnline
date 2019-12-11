@@ -1,0 +1,705 @@
+<!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
+    type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+  <!-- Custom styles for this template -->
+  <link href="stylesheets/agency.css" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheets/mybid.css">
+  <link rel="stylesheet" href="stylesheets/rating.css">
+
+<div id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="home">Bidding Together</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <form class="form-inline my-2 my-lg-0">
+
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <ul class="navbar-nav text-uppercase ml-auto">
+
+                    <li class="nav-item">
+                        <div class="dropdown">
+
+                            <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false" aria-haspopup="true">
+                                Category</a>
+
+                            <ul class="dropdown-menu" id="drop" role="menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="product">All</a></li>
+                                <li class="divider"></li>
+                                <li><a class="dropdown-item" href="product">Laptop</a></li>
+                                <li><a class="dropdown-item" href="product">Mobile</a></li>
+                                <li><a class="dropdown-item" href="product">Tablet</a></li>
+
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#topbid">TOP BID</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#team">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="upload">Upload</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" id="Signin_Signup" href="signup">Sign in/up</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="fas fa-user" href="account" id="user" style="color:white;"></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="masthead">
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in">Welcome to Auctions</div>
+                <div class="intro-heading text-uppercase">It's Nice To Meet You</div>
+                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#categories">Tell Me More</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- categories -->
+    <section class="page-section" id="categories">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading text-uppercase">categories</h2>
+                    <h3 class="section-subheading text-muted">The best products for you</h3>
+                </div>
+            </div>
+            <div class="row text-center ">
+                <a class="col-md-4" href="product">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-tablet-alt fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">TABLET</h4>
+                    <p class="text-muted">SumSung, Apple, Huawei, OnePlus, Xiaomi, Lenovo, LG, Sony, HTC, Lenovo, Asus,
+                        ....</p>
+                </a>
+                <a class="col-md-4" href="product">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">LAPTOP</h4>
+                    <p class="text-muted">Macbook, Dell, Asus, HP, Lenovo, Acer. MSI, Microsoft, Samsung, Toshiba, ...
+                    </p>
+                </a>
+                <a class="col-md-4" href="product">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-mobile-alt fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">MOBILE</h4>
+                    <p class="text-muted">SumSung, Apple, Huawei, OnePlus, Xiaomi, Lenovo, LG, Nokia, Oppo, Sony, HTC,
+                        Lenovo,
+                        Asus, Realme...</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- topbid Grid -->
+    <section class="bg-light page-section" id="topbid">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading text-uppercase">TOP BID</h2>
+                    <h3 class="section-subheading text-muted" style="color: black !important;">TOP 5 PRODUCTS WITH THE
+                        HIGHEST
+                        PRICE</h3>
+                </div>
+            </div>
+            <div class="row">
+                <!-- chèn cho khỏi trống -->
+                <div class="col-md-1"></div>
+                <div class="col-md-2 col-sm-6 topbid-item">
+                    <a class="topbid-link" href="detailproduct">
+                        <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid"
+                            src="https://cdn.fptshop.com.vn/Uploads/Originals/2019/9/11/637037687765081535_11-pro-max-vang.png"
+                            alt="">
+                    </a>
+                    <div class="topbid-caption">
+                        <h4>iPhone 11 Pro Max</h4>
+                        <p class="text-muted">37,990,000 ₫</p>
+                        <p class="settime">02:00:30</p>
+
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-sm-6 topbid-item">
+                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                        <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid"
+                            src="https://product.hstatic.net/1000337134/product/1024e34a20f1da3c195ce4c_master_112c442a9817466eb1de8ac23fd6f593_master_027d12a707d944b38602059a3e40e665_master.jpg"
+                            alt="">
+                    </a>
+                    <div class="topbid-caption">
+                        <h4>MacBook Pro 15"2019</h4>
+                        <p class="text-muted">66,000,000₫</p>
+                        <p class="settime">21:12:19</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-6 topbid-item ">
+                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                        <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid"
+                            src="https://product.hstatic.net/1000233206/product/msi-gt76-titan-dt-9sg-097vn_6e77dffe3a3448199c2ae3743e13a2e9_master.png"
+                            alt="">
+                    </a>
+                    <div class="topbid-caption">
+                        <h4> Laptop MSI GT76</h4>
+                        <p class="text-muted">111,990,000₫</p>
+                        <p class="settime">3 days</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-6 topbid-item">
+                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                        <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid"
+                            src="https://minmobile.net/image/catalog/Samsung/Galaxy-Fold-5G/samsung-galaxy-fold-5g-gia-re-han-quoc-xach-tay-uy-tin-hai-phong.jpg"
+                            alt="">
+                    </a>
+                    <div class="topbid-caption">
+                        <h4><br>Samsung Galaxy Fold 5G</h4>
+                        <p class="text-muted">49.900.000 đ</p>
+                        <p class="settime">3 days</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-6 topbid-item">
+                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                        <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid"
+                            src="https://img.nhabanhang.com/c/i/19086/aHR0cHM6Ly9zYWx0LnRpa2ljZG4uY29tL3RzL3Byb2R1Y3QvZGYvODkvNDYvNWZmZDA0YTYxYzljMjRhYzZiMWQ4Yzk4YjdhM2FiYTAuanBn.jpg"
+                            alt="">
+                    </a>
+                    <div class="topbid-caption">
+                        <h4>IPAD PRO 12.9 INCH </h4>
+                        <p class="text-muted">35,990,000 đ</p>
+                        <p class="settime">25:00:27</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h3 class="section-subheading text-muted" style="color: black !important;">TOP 5 PRODUCTS WITH THE
+                        BEST
+                        REVIEWS</h3>
+                </div>
+            </div>
+            <div class="row">
+                <!-- chèn cho khỏi trống -->
+                <div class="col-md-1"></div>
+                <div class="col-md-2 col-sm-6 topbid-item">
+                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                        <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid"
+                            src="https://bachlongmobile.com/media/catalog/product/cache/1/image/040ec09b1e35df139433887a97daa66f/7/p/7psilver_2.jpg"
+                            alt="">
+                    </a>
+                    <div class="topbid-caption">
+                        <h4>IPhone7 Plus</h4>
+                        <p class="text-muted">5,850,000₫</p>
+                        <p class="settime">02:00:30</p>
+                    </div>
+
+                </div>
+                <div class="col-md-2 col-sm-6 topbid-item">
+                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                        <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid" src="img/product/macbookpro_13.jpg" alt="">
+                    </a>
+                    <div class="topbid-caption">
+                        <h4>MacBook Pro 13"</h4>
+                        <p class="text-muted"> 31,000,000₫</p>
+                        <p class="settime">02:00:30</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-6 topbid-item ">
+                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                        <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid"
+                            src="https://cdn.tgdd.vn/Products/Images/42/201228/samsung-galaxy-a80-gold-400x460.png"
+                            alt="">
+                    </a>
+                    <div class="topbid-caption">
+                        <h4>Samsung Galaxy A80</h4>
+                        <p class="text-muted">12,990,000₫</p>
+                        <p class="settime">02:00:30</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-6 topbid-item">
+                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                        <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid"
+                            src="https://cdn.tgdd.vn/Products/Images/42/201228/samsung-galaxy-a80-gold-400x460.png"
+                            alt="">
+                    </a>
+                    <div class="topbid-caption">
+                        <h4>Samsung Galaxy A80</h4>
+                        <p class="text-muted">12,990,000₫</p>
+                        <p class="settime">02:00:30</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-6 topbid-item">
+                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                        <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid"
+                            src="https://cdn.tgdd.vn/Products/Images/42/201228/samsung-galaxy-a80-gold-400x460.png"
+                            alt="">
+                    </a>
+                    <div class="topbid-caption">
+                        <h4>Samsung Galaxy A80</h4>
+                        <p class="text-muted">12,990,000₫</p>
+                        <p class="settime">02:00:30</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h3 class="section-subheading text-muted" style="color: black !important;">TOP 5 BIDDING PRODUCTS
+                        GOING TO THE
+                        END</h3>
+                </div>
+            </div>
+            <div class="row">
+                <!-- chèn cho khỏi trống -->
+                <div class="col-md-1"></div>
+                <div class="col-md-2 col-sm-6 topbid-item">
+                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                        <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid"
+                            src="https://bachlongmobile.com/media/catalog/product/cache/1/image/040ec09b1e35df139433887a97daa66f/7/p/7psilver_2.jpg"
+                            alt="">
+                    </a>
+                    <div class="topbid-caption">
+                        <h4>Iphone 6s plus</h4>
+                        <p class="text-muted">12,000,000 đ</p>
+                        <p class="settime">02:00:30</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-6 topbid-item">
+                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                        <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid"
+                            src="https://cdn.tgdd.vn/Products/Images/42/201228/samsung-galaxy-a80-gold-400x460.png"
+                            alt="">
+                    </a>
+                    <div class="topbid-caption">
+                        <h4>Samsung Galaxy A80</h4>
+                        <p class="text-muted">12,990,000₫</p>
+                        <p class="settime">02:00:30</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-6 topbid-item ">
+                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                        <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid"
+                            src="https://cdn.tgdd.vn/Products/Images/42/201228/samsung-galaxy-a80-gold-400x460.png"
+                            alt="">
+                    </a>
+                    <div class="topbid-caption">
+                        <h4>Samsung Galaxy A80</h4>
+                        <p class="text-muted">12,990,000₫</p>
+                        <p class="settime">02:00:30</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-6 topbid-item">
+                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                        <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid"
+                            src="https://cdn.tgdd.vn/Products/Images/42/201228/samsung-galaxy-a80-gold-400x460.png"
+                            alt="">
+                    </a>
+                    <div class="topbid-caption">
+                        <h4>Samsung Galaxy A80</h4>
+                        <p class="text-muted">12,990,000₫</p>
+                        <p class="settime">02:00:30</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-6 topbid-item">
+                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                        <div class="topbid-hover">
+                            <div class="topbid-hover-content">
+                                <i class="fas fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img class="img-fluid"
+                            src="https://cdn.tgdd.vn/Products/Images/42/201228/samsung-galaxy-a80-gold-400x460.png"
+                            alt="">
+                    </a>
+                    <div class="topbid-caption">
+                        <h4>Samsung Galaxy A80</h4>
+                        <p class="text-muted">12,990,000₫</p>
+                        <p class="settime">02:00:30</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="page-section" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading text-uppercase">About</h2>
+                    <h3 class="section-subheading text-muted">TOP 5 PRODUCTS WITH THE HIGHEST PRICE</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-image">
+                                <img class="rounded-circle img-fluid" src="img/about/1.jpg" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>2009-2011</h4>
+                                    <h4 class="subheading">Our Humble Beginnings</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
+                                        ut voluptatum
+                                        eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero
+                                        unde, sed, incidunt et
+                                        ea quo dolore laudantium consectetur!</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="rounded-circle img-fluid" src="img/about/2.jpg" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>March 2011</h4>
+                                    <h4 class="subheading">An Agency is Born</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
+                                        ut voluptatum
+                                        eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero
+                                        unde, sed, incidunt et
+                                        ea quo dolore laudantium consectetur!</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="timeline-image">
+                                <img class="rounded-circle img-fluid" src="img/about/3.jpg" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>December 2012</h4>
+                                    <h4 class="subheading">Transition to Full Service</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
+                                        ut voluptatum
+                                        eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero
+                                        unde, sed, incidunt et
+                                        ea quo dolore laudantium consectetur!</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="rounded-circle img-fluid" src="img/about/4.jpg" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>July 2014</h4>
+                                    <h4 class="subheading">Phase Two Expansion</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
+                                        ut voluptatum
+                                        eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero
+                                        unde, sed, incidunt et
+                                        ea quo dolore laudantium consectetur!</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <h4>Be Part
+                                    <br>Of Our
+                                    <br>Story!</h4>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="bg-light page-section" id="team">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="img/team/1.jpg" alt="">
+                        <h4>Kay Garland</h4>
+                        <p class="text-muted">Lead Designer</p>
+                        <ul class="list-inline social-buttons">
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://www.facebook.com/cams.nhung">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="img/team/2.jpg" alt="">
+                        <h4>Larry Parker</h4>
+                        <p class="text-muted">Lead Marketer</p>
+                        <ul class="list-inline social-buttons">
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://www.facebook.com/cams.nhung">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="img/team/3.jpg" alt="">
+                        <h4>Diana Pertersen</h4>
+                        <p class="text-muted">Lead Developer</p>
+                        <ul class="list-inline social-buttons">
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://www.facebook.com/cams.nhung">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <p class="large text-muted">Nothing in life is to be feared; it is only to be understood. Now is the
+                        time to understand more so that we may fear less. —Marie Curie</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">
+                        <img class="img-fluid d-block mx-auto" src="img/logos/envato.jpg" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">
+                        <img class="img-fluid d-block mx-auto" src="img/logos/designmodo.jpg" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">
+                        <img class="img-fluid d-block mx-auto" src="img/logos/themeforest.jpg" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="#">
+                        <img class="img-fluid d-block mx-auto" src="img/logos/creative-market.jpg" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <span class="copyright">Copyright &copy; Your Website 2019</span>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline quicklinks">
+                        <li class="list-inline-item">
+                            <a href="#">Privacy Policy</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="/javascripts/agency.min.js"></script>
+
+    <!-- Javascrip create dialog for sign in sign up-->
+    <script src="/javascripts/mybid.js"></script>
+
+    <script src="/javascripts/signin.js"></script>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js">
+    </script>
+</div>
