@@ -1,10 +1,4 @@
 
-
-function SignIn() {
-    $(location).attr('href', 'home');
-
-}
-
 $(document).ready(function () {
     $("#btnSignin").click(SignIn);
     

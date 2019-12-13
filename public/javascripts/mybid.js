@@ -7,9 +7,3 @@
 
 //     });
 // });
-
-$(document).ready(function () {
-    $('#Signin_Signup').click(function () {
-        $(location).attr('href', 'signup_in.html');
-    });
-});
