@@ -1,64 +1,53 @@
 <!-- Custom fonts for this template -->
+{{!-- {{#section 'css'}} --}}
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
     type='text/css'>
 <!-- Custom styles for this template -->
-<link rel="stylesheet" href="stylesheets/upload.css">
-<link href="stylesheets/agency.css" rel="stylesheet">
-
+<link rel="stylesheet" href="/../../../stylesheets/upload.css">
+<link href="/../../../stylesheets/agency.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+
+{{!-- {{/section}} --}}
+
+{{!-- {{#section 'js'}} --}}
+
+{{!-- {{/section}} --}}
 
 
-
+{{>navProducts}}
 <div>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top " id="mainNav">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="/">Bidding Together</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse " id="navbarResponsive">
-                <form class="form-inline my-2 my-lg-0">
 
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                <ul class="navbar-nav text-uppercase ml-auto">
-                    <!--??????????? không làm được -->
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#topbid">TOP BID</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#team">Team</a>
-                    </li>
-                    <!--Sign in sign up-->
+    <div class="container" style="margin-top: 150px;">
+        <p class="h2 text-center">Add bidding</p>
+        <form onsubmit="return validate();" method="post">
 
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#">Marcus Doe</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/users/signup">Log out</a>
-                    </li>
-                </ul>
+            <div class="form-group row">
+                <label for="process" class="col-md-2 col-form-label">Chọn ảnh sản phẩm</label>
+                <div class="col-md-7">
+                    <progress class="col-md-12" value="0" id="process" max="100">0%</progress>
+                    <input id="photo" class="file" type="file" name="mainimage" value="" onchange="getfile()">
+                    <input id="url" name="url" hidden></input>
+
+
+                </div>
             </div>
-        </div>
-    </nav>
 
-    <div class="container" style="margin-top: 130px;">
-        <p class="h2 text-center">Form</p>
-        <form action="/users/account" method="post">
+            {{!-- <div class="form-group row "></div>
+            <div class="col-md-7 offset-md-2">
+                <button id="submit_link" type="submit" class="btn btn-secondary doneButton " data-toggle="modal"
+                    data-target="#exampleModalCenter">HOÀN THÀNH</button>
+            </div> --}}
             <div class="preview text-center">
-                <img class="preview-img" src="http://simpleicon.com/wp-content/uploads/account.png" alt="Preview Image"
-                    width="200" height="200" />
+                <img class="preview-img" src="https://www.onlygfx.com/wp-content/uploads/2016/04/old-photo-camera.png"
+                    id="image" alt="Preview Image" width="200" height="200" />
                 <div class="browse-button">
                     <i class="fa fa-pencil-alt"></i>
-                    <input class="browse-input" type="file" required name="UploadedFile" id="UploadedFile" />
+                    <input class="browse-input" type="file" name="UploadedFile" id="UploadedFile" />
                 </div>
                 <span class="Error"></span>
             </div>
@@ -77,7 +66,7 @@
             </div>
             <div class="form-group">
                 <label>Minimum price:</label>
-                <input class="form-control" type="number" min="100000" step="1000" name="beginprice" required
+                <input class="form-control" type="number" min="100000" step="1000" name="miniprice" required
                     placeholder="Enter begin price" />
                 <span class="Error"></span>
             </div>
@@ -95,7 +84,7 @@
             </div>
             <div class="form-group">
                 <label>Type product:</label>
-                <select class="form-control" name="selName" size="1">
+                <select class="form-control" name="selname" size="1">
                     <option value="laptop">LAPTOP</option>
                     <option value="tablet">TABLET</option>
                     <option value="mobile">MOBILE</option>
@@ -103,18 +92,38 @@
                 <span class="Error"></span>
             </div>
             <div class="form-group">
+                <label for="txtDOB">Date of Birth</label>
+                <input type="text" class="form-control" id="txtDOB" name="dob">
+            </div>
+            <div class="form-group">
                 <input type="checkbox"> Do you want to automatically extend time?
             </div>
             <div class="form-group">
-                <button class="btn btn-primary btn-block" type="submit">Submit</button>
+                <input id="submit_link" class="btn btn-primary btn-block" type="submit" value="Upload Product"></button>
             </div>
 
         </form>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-    <!-- couple -->
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/javascripts/agency.min.js"></script>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script>
+    $('#txtDOB').datetimepicker({
+        // format: 'd/m/Y H:i'
+        format: 'd/m/Y',
+        timepicker: false,
+        mask: true,
+    });
+
+    function validate() {
+        return true;
+    }
+</script>
+<!-- couple -->
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/javascripts/agency.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+<script src="/../../../javascripts/import-new-products.js"></script>

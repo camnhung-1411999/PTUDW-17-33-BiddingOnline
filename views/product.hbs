@@ -1,3 +1,5 @@
+{{!-- {{#section 'css'}} --}}
+
 <!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -14,77 +16,15 @@
 <!-- Custom styles for this template -->
 <link href="/stylesheets/agency.css" rel="stylesheet">
 <link rel="stylesheet" href="/stylesheets/product.css">
-
+{{!-- {{/section}} --}}
 
 <div id="page-top">
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top " id="mainNav">
-    <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="/">Bidding Together</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-        aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse " id="navbarResponsive">
-        <form class="form-inline my-2 my-lg-0">
-
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        <ul class="navbar-nav text-uppercase ml-auto">
-          <!--??????????? không làm được -->
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#topbid">TOP BID</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#team">Team</a>
-          </li>
-          <!--Sign in sign up-->
-
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="/users/signup">Sign in/Sign up</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- <div class="container-fluid mt-12">
-    <div class="row">
-      <div class="col-3">
-        <div class="card" style="width: 18rem;">
-          <div class="card-header">
-            Featured
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-          </ul>
-        </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
+  {{>navProducts}}
+ 
   <div class="container-fluid mt-12">
     <div class="row">
       <div class="col-sm-3">
-        <div class="card shadow">
-          <h5 class="card-header">
-            Categories
-          </h5>
-
-          <div class="list-group list-group-flush">
-            <a href="#" class="list-group-item list-group-item-action" id="categoryall"> All</a>
-            <a href="#" class="list-group-item list-group-item-action" id="categorylaptop">Laptop</a>
-            <a href="#" class="list-group-item list-group-item-action " id="categorymobile">Mobile</a>
-            <a href="#" class="list-group-item list-group-item-action" id="categorytablet">Tablet</a>
-
-          </div>
-
-        </div>
+       {{>category}}
       </div>
       <div class="col-sm-9">
 
