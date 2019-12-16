@@ -1,13 +1,23 @@
 const MongoClient = require('mongodb').MongoClient;
 var url = "mongodb+srv://hoangman:123@cluster0-ascy6.mongodb.net/test?retryWrites=true&w=majority";
 
-// MongoClient.connect(url, function(err, db) {
-//   if (err) throw err;
-//   console.log("Database created!");
-//   db.close();
-// });
+var mongoose=require('mongoose');
+mongoose.connect(url,{
+    useUnifiedTopology:true,
+    useNewUrlParser:true,
+});
+var db=mongoose.connection;
+var  accountSchema=new mongoose.Schema({
 
-
+    name: String,
+    pass:String,
+    email:String,
+    phone:String,
+    address:String,
+},{
+    collection:"account"
+});
+var Account=db.useDb("udweb-nhom7").model("account",accountSchema);
 
 module.exports = {
     insert: (entity) => {
@@ -20,5 +30,7 @@ module.exports = {
                 db.close();
             });
         });
-    }
+    },
+    getAccount:Account,
+    
 }

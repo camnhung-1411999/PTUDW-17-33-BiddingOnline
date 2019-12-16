@@ -20,27 +20,32 @@
                     <div class="sign-in-htm">
                         <div class="group">
                             <label for="user" class="label">Username</label>
-                            <input id="user" type="text" class="input">
+                            <input id="user" type="text" class="input" name="suname">
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Password</label>
-                            <input id="pass" type="password" class="input" data-type="password">
+                            <input id="pass" type="password" class="input" data-type="password" name="supass">
                         </div>
                         <div class="group">
                             <input id="check" type="checkbox" class="check" checked>
                             <label for="check"><span class="icon"></span> Keep me Signed in</label>
                         </div>
                         <div class="group">
-                            <input type="submit" id="btnSignin" class="button" onclick="window.location.href='/'"
+                            <input type="submit" id="btnSignin" class="button" formaction="/users/signin"
                                 value="Sign In">
                         </div>
-
+                        {{#if error}}
+                        <h2>{{error}}</h2>
+                        {{/if}}
                         <div class="hr"></div>
                         <div class="foot-lnk">
                             <a href="#forgot">Forgot Password?</a>
                         </div>
                     </div>
+
                 </form>
+
+
                 {{!-- sign up --}}
                 <form method="post">
                     <div class="sign-up-htm">

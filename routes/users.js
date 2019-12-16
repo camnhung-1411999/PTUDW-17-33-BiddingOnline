@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const userController = require('../controllers/usercontroller');
-const db = require('../models/user');
 const controllers = new userController();
 /* GET users listing. */
 // router.get('/', function(req, res, next) {
@@ -17,21 +16,12 @@ router.get('/account', function (req, res) {
 });
 
 
-//post
+//post sign up
 router.post('/signup', (req, res) => {
-
-  var checkInfor = {
-    name: req.body.name,
-    pass: req.body.password,
-    email: req.body.email,
-    phone: req.body.phone,
-    address: req.body.address,
-  }
-  console.log(checkInfor);
-
-  db.insert(checkInfor);
-
-  res.end("asaaa");
-  // res.redirect('/');
+  controllers.setPostSignup(req, res);
+});
+//post sign in
+router.post('/signin',(req,res)=>{
+  controllers.setPostSignin(req,res);
 });
 module.exports = router;
