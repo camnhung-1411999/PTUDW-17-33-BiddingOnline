@@ -11,32 +11,44 @@
 <div class='body'>
     <div class="login-wrap">
         <div class="login-html">
+            {{#if checksignup}}
+            <input id="tab-1" type="radio" name="tab" class="sign-in"><label for="tab-1" class="tab">Sign
+                In</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up" checked><label for="tab-2" class="tab">Sign
+                Up</label>
+            {{/if}}
+            {{#if checksignin}}
             <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign
                 In</label>
-            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign
+                Up</label>
+            {{/if}}
+
             <div class="login-form">
                 {{!-- sign in --}}
-                <form action="" method="post">
+                <form method="post">
                     <div class="sign-in-htm">
                         <div class="group">
-                            <label for="user" class="label">Username</label>
-                            <input id="user" type="text" class="input" name="suname">
+                            <label for="user" class="label">Username{{#if errsiname}}
+                                <span name="errorcaptcha"
+                                    style="float:right; color:rgb(189, 88, 88);">{{errsiname}}</span>{{/if}}</label>
+                            <input id="user" type="text" class="input" name="suname" required>
                         </div>
                         <div class="group">
-                            <label for="pass" class="label">Password</label>
-                            <input id="pass" type="password" class="input" data-type="password" name="supass">
+                            <label for="pass" class="label">Password{{#if errsipass}}
+                                <span name="errorcaptcha"
+                                    style="float:right; color:rgb(189, 88, 88);">{{errsipass}}</span>{{/if}}</label>
+                            <input id="pass" type="password" class="input" data-type="password" name="supass" required>
                         </div>
                         <div class="group">
-                            <input id="check" type="checkbox" class="check" checked>
+                            <input id="check" type="checkbox" class="check">
                             <label for="check"><span class="icon"></span> Keep me Signed in</label>
                         </div>
                         <div class="group">
                             <input type="submit" id="btnSignin" class="button" formaction="/users/signin"
                                 value="Sign In">
                         </div>
-                        {{#if error}}
-                        <h2>{{error}}</h2>
-                        {{/if}}
+
                         <div class="hr"></div>
                         <div class="foot-lnk">
                             <a href="#forgot">Forgot Password?</a>
@@ -50,55 +62,76 @@
                 <form method="post">
                     <div class="sign-up-htm">
                         <div class="group">
-                            <label for="user" class="label">Username</label>
-                            <input id="user" type="text" class="input" name="name">
+                            <label for="user" class="label">Fullname</label>
+                            <input id="user" type="text" class="input" name="fullname" required>
+                        </div>
+                        <div class="group">
+                            <label for="user" class="label">Username{{#if errusername}}
+                                <span name="errorcaptcha"
+                                    style="float:right; color:rgb(189, 88, 88);">{{errusername}}</span>{{/if}}</label>
+
+                            <input id="user" type="text" class="input" name="name" required>
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Password</label>
-                            <input type="password" class="input" data-type="password" name="password">
+                            <input type="password" class="input" data-type="password" name="password" required>
                         </div>
                         <div class="group">
-                            <label for="pass" class="label">Repeat Password</label>
-                            <input type="password" class="input" data-type="password">
+                            <label for="pass" class="label">Repeat Password{{#if errrepass}}
+                                <span name="errorcaptcha"
+                                    style="float:right; color:rgb(189, 88, 88);">{{errrepass}}</span>{{/if}}</label>
+                            <input type="password" name="repassword" class="input" data-type="password" required>
                         </div>
                         <div class="group">
-                            <label for="pass" class="label">Email Address</label>
-                            <input type="text" class="input" name="email">
+                            <label for="pass" class="label">Email Address {{#if erremail}}
+                                <span name="errorcaptcha"
+                                    style="float:right; color:rgb(189, 88, 88);">{{erremail}}</span>{{/if}}</label>
+                            <input type="text" class="input" name="email" required>
                         </div>
                         <div class="group">
-                            <label for="pass" class="label">Phone number</label>
-                            <input type="text" class="input" name="phone">
+                            <label for="pass" class="label">Phone number{{#if errphone}}
+                                <span name="errorcaptcha"
+                                    style="float:right; color:rgb(189, 88, 88);">{{errphone}}</span>{{/if}}</label>
+                            <input type="text" class="input" name="phone" pattern="[0-9]{10}" required>
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Address</label>
-                            <input type="text" class="input" name="address">
+                            <input type="text" class="input" name="address" required>
                         </div>
                         <div class="group">
                             <label for="pass" class="label">Do you want to become?</label>
                             {{!-- <input id="pass" type="text" class="input"> --}}
-                            <select class='input'>
-                                <option value="bidder">Bidder</option>
-                                <option value="seller">Seller</option>
+                            <select class='input' name="status">
+                                <option value="bidder"style="height:30px; color:black;">Bidder</option>
+                                <option value="seller" style="height:30px; color:black;">Seller</option>
                             </select>
                         </div>
 
                         <div class="group">
-                            <label for="pass" class="label"><span id="a"></span><span> + </span><span
-                                    id="b"></span><span> =
+                            <label for="pass" class="label"><span id="a"></span><span> + </span><span id="b"></span>
+                                {{#if errcaptcha}}
+                                <span name="errorcaptcha"
+                                    style="float:right; color:rgb(189, 88, 88);">{{errcaptcha}}</span>{{/if}}<span> =
                                     ?</span></label>
+                            <input type="text" name="a" id="inputa" hidden>
+                            <input type="text" name="b" hidden id="inputb">
                             <script>
                                 var a, b;
                                 a = "" + Math.floor(Math.random() * 10);
                                 b = "" + Math.floor(Math.random() * 10);
                                 document.getElementById("a").innerHTML = "" + a;
                                 document.getElementById("b").innerHTML = "" + b;
+                                document.getElementById("inputa").value = a;
+                                document.getElementById("inputb").value = b;
+
                             </script>
-                            <input id="pass" type="text" class="input">
+
+                            <input name="captcha" type="text" class="input" required>
                         </div>
                         <div class="group">
-                            <input type="submit" class="button" formaction="/users/signup" value="Sign Up">
+                            <input type="submit" id="submit" class="button" formaction="/users/signup" value="Sign Up">
                         </div>
-                        <div class="hr"></div>
+                        <div class="hr"style="margin-top:30px!important; margin-bottom:1px!important;"></div>
                         <div class="foot-lnk">
                             <label for="tab-1">Already Member?</label>
                             {{!-- </a> --}}

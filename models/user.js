@@ -8,12 +8,13 @@ mongoose.connect(url,{
 });
 var db=mongoose.connection;
 var  accountSchema=new mongoose.Schema({
-
+    fullname:String,
     name: String,
     pass:String,
     email:String,
     phone:String,
     address:String,
+    status:String,
 },{
     collection:"account"
 });
