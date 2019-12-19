@@ -1,5 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 var url = "mongodb+srv://hoangman:123@cluster0-ascy6.mongodb.net/test?retryWrites=true&w=majority";
+const bcrypt=require('bcryptjs');
 
 var mongoose=require('mongoose');
 mongoose.connect(url,{
@@ -32,6 +33,15 @@ module.exports = {
             });
         });
     },
+    hashPassword: async (password) => {
+        try {
+            const salt = await bcrypt.genSalt(10);
+            var result =await bcrypt.hash(password, salt);
+            return result;
+        } catch (error) {
+            throw new Error('Hashing failed', error)
+        }
+      },
     getAccount:Account,
     
 }

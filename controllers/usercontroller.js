@@ -1,5 +1,7 @@
 const usermodels = require('../models/user');
 const db = usermodels.getAccount;
+const bcrypt=require('bcryptjs');
+
 
 class userController {
     showSignup(req, res) {
@@ -34,7 +36,6 @@ class userController {
                 arr.push(element);
             })
         });
-        console.log(arr);
         if (arr.length != 0) {
             // res.redirect('/users/signup');
             res.render('signup_in', {
@@ -44,7 +45,14 @@ class userController {
             });
             arr = [];
         }
-
+        // kiem tra mat khau lon hon 6 ki tu
+        if (checkInfor.pass.length < 6) {
+            res.render('signup_in', {
+                title: 'Sign in/ Sign up',
+                errpass: "*Password must be at least 6 characters!",
+                checksignup: true
+            });
+        }
         // kiem tra mat khau nhap lai co khop k
         var repass = req.body.repassword;
         if (!(repass === checkInfor.pass)) {
@@ -61,8 +69,8 @@ class userController {
         for (i; i < checkInfor.email.length; i = i + 1) {
 
             if (checkInfor.email[i] === ' ') {
-                temp=0;
-                i=checkInfor.email.length;
+                temp = 0;
+                i = checkInfor.email.length;
             }
             else {
                 if (checkInfor.email[i] === '@') {
@@ -82,7 +90,7 @@ class userController {
             }
 
         }
-        if(temp===0){
+        if (temp === 0) {
             res.render('signup_in', {
                 title: 'Sign in/ Sign up',
                 erremail: "*Email wrong!",
@@ -106,7 +114,7 @@ class userController {
         }
 
         //kiem tra so dien thoai
-        await db.find({phone: checkInfor.phone }).then(function (docs) {
+        await db.find({ phone: checkInfor.phone }).then(function (docs) {
             // arr.push(docs);
             docs.forEach(element => {
                 arr.push(element);
@@ -131,8 +139,20 @@ class userController {
             });
         }
         else {
-            await usermodels.insert(checkInfor);
-            res.redirect('/');
+            console.log(checkInfor.pass);
+            await usermodels.hashPassword(checkInfor.pass).then(function (doc) {
+                const user = {
+                    fullname: checkInfor.fullname,
+                    name: checkInfor.name,
+                    pass: doc,
+                    phone: checkInfor.phone,
+                    email: checkInfor.email,
+                    address: checkInfor.address,
+                    status: checkInfor.status,
+                }
+                usermodels.insert(user);
+                res.redirect('/');
+            });
         }
     }
     async setPostSignin(req, res) {
@@ -142,6 +162,11 @@ class userController {
             suname: req.body.suname,
             supass: req.body.supass,
         };
+        console.log(checkSignin);
+        // await usermodels.hashPassword(req.body.supass).then(function (doc) {
+        //     checkSignin.supass=doc;
+        // });
+        console.log(checkSignin);
         //kiểm tra pass
         await db.find({ name: checkSignin.suname }).then(function (docs) {
             // arr.push(docs);
@@ -149,23 +174,28 @@ class userController {
                 arr.push(element);
             })
         });
+        console.log(arr);
         if (arr.length === 0) {
             res.render('signup_in', {
                 title: 'Sign in/ Sign up',
                 checksignin: true,
-                errsiname:"*Username wrong!"
+                errsiname: "*Username wrong!"
             });
-        } else if (arr[0].pass === checkSignin.supass) {
-            res.redirect('/');
-        }
-        else {
-            // errors.push({msg:"Mật khẩu sai!"});
-            res.render('signup_in', {
-                title: 'Sign in/ Sign up',
-                checksignin: true,
-                errsipass:"*Password wrong!"
-            });
-
+        } else {
+            bcrypt.compare(arr[0].pass,checkSignin.supass,(err,isMatch)=>{
+                console.log(isMatch);
+                if(err) throw err;
+                if(!isMatch){
+                    res.render('signup_in', {
+                        title: 'Sign in/ Sign up',
+                        checksignin: true,
+                        errsipass: "*Password wrong!"
+                    });
+                }
+                else{
+                    res.redirect('/');
+                }
+            })
         }
     }
 
