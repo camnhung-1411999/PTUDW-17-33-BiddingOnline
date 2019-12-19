@@ -1,15 +1,20 @@
 const usermodels = require('../models/user');
 const db = usermodels.getAccount;
-const bcrypt=require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 
 class userController {
     showSignup(req, res) {
-        res.render('signup_in', { title: 'Sign in/ Sign up', checksignin: true });
+        res.render('signup_in', {
+            title: 'Sign in/ Sign up',
+            checksignin: true
+        });
     }
 
     showAccount(req, res) {
-        res.render('account', { title: 'Account' });
+        res.render('account', {
+            title: 'Account'
+        });
     }
 
     async setPostSignup(req, res) {
@@ -30,7 +35,9 @@ class userController {
         };
 
         // kiem tra username co ton tai hay k
-        await db.find({ name: checkInfor.name }).then(function (docs) {
+        await db.find({
+            name: checkInfor.name
+        }).then(function (docs) {
             // arr.push(docs);
             docs.forEach(element => {
                 arr.push(element);
@@ -71,8 +78,7 @@ class userController {
             if (checkInfor.email[i] === ' ') {
                 temp = 0;
                 i = checkInfor.email.length;
-            }
-            else {
+            } else {
                 if (checkInfor.email[i] === '@') {
                     var a = "";
                     i = i + 1;
@@ -82,8 +88,7 @@ class userController {
                     }
                     if (a === "gmail.com" || a === "yahoo.com") {
                         temp = 1;
-                    }
-                    else {
+                    } else {
                         temp = 0;
                     }
                 }
@@ -97,7 +102,9 @@ class userController {
                 checksignup: true
             });
         }
-        await db.find({ email: checkInfor.email }).then(function (docs) {
+        await db.find({
+            email: checkInfor.email
+        }).then(function (docs) {
             // arr.push(docs);
             docs.forEach(element => {
                 arr.push(element);
@@ -114,7 +121,9 @@ class userController {
         }
 
         //kiem tra so dien thoai
-        await db.find({ phone: checkInfor.phone }).then(function (docs) {
+        await db.find({
+            phone: checkInfor.phone
+        }).then(function (docs) {
             // arr.push(docs);
             docs.forEach(element => {
                 arr.push(element);
@@ -137,8 +146,7 @@ class userController {
                 errcaptcha: "*Captcha wrong!",
                 checksignup: true
             });
-        }
-        else {
+        } else {
             console.log(checkInfor.pass);
             await usermodels.hashPassword(checkInfor.pass).then(function (doc) {
                 const user = {
@@ -162,13 +170,10 @@ class userController {
             suname: req.body.suname,
             supass: req.body.supass,
         };
-        console.log(checkSignin);
-        // await usermodels.hashPassword(req.body.supass).then(function (doc) {
-        //     checkSignin.supass=doc;
-        // });
-        console.log(checkSignin);
         //kiểm tra pass
-        await db.find({ name: checkSignin.suname }).then(function (docs) {
+        await db.find({
+            name: checkSignin.suname
+        }).then(function (docs) {
             // arr.push(docs);
             docs.forEach(element => {
                 arr.push(element);
@@ -182,17 +187,16 @@ class userController {
                 errsiname: "*Username wrong!"
             });
         } else {
-            bcrypt.compare(arr[0].pass,checkSignin.supass,(err,isMatch)=>{
+            bcrypt.compare(checkSignin.supass, arr[0].pass, (err, isMatch) => {
                 console.log(isMatch);
-                if(err) throw err;
-                if(!isMatch){
+                if (err) throw err;
+                if (!isMatch) {
                     res.render('signup_in', {
                         title: 'Sign in/ Sign up',
                         checksignin: true,
                         errsipass: "*Password wrong!"
                     });
-                }
-                else{
+                } else {
                     res.redirect('/');
                 }
             })
