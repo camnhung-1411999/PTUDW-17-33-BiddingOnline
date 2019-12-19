@@ -1,11 +1,20 @@
 const productmodels = require('../models/products');
-const db = productmodels.getProduct;
+const dbproduct = productmodels.getProduct;
 const moment = require('moment');
 
 class productController {
-    showProduct(req, res) {
+    async showProduct(req, res) {
+
+        var arrproduct = [];
+
+        await dbproduct.find({}).then((docs)=>{
+            docs.forEach(element=>{
+                arrproduct.push(element);
+            })
+        })
         res.render('product', {
-            title: 'Product'
+            title: 'Product',
+            list: arrproduct
         });
     };
     showUpload(req, res) {
@@ -20,6 +29,16 @@ class productController {
     postUpload(req, res) {
         var img = [];
         img.push(req.body.url);
+        var temp = 0;
+        var sldate = req.body.selectdate;
+        if(sldate === "ngay"){
+            temp = 1;
+        }else if(sldate === "tuan"){
+            temp = 7;
+        }
+        else{
+            temp = 30;
+        }
         var entity = {
             image: img,
             ten: req.body.nameproduct,
@@ -27,19 +46,15 @@ class productController {
             giatoithieu: req.body.miniprice,
             giamuangay: req.body.buynow,
             buocdaugia: req.body.stepprice,
-            loai: req.body.selname
+            loai: req.body.selname,
+            datetime: req.body.dob,
+            datetimeproduct: temp*req.body.timeproduct,
+            ghichu: req.body.ghichu
         }
 
-        const dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
-
-        const entity2 = req.body;
-        entity2.f_DOB = dob;
-
-        delete entity2.dob;
 
 
-        console.log(entity);
-        // productmodels.insert(entity);
+        productmodels.insert(entity);
         res.render('upload', {
             title: 'Upload product'
         });

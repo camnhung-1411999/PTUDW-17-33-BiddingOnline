@@ -1,22 +1,25 @@
 const MongoClient = require('mongodb').MongoClient;
 var url = "mongodb+srv://hoangman:123@cluster0-ascy6.mongodb.net/test?retryWrites=true&w=majority";
 
-var mongoose=require('mongoose');
-mongoose.connect(url,{
-    useUnifiedTopology:true,
-    useNewUrlParser:true,
+var mongoose = require('mongoose');
+mongoose.connect(url, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
 });
-var db=mongoose.connection;
-var  ProductsSchema=new mongoose.Schema({
-    image : [],
+var db = mongoose.connection;
+var ProductsSchema = new mongoose.Schema({
+    image: [],
     ten: String,
     giahientai: Number,
     giatoithieu: Number,
     giamuangay: Number,
     buocdaugia: Number,
-    loai: String
-},{
-    collection:"product"
+    loai: String,
+    datetime: String,
+    datetimeproduct:Number,
+    ghichu: String
+}, {
+    collection: "product"
 });
 var Product = db.useDb("udweb-nhom7").model('product', ProductsSchema);
 module.exports = {
@@ -31,6 +34,6 @@ module.exports = {
             });
         });
     },
-    getProduct:Product,
-    
+    getProduct: Product,
+
 }

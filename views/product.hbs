@@ -20,191 +20,36 @@
 
 <div id="page-top">
   {{>navProducts}}
- 
+
   <div class="container-fluid mt-12">
     <div class="row">
       <div class="col-sm-3">
-       {{>category}}
+        {{>category}}
       </div>
       <div class="col-sm-9">
 
         <section class="bg-light page-section" id="topbid">
 
           <div class="row" style="padding-left: 50px;">
-            <!-- chèn cho khỏi trống -->
-            <div class="col-md-2 col-sm-6 topbid-item mobile">
-              <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                <div class="topbid-hover">
-                  <div class="topbid-hover-content">
-                    <i class="fas fa-plus fa-3x"></i>
-                  </div>
-                </div>
-                <img class="img-fluid"
-                  src="https://cdn.fptshop.com.vn/Uploads/Originals/2019/9/11/637037687765081535_11-pro-max-vang.png"
-                  alt="">
-              </a>
-              <div class="topbid-caption">
-                <h5>iPhone 11 Pro Max</h5>
-                <p class="text-muted">37,990,000 ₫</p>
-                <p class="settime">02:00:30</p>
-              </div>
-            </div>
 
-            <div class="col-md-2 col-sm-6 topbid-item laptop">
+            {{#each list}}
+            <div class="col-md-2 col-sm-6 topbid-item {{this.loai}}">
               <a class="topbid-link" data-toggle="modal" href="detailproduct">
                 <div class="topbid-hover">
                   <div class="topbid-hover-content">
                     <i class="fas fa-plus fa-3x"></i>
                   </div>
                 </div>
-                <img class="img-fluid"
-                  src="https://product.hstatic.net/1000337134/product/1024e34a20f1da3c195ce4c_master_112c442a9817466eb1de8ac23fd6f593_master_027d12a707d944b38602059a3e40e665_master.jpg"
-                  alt="">
+                <img class="img-fluid" src="{{this.image}}" alt="">
               </a>
               <div class="topbid-caption">
-                <h5>MacBook Pro 15"2019</h5>
-                <p class="text-muted">66,000,000₫</p>
-                <p class="settime">21:12:19</p>
+                <h5>{{this.ten}}</h5>
+                <p class="text-muted">{{this.giahientai}} ₫</p>
+                <p class="settime">03:00:30</p>
               </div>
             </div>
-            <div class="col-md-2 col-sm-6 topbid-item laptop">
-              <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
-                <div class="topbid-hover">
-                  <div class="topbid-hover-content">
-                    <i class="fas fa-plus fa-3x"></i>
-                  </div>
-                </div>
-                <img class="img-fluid"
-                  src="https://product.hstatic.net/1000233206/product/msi-gt76-titan-dt-9sg-097vn_6e77dffe3a3448199c2ae3743e13a2e9_master.png"
-                  alt="">
-              </a>
-              <div class="topbid-caption">
-                <h5> Laptop MSI GT76</h5>
-                <p class="text-muted">111,990,000₫</p>
-                <p class="settime">3 days</p>
-              </div>
-            </div>
-            <div class="col-md-2 col-sm-6 topbid-item mobile">
-              <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                <div class="topbid-hover">
-                  <div class="topbid-hover-content">
-                    <i class="fas fa-plus fa-3x"></i>
-                  </div>
-                </div>
-                <img class="img-fluid"
-                  src="https://minmobile.net/image/catalog/Samsung/Galaxy-Fold-5G/samsung-galaxy-fold-5g-gia-re-han-quoc-xach-tay-uy-tin-hai-phong.jpg"
-                  alt="">
-              </a>
-              <div class="topbid-caption">
-                <h5><br>Samsung Galaxy Fold 5G</h5>
-                <p class="text-muted">49.900.000 đ</p>
-                <p class="settime">3 days</p>
-              </div>
-            </div>
-            <div class="col-md-2 col-sm-6 topbid-item tablet">
-              <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                <div class="topbid-hover">
-                  <div class="topbid-hover-content">
-                    <i class="fas fa-plus fa-3x"></i>
-                  </div>
-                </div>
-                <img class="img-fluid"
-                  src="https://img.nhabanhang.com/c/i/19086/aHR0cHM6Ly9zYWx0LnRpa2ljZG4uY29tL3RzL3Byb2R1Y3QvZGYvODkvNDYvNWZmZDA0YTYxYzljMjRhYzZiMWQ4Yzk4YjdhM2FiYTAuanBn.jpg"
-                  alt="">
-              </a>
-              <div class="topbid-caption">
-                <h5>IPAD PRO 12.9 INCH </h5>
-                <p class="text-muted">35,990,000 đ</p>
-                <p class="settime">25:00:27</p>
-              </div>
-            </div>
+            {{/each}}
 
-            <div class="col-md-2 col-sm-6 topbid-item mobile">
-              <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
-                <div class="topbid-hover">
-                  <div class="topbid-hover-content">
-                    <i class="fas fa-plus fa-3x"></i>
-                  </div>
-                </div>
-                <img class="img-fluid"
-                  src="https://cdn.fptshop.com.vn/Uploads/Originals/2019/9/11/637037687765081535_11-pro-max-vang.png"
-                  alt="">
-              </a>
-              <div class="topbid-caption">
-                <h5>iPhone 11 Pro Max</h5>
-                <p class="text-muted">37,990,000 ₫</p>
-                <p class="settime">02:00:30</p>
-              </div>
-            </div>
-
-            <div class="col-md-2 col-sm-6 topbid-item laptop">
-              <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                <div class="topbid-hover">
-                  <div class="topbid-hover-content">
-                    <i class="fas fa-plus fa-3x"></i>
-                  </div>
-                </div>
-                <img class="img-fluid"
-                  src="https://product.hstatic.net/1000337134/product/1024e34a20f1da3c195ce4c_master_112c442a9817466eb1de8ac23fd6f593_master_027d12a707d944b38602059a3e40e665_master.jpg"
-                  alt="">
-              </a>
-              <div class="topbid-caption">
-                <h5>MacBook Pro 15"2019</h5>
-                <p class="text-muted">66,000,000₫</p>
-                <p class="settime">21:12:19</p>
-              </div>
-            </div>
-            <div class="col-md-2 col-sm-6 topbid-item laptop">
-              <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
-                <div class="topbid-hover">
-                  <div class="topbid-hover-content">
-                    <i class="fas fa-plus fa-3x"></i>
-                  </div>
-                </div>
-                <img class="img-fluid"
-                  src="https://product.hstatic.net/1000233206/product/msi-gt76-titan-dt-9sg-097vn_6e77dffe3a3448199c2ae3743e13a2e9_master.png"
-                  alt="">
-              </a>
-              <div class="topbid-caption">
-                <h5> Laptop MSI GT76</h5>
-                <p class="text-muted">111,990,000₫</p>
-                <p class="settime">3 days</p>
-              </div>
-            </div>
-            <div class="col-md-2 col-sm-6 topbid-item mobile">
-              <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                <div class="topbid-hover">
-                  <div class="topbid-hover-content">
-                    <i class="fas fa-plus fa-3x"></i>
-                  </div>
-                </div>
-                <img class="img-fluid"
-                  src="https://minmobile.net/image/catalog/Samsung/Galaxy-Fold-5G/samsung-galaxy-fold-5g-gia-re-han-quoc-xach-tay-uy-tin-hai-phong.jpg"
-                  alt="">
-              </a>
-              <div class="topbid-caption">
-                <h5><br>Samsung Galaxy Fold 5G</h5>
-                <p class="text-muted">49.900.000 đ</p>
-                <p class="settime">3 days</p>
-              </div>
-            </div>
-            <div class="col-md-2 col-sm-6 topbid-item tablet">
-              <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
-                <div class="topbid-hover">
-                  <div class="topbid-hover-content">
-                    <i class="fas fa-plus fa-3x"></i>
-                  </div>
-                </div>
-                <img class="img-fluid"
-                  src="https://img.nhabanhang.com/c/i/19086/aHR0cHM6Ly9zYWx0LnRpa2ljZG4uY29tL3RzL3Byb2R1Y3QvZGYvODkvNDYvNWZmZDA0YTYxYzljMjRhYzZiMWQ4Yzk4YjdhM2FiYTAuanBn.jpg"
-                  alt="">
-              </a>
-              <div class="topbid-caption">
-                <h5>IPAD PRO 12.9 INCH </h5>
-                <p class="text-muted">35,990,000 đ</p>
-                <p class="settime">25:00:27</p>
-              </div>
-            </div>
           </div>
         </section>
       </div>
@@ -217,12 +62,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/../../vendor/jquery/jquery.min.js"></script>
+    <script src="/../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="/javascripts/agency.min.js"></script>
+    <script src="../../javascripts/agency.min.js"></script>
   </div>
