@@ -99,10 +99,10 @@ html,body
 .container
 {
     width: 500px;
-    margin: 20px auto;
+    margin: -10px auto;
 }
 
-.preview
+/* .preview
 {
     padding: 10px;
     position: relative;
@@ -126,7 +126,7 @@ html,body
     width: 200px;
     height: 200px;
     border-radius: 100%;
-    position: absolute; /* Tweak the position property if the element seems to be unfit */
+    position: absolute; 
     top: 10px;
     left: 132px;
     background: linear-gradient(180deg, transparent, black);
@@ -174,4 +174,4 @@ html,body
 .Back
 {
     font-size: 25px;
-}
+} */

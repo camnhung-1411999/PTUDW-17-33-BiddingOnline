@@ -8,6 +8,7 @@ mongoose.connect(url, {
 });
 var db = mongoose.connection;
 var ProductsSchema = new mongoose.Schema({
+    _id: Object,
     image: [],
     ten: String,
     giahientai: Number,

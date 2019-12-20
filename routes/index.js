@@ -6,9 +6,6 @@ router.get('/', function(req, res) {
   res.render('home', { title: 'Home' });
 });
 
-router.get('/detailproduct', function(req, res) {
-  res.render('detailproduct', { title: 'Detail product' });
-});
 
 
 

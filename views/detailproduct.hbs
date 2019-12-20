@@ -1,20 +1,22 @@
+<!-- Bootstrap core CSS -->
+<link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom fonts for this template -->
+<link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
+    type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
-    <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
-        type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+<!-- Custom styles for this template -->
+<link href="/stylesheets/agency.css" rel="stylesheet">
+<link rel="stylesheet" href="/stylesheets/rating.css">
 
-    <!-- Custom styles for this template -->
-    <link href="/stylesheets/agency.css" rel="stylesheet">
-    <link rel="stylesheet" href="/stylesheets/rating.css">
+<div class="row" style="margin-top: 100px">
+    {{>navProducts}}
 
-<div>
+
     <div class="modal-content">
         <div class="close-modal" data-dismiss="modal">
             <div class="lr">
@@ -33,7 +35,7 @@
                             <!--                       Main picture-->
                             <div class="col-12 col-lg-10 flex-lg-last border-full-1px-solid border-color-a0">
                                 <div class="d-flex justify-content-center align-items-center w-100 px-5">
-                                    <img src="https://cdn.fptshop.com.vn/Uploads/Originals/2019/9/11/637037687765081535_11-pro-max-vang.png"
+                                    <img src="{{product.image}}"
                                         class="img-fluid " id="main1-image" style="max-height:600px;">
                                 </div>
                             </div>
@@ -74,7 +76,7 @@
 
                             <div
                                 class="mb-4 border-full-2px-solid border-top-0 border-left-0 border-right-0 border-color-inverse">
-                                <h1>iPhone 11 Pro Max</h1>
+                                <h1>{{product.ten}}</h1>
                                 <!-- favorite product <3 -->
                                 <span class="far fa-heart" style="font-size: 2rem; color: red;" id="love"></span>
                             </div>
@@ -93,13 +95,13 @@
                                             </div>
                                         </li>
                                         <li class="list-inline-item ">
-                                            <div class="p-1" style="width:60px; height:40px; "id='a2'>
+                                            <div class="p-1" style="width:60px; height:40px; " id='a2'>
                                                 <div class="w-100 h-100 " style="background-color:rgb(12, 12, 12) ">
                                                 </div>
                                             </div>
                                         </li>
                                         <li class="list-inline-item ">
-                                            <div class="p-1" style="width:60px; height:40px; "id='a3'>
+                                            <div class="p-1" style="width:60px; height:40px; " id='a3'>
                                                 <div class="w-100 h-100 "
                                                     style="background-color:rgba(148, 145, 141, 0.438) "></div>
                                             </div>
@@ -109,11 +111,12 @@
                             </div>
                             <!--                   Price-->
                             <div class="row">
-                                <div class="mb-4 ">
+                                <div class="col-md-6">
                                     <h6 class="text-muted font-size-08 text-uppercase ">Current bid:</h6>
-                                    <h4>39,990,000 ₫</h4>
+                                    <h4>{{product.giahientai}} ₫</h4>
                                 </div>
-                                <div class="mb-4 ">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-4 ">
                                     <h6 class="text-muted font-size-08 text-uppercase ml-5">Current winner:</h6>
                                     <h4>toanlong.123</h4>
                                 </div>
@@ -125,8 +128,8 @@
 
                             <div class="row text-muted ml-7">
                                 <div class="mb-5 ">
-                                    <input type="number" placeholder="0" id="add-to-cart-qty" min="10000"
-                                        max="10000000000" value="1000000">
+                                    <input type="number" placeholder="0" id="add-to-cart-qty" step="{{product.buocdaugia}}" min="10000"
+                                        max="10000000000" value="{{product.giahientai}}">
                                 </div>
                                 <div class="mb-4"><span class="font-size-04 ">K</span></div>
                                 <div class="mb-4 ml-3 font-size-04">
@@ -462,7 +465,7 @@
                                             </div>
                                             <div class="col-12 col-sm-4 justify-content-start justify-content-sm-end">
                                                 <div>
-                                                    <img class="img-fluid" src="img/rating.jpg" alt="rating give">
+                                                    <img class="img-fluid" src="../../img/rating.jpg" alt="rating give">
                                                 </div>
                                             </div>
                                             <div class="col-12 mt-3 mb-2">
@@ -509,7 +512,7 @@
                                             </div>
                                             <div class="col-12 col-sm-4 justify-content-start justify-content-sm-end">
                                                 <div>
-                                                    <img class="img-fluid" src="img/rating.jpg" alt="rating give">
+                                                    <img class="img-fluid" src="../../img/rating.jpg" alt="rating give">
                                                 </div>
                                             </div>
                                             <div class="col-12 mt-3 mb-2">
@@ -731,24 +734,26 @@
             </div>
         </footer>
     </div>
+</div>
 
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="../../vendor/jquery/jquery.min.js"></script>
+<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom scripts for this template -->
-    <script src="/javascripts/agency.min.js"></script>
+<!-- Plugin JavaScript -->
+<script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Javascrip create dialog for sign in sign up-->
+<!-- Custom scripts for this template -->
+<script src="/javascripts/agency.min.js"></script>
 
-    <script src="/javascripts/modal.js"></script>
+<!-- Javascrip create dialog for sign in sign up-->
+
+<script src="/javascripts/modal.js"></script>
 
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js">
-    </script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js">
+</script>
 </div>

@@ -1,10 +1,10 @@
 {{!-- {{#section 'css'}} --}}
 
 <!-- Bootstrap core CSS -->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+{{!-- <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> --}}
 
 <!-- Custom fonts for this template -->
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
@@ -34,7 +34,7 @@
 
             {{#each list}}
             <div class="col-md-2 col-sm-6 topbid-item {{this.loai}}">
-              <a class="topbid-link" data-toggle="modal" href="detailproduct">
+              <a class="topbid-link" href="/products/detailproduct/id?id={{this._id}}">
                 <div class="topbid-hover">
                   <div class="topbid-hover-content">
                     <i class="fas fa-plus fa-3x"></i>

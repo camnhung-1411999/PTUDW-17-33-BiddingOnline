@@ -12,12 +12,15 @@
     "express": "~4.16.1",
     "express-handlebars": "^3.1.0",
     "express-handlebars-sections": "^1.0.1",
+    "express-session": "^1.17.0",
     "hbs": "^4.0.6",
     "helper": "0.0.13",
     "http-errors": "~1.6.3",
     "moment": "^2.24.0",
     "mongodb": "^3.4.0",
     "mongoose": "^5.8.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
   }
 }
