@@ -4,31 +4,33 @@ var session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var hbs = require('hbs');
+// var hbs = require('hbs');
 var exhbs = require('express-handlebars');
 var hbs_sections = require('express-handlebars-sections');
 var bodyParser = require('body-parser'); //databasevar dotenv = require('dotenv').config();
+var passport = require('passport');
+require('./config/passport')(passport);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var productRouter = require('./routes/products');
-var passport = require('passport');
-require('./config/passport')(passport);
 
 
 var app = express();
 
-// view engine setup
-hbs.registerPartials(__dirname + '/views/partials');
-app.engine('handlebars', exhbs({
-  extname: "hbs",
+app.engine('hbs', exhbs({
+  extname: 'hbs',
   defaultLayout: 'main',
-  layoutsDir: __dirname + 'views/_layouts',
-
-  section: hbs_sections(),
+  layoutsDir: __dirname + '/views/layout/',
+  partialsDir: __dirname + '/views/partials/',
+  helpers: {
+    section: hbs_sections() //////
+  }
 }));
-app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+
+
 
 
 // use session

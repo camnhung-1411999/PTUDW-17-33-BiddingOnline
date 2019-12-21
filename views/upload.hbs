@@ -1,6 +1,6 @@
 <!-- Custom fonts for this template -->
-{{!-- {{#section 'css'}} --}}
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+{{#section 'css'}}
+<link href="/../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
@@ -14,7 +14,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
 
 
-{{!-- {{/section}} --}}
+{{/section}}    
 
 
 <div>
@@ -25,8 +25,9 @@
         <form onsubmit="return validate();" method="post">
 
             <div class="form-group row">
-                <label for="process" class="col-md-2 col-form-label">Chọn ảnh sản phẩm</label>
                 <div class="col-md-7">
+                    <label for="process" class=" col-form-label">Chọn ảnh sản phẩm</label>
+
                     <progress class="col-md-12" value="0" id="process" max="100">0%</progress>
                     <input id="photo" class="file" type="file" name="mainimage" value="" onchange="getfile()">
                     <input id="url" name="url" hidden></input>
@@ -35,17 +36,12 @@
                 </div>
             </div>
 
-            {{!-- <div class="form-group row "></div>
-            <div class="col-md-7 offset-md-2">
-                <button id="submit_link" type="submit" class="btn btn-secondary doneButton " data-toggle="modal"
-                    data-target="#exampleModalCenter">HOÀN THÀNH</button>
-            </div> --}}
+
             <div class="preview text-center">
                 <img class="preview-img" src="https://www.onlygfx.com/wp-content/uploads/2016/04/old-photo-camera.png"
                     id="image" alt="Preview Image" width="200" height="200" />
                 <div class="browse-button">
                     <i class="fa fa-pencil-alt"></i>
-                    <input class="browse-input" type="file" name="UploadedFile" id="UploadedFile" />
                 </div>
                 <span class="Error"></span>
             </div>
@@ -169,7 +165,7 @@
     }
 </script>
 <!-- couple -->
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/javascripts/agency.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 <script src="/../../../javascripts/import-new-products.js"></script>

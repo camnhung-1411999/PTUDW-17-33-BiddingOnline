@@ -42,13 +42,13 @@ class productController {
         var entity = {
             image: img,
             ten: req.body.nameproduct,
-            giahientai: req.body.beginprice,
-            giatoithieu: req.body.miniprice,
-            giamuangay: req.body.buynow,
-            buocdaugia: req.body.stepprice,
+            giahientai: +req.body.beginprice,
+            giatoithieu: +req.body.miniprice,
+            giamuangay: +req.body.buynow,
+            buocdaugia:+req.body.stepprice,
             loai: req.body.selname,
             datetime: req.body.dob,
-            datetimeproduct: temp * req.body.timeproduct,
+            datetimeproduct: +temp * req.body.timeproduct,
             ghichu: req.body.ghichu
         }
 

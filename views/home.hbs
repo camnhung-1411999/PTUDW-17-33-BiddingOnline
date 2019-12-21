@@ -1,5 +1,5 @@
 <!-- Bootstrap core CSS -->
-{{!-- {{#section 'css'}} --}}
+{{#section 'css'}}
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom fonts for this template -->
@@ -13,7 +13,7 @@
 <link href="stylesheets/agency.css" rel="stylesheet">
 <link rel="stylesheet" href="stylesheets/mybid.css">
 <link rel="stylesheet" href="stylesheets/rating.css">
-{{!-- {{/section}} --}}
+{{/section}}
 <div id="page-top">
 
     <!-- Navigation -->
@@ -140,106 +140,36 @@
             <div class="row">
                 <!-- chèn cho khỏi trống -->
                 <div class="col-md-1"></div>
+
+                {{#each mostprices}}
                 <div class="col-md-2 col-sm-6 topbid-item">
-                    <a class="topbid-link" href="detailproduct">
+                    <a class="topbid-link" href="/products/detailproduct/id?id={{this._id}}">
                         <div class="topbid-hover">
                             <div class="topbid-hover-content">
                                 <i class="fas fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img class="img-fluid"
-                            src="https://cdn.fptshop.com.vn/Uploads/Originals/2019/9/11/637037687765081535_11-pro-max-vang.png"
-                            alt="">
+                        <img class="img-fluid" src={{this.image}} alt="">
                     </a>
                     <div class="topbid-caption">
-                        <h4>iPhone 11 Pro Max</h4>
-                        <p class="text-muted">37,990,000 ₫</p>
-                        <p class="settime">02:00:30</p>
+                        <h4>{{this.ten}}</h4>
+                        <p class="text-muted">{{this.giahientai}} ₫</p>
+                        <p class="settime">{{this.datetime}}</p>
 
                     </div>
                 </div>
-
-                <div class="col-md-2 col-sm-6 topbid-item">
-
-                    {{!-- //data-toggle="modal" --}}
-                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                        <div class="topbid-hover">
-                            <div class="topbid-hover-content">
-                                <i class="fas fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img class="img-fluid"
-                            src="https://product.hstatic.net/1000337134/product/1024e34a20f1da3c195ce4c_master_112c442a9817466eb1de8ac23fd6f593_master_027d12a707d944b38602059a3e40e665_master.jpg"
-                            alt="">
-                    </a>
-                    <div class="topbid-caption">
-                        <h4>MacBook Pro 15"2019</h4>
-                        <p class="text-muted">66,000,000₫</p>
-                        <p class="settime">21:12:19</p>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-6 topbid-item ">
-                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                        <div class="topbid-hover">
-                            <div class="topbid-hover-content">
-                                <i class="fas fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img class="img-fluid"
-                            src="https://product.hstatic.net/1000233206/product/msi-gt76-titan-dt-9sg-097vn_6e77dffe3a3448199c2ae3743e13a2e9_master.png"
-                            alt="">
-                    </a>
-                    <div class="topbid-caption">
-                        <h4> Laptop MSI GT76</h4>
-                        <p class="text-muted">111,990,000₫</p>
-                        <p class="settime">3 days</p>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-6 topbid-item">
-                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                        <div class="topbid-hover">
-                            <div class="topbid-hover-content">
-                                <i class="fas fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img class="img-fluid"
-                            src="https://minmobile.net/image/catalog/Samsung/Galaxy-Fold-5G/samsung-galaxy-fold-5g-gia-re-han-quoc-xach-tay-uy-tin-hai-phong.jpg"
-                            alt="">
-                    </a>
-                    <div class="topbid-caption">
-                        <h4><br>Samsung Galaxy Fold 5G</h4>
-                        <p class="text-muted">49.900.000 đ</p>
-                        <p class="settime">3 days</p>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-6 topbid-item">
-                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                        <div class="topbid-hover">
-                            <div class="topbid-hover-content">
-                                <i class="fas fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img class="img-fluid"
-                            src="https://img.nhabanhang.com/c/i/19086/aHR0cHM6Ly9zYWx0LnRpa2ljZG4uY29tL3RzL3Byb2R1Y3QvZGYvODkvNDYvNWZmZDA0YTYxYzljMjRhYzZiMWQ4Yzk4YjdhM2FiYTAuanBn.jpg"
-                            alt="">
-                    </a>
-                    <div class="topbid-caption">
-                        <h4>IPAD PRO 12.9 INCH </h4>
-                        <p class="text-muted">35,990,000 đ</p>
-                        <p class="settime">25:00:27</p>
-                    </div>
-                </div>
+                {{/each}}
             </div>
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h3 class="section-subheading text-muted" style="color: black !important;">TOP 5 PRODUCTS WITH THE
-                        BEST
-                        REVIEWS</h3>
+                        MOST BIDS</h3>
                 </div>
             </div>
             <div class="row">
                 <!-- chèn cho khỏi trống -->
                 <div class="col-md-1"></div>
+                {{#each mostbids}}
                 <div class="col-md-2 col-sm-6 topbid-item">
                     <a class="topbid-link" data-toggle="modal" href="detailproduct">
                         <div class="topbid-hover">
@@ -248,82 +178,17 @@
                             </div>
                         </div>
                         <img class="img-fluid"
-                            src="https://bachlongmobile.com/media/catalog/product/cache/1/image/040ec09b1e35df139433887a97daa66f/7/p/7psilver_2.jpg"
+                            src={{this.image}}
                             alt="">
                     </a>
                     <div class="topbid-caption">
-                        <h4>IPhone7 Plus</h4>
-                        <p class="text-muted">5,850,000₫</p>
-                        <p class="settime">02:00:30</p>
+                        <h4>{{this.ten}}</h4>
+                        <p class="text-muted">{{this.giahientai}} ₫</p>
+                        <p class="settime">{{this.datetime}}</p>
                     </div>
 
                 </div>
-                <div class="col-md-2 col-sm-6 topbid-item">
-                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                        <div class="topbid-hover">
-                            <div class="topbid-hover-content">
-                                <i class="fas fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img class="img-fluid" src="img/product/macbookpro_13.jpg" alt="">
-                    </a>
-                    <div class="topbid-caption">
-                        <h4>MacBook Pro 13"</h4>
-                        <p class="text-muted"> 31,000,000₫</p>
-                        <p class="settime">02:00:30</p>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-6 topbid-item ">
-                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                        <div class="topbid-hover">
-                            <div class="topbid-hover-content">
-                                <i class="fas fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img class="img-fluid"
-                            src="https://cdn.tgdd.vn/Products/Images/42/201228/samsung-galaxy-a80-gold-400x460.png"
-                            alt="">
-                    </a>
-                    <div class="topbid-caption">
-                        <h4>Samsung Galaxy A80</h4>
-                        <p class="text-muted">12,990,000₫</p>
-                        <p class="settime">02:00:30</p>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-6 topbid-item">
-                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                        <div class="topbid-hover">
-                            <div class="topbid-hover-content">
-                                <i class="fas fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img class="img-fluid"
-                            src="https://cdn.tgdd.vn/Products/Images/42/201228/samsung-galaxy-a80-gold-400x460.png"
-                            alt="">
-                    </a>
-                    <div class="topbid-caption">
-                        <h4>Samsung Galaxy A80</h4>
-                        <p class="text-muted">12,990,000₫</p>
-                        <p class="settime">02:00:30</p>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-6 topbid-item">
-                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                        <div class="topbid-hover">
-                            <div class="topbid-hover-content">
-                                <i class="fas fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img class="img-fluid"
-                            src="https://cdn.tgdd.vn/Products/Images/42/201228/samsung-galaxy-a80-gold-400x460.png"
-                            alt="">
-                    </a>
-                    <div class="topbid-caption">
-                        <h4>Samsung Galaxy A80</h4>
-                        <p class="text-muted">12,990,000₫</p>
-                        <p class="settime">02:00:30</p>
-                    </div>
-                </div>
+                {{/each}}
 
             </div>
 
@@ -687,6 +552,7 @@
 
 </div>
 
+{{#section 'js'}}
 
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
@@ -706,3 +572,4 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js">
 </script>
+{{/section}}

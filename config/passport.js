@@ -3,11 +3,11 @@ const passport = require('passport');
 const bcrypt=require('bcryptjs');
 var User= require('../models/user').getAccount;
 
-//lưu cokie
+//lưu cookie
 passport.serializeUser(function (user, done) {
     done(null, user.name);
 });
-//lấy cokie
+//lấy cookie
 passport.deserializeUser(function (name, done) {
     User.findOne({name:name}).then(function (user) {
         done(null, user);

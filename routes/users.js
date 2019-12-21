@@ -36,7 +36,7 @@ router.post('/signup', (req, res) => {
 //post sign in
 router.post('/signin', (req, res, next) => {
   // controllers.setPostSignin(req, res);
-  console.log(req.body.username +"-"+ req.body.password);
+  // console.log(req.body.username +"-"+ req.body.password);
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/users/signup_' + req.body.username

@@ -99,10 +99,10 @@ html,body
 .container
 {
     width: 500px;
-    margin: -10px auto;
+    margin: 10px auto;
 }
 
-/* .preview
+.preview
 {
     padding: 10px;
     position: relative;
@@ -174,4 +174,4 @@ html,body
 .Back
 {
     font-size: 25px;
-} */
+}

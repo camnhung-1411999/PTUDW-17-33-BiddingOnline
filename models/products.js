@@ -17,7 +17,7 @@ var ProductsSchema = new mongoose.Schema({
     buocdaugia: Number,
     loai: String,
     datetime: String,
-    datetimeproduct:Number,
+    datetimeproduct: Number,
     ghichu: String
 }, {
     collection: "product"
@@ -36,5 +36,13 @@ module.exports = {
         });
     },
     getProduct: Product,
+
+    getLimitSkipandSort: async (nameSort, limit, skip) => {
+        var product = [];
+        await Product.find({}).skip(skip).limit(limit).then((docs) => {
+           return docs;
+        })
+        // return product;
+    }
 
 }
