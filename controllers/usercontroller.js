@@ -5,6 +5,12 @@ const bcrypt = require('bcryptjs');
 
 class userController {
     showSignup(req, res) {
+        req.logout();
+        req.session.destroy();
+        if (req.user != undefined && req.user != null)
+        {
+            router.redirect('/');
+        }
         res.render('signup_in', {
             title: 'Sign in/ Sign up',
             checksignin: true
@@ -13,7 +19,8 @@ class userController {
 
     showAccount(req, res) {
         res.render('account', {
-            title: 'Account'
+            title: 'Account',
+            account:req.user,
         });
     }
 
@@ -161,45 +168,6 @@ class userController {
                 usermodels.insert(user);
                 res.redirect('/');
             });
-        }
-    }
-    async setPostSignin(req, res) {
-
-        var arr = [];
-        var checkSignin = {
-            suname: req.body.suname,
-            supass: req.body.supass,
-        };
-        //kiểm tra pass
-        await db.find({
-            name: checkSignin.suname
-        }).then(function (docs) {
-            // arr.push(docs);
-            docs.forEach(element => {
-                arr.push(element);
-            })
-        });
-        console.log(arr);
-        if (arr.length === 0) {
-            res.render('signup_in', {
-                title: 'Sign in/ Sign up',
-                checksignin: true,
-                errsiname: "*Username wrong!"
-            });
-        } else {
-            bcrypt.compare(checkSignin.supass, arr[0].pass, (err, isMatch) => {
-                console.log(isMatch);
-                if (err) throw err;
-                if (!isMatch) {
-                    res.render('signup_in', {
-                        title: 'Sign in/ Sign up',
-                        checksignin: true,
-                        errsipass: "*Password wrong!"
-                    });
-                } else {
-                    res.redirect('/');
-                }
-            })
         }
     }
 

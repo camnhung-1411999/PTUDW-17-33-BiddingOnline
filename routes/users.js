@@ -5,8 +5,6 @@ const controllers = new userController();
 
 // authenticate
 const passport = require('passport');
-
-//kiem tra da login hay chua
 const {
   ensureAuthenticated
 } = require('../config/auth');
@@ -24,22 +22,20 @@ router.get('/signup_:username', (req, res) => {
   });
 })
 
-router.get('/account', function (req, res) {
-  controllers.showAccount(req, res);
-});
-
-
 //post sign up
 router.post('/signup', (req, res) => {
   controllers.setPostSignup(req, res);
 });
 //post sign in
 router.post('/signin', (req, res, next) => {
-  // controllers.setPostSignin(req, res);
-  // console.log(req.body.username +"-"+ req.body.password);
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/users/signup_' + req.body.username
   })(req, res, next);
+});
+
+
+router.get('/account', function (req, res) {
+  controllers.showAccount(req, res);
 });
 module.exports = router;

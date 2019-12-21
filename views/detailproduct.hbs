@@ -128,10 +128,10 @@
 
                             <div class="row text-muted ml-7">
                                 <div class="mb-5 ">
-                                    <input type="number" placeholder="0" id="add-to-cart-qty" step="{{product.buocdaugia}}" min="10000"
+                                    <input type="number" placeholder="0"  step="{{product.buocdaugia}}" min="{{product.buocdaugia}}"
                                         max="10000000000" value="{{product.giahientai}}">
                                 </div>
-                                <div class="mb-4"><span class="font-size-04 ">K</span></div>
+                                <div class="mb-4"><span class="font-size-04 "> -K</span></div>
                                 <div class="mb-4 ml-3 font-size-04">
                                     <button type="submit">Bid</button></div>
                             </div>
@@ -140,7 +140,7 @@
                             <div id="text">
                                 <div class="mb-4">
                                     <h6 class="text-muted font-size-08 text-uppercase ">Price buy now!</h6>
-                                    <h4>45,000,000 ₫</h4>
+                                    <h4>{{product.giamuangay}} ₫</h4>
                                 </div>
                                 <button class="add-to-cart"> Add to Cart</button>
 

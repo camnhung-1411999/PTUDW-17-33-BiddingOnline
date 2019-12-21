@@ -17,12 +17,12 @@ passport.deserializeUser(function (name, done) {
 });
 module.exports =function (passport) {
     passport.use(new LocalStrategy(
-        (username, password, done) => {       
+        (username, password, done) => {
             if(!username||!password)
                 return done(null, false,{message:'Vui lòng điền đầy đủ thông tin'});
             User.findOne({
                 name:username
-            }).then(async function (user) {    
+            }).then(async function (user) {
                 if(!user)
                     return done(null,false,{message:'Tài khoản chưa được đăng ký'});
                 bcrypt.compare(password,user.pass,(err,isMatch)=>{
