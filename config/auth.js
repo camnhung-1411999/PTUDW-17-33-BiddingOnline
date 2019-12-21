@@ -4,7 +4,7 @@ module.exports={
             next();
         }
         else{
-        res.redirect("/users/login");
+        res.redirect("/users/signup");
         }
     }
 }

@@ -3,11 +3,20 @@ var router = express.Router();
 var productController = require('../controllers/productcontroller');
 var controllers = new productController();
 
+
+// authenticate
+const passport = require('passport');
+
+//kiem tra da login hay chua
+const {
+   ensureAuthenticated
+} = require('../config/auth');
+
+
 router.get('/', function (req, res) {
    controllers.showProduct(req, res);
 });
 router.get('/upload', function (req, res) {
-   console.log("day la:" + req.user);
    controllers.showUpload(req, res);
 });
 

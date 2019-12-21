@@ -13,15 +13,35 @@ class productController {
                 arrproduct.push(element);
             })
         });
+
+        var checkuser = false;
+        if (req.user) {
+            checkuser = true;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
         res.render('product', {
             title: 'Product',
-            list: arrproduct
+            list: arrproduct,
+            checkuser,
+            isSeller,
         });
     };
     showUpload(req, res) {
-
+        var checkuser = false;
+        if (req.user) {
+            checkuser = true;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
         res.render('upload', {
-            title: 'Upload product'
+            title: 'Upload product',
+            checkuser,
+            isSeller,
         });
     }
 
@@ -61,17 +81,27 @@ class productController {
     }
 
     async showDetailProduct(req, res) {
-        var id =req.query.id;
+        var id = req.query.id;
         // var o_id = new ObjectId(id);
         var product = {};
         // console.log("id: "+req.query.id);
-        await dbproduct.findOne({"_id": ObjectId(id)}).then(doc=>{
+        await dbproduct.findOne({ "_id": ObjectId(id) }).then(doc => {
             product = doc;
         });
         console.log(product.image[0]);
+        var checkuser = false;
+        if (req.user) {
+            checkuser = true;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
         res.render('detailproduct', {
             title: 'Detail product',
-            product: product
+            product: product,
+            checkuser,
+            isSeller,
         });
     }
 }

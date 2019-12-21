@@ -31,7 +31,22 @@
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <!--??????????? không làm được -->
+                    <li class="nav-item">
+                        <div class="dropdown">
+
+                            <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false" aria-haspopup="true">
+                                Category</a>
+
+                            <ul class="dropdown-menu" id="drop" role="menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="/../products">All</a></li>
+                                <li class="divider"></li>
+                                <li><a class="dropdown-item" href="/../products">Laptop</a></li>
+                                <li><a class="dropdown-item" href="/../products">Mobile</a></li>
+                                <li><a class="dropdown-item" href="/../products">Tablet</a></li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#topbid">TOP BID</a>
                     </li>
@@ -41,7 +56,7 @@
                     <!--Sign in sign up-->
 
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#">Marcus Doe</a>
+                        <a class="nav-link js-scroll-trigger" href="#">{{account.name}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="/users/signup">Log out</a>
@@ -65,10 +80,10 @@
                     <!-- SIDEBAR USER TITLE -->
                     <div class="profile-usertitle">
                         <div class="profile-usertitle-name">
-                            Marcus Doe
+                            {{account.name}}
                         </div>
                         <div class="profile-usertitle-job">
-                            Bidder/Seller
+                            {{account.status}}
                         </div>
                     </div>
                     <!-- END SIDEBAR USER TITLE -->
@@ -134,24 +149,24 @@
                             <thead>
                                 <tr>
                                     <th>Full Name</th>
-                                    <td>Vikram</td>
+                                    <td>{{account.fullname}}</td>
                                 </tr>
                                 <tr>
                                     <th class="info">Email</th>
-                                    <td>lorem@mail.com</td>
+                                    <td>{{account.email}}</td>
                                 </tr>
                                 <tr>
                                     <th class="info">Contact</th>
-                                    <td>+91 9999955555</td>
+                                    <td>{{account.phone}}</td>
                                 </tr>
 
                                 <tr>
                                     <th class="info">Address</th>
-                                    <td>Tp HCM, Viet Nam</td>
+                                    <td>{{account.address}}</td>
                                 </tr>
                                 <tr>
                                     <th class="info">Status</th>
-                                    <td>Bidder/Seller</td>
+                                    <td>{{account.status}}</td>
                                 </tr>
 
                             </thead>
