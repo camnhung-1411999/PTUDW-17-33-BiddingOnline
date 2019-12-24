@@ -1,39 +1,55 @@
 var time = 20;
 
 $(document).ready(function () {
-    var laptop = document.getElementById('categorylaptop');
-    laptop.addEventListener('click', function () {
-        $(".tablet").hide(time);
-        $(".mobile").hide(time);
-        $('.laptop').show(time);
+  $('#categorylaptop').click(function () {
+    $(".tablet").hide(time);
+    $(".mobile").hide(time);
+    $('.laptop').show(time);
 
-    });
-    var all = document.getElementById('categoryall');
-    all.addEventListener('click', function () {
-        $('.tablet').show(time);
-        $('.mobile').show(time);
-        $('.laptop').show(time);
-    });
+    $('#categorylaptop').addClass('active');
+    $('#categorymobile').removeClass('active');
+    $('#categorytablet').removeClass('active');
+    $('#categoryall').removeClass('active');
 
-    var mobile = document.getElementById('categorymobile');
-    mobile.addEventListener('click', function () {
-        $('.tablet').hide(time);
-        $('.mobile').show(time);
-        $('.laptop').hide(time);
-    });
-    var tablet = document.getElementById('categorytablet');
-    tablet.addEventListener('click', function () {
-        $('.tablet').show(time);
-        $('.mobile').hide(time);
-        $('.laptop').hide(time);
-    });
+  });
+  $('#categoryall').click(function () {
+    $('.tablet').show(time);
+    $('.mobile').show(time);
+    $('.laptop').show(time);
+
+    $('#categorylaptop').removeClass('active');
+    $('#categorymobile').removeClass('active');
+    $('#categorytablet').removeClass('active');
+    $('#categoryall').addClass('active');
+  });
+
+  $('#categorymobile').click(function () {
+    $('.tablet').hide(time);
+    $('.mobile').show(time);
+    $('.laptop').hide(time);
+
+    $('#categorylaptop').removeClass('active');
+    $('#categorymobile').addClass('active');
+    $('#categorytablet').removeClass('active');
+    $('#categoryall').removeClass('active');
+  });
+  $('#categorytablet').click(function () {
+    $('.tablet').show(time);
+    $('.mobile').hide(time);
+    $('.laptop').hide(time);
+
+    $('#categorylaptop').removeClass('active');
+    $('#categorymobile').removeClass('active');
+    $('#categorytablet').addClass('active');
+    $('#categoryall').removeClass('active');
+  });
 
 });
 
 // //favorite product
 var heart = document.querySelector('.far');
 
-heart.addEventListener('click', function() {
+heart.addEventListener('click', function () {
   this.classList.toggle('fas');
 }, false);
 // end
@@ -41,7 +57,7 @@ heart.addEventListener('click', function() {
 
 
 (function ($) {
-  $.fn.niceNumber = function(options) {
+  $.fn.niceNumber = function (options) {
     var settings = $.extend({
       autoSize: false,
       autoSizeBuffer: 1,
@@ -50,37 +66,37 @@ heart.addEventListener('click', function() {
       buttonPosition: 'around'
     }, options);
 
-    return this.each(function(){
+    return this.each(function () {
       var currentInput = this,
-          $currentInput = $(currentInput),
-          attrMax = 999,
-          attrMin = 0;
+        $currentInput = $(currentInput),
+        attrMax = 999,
+        attrMin = 0;
 
       // Handle max and min values
       if (
-        typeof $currentInput.attr('max') !== typeof undefined
-        && $currentInput.attr('max') !== false
+        typeof $currentInput.attr('max') !== typeof undefined &&
+        $currentInput.attr('max') !== false
       ) {
         attrMax = parseFloat($currentInput.attr('max'));
       }
 
       if (
-        typeof $currentInput.attr('min') !== typeof undefined
-        && $currentInput.attr('min') !== false
+        typeof $currentInput.attr('min') !== typeof undefined &&
+        $currentInput.attr('min') !== false
       ) {
         attrMin = parseFloat($currentInput.attr('min'));
       }
 
       // Fix issue with initial value being < min
       if (
-        attrMin
-        && !currentInput.value
+        attrMin &&
+        !currentInput.value
       ) {
         $currentInput.val(attrMin);
       }
 
       // Generate container
-      var $inputContainer = $('<div/>',{
+      var $inputContainer = $('<div/>', {
           class: 'nice-number'
         })
         .insertAfter(currentInput);
@@ -92,11 +108,11 @@ heart.addEventListener('click', function() {
       var $minusButton = $('<button/>')
         .attr('type', 'button')
         .html(settings.buttonDecrement)
-        .on('mousedown mouseup mouseleave', function(event){
-          changeInterval(event.type, interval, function(){
+        .on('mousedown mouseup mouseleave', function (event) {
+          changeInterval(event.type, interval, function () {
             if (
-              attrMin == null
-              || attrMin < parseFloat(currentInput.value)
+              attrMin == null ||
+              attrMin < parseFloat(currentInput.value)
             ) {
               currentInput.value--;
             }
@@ -104,8 +120,8 @@ heart.addEventListener('click', function() {
 
           // Trigger the input event here to avoid event spam
           if (
-            event.type == 'mouseup'
-            || event.type == 'mouseleave'
+            event.type == 'mouseup' ||
+            event.type == 'mouseleave'
           ) {
             $currentInput.trigger('input');
           }
@@ -114,11 +130,11 @@ heart.addEventListener('click', function() {
       var $plusButton = $('<button/>')
         .attr('type', 'button')
         .html(settings.buttonIncrement)
-        .on('mousedown mouseup mouseleave', function(event){
-          changeInterval(event.type, interval, function(){
+        .on('mousedown mouseup mouseleave', function (event) {
+          changeInterval(event.type, interval, function () {
             if (
-              attrMax == null
-              || attrMax > parseFloat(currentInput.value)
+              attrMax == null ||
+              attrMax > parseFloat(currentInput.value)
             ) {
               currentInput.value++;
             }
@@ -126,8 +142,8 @@ heart.addEventListener('click', function() {
 
           // Trigger the input event here to avoid event spam
           if (
-            event.type == 'mouseup'
-            || event.type == 'mouseleave'
+            event.type == 'mouseup' ||
+            event.type == 'mouseleave'
           ) {
             $currentInput.trigger('input');
           }
@@ -156,11 +172,11 @@ heart.addEventListener('click', function() {
       // Nicely size input
       if (settings.autoSize) {
         $currentInput.width(
-          $currentInput.val().length+settings.autoSizeBuffer+"ch"
+          $currentInput.val().length + settings.autoSizeBuffer + "ch"
         );
-        $currentInput.on('keyup input',function(){
+        $currentInput.on('keyup input', function () {
           $currentInput.animate({
-            'width': $currentInput.val().length+settings.autoSizeBuffer+"ch"
+            'width': $currentInput.val().length + settings.autoSizeBuffer + "ch"
           }, 200);
         });
       }
@@ -169,8 +185,8 @@ heart.addEventListener('click', function() {
 
   function changeInterval(eventType, interval, callback) {
     if (eventType == "mousedown") {
-      interval.timeout = setTimeout(function(){
-        interval.actualInterval = setInterval(function(){
+      interval.timeout = setTimeout(function () {
+        interval.actualInterval = setInterval(function () {
           callback();
         }, 100);
       }, 200);
@@ -189,53 +205,53 @@ heart.addEventListener('click', function() {
 $('input#add-to-cart-qty').niceNumber();
 
 $('input#add-to-cart-qty').keydown(function (e) {
-    if (e.keyCode == 190 || e.keyCode == 110 || e.keyCode == 69 || e.keyCode == 189 || e.keyCode == 109) {
+  if (e.keyCode == 190 || e.keyCode == 110 || e.keyCode == 69 || e.keyCode == 189 || e.keyCode == 109) {
+    e.preventDefault();
+  }
+
+  if (isNaN(parseInt(window.getSelection()))) {
+    var code = (e.keyCode >= 96) ? e.keyCode - 48 : e.keyCode;
+    var keyval = parseInt(String.fromCharCode(code));
+
+    if (!isNaN(keyval)) {
+      if ($(this).val() + keyval > parseInt($(this).attr('max'))) {
         e.preventDefault();
+      }
     }
-
-    if (isNaN(parseInt(window.getSelection()))) {
-        var code = (e.keyCode >= 96) ? e.keyCode - 48 : e.keyCode;
-        var keyval = parseInt(String.fromCharCode(code));
-
-        if (!isNaN(keyval)) {
-            if ($(this).val() + keyval > parseInt($(this).attr('max'))) {
-                e.preventDefault();
-            }
-        }
-    }
+  }
 });
 $('input#add-to-cart-qty').keyup(function (e) {
-    if ($(this).val() != '') {
-        $(this).val(parseInt($(this).val()));
-    }
+  if ($(this).val() != '') {
+    $(this).val(parseInt($(this).val()));
+  }
 });
 // ------------- //
 
 
 $('#text').hide();
 
-$('.subscribe-btn').change(function() {
-    // use the :checked selector to find any that are checked
-    if($(".subscribe-btn").is(':checked')) {
-        $('#text').slideDown();
-    } else {
-        $('#text').slideUp();
-    }
- });
- $('.subscribe-btn').change(function() {
+$('.subscribe-btn').change(function () {
   // use the :checked selector to find any that are checked
-  if($(".subscribe-btn").is(':checked')) {
-      $('#text').slideDown();
+  if ($(".subscribe-btn").is(':checked')) {
+    $('#text').slideDown();
   } else {
-      $('#text').slideUp();
+    $('#text').slideUp();
+  }
+});
+$('.subscribe-btn').change(function () {
+  // use the :checked selector to find any that are checked
+  if ($(".subscribe-btn").is(':checked')) {
+    $('#text').slideDown();
+  } else {
+    $('#text').slideUp();
   }
 });
 
 /* Images */
-$('.thumbnail').on('click', function() {
+$('.thumbnail').on('click', function () {
   var clicked = $(this);
   var newSelection = clicked.data('big');
-  var $img = $('.primary').css("background-image","url(" + newSelection + ")");
+  var $img = $('.primary').css("background-image", "url(" + newSelection + ")");
   clicked.parent().find('.thumbnail').removeClass('selected');
   clicked.addClass('selected');
   $('.primary').empty().append($img.hide().fadeIn(500));
@@ -245,26 +261,26 @@ $('.thumbnail').on('click', function() {
 
 
 
-$('button.add-to-cart').on('click', function(){
+$('button.add-to-cart').on('click', function () {
   var cartBtn = $(this);
-  cartBtn.addClass('success').text( "Success!" ).attr('disabled',true);
-  setTimeout(function() { cartBtn.removeClass('success').addClass('active').text( "Add to Cart" ).attr('disabled', false);}, 1500);
+  cartBtn.addClass('success').text("Success!").attr('disabled', true);
+  setTimeout(function () {
+    cartBtn.removeClass('success').addClass('active').text("Add to Cart").attr('disabled', false);
+  }, 1500);
 });
 
 
-$('#favorite-button').on('click', function(){
-    $(this).toggleClass('active');
+$('#favorite-button').on('click', function () {
+  $(this).toggleClass('active');
 })
 
-// function changeImg(){
-//     var showing = $(this).find("img").attr("src");
-//     alert(showing+"");
-  //   document.getElementById('main-image').src=""+showing;
-  //  var  mainImg=document.getElementById('main-image');
-    //alert(mainImg.src);
-    
-    $('.side-picture').click(function () {
-      var showing = $(this).find("img").attr("src");
-      document.getElementById('main1-image').src=""+showing;
-      document.getElementById('main2-image').src=""+showing;
-    });
+$('.side-picture').click(function () {
+  var showing = $(this).find("img").attr("src");
+  document.getElementById('main1-image').src = "" + showing;
+  document.getElementById('main2-image').src = "" + showing;
+});
+
+
+
+
+//couting down time

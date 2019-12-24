@@ -17,6 +17,7 @@
 <div id="page-top">
 
     <!-- Navigation -->
+    {{!-- {{>navProducts}} --}}
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="/">Bidding Together</a>
@@ -42,11 +43,11 @@
                                 Category</a>
 
                             <ul class="dropdown-menu" id="drop" role="menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="/products">All</a></li>
+                                <li><a class="dropdown-item" href="/products/category/category?id=all">All</a></li>
                                 <li class="divider"></li>
-                                <li><a class="dropdown-item" href="/products">Laptop</a></li>
-                                <li><a class="dropdown-item" href="/products">Mobile</a></li>
-                                <li><a class="dropdown-item" href="/products">Tablet</a></li>
+                                <li><a class="dropdown-item" href="/products/category/category?id=latop">Laptop</a></li>
+                                <li><a class="dropdown-item" href="/products/category/category?id=mobile">Mobile</a></li>
+                                <li><a class="dropdown-item" href="/products/category/category?id=tablet">Tablet</a></li>
                             </ul>
                         </div>
                     </li>
@@ -64,7 +65,7 @@
 
 
                     {{#if checkuser}}
-                     <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" id="Signin_Signup" href="/users/signup">Log out</a>
                     </li>
                     <li class="nav-item">
@@ -102,7 +103,7 @@
                 </div>
             </div>
             <div class="row text-center ">
-                <a class="col-md-4" href="product">
+                <a class="col-md-4" href="/products/category/category?id=tablet">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         <i class="fas fa-tablet-alt fa-stack-1x fa-inverse"></i>
@@ -111,7 +112,7 @@
                     <p class="text-muted">SumSung, Apple, Huawei, OnePlus, Xiaomi, Lenovo, LG, Sony, HTC, Lenovo, Asus,
                         ....</p>
                 </a>
-                <a class="col-md-4" href="product">
+                <a class="col-md-4" href="/products/category/category?id=latop">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
@@ -120,7 +121,7 @@
                     <p class="text-muted">Macbook, Dell, Asus, HP, Lenovo, Acer. MSI, Microsoft, Samsung, Toshiba, ...
                     </p>
                 </a>
-                <a class="col-md-4" href="product">
+                <a class="col-md-4" href="/products/category/category?id=mobile">
                     <span class="fa-stack fa-4x">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         <i class="fas fa-mobile-alt fa-stack-1x fa-inverse"></i>
@@ -162,8 +163,8 @@
                     <div class="topbid-caption">
                         <h4>{{this.ten}}</h4>
                         <p class="text-muted">{{this.giahientai}} ₫</p>
-                        <p class="settime">{{this.datetime}}</p>
-
+                        <p class="settime" style="color:red"></p>
+                        <p class="temp" hidden>{{this.datetimeproduct}}</p>
                     </div>
                 </div>
                 {{/each}}
@@ -178,23 +179,24 @@
                 <!-- chèn cho khỏi trống -->
                 <div class="col-md-1"></div>
                 {{#each mostbids}}
+
+
                 <div class="col-md-2 col-sm-6 topbid-item">
-                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                    <a class="topbid-link" href="/products/detailproduct/id?id={{this._id}}">
                         <div class="topbid-hover">
                             <div class="topbid-hover-content">
                                 <i class="fas fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img class="img-fluid"
-                            src={{this.image}}
-                            alt="">
+                        <img class="img-fluid" src={{this.image}} alt="">
                     </a>
                     <div class="topbid-caption">
                         <h4>{{this.ten}}</h4>
                         <p class="text-muted">{{this.giahientai}} ₫</p>
-                        <p class="settime">{{this.datetime}}</p>
-                    </div>
+                        <p class="settime" style="color:red"></p>
+                        <p class="temp" hidden>{{this.datetimeproduct}}</p>
 
+                    </div>
                 </div>
                 {{/each}}
 
@@ -210,92 +212,27 @@
             </div>
             <div class="row">
                 <!-- chèn cho khỏi trống -->
+
                 <div class="col-md-1"></div>
+                {{#each neartimeout}}
                 <div class="col-md-2 col-sm-6 topbid-item">
-                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
+                    <a class="topbid-link" data-toggle="modal" href="/products/detailproduct/id?id={{this._id}}">
                         <div class="topbid-hover">
                             <div class="topbid-hover-content">
                                 <i class="fas fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img class="img-fluid"
-                            src="https://bachlongmobile.com/media/catalog/product/cache/1/image/040ec09b1e35df139433887a97daa66f/7/p/7psilver_2.jpg"
-                            alt="">
+                        <img class="img-fluid" src={{this.image}} alt="">
                     </a>
                     <div class="topbid-caption">
-                        <h4>Iphone 6s plus</h4>
-                        <p class="text-muted">12,000,000 đ</p>
-                        <p class="settime">02:00:30</p>
+                        <h4>{{this.ten}}</h4>
+                        <p class="text-muted">{{this.giahientai}} đ</p>
+                        <p class="settime" style="color:red"></p>
+                        <p class="temp" hidden>{{this.datetimeproduct}}</p>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-6 topbid-item">
-                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                        <div class="topbid-hover">
-                            <div class="topbid-hover-content">
-                                <i class="fas fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img class="img-fluid"
-                            src="https://cdn.tgdd.vn/Products/Images/42/201228/samsung-galaxy-a80-gold-400x460.png"
-                            alt="">
-                    </a>
-                    <div class="topbid-caption">
-                        <h4>Samsung Galaxy A80</h4>
-                        <p class="text-muted">12,990,000₫</p>
-                        <p class="settime">02:00:30</p>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-6 topbid-item ">
-                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                        <div class="topbid-hover">
-                            <div class="topbid-hover-content">
-                                <i class="fas fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img class="img-fluid"
-                            src="https://cdn.tgdd.vn/Products/Images/42/201228/samsung-galaxy-a80-gold-400x460.png"
-                            alt="">
-                    </a>
-                    <div class="topbid-caption">
-                        <h4>Samsung Galaxy A80</h4>
-                        <p class="text-muted">12,990,000₫</p>
-                        <p class="settime">02:00:30</p>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-6 topbid-item">
-                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                        <div class="topbid-hover">
-                            <div class="topbid-hover-content">
-                                <i class="fas fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img class="img-fluid"
-                            src="https://cdn.tgdd.vn/Products/Images/42/201228/samsung-galaxy-a80-gold-400x460.png"
-                            alt="">
-                    </a>
-                    <div class="topbid-caption">
-                        <h4>Samsung Galaxy A80</h4>
-                        <p class="text-muted">12,990,000₫</p>
-                        <p class="settime">02:00:30</p>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-6 topbid-item">
-                    <a class="topbid-link" data-toggle="modal" href="detailproduct">
-                        <div class="topbid-hover">
-                            <div class="topbid-hover-content">
-                                <i class="fas fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img class="img-fluid"
-                            src="https://cdn.tgdd.vn/Products/Images/42/201228/samsung-galaxy-a80-gold-400x460.png"
-                            alt="">
-                    </a>
-                    <div class="topbid-caption">
-                        <h4>Samsung Galaxy A80</h4>
-                        <p class="text-muted">12,990,000₫</p>
-                        <p class="settime">02:00:30</p>
-                    </div>
-                </div>
+                {{/each}}
+
             </div>
 
         </div>
@@ -517,52 +454,15 @@
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; Your Website 2019</span>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline social-buttons">
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline quicklinks">
-                        <li class="list-inline-item">
-                            <a href="#">Privacy Policy</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">Terms of Use</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-
 </div>
 
 {{#section 'js'}}
 
 <!-- Bootstrap core JavaScript -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/javascripts/counttime.js"></script>
+
+
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

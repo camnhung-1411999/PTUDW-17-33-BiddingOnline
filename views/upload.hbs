@@ -150,12 +150,12 @@
     if (ii < 10) {
         ii = '0' + ii;
     }
-    var today = dd + '/' + mm + '/' + yyyy + " " + hh + ":" + ii;
+    var today = yyyy +'/' + mm + '/' +dd  +  " " + hh + ":" + ii;
     $('#txtDOB').val(today);
 
     $('#txtDOB').datetimepicker({
         // format: 'd/m/Y H:i'
-        format: 'd/m/Y H:i',
+        format: 'Y/m/d H:i',
         timepicker: false,
         mask: true,
     });
