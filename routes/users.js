@@ -38,4 +38,14 @@ router.post('/signin', (req, res, next) => {
 router.get('/account', function (req, res) {
   controllers.showAccount(req, res);
 });
+router.get('/changepassword', function (req, res) {
+  controllers.showchangepassword(req, res);
+});
+
+router.post('/account',function(req,res){
+  controllers.setPostAccount(req,res);
+});
+router.post('/changepassword',function(req,res){
+  controllers.setPostPassword(req,res);
+})
 module.exports = router;

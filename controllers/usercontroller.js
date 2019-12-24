@@ -13,17 +13,47 @@ class userController {
         }
         res.render('signup_in', {
             title: 'Sign in/ Sign up',
-            checksignin: true
+            checksignin: true,
+            messenger: req.user
         });
     }
 
     showAccount(req, res) {
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser=req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
         res.render('account', {
             title: 'Account',
+            checkuser,
+            nameuser,
             account:req.user,
         });
     }
-
+    showchangepassword(req,res){
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser=req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
+        res.render('changepassword', {
+            title: 'Change password',
+            checkuser,
+            nameuser,
+            account:req.user,
+        });
+    }
     async setPostSignup(req, res) {
         var arr = [];
         var a = +req.body.a;
@@ -154,7 +184,6 @@ class userController {
                 checksignup: true
             });
         } else {
-            console.log(checkInfor.pass);
             await usermodels.hashPassword(checkInfor.pass).then(function (doc) {
                 const user = {
                     fullname: checkInfor.fullname,
@@ -169,6 +198,69 @@ class userController {
                 res.redirect('/');
             });
         }
+    }
+    async setPostAccount(req,res){
+        // var iduser=req.user._id;
+
+        var myquery = {
+            _id: req.user._id
+        }
+        var changeAcc={
+            fullname:req.body.fullnamechange,
+            phone:req.body.phonechange,
+            address:req.body.addresschange,
+        };
+        var options = {
+            multi: true
+        }
+        // usermodels.UpdateInfoAccount(changeAcc,iduser);
+        await db.update(myquery,changeAcc,options);
+        res.redirect('/../users/account');
+    }
+
+    async setPostPassword(req,res){
+        var oldpass=req.body.oldpass;
+        var newpass=req.body.newpass;
+        var renewpass=req.body.renewpass;
+        bcrypt.compare(oldpass,req.user.pass,(err,isMatch)=>{
+            if(err) throw err;
+            if(!isMatch) {
+                res.render('changepassword', {
+                    title: 'Change password',
+                    erroldpass:"Password wrong",
+            });
+            }
+        });
+        // kiem tra mat khau lon hon 6 ki tu
+        if (newpass < 6) {
+            res.render('changepassword', {
+                title: 'Change password',
+                errnewpass: "*Password must be at least 6 characters!",
+            });
+        }
+        // kiem tra mat khau nhap lai co khop k
+        if (!(newpass === renewpass)) {
+            res.render('changepassword', {
+                title: 'Change pasword',
+                errrenewpass: "*Do not match!",
+            });
+        }
+        var change;
+        await usermodels.hashPassword(newpass).then(function (doc) {
+            change=doc;
+        });
+        var myquery = {
+            _id: req.user._id
+        }
+        var changePass={
+            pass:change,
+        };
+        var options = {
+            multi: true
+        }
+        // usermodels.UpdateInfoAccount(changeAcc,iduser);
+        await db.update(myquery,changePass,options);
+        res.redirect('/../users/account');
     }
 
 }

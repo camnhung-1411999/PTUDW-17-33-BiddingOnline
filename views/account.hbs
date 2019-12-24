@@ -1,6 +1,5 @@
-
 <!-- Custom fonts for this template -->
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="/../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
@@ -15,56 +14,7 @@
 
 
 <div id="page-top">
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top " id="mainNav">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="/">Bidding Together</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse " id="navbarResponsive">
-                <form class="form-inline my-2 my-lg-0">
-
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item">
-                        <div class="dropdown">
-
-                            <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown" role="button"
-                                aria-expanded="false" aria-haspopup="true">
-                                Category</a>
-
-                            <ul class="dropdown-menu" id="drop" role="menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="/../products">All</a></li>
-                                <li class="divider"></li>
-                                <li><a class="dropdown-item" href="/../products">Laptop</a></li>
-                                <li><a class="dropdown-item" href="/../products">Mobile</a></li>
-                                <li><a class="dropdown-item" href="/../products">Tablet</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#topbid">TOP BID</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#team">Team</a>
-                    </li>
-                    <!--Sign in sign up-->
-
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#">{{account.name}}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/users/signup">Log out</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    {{>navProducts}}
 
 
     <div class="container">
@@ -89,8 +39,55 @@
                     <!-- END SIDEBAR USER TITLE -->
                     <!-- SIDEBAR BUTTONS -->
                     <div class="profile-userbuttons">
-                        <button type="button" class="btn btn-success btn-sm">Follow</button>
-                        <button type="button" class="btn btn-danger btn-sm">Message</button>
+                        <a href="/../users/changepassword"><input type="button" class="btn btn-danger btn-sm" >Reset password</a>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                            data-target="#exampleModalCenter">
+                            Profile
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">Change Information</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form method="post">
+                                        <div class="modal-body">
+                                            <div class="sign-up-htm">
+                                                <div class="group">
+                                                    <label>Fullname</label>
+                                                    <input id="user" type="text" class="input" name="fullnamechange"
+                                                        value="{{account.fullname}}">
+                                                </div>
+                                                <div class="group">
+                                                    <label for="pass" class="label">Phone number</label>
+                                                    <input type="text" class="input" name="phonechange"
+                                                        pattern="[0-9]{10}" value="{{account.phone}}">
+                                                </div>
+                                                <div class="group">
+                                                    <label for="pass" class="label">Address</label>
+                                                    <input type="text" class="input" name="addresschange"
+                                                        value="{{account.address}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <input type="submit" id="submit" class="button" formaction="/users/account"
+                                                value="Save changes">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- END SIDEBAR BUTTONS -->
                     <!-- SIDEBAR MENU -->
@@ -207,10 +204,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/../vendor/jquery/jquery.min.js"></script>
 
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <script src="/../vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="/../javascripts/agency.min.js"></script>
     <script src="/../javascripts/account.js"></script>
 </div>
