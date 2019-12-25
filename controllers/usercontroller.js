@@ -36,7 +36,7 @@ class userController {
             account:req.user,
         });
     }
-    showchangepassword(req,res){
+    showChangePassword(req,res){
         var checkuser = false;
         var nameuser;
         if (req.user) {
@@ -222,15 +222,19 @@ class userController {
         var oldpass=req.body.oldpass;
         var newpass=req.body.newpass;
         var renewpass=req.body.renewpass;
-        bcrypt.compare(oldpass,req.user.pass,(err,isMatch)=>{
-            if(err) throw err;
-            if(!isMatch) {
-                res.render('changepassword', {
-                    title: 'Change password',
-                    erroldpass:"Password wrong",
+        if(req.user != undefined && req.user != null)
+        {
+            bcrypt.compare(oldpass,req.user.pass,(err,isMatch)=>{
+                console.log(isMatch);
+                if(err) throw err;
+                if(!isMatch) {
+                    res.render('changepassword', {
+                        title: 'Change password',
+                        erroldpass:"*Password wrong!",
+                });
+                }
             });
-            }
-        });
+        }
         // kiem tra mat khau lon hon 6 ki tu
         if (newpass < 6) {
             res.render('changepassword', {
@@ -241,7 +245,7 @@ class userController {
         // kiem tra mat khau nhap lai co khop k
         if (!(newpass === renewpass)) {
             res.render('changepassword', {
-                title: 'Change pasword',
+                title: 'Change password',
                 errrenewpass: "*Do not match!",
             });
         }
@@ -259,7 +263,7 @@ class userController {
             multi: true
         }
         // usermodels.UpdateInfoAccount(changeAcc,iduser);
-        await db.update(myquery,changePass,options);
+        // await db.update(myquery,changePass,options);
         res.redirect('/../users/account');
     }
 

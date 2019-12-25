@@ -39,7 +39,7 @@ router.get('/account', function (req, res) {
   controllers.showAccount(req, res);
 });
 router.get('/changepassword', function (req, res) {
-  controllers.showchangepassword(req, res);
+  controllers.showChangePassword(req, res);
 });
 
 router.post('/account',function(req,res){
