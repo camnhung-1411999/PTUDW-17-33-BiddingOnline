@@ -264,7 +264,7 @@ class userController {
         }
         // usermodels.UpdateInfoAccount(changeAcc,iduser);
         // await db.update(myquery,changePass,options);
-        res.redirect('/../users/account');
+        //res.redirect('/../users/account');
     }
 
 }
