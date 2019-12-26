@@ -66,10 +66,22 @@
 
                     {{#if checkuser}}
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" id="Signin_Signup" href="/users/signup">Log out</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="fas fa-user" href="/users/account" id="user" style="color:white;"></a>
+                        <div class="dropdown">
+
+                            <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false" aria-haspopup="true" id="dropCategory">
+                                <i class="fas fa-user"  style="color:white;"></i>
+                            </a>
+
+                            <ul class="dropdown-menu" id="drop" role="menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="/users/account">{{nameuser}}</a></li>
+                                <li class="divider"></li>
+                                <li><a class="dropdown-item" href="/users/account">Notification</a></li>
+                                <li><a class="dropdown-item" href="/users/account">My Chart</a>
+                                </li>
+                                <li><a class="dropdown-item" href="/users/signup">Log out</a></li>
+                            </ul>
+                        </div>
                     </li>
                     {{else}}
                     <li class="nav-item">

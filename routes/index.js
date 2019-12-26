@@ -10,8 +10,10 @@ const dbproduct = productmodels.getProduct;
 /* GET home page. */
 router.get('/', async function (req, res) {
   var checkuser = false;
+  var username;
   if (req.user) {
     checkuser = true;
+    username=req.user.name;
     var isSeller = false;
     if (req.user.status === "seller") {
       isSeller = true;
@@ -78,7 +80,8 @@ router.get('/', async function (req, res) {
     mostprices: giacaonhat,
     mostbids: ragianhieunhat,
     neartimeout: thoigiansaphet,
-    home: true
+    home: true,
+    nameuser:username,
   });
 });
 

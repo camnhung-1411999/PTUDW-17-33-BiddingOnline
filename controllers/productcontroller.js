@@ -102,8 +102,10 @@ class productController {
 
 
         var checkuser = false;
+        var nameuser;
         if (req.user) {
             checkuser = true;
+            nameuser=req.user.name;
             var isSeller = true;
             if (req.user.status != "Seller") {
                 isSeller = false;
