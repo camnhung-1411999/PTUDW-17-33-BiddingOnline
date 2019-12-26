@@ -25,13 +25,14 @@
     <div class="row">
       <div class="col-sm-3">
         {{>category}}
+
+        {{>seach}}
       </div>
       <div class="col-sm-9">
 
         <section class="bg-light page-section" id="topbid">
 
           <div class="row" style="padding-left: 15px; padding-right: 15px;">
-
             {{#each list}}
             {{#if this.selling}}
 
@@ -53,31 +54,10 @@
             </div>
             {{/if}}
             {{/each}}
-
           </div>
         </section>
 
         <div class="d-flex justify-content-center">
-          {{!-- <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                  <span class="sr-only">Previous</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-            </ul>
-          </nav> --}}
-
           <div class="row">
             <div class="col-sm-12">
               <nav>
@@ -90,7 +70,7 @@
                   {{#each this.page_numbers}}
                   {{#if isCurrentPage}}
                   <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="javascript:;">{{value}} <span class="sr-only">(current)</span></a>
+                    <a class="page-link" href="javascript:;">{{value}} <span class="sr-only">(curr ent)</span></a>
                   </li>
                   {{else}}
                   <li class="page-item">
@@ -111,41 +91,25 @@
         </div>
       </div>
     </div>
-
-    {{#section 'js'}}
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-    <script>
-      if ({{ laptop }}) {
-        $(".tablet").hide(20);
-        $(".mobile").hide(20);
-        $('.laptop').show(20);
-      }else if ({{ tablet }}) {
-        $(".tablet").show(20);
-        $(".mobile").hide(20);
-        $('.laptop').hide(20);
-      }else if ({{ mobile }}) {
-        $(".tablet").hide(20);
-        $(".mobile").show(20);
-        $('.laptop').hide(20);
-      }
-    </script>
-    </script>
-    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </div>
+  {{#section 'js'}}
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  </script>
+  <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <script src="../../vendor/jquery/jquery.min.js"></script>
+  <script src="../../vendor/jquery/jquery.min.js"></script>
 
-    <!-- Plugin JavaScript -->
-    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Plugin JavaScript -->
+  <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for this template -->
-    <script src="/javascripts/agency.min.js"></script>
-    <script src="/javascripts/product.js"></script>
-    <script src="/javascripts/counttime.js"></script>
+  <!-- Custom scripts for this template -->
+  <script src="/javascripts/agency.min.js"></script>
+  <script src="/javascripts/product.js"></script>
+  <script src="/javascripts/counttime.js"></script>
 
-    {{/section}}
+  {{/section}}

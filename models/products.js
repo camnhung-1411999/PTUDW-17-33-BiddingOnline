@@ -24,6 +24,8 @@ var ProductsSchema = new mongoose.Schema({
 }, {
     collection: "product"
 });
+
+// ProductsSchema.index({loai :'text'});
 var Product = db.useDb("udweb-nhom7").model('product', ProductsSchema);
 module.exports = {
     insert: (entity) => {

@@ -3,7 +3,8 @@ var router = express.Router();
 var productController = require('../controllers/productcontroller');
 var controllers = new productController();
 
-
+var cartcontroller = require('../controllers/cartcontroller');
+var controllersCart = new cartcontroller();
 
 // authenticate
 const passport = require('passport');
@@ -18,7 +19,7 @@ router.get('/', function (req, res) {
    controllers.showProduct(req, res);
 });
 
-router.get('/category/:id', function (req, res) {
+router.get('/:id/categories', function (req, res) {
    controllers.showProduct(req, res);
 });
 
@@ -33,12 +34,24 @@ router.get('/detailproduct/:id', ensureAuthenticated, function (req, res) {
 
 router.get('/topbidding', (req, res) => {
    controllers.showTopBidding(req, res);
-})
+});
+
 
 //POST
 router.post('/upload', (req, res) => {
    controllers.postUpload(req, res);
+});
+router.post('/:id/categories',(req,res)=>{
+   controllers.postSearch(req, res);
 })
+
+//cart
+router.post('/detailproduct/:id/bid',(req, res)=>{
+   controllersCart.postBid(req, res);
+})
+
+
+
 module.exports = router;
 
 

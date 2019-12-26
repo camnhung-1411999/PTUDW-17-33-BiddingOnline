@@ -4,32 +4,11 @@
     </h5>
 
     <div class="list-group list-group-flush">
-        {{#if allcategory}}
-        <a href="#" class="list-group-item list-group-item-action active" id="categoryall"> All</a>
-        {{else}}
-        <a href="#" class="list-group-item list-group-item-action" id="categoryall"> All</a>
-        {{/if}}
-
-        {{#if laptop}}
-        <a href="#" class="list-group-item list-group-item-action active" id="categorylaptop">Laptop</a>
-     
-        {{else}}
-        <a href="#" class="list-group-item list-group-item-action" id="categorylaptop">Laptop</a>
-        {{/if}}
-
-        {{#if mobile}}
-        <a href="#" class="list-group-item list-group-item-action active" id="categorymobile">Mobile</a>
-
-        {{else}}
-        <a href="#" class="list-group-item list-group-item-action" id="categorymobile">Mobile</a>
-        {{/if}}
-
-        {{#if tablet}}
-        <a href="#" class="list-group-item list-group-item-action active" id="categorytablet">Tablet</a>
-      
-        {{else}}
-        <a href="#" class="list-group-item list-group-item-action" id="categorytablet">Tablet</a>
-        {{/if}}
+        {{#each listCategories}}
+        <a href="/products/{{ProID}}/categories"
+            class="list-group-item list-group-item-action {{#if isActive}} active {{/if}}" id="category{{ProID}}">
+            {{catName}}</a>
+        {{/each}}
 
     </div>
 

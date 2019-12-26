@@ -1,51 +1,5 @@
 var time = 20;
 
-$(document).ready(function () {
-  $('#categorylaptop').click(function () {
-    $(".tablet").hide(time);
-    $(".mobile").hide(time);
-    $('.laptop').show(time);
-
-    $('#categorylaptop').addClass('active');
-    $('#categorymobile').removeClass('active');
-    $('#categorytablet').removeClass('active');
-    $('#categoryall').removeClass('active');
-
-  });
-  $('#categoryall').click(function () {
-    $('.tablet').show(time);
-    $('.mobile').show(time);
-    $('.laptop').show(time);
-
-    $('#categorylaptop').removeClass('active');
-    $('#categorymobile').removeClass('active');
-    $('#categorytablet').removeClass('active');
-    $('#categoryall').addClass('active');
-  });
-
-  $('#categorymobile').click(function () {
-    $('.tablet').hide(time);
-    $('.mobile').show(time);
-    $('.laptop').hide(time);
-
-    $('#categorylaptop').removeClass('active');
-    $('#categorymobile').addClass('active');
-    $('#categorytablet').removeClass('active');
-    $('#categoryall').removeClass('active');
-  });
-  $('#categorytablet').click(function () {
-    $('.tablet').show(time);
-    $('.mobile').hide(time);
-    $('.laptop').hide(time);
-
-    $('#categorylaptop').removeClass('active');
-    $('#categorymobile').removeClass('active');
-    $('#categorytablet').addClass('active');
-    $('#categoryall').removeClass('active');
-  });
-
-});
-
 // //favorite product
 var heart = document.querySelector('.far');
 

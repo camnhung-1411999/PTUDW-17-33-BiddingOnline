@@ -7,8 +7,7 @@ class userController {
     showSignup(req, res) {
         req.logout();
         req.session.destroy();
-        if (req.user != undefined && req.user != null)
-        {
+        if (req.user != undefined && req.user != null) {
             router.redirect('/');
         }
         res.render('signup_in', {
@@ -20,7 +19,7 @@ class userController {
     showAccount(req, res) {
         res.render('account', {
             title: 'Account',
-            account:req.user,
+            account: req.user,
         });
     }
 
@@ -170,7 +169,6 @@ class userController {
             });
         }
     }
-
 }
 
 
