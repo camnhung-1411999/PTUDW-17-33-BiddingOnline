@@ -22,7 +22,7 @@ class userController {
         var nameuser;
         if (req.user) {
             checkuser = true;
-            nameuser=req.user.name;
+            nameuser = req.user.name;
             var isSeller = true;
             if (req.user.status != "Seller") {
                 isSeller = false;
@@ -32,15 +32,15 @@ class userController {
             title: 'Account',
             checkuser,
             nameuser,
-            account:req.user,
+            account: req.user,
         });
     }
-    showChangePassword(req,res){
+    showChangePassword(req, res) {
         var checkuser = false;
         var nameuser;
         if (req.user) {
             checkuser = true;
-            nameuser=req.user.name;
+            nameuser = req.user.name;
             var isSeller = true;
             if (req.user.status != "Seller") {
                 isSeller = false;
@@ -50,7 +50,7 @@ class userController {
             title: 'Change password',
             checkuser,
             nameuser,
-            account:req.user,
+            account: req.user,
         });
     }
     async setPostSignup(req, res) {
@@ -198,72 +198,72 @@ class userController {
             });
         }
     }
-    async setPostAccount(req,res){
+    async setPostAccount(req, res) {
         // var iduser=req.user._id;
 
         var myquery = {
             _id: req.user._id
         }
-        var changeAcc={
-            fullname:req.body.fullnamechange,
-            phone:req.body.phonechange,
-            address:req.body.addresschange,
+        var changeAcc = {
+            fullname: req.body.fullnamechange,
+            phone: req.body.phonechange,
+            address: req.body.addresschange,
         };
         var options = {
             multi: true
         }
         // usermodels.UpdateInfoAccount(changeAcc,iduser);
-        await db.update(myquery,changeAcc,options);
+        await db.update(myquery, changeAcc, options);
         res.redirect('/../users/account');
     }
 
-    async setPostPassword(req,res){
-        var oldpass=req.body.oldpass;
-        var newpass=req.body.newpass;
-        var renewpass=req.body.renewpass;
-        if(req.user != undefined && req.user != null)
-        {
-            bcrypt.compare(oldpass,req.user.pass,(err,isMatch)=>{
+    async setPostPassword(req, res) {
+        var oldpass = req.body.oldpass;
+        var newpass = req.body.newpass;
+        var renewpass = req.body.renewpass;
+        if (req.user != undefined && req.user != null) {
+            bcrypt.compare(oldpass, req.user.pass, (err, isMatch) => {
                 console.log(isMatch);
-                if(err) throw err;
-                if(!isMatch) {
+                if (err) throw err;
+                if (!isMatch) {
                     res.render('changepassword', {
                         title: 'Change password',
-                        erroldpass:"*Password wrong!",
-                });
+                        erroldpass: "*Password wrong!",
+                    });
                 }
             });
         }
         // kiem tra mat khau lon hon 6 ki tu
-        if (newpass < 6) {
+        else if (newpass < 6) {
             res.render('changepassword', {
                 title: 'Change password',
                 errnewpass: "*Password must be at least 6 characters!",
             });
         }
         // kiem tra mat khau nhap lai co khop k
-        if (!(newpass === renewpass)) {
+        else if (!(newpass === renewpass)) {
             res.render('changepassword', {
                 title: 'Change password',
                 errrenewpass: "*Do not match!",
             });
+        } else {
+            var change;
+            await usermodels.hashPassword(newpass).then(function (doc) {
+                change = doc;
+            });
+            var myquery = {
+                _id: req.user._id
+            }
+            var changePass = {
+                pass: change,
+            };
+            var options = {
+                multi: true
+            }
+            // usermodels.UpdateInfoAccount(changeAcc,iduser);
+            await db.update(myquery,changePass,options);
+            res.redirect('/../users/account');
         }
-        var change;
-        await usermodels.hashPassword(newpass).then(function (doc) {
-            change=doc;
-        });
-        var myquery = {
-            _id: req.user._id
-        }
-        var changePass={
-            pass:change,
-        };
-        var options = {
-            multi: true
-        }
-        // usermodels.UpdateInfoAccount(changeAcc,iduser);
-        // await db.update(myquery,changePass,options);
-        //res.redirect('/../users/account');
     }
 
 }

@@ -9,9 +9,8 @@ var db = mongoose.connection;
 
 var CartSchema = new mongoose.Schema({
     _id: Object,
-    user: String,
     idsanpham: Object,
-    giadau: Number
+    bidding: []
 }, {
     collection: "bidding"
 });
