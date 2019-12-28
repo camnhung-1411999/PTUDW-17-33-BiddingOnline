@@ -221,49 +221,101 @@ class userController {
         var oldpass = req.body.oldpass;
         var newpass = req.body.newpass;
         var renewpass = req.body.renewpass;
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
         if (req.user != undefined && req.user != null) {
-            bcrypt.compare(oldpass, req.user.pass, (err, isMatch) => {
+            bcrypt.compare(oldpass, req.user.pass, async(err, isMatch) => {
                 console.log(isMatch);
                 if (err) throw err;
                 if (!isMatch) {
                     res.render('changepassword', {
                         title: 'Change password',
                         erroldpass: "*Password wrong!",
+                        checkuser,
+                        nameuser,
                     });
+                } else {
+                    if (newpass < 6) {
+                        res.render('changepassword', {
+                            title: 'Change password',
+                            errnewpass: "*Password must be at least 6 characters!",
+                            checkuser,
+                            nameuser,
+                        });
+                    }
+                    // kiem tra mat khau nhap lai co khop k
+                    else if (!(newpass === renewpass)) {
+                        res.render('changepassword', {
+                            title: 'Change password',
+                            errrenewpass: "*Do not match!",
+                            checkuser,
+                            nameuser,
+                        });
+                    } else {
+                        var change;
+                        await usermodels.hashPassword(newpass).then(function (doc) {
+                            change = doc;
+                        });
+                        var myquery = {
+                            _id: req.user._id
+                        }
+                        var changePass = {
+                            pass: change,
+                        };
+                        var options = {
+                            multi: true
+                        }
+                        // usermodels.UpdateInfoAccount(changeAcc,iduser);
+                        await db.update(myquery, changePass, options);
+                        res.redirect('/../users/account');
+                    }
+
                 }
             });
         }
         // kiem tra mat khau lon hon 6 ki tu
-        else if (newpass < 6) {
-            res.render('changepassword', {
-                title: 'Change password',
-                errnewpass: "*Password must be at least 6 characters!",
-            });
-        }
-        // kiem tra mat khau nhap lai co khop k
-        else if (!(newpass === renewpass)) {
-            res.render('changepassword', {
-                title: 'Change password',
-                errrenewpass: "*Do not match!",
-            });
-        } else {
-            var change;
-            await usermodels.hashPassword(newpass).then(function (doc) {
-                change = doc;
-            });
-            var myquery = {
-                _id: req.user._id
-            }
-            var changePass = {
-                pass: change,
-            };
-            var options = {
-                multi: true
-            }
-            // usermodels.UpdateInfoAccount(changeAcc,iduser);
-            await db.update(myquery,changePass,options);
-            res.redirect('/../users/account');
-        }
+        //     if (newpass < 6) {
+        //         res.render('changepassword', {
+        //             title: 'Change password',
+        //             errnewpass: "*Password must be at least 6 characters!",
+        //             checkuser,
+        //             nameuser,
+        //         });
+        //     }
+        //     // kiem tra mat khau nhap lai co khop k
+        //     else if (!(newpass === renewpass)) {
+        //         res.render('changepassword', {
+        //             title: 'Change password',
+        //             errrenewpass: "*Do not match!",
+        //             checkuser,
+        //             nameuser,
+        //         });
+        //     } else {
+        //         var change;
+        //         await usermodels.hashPassword(newpass).then(function (doc) {
+        //             change = doc;
+        //         });
+        //         var myquery = {
+        //             _id: req.user._id
+        //         }
+        //         var changePass = {
+        //             pass: change,
+        //         };
+        //         var options = {
+        //             multi: true
+        //         }
+        //         // usermodels.UpdateInfoAccount(changeAcc,iduser);
+        //         await db.update(myquery, changePass, options);
+        //         res.redirect('/../users/account');
+        //     }
     }
 
 }
