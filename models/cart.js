@@ -7,30 +7,32 @@ mongoose.connect(url, {
 });
 var db = mongoose.connection;
 
-var BiddingSchema = new mongoose.Schema({
+var CartSchema = new mongoose.Schema({
     _id: Object,
     idsanpham: Object,
-    bidding: [],
-    datebid: Date
+    user: String,
+    giadau: Number,
+    giaphaitra: Number,
+    datebuy: Date
 }, {
-    collection: "bidding"
+    collection: "cart"
 });
 
 // ProductsSchema.index({loai :'text'});
-var Bidding = db.useDb("udweb-nhom7").model('bidding', BiddingSchema);
+var Cart = db.useDb("udweb-nhom7").model('Cart', CartSchema);
 
 module.exports = {
     insert: (entity) => {
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             var dbo = db.db("udweb-nhom7");
-            dbo.collection("bidding").insertOne(entity, function (err, res) {
+            dbo.collection("cart").insertOne(entity, function (err, res) {
                 if (err) throw err;
                 console.log("1 document inserted");
                 db.close();
             });
         });
     },
-    getBidding: Bidding,
+    getCart: Cart
 
 }

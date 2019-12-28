@@ -13,7 +13,7 @@ router.get('/', async function (req, res) {
   var username;
   if (req.user) {
     checkuser = true;
-    username=req.user.name;
+    username = req.user.name;
     var isSeller = false;
     if (req.user.status === "seller") {
       isSeller = true;
@@ -56,20 +56,20 @@ router.get('/', async function (req, res) {
   for (var i = 0; i < giacaonhat.length; i++) {
     const time = giacaonhat[i].datetime;
     const c = now.diff(time, 'seconds');
-    if (giacaonhat[i].datetimeproduct * 24 * 3600 > c) {
-      giacaonhat[i].datetimeproduct = giacaonhat[i].datetimeproduct * 24 * 3600 - c;
+    if (giacaonhat[i].datetimeproduct * 24 * 3600 + giacaonhat[i].moretime > c) {
+      giacaonhat[i].datetimeproduct = giacaonhat[i].datetimeproduct * 24 * 3600 + giacaonhat[i].moretime - c;
     }
 
     var time1 = ragianhieunhat[i].datetime;
     var c1 = now.diff(time1, 'seconds');
-    if (ragianhieunhat[i].datetimeproduct * 24 * 3600 >= c1) {
-      ragianhieunhat[i].datetimeproduct = ragianhieunhat[i].datetimeproduct * 24 * 3600 - c1;
+    if (ragianhieunhat[i].datetimeproduct * 24 * 3600 + ragianhieunhat[i].moretime >= c1) {
+      ragianhieunhat[i].datetimeproduct = ragianhieunhat[i].datetimeproduct * 24 * 3600 + ragianhieunhat[i].moretime - c1;
     }
 
     time2 = thoigiansaphet[i].datetime;
     var c2 = now.diff(time2, 'seconds');
-    if (thoigiansaphet[i].datetimeproduct * 24 * 3600 >= c2) {
-      thoigiansaphet[i].datetimeproduct = thoigiansaphet[i].datetimeproduct * 24 * 3600 - c2;
+    if (thoigiansaphet[i].datetimeproduct * 24 * 3600 + thoigiansaphet[i].moretime >= c2) {
+      thoigiansaphet[i].datetimeproduct = thoigiansaphet[i].datetimeproduct * 24 * 3600 + thoigiansaphet[i].moretime - c2;
     }
 
   }
@@ -81,7 +81,7 @@ router.get('/', async function (req, res) {
     mostbids: ragianhieunhat,
     neartimeout: thoigiansaphet,
     home: true,
-    nameuser:username,
+    nameuser: username,
   });
 });
 

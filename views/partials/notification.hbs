@@ -1,0 +1,36 @@
+<p data-toggle="modal" data-target="#addtocart" hidden>man</p>
+
+<div class="modal fade" id="addtocart" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="width: 300px; margin: auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+                {{#if checkdaugia.ischecked}}
+                <h5 class="modal-title" id="exampleModalLongTitle">Thành công!</h5>
+                {{else}}
+                <h5 class="modal-title" id="exampleModalLongTitle">Thất bại!</h5>
+                {{/if}}
+            </div>
+            <div class="modal-body">
+                {{checkdaugia.msg}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" id="product">Tiếp tục đấu giá</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#if checkdaugia}}
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('p').click();
+
+        $('#product').click(()=>{
+            window.location.href('/products/all/categories');
+        });
+    }); 
+</script>
+{{/if}}

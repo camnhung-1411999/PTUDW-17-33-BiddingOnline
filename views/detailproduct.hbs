@@ -1,8 +1,8 @@
 <!-- Bootstrap core CSS -->
-<link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom fonts for this template -->
-<link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="../../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
@@ -15,7 +15,7 @@
 
 <div class="row" style="margin-top: 100px">
     {{>navProducts}}
-
+    {{>notification}}
 
     <div class="modal-content">
         <div class="close-modal" data-dismiss="modal">
@@ -137,8 +137,9 @@
                                         <h3 class="font-size-04 ">đồng</h3>
                                     </div>
                                     <div class="mb-4 ml-3 font-size-04">
-                                        <button class="btn btn-outline-primary my-2 my-sm-0" formaction="/products/detailproduct/{{product._id}}/bid"
-                                            type="submit">Bid</button>
+                                        <button class="btn btn-outline-primary my-2 my-sm-0"
+                                            formaction="/products/detailproduct/{{product._id}}/bid" type="submit"
+                                           >Bid</button>
                                     </div>
                                 </div>
                                 <input type="checkbox" class="subscribe-btn"> &nbsp;<span class="align-middle"><label
@@ -149,8 +150,11 @@
                                         <h4>{{product.giamuangay}} ₫</h4>
                                     </div>
                                     <button class="btn btn-outline-primary my-2 my-sm-0"
-                                        formaction="/products/addtocart" type="submit">Add to
+                                        formaction="/products/detailproduct/{{product._id}}/addtocart" type="submit"
+                                       >Add to
                                         cart</button>
+                                    {{>notification}}
+
 
                                 </div>
 
@@ -266,12 +270,13 @@
 
 
 
+
 <!-- Bootstrap core JavaScript -->
-<script src="../../vendor/jquery/jquery.min.js"></script>
-<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../../vendor/jquery/jquery.min.js"></script>
+<script src="../../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Plugin JavaScript -->
-<script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="../../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for this template -->
 <script src="/javascripts/agency.min.js"></script>

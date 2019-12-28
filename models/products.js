@@ -17,6 +17,7 @@ var ProductsSchema = new mongoose.Schema({
     buocdaugia: Number,
     loai: String,
     datetime: Date,
+    moretime: Number,
     datetimeproduct: Number,
     ghichu: String,
     selling: Boolean,
