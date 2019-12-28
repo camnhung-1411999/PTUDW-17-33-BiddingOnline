@@ -105,22 +105,22 @@ class productController {
         var nameuser;
         if (req.user) {
             checkuser = true;
-            nameuser=req.user.name;
+            nameuser = req.user.name;
             var isSeller = true;
             if (req.user.status != "Seller") {
                 isSeller = false;
             }
         }
 
-
+        
         const now = moment(new Date());
 
         for (var i = 0; i < arrproduct.length; i++) {
 
             const time = arrproduct[i].datetime;
             const c = now.diff(time, 'seconds');
-            if (arrproduct[i].datetimeproduct * 24 * 3600 > c) {
-                var temp = arrproduct[i].datetimeproduct * 24 * 3600 - c;
+            if ((arrproduct[i].datetimeproduct * 24 * 3600 + arrproduct[i].moretime) > c) {
+                var temp = arrproduct[i].datetimeproduct * 24 * 3600 + arrproduct[i].moretime - c;
                 arrproduct[i].datetimeproduct = temp;
             } else {
 
@@ -282,12 +282,12 @@ class productController {
 
         }, ]
 
-        var checkselect ={
+        var checkselect = {
             macdinh: false,
             giatangdan: false,
             giagiamdan: false,
             thoigiangiamdan: false,
-            thoigiantangdan:false
+            thoigiantangdan: false
         }
 
         var temp = {
@@ -715,18 +715,16 @@ class productController {
 
     async showDetailProduct(req, res) {
         var id = req.query.id;
-        // var o_id = new ObjectId(id);
         var product = {};
-        // console.log("id: "+req.query.id);
         await dbproduct.findOne({
             "_id": ObjectId(id)
         }).then(doc => {
             product = doc;
         });
         var checkuser = false;
+        var isSeller = true;
         if (req.user) {
             checkuser = true;
-            var isSeller = true;
             if (req.user.status != "Seller") {
                 isSeller = false;
             }

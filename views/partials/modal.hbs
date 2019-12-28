@@ -1,0 +1,42 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
+    Profile
+</button>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Change Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    <div class="sign-up-htm">
+                        <div class="group">
+                            <label>Fullname</label>
+                            <input id="user" type="text" class="input" name="fullnamechange"
+                                value="{{account.fullname}}">
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Phone number</label>
+                            <input type="text" class="input" name="phonechange" pattern="[0-9]{10}"
+                                value="{{account.phone}}">
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Address</label>
+                            <input type="text" class="input" name="addresschange" value="{{account.address}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" id="submit" class="button" formaction="/users/account" value="Save changes">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>

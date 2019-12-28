@@ -15,11 +15,11 @@ const {
 } = require('../config/auth');
 
 
-router.get('/', function (req, res) {
+router.get('/', ensureAuthenticated, function (req, res) {
    controllers.showProduct(req, res);
 });
 
-router.get('/:id/categories', function (req, res) {
+router.get('/:id/categories',ensureAuthenticated, function (req, res) {
    controllers.showProduct(req, res);
 });
 
@@ -50,6 +50,9 @@ router.post('/detailproduct/:id/bid',(req, res)=>{
    controllersCart.postBid(req, res);
 })
 
+router.post('/detailproduct/:id/addtocart',(req, res)=>{
+   controllersCart.postAddToCart(req, res);
+})
 
 
 module.exports = router;

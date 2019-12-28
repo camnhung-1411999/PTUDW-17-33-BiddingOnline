@@ -20,194 +20,83 @@
     <div class="container">
         <div class="row profile">
             <div class="col-md-3">
-                <div class="profile-sidebar">
-                    <!-- SIDEBAR USERPIC -->
-                    <div class="profile-userpic">
-                        <img src="https://nguoi-noi-tieng.com/photo/tieu-su-ca-si-khoi-9808.jpg" class="img-responsive"
-                            alt="">
-                    </div>
-                    <!-- END SIDEBAR USERPIC -->
-                    <!-- SIDEBAR USER TITLE -->
-                    <div class="profile-usertitle">
-                        <div class="profile-usertitle-name">
-                            {{account.name}}
-                        </div>
-                        <div class="profile-usertitle-job">
-                            {{account.status}}
-                        </div>
-                    </div>
-                    <!-- END SIDEBAR USER TITLE -->
-                    <!-- SIDEBAR BUTTONS -->
-                    <div class="profile-userbuttons">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                            data-target="#exampleModalCenter">
-                           Edit Profile
-                        </button><br><br>
-                        <a href="/../users/changepassword">Reset password</a>
+               {{>profile}}
+                <div class="col-md-9">
+                    <!-- detail infor -->
+                    <div class="profile-content" id="detailinfor">
+                        <div class="container-fluid">
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalCenterTitle">Change Information</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <form method="post">
-                                        <div class="modal-body">
-                                            <div class="sign-up-htm">
-                                                <div class="group">
-                                                    <label>Fullname</label>
-                                                    <input id="user" type="text" class="input" name="fullnamechange"
-                                                        value="{{account.fullname}}">
-                                                </div>
-                                                <div class="group">
-                                                    <label for="pass" class="label">Phone number</label>
-                                                    <input type="text" class="input" name="phonechange"
-                                                        pattern="[0-9]{10}" value="{{account.phone}}">
-                                                </div>
-                                                <div class="group">
-                                                    <label for="pass" class="label">Address</label>
-                                                    <input type="text" class="input" name="addresschange"
-                                                        value="{{account.address}}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Close</button>
-                                            <input type="submit" id="submit" class="button" formaction="/users/account"
-                                                value="Save changes">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                            <h2 class="text-danger">Detail Information</h2>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Full Name</th>
+                                        <td>{{account.fullname}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="info">Email</th>
+                                        <td>{{account.email}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="info">Contact</th>
+                                        <td>{{account.phone}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th class="info">Address</th>
+                                        <td>{{account.address}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="info">Status</th>
+                                        <td>{{account.status}}</td>
+                                    </tr>
+
+                                </thead>
+
+                            </table>
                         </div>
                     </div>
-                    <!-- END SIDEBAR BUTTONS -->
-                    <!-- SIDEBAR MENU -->
-                    <div class="profile-usermenu">
-                        <ul class="nav">
-                            <li id="acc_detail">
-                                <a href="#">
-                                    <i class="fas fa-user"></i>
-                                    Detail Information </a>
-                            </li>
-                            <li id="acc_favorite">
-                                <a href="#">
-                                    <i class="fas fa-heart-broken"></i>
-                                    Favorite Product </a>
-                            </li>
-                            <li id="acc_cart">
-                                <a href="#">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    My Cart</a>
-                            </li>
+                    <!-- favorite product -->
+                    <div id="favoriteproduct">
+                        <h2 class="text-danger">Favorite product</h2>
+                        <div class="row profile-content" style="background-color:rgb(89, 0, 255)(111, 0, 255);">
+                            <img class="col-md-3" src="img/product/macbookpro_13.jpg" alt="" width="50px"
+                                height="100px">
+                            <h3 class="text-danger col-md-5">Macbook pro 13</h3>
+                            <h3 class=" text-danger col-md-3">Price:45,000,000 đ</h3>
 
-                            <!-- <li id="acc_cart">
-                                <a href="#">
-                                    <i class="glyphicon glyphicon-shopping-cart"></i>
-
-                                    My Cart</a>
-                            </li> -->
-                            <li id="acc_auction">
-                                <a href="#">
-                                    <i class="fas fa-gavel"></i>
-                                    My Auctions </a>
-                            </li>
-                            <li id="acc_product">
-                                <a href="#">
-                                    <i class="fas fa-clipboard-check"></i>
-                                    My Product( of bidder) </a>
-                            </li>
-                            <li>
-                                <a href="/">
-                                    <i class="fas fa-home"></i>
-                                    Home </a>
-                            </li>
-
-                        </ul>
+                        </div>
+                        <div class="row profile-content mt-3" style="background-color:rgb(89, 0, 255)(111, 0, 255);">
+                            <img class="col-md-3" src="img/product/macbookpro_13.jpg" alt="" width="50px"
+                                height="100px">
+                            <h3 class="text-danger col-md-5">Macbook pro 13</h3>
+                            <h3 class=" text-danger col-md-3">Price:45,000,000 đ</h3>
+                        </div>
+                        <div class="row profile-content" style="background-color:rgb(89, 0, 255)(111, 0, 255);">
+                            <img class="col-md-3" src="img/product/macbookpro_13.jpg" alt="" width="50px"
+                                height="100px">
+                            <h3 class="text-danger col-md-5">Macbook pro 13</h3>
+                            <h3 class=" text-danger col-md-3">Price:45,000,000 đ</h3>
+                        </div>
                     </div>
-                    <!-- END MENU -->
-                </div>
-            </div>
-            <div class="col-md-9">
-                <!-- detail infor -->
-                <div class="profile-content" id="detailinfor">
-                    <div class="container-fluid">
-
-                        <h2 class="text-danger">Detail Information</h2>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Full Name</th>
-                                    <td>{{account.fullname}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="info">Email</th>
-                                    <td>{{account.email}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="info">Contact</th>
-                                    <td>{{account.phone}}</td>
-                                </tr>
-
-                                <tr>
-                                    <th class="info">Address</th>
-                                    <td>{{account.address}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="info">Status</th>
-                                    <td>{{account.status}}</td>
-                                </tr>
-
-                            </thead>
-
-                        </table>
+                    <div id="mycart">
+                        YOUR CART IS EMPTY.
                     </div>
-                </div>
-                <!-- favorite product -->
-                <div id="favoriteproduct">
-                    <h2 class="text-danger">Favorite product</h2>
-                    <div class="row profile-content" style="background-color:rgb(89, 0, 255)(111, 0, 255);">
-                        <img class="col-md-3" src="img/product/macbookpro_13.jpg" alt="" width="50px" height="100px">
-                        <h3 class="text-danger col-md-5">Macbook pro 13</h3>
-                        <h3 class=" text-danger col-md-3">Price:45,000,000 đ</h3>
-
-                    </div>
-                    <div class="row profile-content mt-3" style="background-color:rgb(89, 0, 255)(111, 0, 255);">
-                        <img class="col-md-3" src="img/product/macbookpro_13.jpg" alt="" width="50px" height="100px">
-                        <h3 class="text-danger col-md-5">Macbook pro 13</h3>
-                        <h3 class=" text-danger col-md-3">Price:45,000,000 đ</h3>
-                    </div>
-                    <div class="row profile-content" style="background-color:rgb(89, 0, 255)(111, 0, 255);">
-                        <img class="col-md-3" src="img/product/macbookpro_13.jpg" alt="" width="50px" height="100px">
-                        <h3 class="text-danger col-md-5">Macbook pro 13</h3>
-                        <h3 class=" text-danger col-md-3">Price:45,000,000 đ</h3>
-                    </div>
-                </div>
-                <div id="mycart">
-                    YOUR CART IS EMPTY.
                 </div>
             </div>
         </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="/../javascripts/product.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+        <script src="/../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/../vendor/jquery/jquery.min.js"></script>
+
+
+        <script src="/../vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="/../javascripts/agency.min.js"></script>
+        <script src="/../javascripts/account.js"></script>
     </div>
-
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="/../javascripts/product.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-    <script src="/../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/../vendor/jquery/jquery.min.js"></script>
-
-
-    <script src="/../vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="/../javascripts/agency.min.js"></script>
-    <script src="/../javascripts/account.js"></script>
-</div>
