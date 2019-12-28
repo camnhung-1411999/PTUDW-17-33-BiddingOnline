@@ -1,0 +1,8 @@
+.order{
+  float: right!important;
+  margin-right:100px !important;
+}
+.order button{
+  background-color: rgb(65, 65, 226)!important;
+  width:200px;
+}
