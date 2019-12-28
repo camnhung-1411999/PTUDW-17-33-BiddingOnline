@@ -1,5 +1,9 @@
 const productmodels = require('../models/products');
 const dbproduct = productmodels.getProduct;
+
+const reviewsmodels = require('../models/review');
+const dbreviews = reviewsmodels.getReviews;
+
 const moment = require('moment');
 var ObjectId = require('mongodb').ObjectId;
 const config = require('../config/default.json');
@@ -112,17 +116,22 @@ class productController {
             }
         }
 
-        
+
         const now = moment(new Date());
 
         for (var i = 0; i < arrproduct.length; i++) {
 
             const time = arrproduct[i].datetime;
             const c = now.diff(time, 'seconds');
+            if (c < 600) {
+                arrproduct[i].new = true;
+            }
+
             if ((arrproduct[i].datetimeproduct * 24 * 3600 + arrproduct[i].moretime) > c) {
                 var temp = arrproduct[i].datetimeproduct * 24 * 3600 + arrproduct[i].moretime - c;
                 arrproduct[i].datetimeproduct = temp;
             } else {
+                console.log(arrproduct[i]);
 
                 const entity = {
                     selling: false
@@ -241,6 +250,7 @@ class productController {
             loai: req.body.selname,
             datetime: req.body.dob,
             datetimeproduct: +temp * req.body.timeproduct,
+            moretime: 0,
             ghichu: req.body.ghichu,
             selling: true,
             user: req.user.name
@@ -729,11 +739,35 @@ class productController {
                 isSeller = false;
             }
         }
+
+        //comment
+        var reviews = [];
+        await dbreviews.find({
+            user: product.user
+        }).then(docs => {
+            docs.forEach(element => {
+                reviews.push(element);
+            });
+        });
+
+        var avgrate = 0;
+        for (var i = 0; i < reviews.length; i++) {
+            avgrate = avgrate + reviews[i].rate;
+           
+        }
+
+        avgrate = avgrate / reviews.length;
+
+        var x = parseFloat(avgrate);
+        avgrate = Math.round(x * 100)/100;
         res.render('detailproduct', {
             title: 'Detail product',
             product: product,
             checkuser,
             isSeller,
+            rate: avgrate,
+            reviews,
+            numreviews: reviews.length
         });
     }
 }

@@ -20,6 +20,10 @@ router.get('/signup_:username', (req, res) => {
     title: 'Đăng nhập',
     checksignin: true
   });
+});
+
+router.get('/favorites', (req, res)=>{
+  controllers.showFavorites(req, res);
 })
 
 //post sign up

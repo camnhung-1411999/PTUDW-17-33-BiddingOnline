@@ -35,6 +35,25 @@ class userController {
             account: req.user,
         });
     }
+
+    showFavorites(req, res) {
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
+        res.render('favoriteproducts', {
+            title: 'Favorites',
+            checkuser,
+            nameuser,
+            account: req.user,
+        });
+    }
     showChangePassword(req, res) {
         var checkuser = false;
         var nameuser;
