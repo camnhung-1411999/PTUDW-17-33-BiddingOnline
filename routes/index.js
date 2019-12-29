@@ -84,12 +84,6 @@ router.get('/', async function (req, res) {
     nameuser: username,
   });
 });
-router.get('/mycart',(req,res)=>{
-  res.render('mycart', {
-     title: 'My cart',
- });
-});
-
 
 
 

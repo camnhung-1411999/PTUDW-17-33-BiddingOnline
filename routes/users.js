@@ -22,7 +22,7 @@ router.get('/signup_:username', (req, res) => {
   });
 });
 
-router.get('/favorites', (req, res)=>{
+router.get('/favorites', (req, res) => {
   controllers.showFavorites(req, res);
 })
 
@@ -47,10 +47,33 @@ router.get('/changepassword', function (req, res) {
   controllers.showChangePassword(req, res);
 });
 
-router.post('/account',function(req,res){
-  controllers.setPostAccount(req,res);
+router.get('/mycart', (req, res) => {
+  var checkuser = false;
+  var nameuser;
+  if (req.user) {
+    checkuser = true;
+    nameuser = req.user.name;
+    var isSeller = true;
+    if (req.user.status != "Seller") {
+      isSeller = false;
+    }
+  }
+
+  res.render('mycart', {
+    title: 'My cart',
+    checkuser,
+    nameuser,
+  });
 });
-router.post('/changepassword',function(req,res){
-  controllers.setPostPassword(req,res);
+
+
+
+//post
+
+router.post('/account', function (req, res) {
+  controllers.setPostAccount(req, res);
+});
+router.post('/changepassword', function (req, res) {
+  controllers.setPostPassword(req, res);
 })
 module.exports = router;
