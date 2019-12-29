@@ -5,9 +5,6 @@ const productmodels = require('../models/products');
 const dbproduct = productmodels.getProduct;
 /* GET home page. */
 
-
-
-/* GET home page. */
 router.get('/', async function (req, res) {
   var checkuser = false;
   var username;
@@ -83,6 +80,11 @@ router.get('/', async function (req, res) {
     home: true,
     nameuser: username,
   });
+});
+router.get('/admin',function (req, res) {
+  res.render('adminaccount',{
+    title: 'Admin'
+  })
 });
 
 

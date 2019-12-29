@@ -54,6 +54,8 @@ class userController {
             account: req.user,
         });
     }
+
+
     showChangePassword(req, res) {
         var checkuser = false;
         var nameuser;
@@ -72,6 +74,44 @@ class userController {
             account: req.user,
         });
     }
+    // async setPostSignin(req, res) {
+
+    //     var arr = [];
+    //     var checkSignin = {
+    //         suname: req.body.username,
+    //         supass: req.body.password,
+    //     };
+    //     //kiểm tra pass
+    //     await db.find({
+    //         name: checkSignin.suname
+    //     }).then(function (docs) {
+    //         // arr.push(docs);
+    //         docs.forEach(element => {
+    //             arr.push(element);
+    //         })
+    //     });
+    //     console.log(arr);
+    //     if (arr.length === 0) {
+    //         res.render('signup_in', {
+    //             title: 'Sign in/ Sign up',
+    //             checksignin: true,
+    //             errsiname: "*Username wrong!"
+    //         });
+    //     } else {
+    //         bcrypt.compare(checkSignin.supass, arr[0].pass, (err, isMatch) => {
+    //             if(!isMatch){
+    //                 res.render('signup_in', {
+    //                     title: 'Sign in/ Sign up',
+    //                     checksignin: true,
+    //                     errsiname: "*Password wrong!"
+    //                 });
+    //             }
+    //             else if(checkSignin.user==="admin"){
+    //                 res.redirect('/admin');
+    //             }
+    //         });
+    //     }
+    // }
     async setPostSignup(req, res) {
         var arr = [];
         var a = +req.body.a;
@@ -86,7 +126,8 @@ class userController {
             email: req.body.email,
             phone: req.body.phone,
             address: req.body.address,
-            status: req.body.status,
+            status: "Bidder",
+            birthday:req.body.birthday
         };
 
         // kiem tra username co ton tai hay k
@@ -211,6 +252,7 @@ class userController {
                     email: checkInfor.email,
                     address: checkInfor.address,
                     status: checkInfor.status,
+                    birthday:checkInfor.birthday,
                 }
                 usermodels.insert(user);
                 res.redirect('/');
@@ -262,6 +304,7 @@ class userController {
                         nameuser,
                     });
                 } else {
+                    //kiem tra matkhau moi co du 6 ki tu hay khong
                     if (newpass < 6) {
                         res.render('changepassword', {
                             title: 'Change password',
@@ -300,41 +343,6 @@ class userController {
                 }
             });
         }
-        // kiem tra mat khau lon hon 6 ki tu
-        //     if (newpass < 6) {
-        //         res.render('changepassword', {
-        //             title: 'Change password',
-        //             errnewpass: "*Password must be at least 6 characters!",
-        //             checkuser,
-        //             nameuser,
-        //         });
-        //     }
-        //     // kiem tra mat khau nhap lai co khop k
-        //     else if (!(newpass === renewpass)) {
-        //         res.render('changepassword', {
-        //             title: 'Change password',
-        //             errrenewpass: "*Do not match!",
-        //             checkuser,
-        //             nameuser,
-        //         });
-        //     } else {
-        //         var change;
-        //         await usermodels.hashPassword(newpass).then(function (doc) {
-        //             change = doc;
-        //         });
-        //         var myquery = {
-        //             _id: req.user._id
-        //         }
-        //         var changePass = {
-        //             pass: change,
-        //         };
-        //         var options = {
-        //             multi: true
-        //         }
-        //         // usermodels.UpdateInfoAccount(changeAcc,iduser);
-        //         await db.update(myquery, changePass, options);
-        //         res.redirect('/../users/account');
-        //     }
     }
 
 }
