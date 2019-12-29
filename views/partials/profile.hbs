@@ -16,10 +16,11 @@
     <!-- END SIDEBAR USER TITLE -->
     <!-- SIDEBAR BUTTONS -->
     <div class="profile-userbuttons">
-        <a href="/../users/changepassword"><input type="button" class="btn btn-danger btn-sm">Reset
-            password</a>
 
-
+        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
+            Edit Profile
+        </button><br><br>
+        <a href="/../users/changepassword">Reset password</a>
 
         <!-- Modal -->
         {{>modal}}

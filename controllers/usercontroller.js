@@ -1,6 +1,16 @@
 const usermodels = require('../models/user');
 const db = usermodels.getAccount;
+
+const cartmodels = require('../models/cart');
+const dbcart = cartmodels.getCart;
+
+const productmodels = require('../models/products');
+const dbproduct = productmodels.getProduct;
+
 const bcrypt = require('bcryptjs');
+
+var ObjectId = require('mongodb').ObjectId;
+
 
 
 class userController {
@@ -55,6 +65,64 @@ class userController {
         });
     }
 
+    async showCart(req, res) {
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
+
+        var cart = [];
+        await dbcart.find({
+            user: req.user.name
+        }).then(docs => {
+            docs.forEach(element => {
+                cart.push(element);
+            })
+        });
+
+        // ObjectId;
+
+        for (var i = 0; i < cart.length; i++) {
+            await dbproduct.findOne({
+                _id: ObjectId(cart[i].idsanpham)
+            }).then(doc => {
+                cart[i].tensp = doc.ten;
+                cart[i].seller = doc.user;
+                cart[i].image = doc.image[0];
+            });
+        }
+        res.render('mycart', {
+            title: 'My cart',
+            checkuser,
+            nameuser,
+            cart
+        });
+    }
+
+    showBid(req, res) {
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
+        // ObjectId;
+        res.render('mybid', {
+            title: 'My Bid',
+            checkuser,
+            nameuser,
+        });
+    }
 
     showChangePassword(req, res) {
         var checkuser = false;
@@ -293,7 +361,7 @@ class userController {
             }
         }
         if (req.user != undefined && req.user != null) {
-            bcrypt.compare(oldpass, req.user.pass, async(err, isMatch) => {
+            bcrypt.compare(oldpass, req.user.pass, async (err, isMatch) => {
                 console.log(isMatch);
                 if (err) throw err;
                 if (!isMatch) {

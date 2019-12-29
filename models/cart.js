@@ -13,7 +13,10 @@ var CartSchema = new mongoose.Schema({
     user: String,
     giadau: Number,
     giaphaitra: Number,
-    datebuy: Date
+    datebuy: Date,
+    tensp: String,
+    seller: String,
+    image: String
 }, {
     collection: "cart"
 });
