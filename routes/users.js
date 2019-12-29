@@ -48,23 +48,12 @@ router.get('/changepassword', function (req, res) {
 });
 
 router.get('/mycart', (req, res) => {
-  var checkuser = false;
-  var nameuser;
-  if (req.user) {
-    checkuser = true;
-    nameuser = req.user.name;
-    var isSeller = true;
-    if (req.user.status != "Seller") {
-      isSeller = false;
-    }
-  }
-
-  res.render('mycart', {
-    title: 'My cart',
-    checkuser,
-    nameuser,
-  });
+  controllers.showCart(req, res);
 });
+
+router.get('/mybid', (req, res) => {
+  controllers.showBid(req, res);
+})
 
 
 

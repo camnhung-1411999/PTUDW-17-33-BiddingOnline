@@ -1,7 +1,7 @@
 <section class="mb-5">
     <h4 class="text-center">REVIEW</h4>
     <div class=" mt-5 container">
-        <div class="row no-gutters gutter-20 mb-5">
+        {{!-- <div class="row no-gutters gutter-20 mb-5">
             <div class="col-12 col-sm-4  mb-4 mb-sm-0 justify-content-center">
                 <div class="row ">
                     <div class="col-12 mb-4 justify-content-center">
@@ -201,33 +201,99 @@
             </div>
 
             {{!-- comment --}}
-            <div class="col-12 col-sm-4  mb-4 mb-sm-0 justify-content-center">
-                <div class="row ">
-                    <div class="col-12 mb-4 justify-content-center">
-                        <h5 class="">Reviewers</h5>
-                    </div>
-                    <div class="col-12  justify-content-center">
-                        <h1 class="font-szie-4">{{numreviews}}</h1>
-                    </div>
+        <div class="col-12 col-sm-4  mb-4 mb-sm-0 justify-content-center">
+            <div class="row ">
+                <div class="col-12 mb-4 justify-content-center">
+                    <h5 class="">Reviewers</h5>
+                </div>
+                <div class="col-12  justify-content-center">
+                    <h1 class="font-szie-4">{{numreviews}}</h1>
+                </div>
 
-                    <div class="md-form">
-                        <i class="fas fa-pencil-alt prefix "></i>
-                        <textarea cols="40" class="md-textarea form-control" name="comment" rows="3"></textarea>
-                        <label for="form10">Your Comment</label>
-                    </div>
+                <div class="md-form">
+                    <i class="fas fa-pencil-alt prefix "></i>
+                    <textarea cols="40" class="md-textarea form-control" name="comment" rows="3"></textarea>
+                    <label for="form10">Your Comment</label>
                 </div>
             </div>
         </div>
     </div>
+    </div> --}}
 
+    {{!-- comment --}}
+    <div class="col-12 col-sm-4  mb-4 mb-sm-0 justify-content-center">
+        <div class="row ">
+            <div class="col-12 mb-4 justify-content-center">
+                <h5 class="">Reviewers</h5>
+            </div>
+            <div class="col-12  justify-content-center">
+                <h1 class="font-szie-4">{{numreviews}}</h1>
+            </div>
+
+            <div class="md-form">
+                <i class="fas fa-pencil-alt prefix "></i>
+                <textarea cols="40" class="md-textarea form-control" name="comment" rows="3"></textarea>
+                <label for="form10">Your Comment</label>
+            </div>
+        </div>
+    </div>
     {{!-- review --}}
     <div class="" style="background-color:#fafafa">
         <div class="container review py-3">
-            {{#each reviews}}
 
-            <div class="row review " style="">
+            <div class="row review ">
+                {{#each reviews}}
 
-                <div class="col-12 col-lg-6 py-3">
+                <div class="col-lg-6 py-3">
+                    <div
+                        class="row pb-3 border-full-1px-solid border-color-inverse border-top-0 border-right-0 border-left-0">
+                        <div class="col-12 col-sm-8">
+                            <div class="row">
+                                <h3 class="col-12">{{this.userrate}}</h3>
+                                <h6 class="col-12 font-size-08">On <span>17 October, 1999</span>
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4 justify-content-start justify-content-sm-end">
+                            <div>
+                                <h3>Rate: {{this.rate}}</h3>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3 mb-2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h6>Comment:</h6>
+                                </div>
+                                <div class="col-12">
+                                    <p class="font-size-09">"<span> {{this.comment}}
+                                        </span>"</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <div class="">
+                                <h6 class="font-size-09 d-inline-block">Was the review helpful ?
+                                </h6>
+                                <div class="ml-3 d-inline-block">
+                                    <button class="btn btn-sm btn-secondary border-rad-0" role="button"
+                                        style="width:40px;">Yes</button>
+                                    <button class="btn btn-sm btn-secondary border-rad-0" role="button"
+                                        style="width:40px;">No</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="">
+                                <h6 class="font-size-08 float-right">1 of 5 found this review
+                                    helpful</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {{/each}}
+                {{!-- 
+               <div class="col-lg-6 py-3">
                     <div
                         class="row pb-3 border-full-1px-solid border-color-inverse border-top-0 border-right-0 border-left-0">
                         <div class="col-12 col-sm-8">
@@ -272,8 +338,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                    {{/each}}
+
+                </div>  --}}
 
                 {{!-- <div class="col-12 col-lg-6 py-3">
                     <div
