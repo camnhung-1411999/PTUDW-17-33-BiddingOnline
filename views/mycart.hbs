@@ -21,7 +21,10 @@
 {{>navProducts}}
 <div class="container">
   {{!-- my cart --}}
+
   <div class="row" style="margin-top: 150px!important;">
+    <h2 style="color:rgb(167, 167, 167);">My Cart</h2>
+
     <div>
       <table class="table">
         <thead style="font-size:25px;">
@@ -34,13 +37,15 @@
             <th scope="col">Choice</th>
           </tr>
         </thead>
+        {{#each cart}}
         <tbody>
           <tr>
-            <th scope="row"><img src="" alt="" style="width:100px; height:100px;"></th>
-            <td style="width:450px;">Iphone 11<br>
-              <p style="color: blue;">Supplier:<span>camnhung111</span></p>
+            <th scope="row"><a href="/products/detailproduct/id?id={{this.idsanpham}}"><img src="{{this.image}}" alt=""
+                  style="width:50px; height:50px;"></a></th>
+            <td style="width:450px;">{{this.tensp}}<br>
+              <p style="color: blue;">Supplier:<span>{{this.seller}}</span></p>
             </td>
-            <td>500000</td>
+            <td>{{this.giadau}} đ</td>
             <td>
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                 Delete
@@ -50,14 +55,14 @@
               {{>modaldeletecart}}
             </td>
 
-            <td>180000000 Đ</td>
+            <td>{{this.giaphaitra}} đ</td>
 
             <td>
               <input type="checkbox" name="" id="" class="col text-center">
             </td>
           </tr>
         </tbody>
-
+        {{/each}}
       </table>
 
     </div>
