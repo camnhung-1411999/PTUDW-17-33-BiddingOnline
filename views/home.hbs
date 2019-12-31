@@ -122,7 +122,8 @@
                             <form method="post">
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                    <input type="button" formaction="/registerseller" class="btn btn-primary" value="Yes">
+                                    <input type="button" formaction="/registerseller" class="btn btn-primary"
+                                        value="Yes">
                                 </div>
                             </form>
                         </div>
@@ -254,11 +255,11 @@
             </div>
             <div class="row">
                 <!-- chèn cho khỏi trống -->
-
                 <div class="col-md-1"></div>
+
                 {{#each neartimeout}}
                 <div class="col-md-2 col-sm-6 topbid-item">
-                    <a class="topbid-link" data-toggle="modal" href="/products/detailproduct/id?id={{this._id}}">
+                    <a class="topbid-link" href="/products/detailproduct/id?id={{this._id}}">
                         <div class="topbid-hover">
                             <div class="topbid-hover-content">
                                 <i class="fas fa-plus fa-3x"></i>
@@ -268,10 +269,11 @@
                     </a>
                     <div class="topbid-caption">
                         <h4>{{this.ten}}</h4>
-                        <p class="text-muted">{{this.giahientai}} đ</p>
+                        <p class="text-muted">{{this.giahientai}} ₫</p>
                         <p class="settime" style="color:red"></p>
                         <p style="color:blue">{{this.soluot}}<i class="fas fa-gavel"></i></p>
                         <p class="temp" hidden>{{this.datetimeproduct}}</p>
+
                     </div>
                 </div>
                 {{/each}}

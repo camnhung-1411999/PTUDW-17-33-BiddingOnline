@@ -18,19 +18,16 @@
         <div class="tab-content font-size-09" style="background-color:#fafafa">
             <div class="tab-pane fade show active px-3 py-4 text-color-a2" id="deskripsi" role="tabpanel">
 
-                Hãng sản xuất Apple<br>
-                Kích thước 158.0mm - 77.8mm - 8.1mm<br>
-                Trọng lượng 226g<br>
-                Bộ nhớ đệm / Ram 4 GB<br>
-                Bộ nhớ trong 64 GB<br>
-                Loại SIM Nano-SIM + eSIM<br>
-                Loại màn hình Super Retina XDR<br>
-                Kích thước màn hình 6.5 inches<br>
-                Độ phân giải màn hình 2688 x 1242 pixels<br>
-                Hệ điều hành iOS <br>
+                Date Start: {{product.datetime}}<br>
+                Date End: sau {{product.datetimeproduct}} day(s)<br>
+                Number of Bid: {{numofbid}} <br>
             </div>
             <div class="tab-pane fade px-3 py-4 text-color-a2" id="detail" role="tabpanel">
-                {{product.ghichu}}
+                <ul>
+                    {{#each  arrdetails}}
+                    <li> {{this.msg}}</li>
+                    {{/each}}
+                </ul>
             </div>
             <div class="tab-pane fade px-3 py-4 text-color-a2" id="shipping" role="tabpanel">
                 + Đơn vị vận chuyển: Vận chuyển nhanh quốc tế (Standard Express)<br>
@@ -38,7 +35,7 @@
                 + Đơn vị vận chuyển: Vận Chuyển Nhanh (Giao Hàng Nhanh)
             </div>
             <div class="tab-pane fade px-3 py-4 text-color-a2" id="seller" role="tabpanel">
-                <h4>{{product.user}}</h4>
+                <h4>User: {{product.user}}</h4>
                 - Name seller: Nguyen Ngo Ngoc Nga <br>
                 - Point : {{rate}}
             </div>

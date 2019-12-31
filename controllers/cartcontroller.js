@@ -51,7 +51,6 @@ class CartController {
                 giatoithieu = bid.bidding[bid.bidding.length - 1].giadau;
             }
 
-            //product.giahientai + product.buocdaugia
             if (giadau >= giatoithieu) {
                 var today = new Date();
                 var dd = today.getDate();
@@ -80,8 +79,9 @@ class CartController {
                             user,
                             datebid: today,
                         }],
-                        soluot: 1
-
+                        soluot: 1,
+                        currentwinner: user,
+                        selling: true
                     }
                     biddingmodels.insert(entity);
                 } else {
@@ -91,8 +91,18 @@ class CartController {
                         datebid: today,
                     });
                     bid.bidding[bid.bidding.length - 1]._id = undefined;
-                    bid.bidding[bid.bidding.length - 1].soluot += 1;
+                    bid.soluot += 1;
 
+                    for (var i = bid.bidding.length - 1; i >= 0; i--) {
+                        if (i === 0) {
+                            bid.currentwinner = bid.bidding[0].user;
+                            break;
+                        }
+                        if (bid.bidding[i].giadau > bid.bidding[i - 1].giadau) {
+                            bid.currentwinner = bid.bidding[i].user;
+                            break;
+                        }
+                    }
 
                     var myquery = {
                         _id: bid._id
@@ -104,8 +114,6 @@ class CartController {
                 }
                 checkdaugia.ischecked = true;
                 checkdaugia.msg = "Đấu giá thành công";
-
-                // product.giahientai = giadau;
 
                 const now = moment(new Date());
                 const time = product.datetime;
@@ -138,13 +146,42 @@ class CartController {
                 isSeller = false;
             }
         }
-
+        var numofbid = 0;
+        await dbbidding.findOne({
+            idsanpham: id
+        }).then(doc => {
+            if (doc) {
+                console.log(doc);
+                numofbid = doc.soluot;
+            }
+        });
+        //detail html
+        var strtemp = "";
+        var strghichu = product.ghichu;
+        var arrdetails = [];
+        for (var i = 0; i < strghichu.length; i++) {
+            if (strghichu[i] === '.' || strghichu[i] === ',') {
+                arrdetails.push({
+                    msg: strtemp
+                });
+                strtemp = "";
+            } else {
+                strtemp += strghichu[i];
+            }
+        }
+        if (strtemp) {
+            arrdetails.push({
+                msg: strtemp
+            })
+        }
         res.render('detailproduct', {
             title: 'Detail product',
             product: product,
             checkuser,
             isSeller,
-            checkdaugia
+            numofbid,
+            checkdaugia,
+            arrdetails
         });
 
     }
@@ -213,14 +250,43 @@ class CartController {
                 }
             }
         }
-
+        var numofbid = 0;
+        await dbbidding.findOne({
+            idsanpham: id
+        }).then(doc => {
+            if (doc) {
+                console.log(doc);
+                numofbid = doc.soluot;
+            }
+        })
+        //detail html
+        var strtemp = "";
+        var strghichu = product.ghichu;
+        var arrdetails = [];
+        for (var i = 0; i < strghichu.length; i++) {
+            if (strghichu[i] === '.' || strghichu[i] === ',') {
+                arrdetails.push({
+                    msg: strtemp
+                });
+                strtemp = "";
+            } else {
+                strtemp += strghichu[i];
+            }
+        }
+        if (strtemp) {
+            arrdetails.push({
+                msg: strtemp
+            })
+        }
 
         res.render('detailproduct', {
             title: 'Detail product',
             product: product,
             checkuser,
             isSeller,
-            checkdaugia
+            numofbid,
+            checkdaugia,
+            arrdetails
         });
     }
 }

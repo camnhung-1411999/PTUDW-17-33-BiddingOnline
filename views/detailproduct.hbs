@@ -1,3 +1,4 @@
+{{#section 'css'}}
 <!-- Bootstrap core CSS -->
 <link href="../../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -12,6 +13,7 @@
 <!-- Custom styles for this template -->
 <link href="/stylesheets/agency.css" rel="stylesheet">
 <link rel="stylesheet" href="/stylesheets/rating.css">
+{{/section}}
 
 <div class="row" style="margin-top: 100px">
     {{>navProducts}}
@@ -77,9 +79,14 @@
 
                                 <div
                                     class="mb-4 border-full-2px-solid border-top-0 border-left-0 border-right-0 border-color-inverse">
-                                    <h1>{{product.ten}}</h1>
+                                    <h1>{{product.ten}}
+                                        <span class="far fa-heart" style="font-size: 2rem; color: red;"
+                                            id="love"></span>
+
+                                    </h1>
                                     <!-- favorite product <3 -->
-                                    <span class="far fa-heart" style="font-size: 2rem; color: red;" id="love"></span>
+                                    <input class="btn btn-outline-danger my-2 my-sm-0" type="submit"
+                                        value="Add to favorite">
                                 </div>
 
                                 <!--                   Price-->
@@ -91,7 +98,7 @@
                                     <div class="col-md-1"></div>
                                     <div class="col-md-4 ">
                                         <h6 class="text-muted font-size-08 text-uppercase ml-5">Current winner:</h6>
-                                        <h4 class="ml-4">{{product.user}}</h4>
+                                        <h4 class="ml-4" id="currentwiiner">{{currentwinner}}</h4>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -242,7 +249,7 @@
 
 
 
-
+{{#section 'js'}}
 <!-- Bootstrap core JavaScript -->
 <script src="../../../vendor/jquery/jquery.min.js"></script>
 <script src="../../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -261,4 +268,12 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js">
 </script>
-</div>
+
+<script>
+    var str = $('#currentwiiner').text();
+    if (str != 'Nobody') {
+        str = "***" + str.substr(-3);
+    }
+    $('#currentwiiner').text(str);
+</script>
+{{/section}}

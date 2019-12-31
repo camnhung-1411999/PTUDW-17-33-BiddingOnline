@@ -244,6 +244,8 @@ class productController {
     postUpload(req, res) {
         var img = [];
         img.push(req.body.url);
+        img.push(req.body.url1);
+        img.push(req.body.url2);
         var temp = 0;
         var sldate = req.body.selectdate;
         if (sldate === "ngay") {
@@ -891,9 +893,58 @@ class productController {
         }
 
         avgrate = avgrate / reviews.length;
-
         var x = parseFloat(avgrate);
         avgrate = Math.round(x * 100) / 100;
+
+
+        //number of bid
+        var numofbid = 0;
+        var biddingofproduct = {};
+        await dbbidding.findOne({
+            idsanpham: id
+        }).then(doc => {
+            if (doc) {
+                numofbid = doc.soluot;
+                biddingofproduct = doc;
+            }
+        });
+
+        //detail html
+        var strtemp = "";
+        var strghichu = product.ghichu;
+        var arrdetails = [];
+        for (var i = 0; i < strghichu.length; i++) {
+            if (strghichu[i] === '.' || strghichu[i] === ',') {
+                arrdetails.push({
+                    msg: strtemp
+                });
+                strtemp = "";
+            } else {
+                strtemp += strghichu[i];
+            }
+        }
+        if (strtemp) {
+            arrdetails.push({
+                msg: strtemp
+            })
+        }
+
+        //mask bid winner
+        var currentwinner = "";
+        if (biddingofproduct.currentwinner) {
+            currentwinner = biddingofproduct.currentwinner.toString();
+            // console.log(currentwinner);
+            // for(var i = 0; i<currentwinner.length-3;i++){
+            //     currentwinner.charAt(i) = '*';
+            // }
+            // currentwinner[0] = currentwinner[1] = currentwinner[2] = '*';
+        } else {
+            currentwinner = "Nobody";
+        }
+        //    if(!isSeller){
+        //     currentwinner[0]=currentwinner[1]=currentwinner[2] = '*';
+        //    }
+        console.log(currentwinner);
         res.render('detailproduct', {
             title: 'Detail product',
             product: product,
@@ -901,7 +952,10 @@ class productController {
             isSeller,
             rate: avgrate,
             reviews,
-            numreviews: reviews.length
+            numofbid,
+            numreviews: reviews.length,
+            arrdetails,
+            currentwinner
         });
     }
 }

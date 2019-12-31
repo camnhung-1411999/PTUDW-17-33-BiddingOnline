@@ -14,7 +14,7 @@ router.get('/', async function (req, res) {
     checkuser = true;
     username = req.user.name;
     var isSeller = false;
-    if (req.user.status === "seller") {
+    if (req.user.status === "Seller") {
       isSeller = true;
     }
   }
@@ -34,7 +34,9 @@ router.get('/', async function (req, res) {
   });
 
   var ragianhieunhattemp = [];
-  await dbbidding.find({selling: true}).sort({
+  await dbbidding.find({
+    selling: true
+  }).sort({
     soluot: -1
   }).limit(5).then(docs => {
     docs.forEach(element => {
@@ -42,7 +44,7 @@ router.get('/', async function (req, res) {
     })
   });
 
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < ragianhieunhattemp.length; i++) {
     await dbproduct.findOne({
       _id: ObjectId(ragianhieunhattemp[i].idsanpham)
     }).then(doc => {
@@ -81,14 +83,16 @@ router.get('/', async function (req, res) {
 
   // console.log(moment(giacaonhat[0].datetime));
   // var timeeee = new Date();
-//  console.log(timeeee.getTime());
+  //  console.log(timeeee.getTime());
   for (var i = 0; i < giacaonhat.length; i++) {
-    const time = moment(giacaonhat[i].datetime,'YYYY/MM/DD HH:ii');
+    const time = moment(giacaonhat[i].datetime, 'YYYY/MM/DD HH:ii');
     const c = now.diff(time, 'seconds');
     if (giacaonhat[i].datetimeproduct * 24 * 3600 + giacaonhat[i].moretime > c) {
       giacaonhat[i].datetimeproduct = giacaonhat[i].datetimeproduct * 24 * 3600 + giacaonhat[i].moretime - c;
     }
+  }
 
+  for (var i = 0; i < ragianhieunhat.length; i++) {
     var time1 = ragianhieunhat[i].datetime;
     var c1 = now.diff(time1, 'seconds');
     if (ragianhieunhat[i].datetimeproduct * 24 * 3600 + ragianhieunhat[i].moretime >= c1) {
@@ -126,7 +130,7 @@ router.get('/', async function (req, res) {
         thoigiansaphet2[i].soluot = doc.soluot;
       }
     });
-    
+
   }
 
   res.render('home', {
@@ -140,8 +144,8 @@ router.get('/', async function (req, res) {
     nameuser: username,
   });
 });
-router.get('/admin',function (req, res) {
-  res.render('adminaccount',{
+router.get('/admin', function (req, res) {
+  res.render('adminaccount', {
     title: 'Admin'
   })
 });
