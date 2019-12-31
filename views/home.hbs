@@ -100,7 +100,36 @@
             <div class="intro-text">
                 <div class="intro-lead-in">Welcome to Auctions</div>
                 <div class="intro-heading text-uppercase">It's Nice To Meet You</div>
+                {{#if isSeller}}
                 <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#categories">Tell Me More</a>
+                {{else}}
+                {{#if checkuser}}
+                <button type="button" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger"
+                    data-toggle="modal" data-target="#exampleModalCenter">
+                    Become a seller
+                </button>
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle" style="color: black">Register to
+                                    become a seller</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form method="post">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                    <input type="button" formaction="/registerseller" class="btn btn-primary" value="Yes">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+                {{/if}}
             </div>
         </div>
     </header>
@@ -494,4 +523,6 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js">
 </script>
+
+
 {{/section}}

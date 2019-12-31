@@ -16,6 +16,7 @@ var accountSchema = new mongoose.Schema({
     phone: String,
     address: String,
     status: String,
+    birthday:String,
 }, {
     collection: "account"
 });

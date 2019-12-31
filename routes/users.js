@@ -32,10 +32,20 @@ router.post('/signup', (req, res) => {
 });
 //post sign in
 router.post('/signin', (req, res, next) => {
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/users/signup_' + req.body.username
-  })(req, res, next);
+  if(req.body.username==="admin")
+  {
+    passport.authenticate('local', {
+      successRedirect: '/admin',
+      failureRedirect: '/users/signup_' + req.body.username
+    })(req, res, next);
+  }
+  else
+  {
+    passport.authenticate('local', {
+      successRedirect: '/',
+      failureRedirect: '/users/signup_' + req.body.username
+    })(req, res, next);
+  }
 });
 
 

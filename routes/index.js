@@ -7,9 +7,6 @@ var ObjectId = require('mongodb').ObjectId;
 const biddingmodels = require('../models/bidding');
 const dbbidding = biddingmodels.getBidding;
 
-
-
-/* GET home page. */
 router.get('/', async function (req, res) {
   var checkuser = false;
   var username;
@@ -142,6 +139,11 @@ router.get('/', async function (req, res) {
     home: true,
     nameuser: username,
   });
+});
+router.get('/admin',function (req, res) {
+  res.render('adminaccount',{
+    title: 'Admin'
+  })
 });
 
 
