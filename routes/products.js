@@ -52,7 +52,9 @@ router.post('/detailproduct/:id/bid',(req, res)=>{
 router.post('/detailproduct/:id/addtocart',(req, res)=>{
    controllersCart.postAddToCart(req, res);
 })
-
+router.post('/registerseller',(req,res)=>{
+   controllers
+});
 
 module.exports = router;
 

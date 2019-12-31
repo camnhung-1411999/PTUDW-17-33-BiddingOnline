@@ -8,10 +8,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button type="button" class="btn btn-primary">Yes</button>
-            </div>
+            <form method="post">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <input type="submit" formaction="/../users/delete/{{this.name}}" class="btn btn-primary"
+                        value="Yes">
+                </div>
+            </form>
         </div>
     </div>
 </div>
