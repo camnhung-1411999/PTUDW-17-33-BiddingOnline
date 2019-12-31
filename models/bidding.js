@@ -11,7 +11,9 @@ var BiddingSchema = new mongoose.Schema({
     _id: Object,
     idsanpham: Object,
     bidding: [],
-    datebid: Date
+    datebid: Date,
+    soluot: Number,
+    selling: Boolean
 }, {
     collection: "bidding"
 });

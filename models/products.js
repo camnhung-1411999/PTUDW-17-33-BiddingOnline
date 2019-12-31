@@ -21,7 +21,8 @@ var ProductsSchema = new mongoose.Schema({
     datetimeproduct: Number,
     ghichu: String,
     selling: Boolean,
-    user: String
+    user: String,
+    soluot: Number
 }, {
     collection: "product"
 });

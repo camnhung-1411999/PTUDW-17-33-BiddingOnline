@@ -36,7 +36,6 @@ router.get('/topbidding', (req, res) => {
    controllers.showTopBidding(req, res);
 });
 
-
 //POST
 router.post('/upload', (req, res) => {
    controllers.postUpload(req, res);

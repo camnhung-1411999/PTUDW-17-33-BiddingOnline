@@ -1,6 +1,9 @@
 const productmodels = require('../models/products');
 const dbproduct = productmodels.getProduct;
 
+const biddingmodels = require('../models/bidding');
+const dbbidding = biddingmodels.getBidding;
+
 const reviewsmodels = require('../models/review');
 const dbreviews = reviewsmodels.getReviews;
 
@@ -163,6 +166,17 @@ class productController {
             })
         }
 
+        for (var i = 0; i < arrproduct.length; i++) {
+            arrproduct[i].soluot = 0;
+            await dbbidding.findOne({
+                idsanpham: arrproduct[i]._id.toString()
+            }).then(doc => {
+                if (doc) {
+                    arrproduct[i].soluot = doc.soluot;
+                }
+            });
+        }
+
         res.render('product', {
             title: 'Product',
             list: arrproduct,
@@ -225,7 +239,6 @@ class productController {
             neartimeout: thoigiansaphet
         });
     }
-
 
     //post
     postUpload(req, res) {
@@ -310,12 +323,6 @@ class productController {
             temp.value = -1;
         } else if (sort === "giatangdan") {
             temp.name = "gia";
-            temp.value = 1;
-        } else if (sort === "thoigiantangdan") {
-            temp.name = "thoigian";
-            temp.value = -1;
-        } else if (sort === "thoigiangiamdan") {
-            temp.name = "thoigian";
             temp.value = 1;
         }
 
@@ -656,7 +663,7 @@ class productController {
                     }).count();
                 }
             }
-        }
+        };
 
         var checkuser = false;
         if (req.user) {
@@ -667,9 +674,7 @@ class productController {
             }
         }
 
-
         const now = moment(new Date());
-
         for (var i = 0; i < arrproduct.length; i++) {
 
             const time = arrproduct[i].datetime;
@@ -707,6 +712,135 @@ class productController {
                 value: i,
                 isCurrentPage: i === +page
             })
+        }
+
+        if (sort === "thoigiantangdan") {
+            var arrtemp = [];
+            // for (var i = 0; i < listCategories.length; i++) {
+            //     if (listCategories[i].isActive === true) {
+            await dbproduct.find({
+                selling: true,
+                // loai: listCategories[i].catName
+            }).then(docs => {
+                docs.forEach(element => {
+                    arrtemp.push(element);
+                });
+            });
+            // }
+            // }
+            //convert time to ss
+            var n = arrtemp.length;
+            for (var i = 0; i < n; i++) {
+
+                const time = arrtemp[i].datetime;
+                const c = now.diff(time, 'seconds');
+                if (arrtemp[i].datetimeproduct * 24 * 3600 > c) {
+                    var temp = arrtemp[i].datetimeproduct * 24 * 3600 - c;
+                    arrtemp[i].datetimeproduct = temp;
+                } else {
+
+                    const entity = {
+                        selling: false
+                    };
+
+                    const myquery = {
+                        _id: arrtemp[i]._id
+                    };
+                    var options = {
+                        multi: true
+                    };
+
+                    await dbproduct.update(myquery, entity, options);
+                    arrtemp[i].selling = false;
+
+                }
+            }
+
+            //sort 
+            for (var i = 0; i < n; i++) {
+                for (var j = i + 1; j < n; j++) {
+                    if (arrtemp[i].datetimeproduct > arrtemp[j].datetimeproduct) {
+                        var temp = arrtemp[i].datetimeproduct;
+                        arrtemp[i].datetimeproduct = arrtemp[j].datetimeproduct;
+                        arrtemp[j].datetimeproduct = temp;
+                    }
+                }
+            }
+            for (var i = 0; i < limit; i++) {
+                arrproduct[i] = arrtemp[i];
+            }
+
+            listCategories[0].isActive = true;
+            listCategories[1].isActive = false;
+            listCategories[2].isActive = false;
+            listCategories[3].isActive = false;
+        } else if (sort === "thoigiangiamdan") {
+            var arrtemp = [];
+
+            await dbproduct.find({
+                selling: true,
+            }).then(docs => {
+                docs.forEach(element => {
+                    arrtemp.push(element);
+                });
+            });
+            //convert time to ss
+            var n = arrtemp.length;
+            for (var i = 0; i < n; i++) {
+
+                const time = arrtemp[i].datetime;
+                const c = now.diff(time, 'seconds');
+                if (arrtemp[i].datetimeproduct * 24 * 3600 > c) {
+                    var temp = arrtemp[i].datetimeproduct * 24 * 3600 - c;
+                    arrtemp[i].datetimeproduct = temp;
+                } else {
+
+                    const entity = {
+                        selling: false
+                    };
+
+                    const myquery = {
+                        _id: arrtemp[i]._id
+                    };
+                    var options = {
+                        multi: true
+                    };
+
+                    await dbproduct.update(myquery, entity, options);
+                    arrtemp[i].selling = false;
+
+                }
+            }
+            //sort 
+            for (var i = 0; i < n; i++) {
+                for (var j = i + 1; j < n; j++) {
+                    if (arrtemp[i].datetimeproduct < arrtemp[j].datetimeproduct) {
+                        var temp = arrtemp[i].datetimeproduct;
+                        arrtemp[i].datetimeproduct = arrtemp[j].datetimeproduct;
+                        arrtemp[j].datetimeproduct = temp;
+                    }
+                }
+            }
+            for (var i = 0; i < limit; i++) {
+                arrproduct[i] = arrtemp[i];
+            }
+
+            listCategories[0].isActive = true;
+            listCategories[1].isActive = false;
+            listCategories[2].isActive = false;
+            listCategories[3].isActive = false;
+        }
+
+
+        for (var i = 0; i < arrproduct.length; i++) {
+            arrproduct[i].soluot = 0;
+            await dbbidding.findOne({
+                idsanpham: arrproduct[i]._id.toString()
+            }).then(doc => {
+                if (doc) {
+                    arrproduct[i].soluot = doc.soluot;
+                }
+            });
         }
 
         var thongbao = req.body.search;
@@ -753,13 +887,13 @@ class productController {
         var avgrate = 0;
         for (var i = 0; i < reviews.length; i++) {
             avgrate = avgrate + reviews[i].rate;
-           
+
         }
 
         avgrate = avgrate / reviews.length;
 
         var x = parseFloat(avgrate);
-        avgrate = Math.round(x * 100)/100;
+        avgrate = Math.round(x * 100) / 100;
         res.render('detailproduct', {
             title: 'Detail product',
             product: product,

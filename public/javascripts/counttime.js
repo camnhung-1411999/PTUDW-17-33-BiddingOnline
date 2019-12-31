@@ -14,7 +14,7 @@ var x = setInterval(function () {
             days = "0" + days;
         }
         if (hours < 10) {
-           hours = "0" + hours;
+            hours = "0" + hours;
         }
         if (minutes < 10) {
             minutes = "0" + minutes;
@@ -22,7 +22,12 @@ var x = setInterval(function () {
         if (seconds < 10) {
             seconds = "0" + seconds;
         }
-        $(settime[i]).text(days + ":" + hours + ":" + minutes + ":" + seconds);
+        if (days != '00') {
+            $(settime[i]).text(days + "days");
+        } else {
+            $(settime[i]).text(hours + ":" + minutes + ":" + seconds);
+        }
+        // $(settime[i]).text(days + ":" + hours + ":" + minutes + ":" + seconds);
         $(time[i]).text(distance - 1 + '');
         if (distance < 0) {
             clearInterval(x);

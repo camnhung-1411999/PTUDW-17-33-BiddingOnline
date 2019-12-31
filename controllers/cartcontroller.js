@@ -80,6 +80,7 @@ class CartController {
                             user,
                             datebid: today,
                         }],
+                        soluot: 1
 
                     }
                     biddingmodels.insert(entity);
@@ -90,6 +91,7 @@ class CartController {
                         datebid: today,
                     });
                     bid.bidding[bid.bidding.length - 1]._id = undefined;
+                    bid.bidding[bid.bidding.length - 1].soluot += 1;
 
 
                     var myquery = {
@@ -111,8 +113,6 @@ class CartController {
                 if (product.datetimeproduct * 24 * 3600 - c + product.moretime <= 5 * 60) {
                     product.moretime = product.moretime + 10 * 60;
                 }
-                console.log(c);
-                console.log(product.moretime);
 
                 var myquery = {
                     _id: product._id
@@ -225,4 +225,4 @@ class CartController {
     }
 }
 
-module.exports = CartController;    
+module.exports = CartController;
