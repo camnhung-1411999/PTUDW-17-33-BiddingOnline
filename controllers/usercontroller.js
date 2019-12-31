@@ -7,13 +7,21 @@ const dbcart = cartmodels.getCart;
 const productmodels = require('../models/products');
 const dbproduct = productmodels.getProduct;
 
+const manageusermodels = require('../models/admin');
+const dbmanageuser = manageusermodels.getManageUser;
+const registerseller = require('../models/registerseller');
+const dbregisterseller = registerseller.getRegister;
+
 const bcrypt = require('bcryptjs');
 
 var ObjectId = require('mongodb').ObjectId;
 
-
+// for user
 
 class userController {
+
+    //Signup/in
+    //----------get-----------------------
     showSignup(req, res) {
         req.logout();
         req.session.destroy();
@@ -26,160 +34,7 @@ class userController {
             messenger: req.user
         });
     }
-
-    showAccount(req, res) {
-        var checkuser = false;
-        var nameuser;
-        if (req.user) {
-            checkuser = true;
-            nameuser = req.user.name;
-            var isSeller = true;
-            if (req.user.status != "Seller") {
-                isSeller = false;
-            }
-        }
-        res.render('account', {
-            title: 'Account',
-            checkuser,
-            nameuser,
-            account: req.user,
-        });
-    }
-
-    showFavorites(req, res) {
-        var checkuser = false;
-        var nameuser;
-        if (req.user) {
-            checkuser = true;
-            nameuser = req.user.name;
-            var isSeller = true;
-            if (req.user.status != "Seller") {
-                isSeller = false;
-            }
-        }
-        res.render('favoriteproducts', {
-            title: 'Favorites',
-            checkuser,
-            nameuser,
-            account: req.user,
-        });
-    }
-
-    async showCart(req, res) {
-        var checkuser = false;
-        var nameuser;
-        if (req.user) {
-            checkuser = true;
-            nameuser = req.user.name;
-            var isSeller = true;
-            if (req.user.status != "Seller") {
-                isSeller = false;
-            }
-        }
-
-        var cart = [];
-        await dbcart.find({
-            user: req.user.name
-        }).then(docs => {
-            docs.forEach(element => {
-                cart.push(element);
-            })
-        });
-
-        // ObjectId;
-
-        for (var i = 0; i < cart.length; i++) {
-            await dbproduct.findOne({
-                _id: ObjectId(cart[i].idsanpham)
-            }).then(doc => {
-                cart[i].tensp = doc.ten;
-                cart[i].seller = doc.user;
-                cart[i].image = doc.image[0];
-            });
-        }
-        res.render('mycart', {
-            title: 'My cart',
-            checkuser,
-            nameuser,
-            cart
-        });
-    }
-
-    showBid(req, res) {
-        var checkuser = false;
-        var nameuser;
-        if (req.user) {
-            checkuser = true;
-            nameuser = req.user.name;
-            var isSeller = true;
-            if (req.user.status != "Seller") {
-                isSeller = false;
-            }
-        }
-        // ObjectId;
-        res.render('mybid', {
-            title: 'My Bid',
-            checkuser,
-            nameuser,
-        });
-    }
-
-    showChangePassword(req, res) {
-        var checkuser = false;
-        var nameuser;
-        if (req.user) {
-            checkuser = true;
-            nameuser = req.user.name;
-            var isSeller = true;
-            if (req.user.status != "Seller") {
-                isSeller = false;
-            }
-        }
-        res.render('changepassword', {
-            title: 'Change password',
-            checkuser,
-            nameuser,
-            account: req.user,
-        });
-    }
-    // async setPostSignin(req, res) {
-
-    //     var arr = [];
-    //     var checkSignin = {
-    //         suname: req.body.username,
-    //         supass: req.body.password,
-    //     };
-    //     //kiểm tra pass
-    //     await db.find({
-    //         name: checkSignin.suname
-    //     }).then(function (docs) {
-    //         // arr.push(docs);
-    //         docs.forEach(element => {
-    //             arr.push(element);
-    //         })
-    //     });
-    //     console.log(arr);
-    //     if (arr.length === 0) {
-    //         res.render('signup_in', {
-    //             title: 'Sign in/ Sign up',
-    //             checksignin: true,
-    //             errsiname: "*Username wrong!"
-    //         });
-    //     } else {
-    //         bcrypt.compare(checkSignin.supass, arr[0].pass, (err, isMatch) => {
-    //             if(!isMatch){
-    //                 res.render('signup_in', {
-    //                     title: 'Sign in/ Sign up',
-    //                     checksignin: true,
-    //                     errsiname: "*Password wrong!"
-    //                 });
-    //             }
-    //             else if(checkSignin.user==="admin"){
-    //                 res.redirect('/admin');
-    //             }
-    //         });
-    //     }
-    // }
+    //----------post----------------------
     async setPostSignup(req, res) {
         var arr = [];
         var a = +req.body.a;
@@ -195,7 +50,7 @@ class userController {
             phone: req.body.phone,
             address: req.body.address,
             status: "Bidder",
-            birthday:req.body.birthday
+            birthday: req.body.birthday
         };
 
         // kiem tra username co ton tai hay k
@@ -320,13 +175,130 @@ class userController {
                     email: checkInfor.email,
                     address: checkInfor.address,
                     status: checkInfor.status,
-                    birthday:checkInfor.birthday,
+                    birthday: checkInfor.birthday,
                 }
                 usermodels.insert(user);
                 res.redirect('/');
             });
         }
     }
+    //for user
+    //----------get-----------------------
+    showAccount(req, res) {
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
+        res.render('account', {
+            title: 'Account',
+            checkuser,
+            nameuser,
+            account: req.user,
+        });
+    }
+
+    showFavorites(req, res) {
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
+        res.render('favoriteproducts', {
+            title: 'Favorites',
+            checkuser,
+            nameuser,
+            account: req.user,
+        });
+    }
+    async showCart(req, res) {
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
+
+        var cart = [];
+        await dbcart.find({
+            user: req.user.name
+        }).then(docs => {
+            docs.forEach(element => {
+                cart.push(element);
+            })
+        });
+
+        // ObjectId;
+
+        for (var i = 0; i < cart.length; i++) {
+            await dbproduct.findOne({
+                _id: ObjectId(cart[i].idsanpham)
+            }).then(doc => {
+                cart[i].tensp = doc.ten;
+                cart[i].seller = doc.user;
+                cart[i].image = doc.image[0];
+            });
+        }
+        res.render('mycart', {
+            title: 'My cart',
+            checkuser,
+            nameuser,
+            cart
+        });
+    }
+
+    showBid(req, res) {
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
+        // ObjectId;
+        res.render('mybid', {
+            title: 'My Bid',
+            checkuser,
+            nameuser,
+        });
+    }
+
+    showChangePassword(req, res) {
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
+        res.render('changepassword', {
+            title: 'Change password',
+            checkuser,
+            nameuser,
+            account: req.user,
+        });
+    }
+    //----------post----------------------
     async setPostAccount(req, res) {
         // var iduser=req.user._id;
 
@@ -345,7 +317,6 @@ class userController {
         await db.update(myquery, changeAcc, options);
         res.redirect('/../users/account');
     }
-
     async setPostPassword(req, res) {
         var oldpass = req.body.oldpass;
         var newpass = req.body.newpass;
@@ -412,8 +383,122 @@ class userController {
             });
         }
     }
+    async setPostRegisterSeller(req, res) {
+        if (req.user != undefined && req.user != null) {
+            var name = req.user.name;
+        }
+        var point;
+        await dbmanageuser.findOne({name}).then(doc=>{
+            point=doc.pointbid;
+        });
+
+        var entity={
+            name:name,
+            point:point
+        };
+        await registerseller.insert(entity);
+        res.redirect('/');
+    }
+
+    //for admin
+    //----------get-----------------------
+    async showManageUser(req, res) {
+        var arrbid = [];
+        var arrsell = [];
+        var regist=[];
+        await dbmanageuser.find({}).then(docs => {
+            docs.forEach(element => {
+                if (element.type) {
+                    arrsell.push(element);
+                }
+                else arrbid.push(element);
+            })
+        });
+
+        await dbregisterseller.find({}).then(docs=>{
+            docs.forEach(element => {
+                regist.push(element);
+            });
+        });
+        
+        res.render('manageuser', {
+            title: "Manage user",
+            listbid: arrbid,
+            listsell: arrsell,
+            listregist:regist,
+        });
+    }
+    //----------post----------------------
+    async setPostRegistDelete(req,res){
+
+    }
+    async setPostRegistConfirm(req,res){
+        var name = req.params.id;
+        var acc={};
+        await db.findOne({name}).then(doc=>{
+            acc=doc;
+        })
+        var myquery = {
+            _id: ObjectId(acc._id)
+        }
+        var changeAcc = {
+            status:"Seller",
+        };
+        var options = {
+            multi: true
+        }
+        // usermodels.UpdateInfoAccount(changeAcc,iduser);
+        await db.update(myquery, changeAcc, options);
+        await dbregisterseller.findOneAndRemove({name});
+        res.redirect('/users/manageuser');
+    }
+    async setPostRegistDelete(req,res){
+        var name = req.params.id;
+        await dbregisterseller.findOneAndRemove({name});
+        res.redirect('/users/manageuser');
+    }
+
 
 }
 
 
 module.exports = userController;
+
+// async setPostSignin(req, res) {
+
+    //     var arr = [];
+    //     var checkSignin = {
+    //         suname: req.body.username,
+    //         supass: req.body.password,
+    //     };
+    //     //kiểm tra pass
+    //     await db.find({
+    //         name: checkSignin.suname
+    //     }).then(function (docs) {
+    //         // arr.push(docs);
+    //         docs.forEach(element => {
+    //             arr.push(element);
+    //         })
+    //     });
+    //     console.log(arr);
+    //     if (arr.length === 0) {
+    //         res.render('signup_in', {
+    //             title: 'Sign in/ Sign up',
+    //             checksignin: true,
+    //             errsiname: "*Username wrong!"
+    //         });
+    //     } else {
+    //         bcrypt.compare(checkSignin.supass, arr[0].pass, (err, isMatch) => {
+    //             if(!isMatch){
+    //                 res.render('signup_in', {
+    //                     title: 'Sign in/ Sign up',
+    //                     checksignin: true,
+    //                     errsiname: "*Password wrong!"
+    //                 });
+    //             }
+    //             else if(checkSignin.user==="admin"){
+    //                 res.redirect('/admin');
+    //             }
+    //         });
+    //     }
+    // }

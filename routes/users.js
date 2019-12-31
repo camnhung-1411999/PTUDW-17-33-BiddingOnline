@@ -64,7 +64,9 @@ router.get('/mycart', (req, res) => {
 router.get('/mybid', (req, res) => {
   controllers.showBid(req, res);
 })
-
+router.get('/manageuser',(req,res)=>{
+  controllers.showManageUser(res,res);
+});
 
 
 //post
@@ -74,5 +76,14 @@ router.post('/account', function (req, res) {
 });
 router.post('/changepassword', function (req, res) {
   controllers.setPostPassword(req, res);
+})
+router.post('/registerseller',(req,res)=>{
+  controllers.setPostRegisterSeller(req,res);
+});
+router.post('/confirm/:id',(req,res)=>{
+  controllers.setPostRegistConfirm(req,res);
+})
+router.post('/delete/:id',(req,res)=>{
+  controllers.setPostRegistDelete(req,res);
 })
 module.exports = router;

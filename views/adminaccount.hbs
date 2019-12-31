@@ -1,130 +1,44 @@
-<!-- Custom fonts for this template -->
-<link href="/../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-<link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
-    type='text/css'>
-<!-- Custom styles for this template -->
-<link href="/stylesheets/agency.css" rel="stylesheet">
-
+<link rel="stylesheet" href="/../stylesheets/admin.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<link rel="stylesheet" href="/stylesheets/admin.css">
-
-
-<div id="page-top">
-    <div class="container">
-        <div class="row profile">
-            <div class="col-md-3">
-                <div class="profile-sidebar">
-                    <!-- SIDEBAR USERPIC -->
-                    <div class="profile-userpic">
-                        <img src="https://nguoi-noi-tieng.com/photo/tieu-su-ca-si-khoi-9808.jpg" class="img-responsive"
-                            alt="">
-                    </div>
-                    <!-- END SIDEBAR USERPIC -->
-                    <!-- SIDEBAR USER TITLE -->
-                    <div class="profile-usertitle">
-                        <div class="profile-usertitle-name">
-                            {{account.name}}
-                        </div>
-                        <div class="profile-usertitle-job">
-                            {{account.status}}
-                        </div>
-                    </div>
-                    <!-- END SIDEBAR USER TITLE -->
-                    <!-- SIDEBAR BUTTONS -->
-                    <div class="profile-userbuttons">
-
-                        <!-- Modal -->
-                        {{!-- {{>modal}} --}}
-                    </div>
-
-                    <a href="/../users/changepassword"><input type="button" class="btn btn-sm">Reset
-                        password</a>
-                    <!-- END SIDEBAR BUTTONS -->
-                    <!-- SIDEBAR MENU -->
-                    <div class="profile-usermenu">
-                        <ul class="nav">
-                            <li id="acc_detail">
-                                <a href="/users/account">
-                                    <i class="fas fa-user"></i>
-                                    Confirm is Seller </a>
-                            </li>
-                            <li id="acc_favorite">
-                                <a href="/users/favorites">
-                                    <i class="fas fa-heart-broken"></i>
-                                    List Category </a>
-                            </li>
-                            <li id="acc_cart">
-                                <a href="/users/mycart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    List Bidder</a>
-                            </li>
-
-                            <li id="acc_auction">
-                                <a href="#">
-                                    <i class="fas fa-gavel"></i>
-                                    List Seller </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                    <!-- END MENU -->
-                </div>
-            </div>
-            <div class="col-md-9">
-                <!-- detail infor -->
-                <div class="profile-content" id="detailinfor">
-                    <div class="container-fluid">
-
-                        <h2 class="text-danger">Confirm become a seller</h2>
-
-                        {{!-- <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Full Name</th>
-                                    <td>{{account.fullname}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="info">Email</th>
-                                    <td>{{account.email}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="info">Contact</th>
-                                    <td>{{account.phone}}</td>
-                                </tr>
-
-                                <tr>
-                                    <th class="info">Address</th>
-                                    <td>{{account.address}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="info">Status</th>
-                                    <td>{{account.status}}</td>
-                                </tr>
-
-                            </thead>
-
-                        </table> --}}
-                    </div>
-                </div>
-            </div>
+<!-- Custom styles for this template -->
+<link href="stylesheets/agency.css" rel="stylesheet">
+<main role="main">
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Hello admin!</h1>
+            <p>Start managing, you are logged in as admin</p>
+            <a href="/../users/signup"><button class="btn btn-dark btn-lg">Log out »</button></a>
         </div>
     </div>
 
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="/../javascripts/product.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-    <script src="/../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/../vendor/jquery/jquery.min.js"></script>
-
-
-    <script src="/../vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="/../javascripts/agency.min.js"></script>
-    <script src="/../javascripts/admin.js"></script>
-</div>
+    <div class="container pb-5 mb-2">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Manage user</h2>
+                <p>List bidder, List seller, List bidder register to become a seller.</p>
+                <a class="btn btn-secondary" href="/../users/manageuser" role="button">Go on »</a>
+            </div>
+            <div class="col-md-4">
+                <h2>Manage product</h2>
+                <p> </p>
+                <a class="btn btn-secondary" href="#" role="button">Go on »</a>
+            </div>
+            <div class="col-md-4">
+                <h2>Manage categories</h2>
+                <p>Nhập hàng sắp hết trong kho, kiểm soát tình trạng hàng hóa.</p>
+                <a class="btn btn-secondary" href="#" role="button">Go on »</a>
+            </div>
+            <hr>
+        </div> <!-- /container -->
+    </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/6b7afa5f4b.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
