@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="/../stylesheets/agency.css" rel="stylesheet">
+<link href="/../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
+    type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+{{>navAdmin}}
+<div class="container-fluid" id="content" style="margin-top:150px !important ; width:70%!important;margin-bottom:100px">
+
+    <div id="titleProfileInfo" class="row ">
+        <h4 class="col" style="color: rgb(159, 159, 160) !important;font-size:30px !important;">LIST CATEGORIES</h4>
+    </div>
+    <button type="button" class="btn btn-primary" style="float: right!important; margin-bottom:50px;"
+        data-toggle="modal" data-target="#ModalInsert">
+        Insert category
+    </button>
+    {{>modalinsertcate}}
+    <table class="table table-sm txt-center table-hover" id="listStore">
+        <thead>
+            <tr>
+                <th scope="col" style="text-align: center!important;font-size:25px !important;">Name category</th>
+                <th scope="col" style="text-align: center!important;"></th>
+                <th scope="col" style="text-align: center!important;"></th>
+
+            </tr>
+        </thead>
+
+        <tbody id="productList">
+            {{#each cate}}
+            <tr>
+                <td style="text-align: center!important;">
+                    {{this.cate}}
+                </td>
+
+                <td style="text-align: center!important;">
+                    <button type="button" class="btn btn-primary"data-toggle="modal" data-target="#ModalRename" >
+                        Rename
+                    </button>
+                    {{>modalrename}}
+
+                </td>
+                <td style="text-align: center!important;">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalDeleteCate">
+                        Delete
+                    </button>
+                    {{>modaldeletecate}}
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/6b7afa5f4b.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>

@@ -5,10 +5,12 @@ $(document).ready(()=>{
     $('#lb').click(() => {
         $('.listbid').show();
         $('.listsell').hide();
+        $('.regis').hide();
     })
     $('#ls').click(() => {
         $('.listbid').hide();
         $('.listsell').show();
+        $('.regis').hide();
     })
     $('#regis').click(() => {
 

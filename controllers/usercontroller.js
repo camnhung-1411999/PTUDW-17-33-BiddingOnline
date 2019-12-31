@@ -12,6 +12,9 @@ const dbmanageuser = manageusermodels.getManageUser;
 const registerseller = require('../models/registerseller');
 const dbregisterseller = registerseller.getRegister;
 
+const category = require('../models/category');
+const dbcategory = category.getCategory;
+
 const bcrypt = require('bcryptjs');
 
 var ObjectId = require('mongodb').ObjectId;
@@ -178,6 +181,15 @@ class userController {
                     birthday: checkInfor.birthday,
                 }
                 usermodels.insert(user);
+                const manageuser={
+                    name:checkInfor.name,
+                    purchase:0,
+                    cacellate:0,
+                    type:false,
+                    pointbid:0,
+                    pointsell:-1,
+                }
+                manageusermodels.insert(manageuser);
                 res.redirect('/');
             });
         }
@@ -420,18 +432,43 @@ class userController {
                 regist.push(element);
             });
         });
-        
+        var checkbid=false;
+        var checksell=false;
+        var checkregist=false;
+        if(arrbid.length===0){
+            checkbid=true;
+        }
+        if(arrsell.length===0){
+            checksell=true;
+        }
+        if(regist.length===0){
+            checkregist=true;
+        }
         res.render('manageuser', {
             title: "Manage user",
             listbid: arrbid,
             listsell: arrsell,
             listregist:regist,
+            checkbid,
+            checksell,
+            checkregist,
+            totalregist:regist.length,
+        });
+    }
+    async showManageCategory(req,res){
+        var arrCate=[];
+        await dbcategory.find({}).then(docs=>{
+            docs.forEach(element => {
+                arrCate.push(element);
+            });
+        });
+
+        res.render('managecategory',{
+            title:"Manage Category",
+            cate:arrCate,
         });
     }
     //----------post----------------------
-    async setPostRegistDelete(req,res){
-
-    }
     async setPostRegistConfirm(req,res){
         var name = req.params.id;
         var acc={};
@@ -458,6 +495,38 @@ class userController {
         res.redirect('/users/manageuser');
     }
 
+    async setPostDeleteCate(req,res){
+        var cate = req.params.id;
+        await dbcategory.findOneAndRemove({cate});
+        res.redirect('/users/managecategory');
+    }
+    async  setPostInsertCate(req,res){
+        var newcate={
+            cate:req.body.insert,
+        }
+        await category.insert(newcate);
+        res.redirect('/users/managecategory');
+
+    }
+    async setPostRenameCate(req,res){
+        var cate = req.params.id;
+        var findcate={};
+        await dbcategory.findOne({cate}).then(doc=>{
+            findcate=doc;
+        })
+        var myquery = {
+            _id: ObjectId(findcate._id)
+        }
+        var changeCate = {
+            cate:req.body.newcate,
+        };
+        var options = {
+            multi: true
+        }
+        // usermodels.UpdateInfoAccount(changeAcc,iduser);
+        await dbcategory.update(myquery, changeCate, options);
+        res.redirect('/users/managecategory');
+    }
 
 }
 

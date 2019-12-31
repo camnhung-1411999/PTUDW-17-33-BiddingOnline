@@ -31,19 +31,27 @@
                     </tr>
                 </thead>
 
-                <tbody id="productList">
-                    {{#each listbid}}
+                <tbody id="productList"></tbody>
+                {{#if checkbid}}
+                <tr>
+                    <h3 style="color: rgb(159, 159, 160);">NO ONE ON LIST</h3>
+                </tr>
+                {{else}}
 
-                    <tr>
-                        <td>{{this.name}}</td>
-                        <td>{{this.purchase}}</td>
-                        <td>{{this.cancellate}}</td>
-                        <td>{{this.pointbid}}</td>
-                    </tr>
+                {{#each listbid}}
+
+                <tr>
+                    <td>{{this.name}}</td>
+                    <td>{{this.purchase}}</td>
+                    <td>{{this.cancellate}}</td>
+                    <td>{{this.pointbid}}</td>
+                </tr>
 
 
-                    {{/each}}
+                {{/each}}
+                {{/if}}
                 </tbody>
+
             </table>
             <!-- Pagination -->
             {{!-- {{> pagination}} --}}
@@ -70,6 +78,11 @@
                 </thead>
 
                 <tbody id="productList">
+                    {{#if checksell}}
+                    <tr>
+                        <h3 style="color: rgb(159, 159, 160);">NO ONE ON LIST</h3>
+                    </tr>
+                    {{else}}
                     {{#each listsell}}
 
                     <tr>
@@ -84,6 +97,7 @@
 
 
                     {{/each}}
+                    {{/if}}
                 </tbody>
             </table>
         </div>
@@ -107,6 +121,11 @@
                 </thead>
 
                 <tbody id="productList">
+                    {{#if checkregist}}
+                    <tr>
+                        <h3 style="color: rgb(159, 159, 160);">NO ONE ON LIST</h3>
+                    </tr>
+                    {{else}}
                     {{#each listregist}}
 
                     <tr>
@@ -130,6 +149,7 @@
 
 
                     {{/each}}
+                    {{/if}}
                 </tbody>
             </table>
         </div>

@@ -65,9 +65,11 @@ router.get('/mybid', (req, res) => {
   controllers.showBid(req, res);
 })
 router.get('/manageuser',(req,res)=>{
-  controllers.showManageUser(res,res);
+  controllers.showManageUser(req,res);
 });
-
+router.get('/managecategory',(req,res)=>{
+  controllers.showManageCategory(req,res);
+})
 
 //post
 
@@ -85,5 +87,15 @@ router.post('/confirm/:id',(req,res)=>{
 })
 router.post('/delete/:id',(req,res)=>{
   controllers.setPostRegistDelete(req,res);
+})
+router.post('/deletecate/:id',(req,res)=>{
+  console.log(req.params.id);
+  controllers.setPostDeleteCate(req,res);
+})
+router.post('/insertcategory',(req,res)=>{
+  controllers.setPostInsertCate(req,res);
+})
+router.post('/renamecate/:id',(req,res)=>{
+  controllers.setPostRenameCate(req,res);
 })
 module.exports = router;
