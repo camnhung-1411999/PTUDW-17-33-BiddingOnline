@@ -3,16 +3,22 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">ENTER NEW NAME</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">RENAME CATEGORY!</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form method="post">
+                <label for="">Old name category:</label>
+                <input type="text" name="oldcate" class="btn btn-secondary" style="margin-left:10px!important;width:470px!important;">
+                <label for="">New name category:</label>
                 <input type="text" name="newcate" class="btn btn-secondary" style="margin-left:10px!important;width:470px!important;">
+                <label for="">New id category</label>
+                <input type="text" name="newid" class="btn btn-secondary" style="margin-left:10px!important;width:470px!important;">
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <input type="submit" formaction="/../users/renamecate/{{this.cate}}" class="btn btn-primary"
+                    <input type="submit" formaction="/../users/renamecate" class="btn btn-primary"
                         value="Confirm">
                 </div>
             </form>

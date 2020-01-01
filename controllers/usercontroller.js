@@ -181,13 +181,13 @@ class userController {
                     birthday: checkInfor.birthday,
                 }
                 usermodels.insert(user);
-                const manageuser={
-                    name:checkInfor.name,
-                    purchase:0,
-                    cacellate:0,
-                    type:false,
-                    pointbid:0,
-                    pointsell:-1,
+                const manageuser = {
+                    name: checkInfor.name,
+                    purchase: 0,
+                    cacellate: 0,
+                    type: false,
+                    pointbid: 0,
+                    pointsell: -1,
                 }
                 manageusermodels.insert(manageuser);
                 res.redirect('/');
@@ -400,13 +400,13 @@ class userController {
             var name = req.user.name;
         }
         var point;
-        await dbmanageuser.findOne({name}).then(doc=>{
-            point=doc.pointbid;
+        await dbmanageuser.findOne({ name }).then(doc => {
+            point = doc.pointbid;
         });
 
-        var entity={
-            name:name,
-            point:point
+        var entity = {
+            name: name,
+            point: point
         };
         await registerseller.insert(entity);
         res.redirect('/');
@@ -417,108 +417,210 @@ class userController {
     async showManageUser(req, res) {
         var arrbid = [];
         var arrsell = [];
-        var regist=[];
-        await dbmanageuser.find({}).then(docs => {
+        var regist = [];
+        await dbmanageuser.find({type: false}).then(docs => {
             docs.forEach(element => {
-                if (element.type) {
-                    arrsell.push(element);
-                }
-                else arrbid.push(element);
+                // if (element.type) {
+                //     arrsell.push(element);
+                // }
+                // else
+                arrbid.push(element);
             })
         });
 
-        await dbregisterseller.find({}).then(docs=>{
+        // await dbregisterseller.find({}).then(docs => {
+        //     docs.forEach(element => {
+        //         regist.push(element);
+        //     });
+        // });
+        var checkbid = false;
+        // var checksell = false;
+        // var checkregist = false;
+        if (arrbid.length === 0) {
+            checkbid = true;
+        }
+        // if (arrsell.length === 0) {
+        //     checksell = true;
+        // }
+        // if (regist.length === 0) {
+        //     checkregist = true;
+        // }
+        res.render('bidder', {
+            title: "Manage user",
+            listbid: arrbid,
+            // listsell: arrsell,
+            // listregist: regist,
+            checkbid,
+            // checksell,
+            // checkregist,
+            // totalregist: regist.length,
+        });
+    }
+    async showListSell(req,res){
+        // var arrbid = [];
+        var arrsell = [];
+        // var regist = [];
+        await dbmanageuser.find({type:true}).then(docs => {
+            docs.forEach(element => {
+                 arrsell.push(element);
+            })
+        });
+
+        // await dbregisterseller.find({}).then(docs => {
+        //     docs.forEach(element => {
+        //         regist.push(element);
+        //     });
+        // });
+        // var checkbid = false;
+        var checksell = false;
+        // var checkregist = false;
+        // if (arrbid.length === 0) {
+        //     checkbid = true;
+        // }
+        if (arrsell.length === 0) {
+            checksell = true;
+        }
+        // if (regist.length === 0) {
+        //     checkregist = true;
+        // }
+        res.render('seller', {
+            title: "Manage user",
+            // listbid: arrbid,
+            listsell: arrsell,
+            // listregist: regist,
+            // checkbid,
+            checksell,
+            // checkregist,
+            // totalregist: regist.length,
+        });
+    }
+    async showRegister(req,res){
+        // var arrbid = [];
+        // var arrsell = [];
+        var regist = [];
+       
+
+        await dbregisterseller.find({}).then(docs => {
             docs.forEach(element => {
                 regist.push(element);
             });
         });
-        var checkbid=false;
-        var checksell=false;
-        var checkregist=false;
-        if(arrbid.length===0){
-            checkbid=true;
+        // var checkbid = false;
+        // var checksell = false;
+        var checkregist = false;
+        // if (arrbid.length === 0) {
+        //     checkbid = true;
+        // }
+        // if (arrsell.length === 0) {
+        //     checksell = true;
+        // }
+        if (regist.length === 0) {
+            checkregist = true;
         }
-        if(arrsell.length===0){
-            checksell=true;
-        }
-        if(regist.length===0){
-            checkregist=true;
-        }
-        res.render('manageuser', {
+        res.render('register', {
             title: "Manage user",
-            listbid: arrbid,
-            listsell: arrsell,
-            listregist:regist,
-            checkbid,
-            checksell,
+            // listbid: arrbid,
+            // listsell: arrsell,
+            listregist: regist,
+            // checkbid,
+            // checksell,
             checkregist,
-            totalregist:regist.length,
+            totalregist: regist.length,
         });
     }
-    async showManageCategory(req,res){
-        var arrCate=[];
-        await dbcategory.find({}).then(docs=>{
+    async showManageCategory(req, res) {
+        var arrCate = [];
+        var check = [];
+        var temp = [];
+        await dbcategory.find({}).then(docs => {
             docs.forEach(element => {
-                arrCate.push(element);
-            });
+                temp.push(element);
+            })
         });
-
-        res.render('managecategory',{
-            title:"Manage Category",
-            cate:arrCate,
+        for (var i = 0; i < temp.length; i++) {
+            var existpro = [];
+            var temp2 = {};
+            await dbproduct.find({ loai: temp[i].idcat }).then(docs => {
+                docs.forEach(elements => {
+                    existpro.push(elements);
+                });
+            });
+            if (existpro.length === 0 && temp[i].idcat != 'all') {
+                temp2 = {
+                    idcat: temp[i].idcat,
+                    cate: temp[i].cate,
+                    check: false,
+                }
+            }
+            else {
+                temp2 = {
+                    idcat: temp[i].idcat,
+                    cate: temp[i].cate,
+                    check: true,
+                }
+            }
+            arrCate.push(temp2);
+        }
+        res.render('managecategory', {
+            title: "Manage Category",
+            cate: arrCate,
         });
     }
     //----------post----------------------
-    async setPostRegistConfirm(req,res){
+    async setPostRegistConfirm(req, res) {
         var name = req.params.id;
-        var acc={};
-        await db.findOne({name}).then(doc=>{
-            acc=doc;
+        var acc = {};
+        await db.findOne({ name }).then(doc => {
+            acc = doc;
         })
         var myquery = {
             _id: ObjectId(acc._id)
         }
         var changeAcc = {
-            status:"Seller",
+            status: "Seller",
         };
         var options = {
             multi: true
         }
         // usermodels.UpdateInfoAccount(changeAcc,iduser);
         await db.update(myquery, changeAcc, options);
-        await dbregisterseller.findOneAndRemove({name});
-        res.redirect('/users/manageuser');
+        await dbregisterseller.findOneAndRemove({ name });
+        res.redirect('/users/manageuser/register');
     }
-    async setPostRegistDelete(req,res){
+    async setPostRegistDelete(req, res) {
         var name = req.params.id;
-        await dbregisterseller.findOneAndRemove({name});
-        res.redirect('/users/manageuser');
+        await dbregisterseller.findOneAndRemove({ name });
+        res.redirect('/users/manageuser/register');
     }
 
-    async setPostDeleteCate(req,res){
-        var cate = req.params.id;
-        await dbcategory.findOneAndRemove({cate});
+    async setPostDeleteCate(req, res) {
+        var cate = req.body.cate;
+        await dbcategory.findOneAndRemove({ cate });
         res.redirect('/users/managecategory');
+
     }
-    async  setPostInsertCate(req,res){
-        var newcate={
-            cate:req.body.insert,
+    async  setPostInsertCate(req, res) {
+        var newcate = {
+            cate: req.body.insert,
+            idcat: req.body.idcat,
         }
-        await category.insert(newcate);
+        category.insert(newcate);
+
         res.redirect('/users/managecategory');
 
     }
-    async setPostRenameCate(req,res){
-        var cate = req.params.id;
-        var findcate={};
-        await dbcategory.findOne({cate}).then(doc=>{
-            findcate=doc;
+    async setPostRenameCate(req, res) {
+        var cate = req.body.oldcate;
+        var findcate = {};
+        await dbcategory.findOne({ cate }).then(doc => {
+            findcate = doc;
         })
         var myquery = {
             _id: ObjectId(findcate._id)
         }
         var changeCate = {
-            cate:req.body.newcate,
+            cate: req.body.newcate,
+            idcat: req.body.newid,
         };
         var options = {
             multi: true

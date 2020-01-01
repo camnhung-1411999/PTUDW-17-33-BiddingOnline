@@ -10,6 +10,8 @@ var db = mongoose.connection;
 var categorySchema = new mongoose.Schema({
     _id: Object,
     cate:String,
+    idcat:String,
+    isActive:Boolean,
 }, {
     collection: "categories"
 });

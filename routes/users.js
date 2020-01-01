@@ -70,7 +70,17 @@ router.get('/manageuser',(req,res)=>{
 router.get('/managecategory',(req,res)=>{
   controllers.showManageCategory(req,res);
 })
+router.get('/manageuser/listbid',(req, res)=>{
+  controllers.showManageUser(req,res);
+})
 
+router.get('/manageuser/listsell',(req, res)=>{
+  controllers.showListSell(req,res);
+})
+
+router.get('/manageuser/register',(req, res)=>{
+  controllers.showRegister(req,res);
+})
 //post
 
 router.post('/account', function (req, res) {
@@ -88,14 +98,14 @@ router.post('/confirm/:id',(req,res)=>{
 router.post('/delete/:id',(req,res)=>{
   controllers.setPostRegistDelete(req,res);
 })
-router.post('/deletecate/:id',(req,res)=>{
+router.post('/deletecate',(req,res)=>{
   console.log(req.params.id);
   controllers.setPostDeleteCate(req,res);
 })
 router.post('/insertcategory',(req,res)=>{
   controllers.setPostInsertCate(req,res);
 })
-router.post('/renamecate/:id',(req,res)=>{
+router.post('/renamecate',(req,res)=>{
   controllers.setPostRenameCate(req,res);
 })
 module.exports = router;
