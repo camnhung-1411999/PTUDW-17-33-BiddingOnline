@@ -22,8 +22,9 @@
     <table class="table table-sm txt-center table-hover" id="listStore">
         <thead>
             <tr>
+                <th scope="col" style="text-align: center!important;">Rename</th>
                 <th scope="col" style="text-align: center!important;font-size:25px !important;">Name category</th>
-                <th scope="col" style="text-align: center!important;"></th>
+                <th scope="col" style="text-align: center!important;">Id</th>
                 <th scope="col" style="text-align: center!important;"></th>
 
             </tr>
@@ -33,22 +34,36 @@
             {{#each cate}}
             <tr>
                 <td style="text-align: center!important;">
-                    {{this.cate}}
-                </td>
-
-                <td style="text-align: center!important;">
-                    <button type="button" class="btn btn-primary"data-toggle="modal" data-target="#ModalRename" >
+                    {{!-- <button type="button" class="btn btn-primary" >
                         Rename
-                    </button>
+                    </button> --}}
+                    <a class="fa fa-pencil" style="color: green;" aria-hidden="true" data-toggle="modal"
+                        data-target="#ModalRename"></a>
                     {{>modalrename}}
 
                 </td>
+                <td style="text-align: center!important;">
+                    {{this.cate}}
+                </td>
+                
+                <td style="text-align: center!important;">
+                    {{this.idcat}}
+                </td>
+
+
+                {{#if this.check}}
+                <td style="text-align: center!important;color: rgb(159, 159, 160) !important;">
+                    This category existed product
+                </td>
+                {{else}}
                 <td style="text-align: center!important;">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalDeleteCate">
                         Delete
                     </button>
                     {{>modaldeletecate}}
+
                 </td>
+                {{/if}}
             </tr>
             {{/each}}
         </tbody>

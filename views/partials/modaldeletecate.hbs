@@ -9,10 +9,12 @@
                 </button>
             </div>
             <form method="post">
+                <label for="">Name category</label>
+                <input type="text" name="cate" class="btn btn-secondary" style="margin-left:10px!important;width:470px!important;">
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <input type="submit" formaction="/../users/deletecate/{{this.cate}}" class="btn btn-primary"
-                        value="Yes">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <input type="submit" formaction="/../users/deletecate" class="btn btn-primary"
+                        value="Confirm">
                 </div>
             </form>
         </div>
