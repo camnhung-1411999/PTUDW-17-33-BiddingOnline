@@ -35,7 +35,8 @@
                 + Đơn vị vận chuyển: Vận Chuyển Nhanh (Giao Hàng Nhanh)
             </div>
             <div class="tab-pane fade px-3 py-4 text-color-a2" id="seller" role="tabpanel">
-                <h4>User: {{product.user}}</h4>
+                <a href="/../rate-reviews/{{product.user}}"><h4>User: <span id="nameseller">{{product.user}}</span></a>
+                </h4>
                 - Name seller: Nguyen Ngo Ngoc Nga <br>
                 - Point : {{rate}}
             </div>
@@ -43,3 +44,15 @@
         </div>
     </div>
 </div>
+
+{{!-- {{#section 'js'}} --}}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+</script>
+
+<script>
+    var str = $('#nameseller').text();
+
+    str = "***" + str.substr(-3);
+    $('#nameseller').text(str);
+</script>
+{{!-- {{/section}} --}}

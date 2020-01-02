@@ -19,7 +19,7 @@ router.get('/', ensureAuthenticated, function (req, res) {
    controllers.showProduct(req, res);
 });
 
-router.get('/:id/categories',ensureAuthenticated, function (req, res) {
+router.get('/:id/categories', ensureAuthenticated, function (req, res) {
    controllers.showProduct(req, res);
 });
 
@@ -35,27 +35,31 @@ router.get('/detailproduct/:id', ensureAuthenticated, function (req, res) {
 router.get('/topbidding', (req, res) => {
    controllers.showTopBidding(req, res);
 });
+//review
+router.get('/reviews/:id', (req, res) => {
+   res.render('reviewandrate', {
+      title: "reviews"
+   });
+});
 
 //POST
 router.post('/upload', (req, res) => {
    controllers.postUpload(req, res);
 });
-router.post('/:id/categories',(req,res)=>{
+router.post('/:id/categories', (req, res) => {
    controllers.postSearch(req, res);
 })
 
 //cart
-router.post('/detailproduct/:id/bid',(req, res)=>{
+router.post('/detailproduct/:id/bid', (req, res) => {
    controllersCart.postBid(req, res);
 })
 
-router.post('/detailproduct/:id/addtocart',(req, res)=>{
+router.post('/detailproduct/:id/addtocart', (req, res) => {
    controllersCart.postAddToCart(req, res);
 })
-router.post('/registerseller',(req,res)=>{
+router.post('/registerseller', (req, res) => {
    controllers
 });
 
 module.exports = router;
-
-

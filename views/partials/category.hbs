@@ -5,9 +5,9 @@
 
     <div class="list-group list-group-flush">
         {{#each listCategories}}
-        <a href="/products/{{ProID}}/categories"
-            class="list-group-item list-group-item-action {{#if isActive}} active {{/if}}" id="category{{ProID}}">
-            {{catName}}</a>
+        <a href="/products/{{this.idcat}}/categories"
+            class="list-group-item list-group-item-action {{#if this.isActive}} active {{/if}}" id="category{{this.idcat}}">
+            {{cate}}</a>
         {{/each}}
 
     </div>

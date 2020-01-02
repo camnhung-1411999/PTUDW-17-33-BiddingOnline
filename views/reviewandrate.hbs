@@ -1,0 +1,107 @@
+{{#section 'css'}}
+<!-- Bootstrap core CSS -->
+<link href="../../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom fonts for this template -->
+<link href="../../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
+    type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+<!-- Custom styles for this template -->
+<link href="/stylesheets/agency.css" rel="stylesheet">
+<link rel="stylesheet" href="/stylesheets/rating.css">
+{{/section}}
+
+<div class="row" style="margin-top: 150px;  margin-left: 100px;">
+    {{>navProducts}}
+    <div class="col-12 ">
+        <h3 class="text-center">Rate of {{username}}: {{ratetb}}</h3>
+    </div>
+
+    <div class="" style="background-color:#fafafa">
+        <div class="container review py-3">
+
+            <div class="row review ">
+                {{#each reviews}}
+
+                <div class="col-lg-6 py-3">
+                    <div class="row pb-3 border-full-1px-solid
+                         border-color-inverse border-top-0 border-right-0 border-left-0">
+                        <div class="col-12 col-sm-8">
+                            <div class="row">
+                                <h3 class="col-12">{{this.userrate}}</h3>
+                                <h6 class="col-12 font-size-08">On <span>17 October, 1999</span>
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4 justify-content-start justify-content-sm-end">
+                            <h3>Rate: {{this.rate}}</h3>
+                        </div>
+                        <div class="col-12 mt-3 mb-2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h6>Comment:</h6>
+                                </div>
+                                <div class="col-12">
+                                    <p class="font-size-09">"<span> {{this.comment}}
+                                        </span>"</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <div class="">
+                                <h6 class="font-size-09 d-inline-block">Was the review helpful ?
+                                </h6>
+                                <div class="ml-3 d-inline-block">
+                                    <button class="btn btn-sm btn-secondary border-rad-0" role="button"
+                                        style="width:40px;">Yes</button>
+                                    <button class="btn btn-sm btn-secondary border-rad-0" role="button"
+                                        style="width:40px;">No</button>
+                                </div>
+                            </div>
+                        </div>
+                        {{!-- <div class="col-12">
+                            <div class="">
+                                <h6 class="font-size-08 float-right">1 of 5 found this review
+                                    helpful</h6>
+                            </div>
+                        </div> --}}
+                    </div>
+
+                </div>
+                {{/each}}
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{{#section 'js'}}
+<!-- Bootstrap core JavaScript -->
+<script src="../../../vendor/jquery/jquery.min.js"></script>
+<script src="../../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="../../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="/javascripts/agency.min.js"></script>
+
+<!-- Javascrip create dialog for sign in sign up-->
+
+<script src="/javascripts/modal.js"></script>
+<script src="/javascripts/counttime.js"></script>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js">
+</script>
+
+
+{{/section}}

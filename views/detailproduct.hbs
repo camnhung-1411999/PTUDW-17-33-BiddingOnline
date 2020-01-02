@@ -73,78 +73,81 @@
                     </div>
                     <!--                Options Product-->
                     <div class="col-12 col-md-5">
-                        <form method="post">
-                            <div class="pt-0 pr-2 pb-2 pl-1 pl-md-5">
-                                <!--                       Judul-->
+                        <div class="pt-0 pr-2 pb-2 pl-1 pl-md-5">
+                            <!--                       Judul-->
 
-                                <div
-                                    class="mb-4 border-full-2px-solid border-top-0 border-left-0 border-right-0 border-color-inverse">
-                                    <h1>{{product.ten}}
-                                        <span class="far fa-heart" style="font-size: 2rem; color: red;"
-                                            id="love"></span>
+                            <div
+                                class="mb-4 border-full-2px-solid border-top-0 border-left-0 border-right-0 border-color-inverse">
+                                <h1>{{product.ten}}
+                                    <span class="far fa-heart" style="font-size: 2rem; color: red;" id="love"></span>
 
-                                    </h1>
-                                    <!-- favorite product <3 -->
-                                    <input class="btn btn-outline-danger my-2 my-sm-0" type="submit"
-                                        value="Add to favorite">
+                                </h1>
+                                <!-- favorite product <3 -->
+                                <input class="btn btn-outline-danger my-2 my-sm-0" type="submit"
+                                    value="Add to favorite">
+                            </div>
+
+                            <!--                   Price-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-muted font-size-08 text-uppercase ">Current bid:</h6>
+                                    <h4>{{product.giahientai}} ₫</h4>
+                                    <p>Time: 59</p>
                                 </div>
-
-                                <!--                   Price-->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h6 class="text-muted font-size-08 text-uppercase ">Current bid:</h6>
-                                        <h4>{{product.giahientai}} ₫</h4>
-                                    </div>
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-4 ">
-                                        <h6 class="text-muted font-size-08 text-uppercase ml-5">Current winner:</h6>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-4 ">
+                                    <h6 class="text-muted font-size-08 text-uppercase ml-5">Current winner:</h6>
+                                    <a class="text-muted font-size-08 text-uppercase ml-5"
+                                        href="/../rate-reviews/{{currentwinner}}">
                                         <h4 class="ml-4" id="currentwiiner">{{currentwinner}}</h4>
-                                    </div>
+                                    </a>
+                                    <p class="text-muted font-size-08 text-uppercase ml-5">rate: 12</p>
                                 </div>
-                                <div class="row">
-                                    <h6 class="font-size-04  mb-4 ">PLACE YOUR BID:</h6>
-                                    <div class="mb-4"></div>
-                                </div>
+                            </div>
+                            <div class="row">
+                                <h6 class="font-size-04  mb-4 ">PLACE YOUR BID:</h6>
+                                <div class="mb-4"></div>
+                            </div>
 
-                                <div class="row text-muted ml-7">
-                                    <div class="mb-5 ">
-                                        <input type="number" placeholder="0" step="{{product.buocdaugia}}"
-                                            min="{{product.giahientai}}" max="10000000000"
-                                            value="{{product.giahientai}}" name="giadau">
-                                    </div>
-                                    <div class="mb-4">
-                                        <h3 class="font-size-04 ">VND</h3>
-                                    </div>
-                                    <div class="mb-4 ml-3 font-size-04">
-                                        <button class="btn btn-outline-primary my-2 my-sm-0"
-                                            formaction="/products/detailproduct/{{product._id}}/bid"
-                                            type="submit">Bid</button>
-                                    </div>
+                            <div class="row text-muted ml-7">
+                                <div class="mb-5 ">
+                                    <input id="giadau" type="number" placeholder="0" step="{{product.buocdaugia}}"
+                                        min="{{product.giahientai}}" max="10000000000" value="{{product.giahientai}}"
+                                        name="giadau">
                                 </div>
-                                <input type="checkbox" class="subscribe-btn"> &nbsp;<span class="align-middle"><label
-                                        for="subscribe-btn">Do you want to buy this product right now?</label></span>
-                                <div id="text">
-                                    <div class="mb-4">
-                                        <h6 class="text-muted font-size-08 text-uppercase ">Price buy now!</h6>
-                                        <h4>{{product.giamuangay}} ₫</h4>
-                                    </div>
-                                    <button class="btn btn-outline-primary my-2 my-sm-0"
-                                        formaction="/products/detailproduct/{{product._id}}/addtocart" type="submit">Add
-                                        to
-                                        cart</button>
-                                    {{>notification}}
-
+                                <div class="mb-4">
+                                    <h3 class="font-size-04 ">VND</h3>
+                                </div>
+                                <div class="mb-4 ml-3 font-size-04">
+                                    <a class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal"
+                                        data-target="#beforebid" id="clickbid">Bid</a>
+                                    {{>notification-bid}}
 
                                 </div>
+                            </div>
+                            <input type="checkbox" class="subscribe-btn"> &nbsp;<span class="align-middle"><label
+                                    for="subscribe-btn">Do you want to buy this product right now?</label></span>
+                            <div id="text">
+                                <div class="mb-4">
+                                    <h6 class="text-muted font-size-08 text-uppercase ">Price buy now!</h6>
+                                    <h4 id="giamuangay">{{product.giamuangay}} ₫</h4>
+                                </div>
+                                <a class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal"
+                                    data-target="#beforeaddtocart" id="clickaddtocart">Add
+                                    to
+                                    cart</a>
+                                {{>notification}}
+                                {{>notification-addcart}}
+
 
                             </div>
-                        </form>
+
+                        </div>
                     </div>
                     <!--    Description / Details / shipping -->
                     {{>description}}
                     <!--        Review ========================================================================================-->
-                    {{>rateandreview}}
-                    <!--        You may also like-->
+
                     <div class="container mb-4 ">
                         <h4 class="text-center text-uppercase ">You May Also Like</h4>
                         <section class="bg-light page-section" id="topbid">
@@ -152,92 +155,27 @@
                                 <div class="row">
                                     <!-- chèn cho khỏi trống -->
                                     <div class="col-md-1"></div>
+                                    {{#each nearproducts}}
                                     <div class="col-md-2 col-sm-6 topbid-item">
-                                        <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
+                                        <a class="topbid-link" href="/products/detailproduct/id?id={{this._id}}">
                                             <div class="topbid-hover">
                                                 <div class="topbid-hover-content">
                                                     <i class="fas fa-plus fa-3x"></i>
                                                 </div>
                                             </div>
-                                            <img class="img-fluid"
-                                                src="https://cdn.fptshop.com.vn/Uploads/Originals/2019/9/11/637037687765081535_11-pro-max-vang.png"
-                                                alt="">
+                                            <img class="img-fluid" src={{this.image}} alt="">
                                         </a>
                                         <div class="topbid-caption">
-                                            <h4>iPhone 11 Pro Max</h4>
-                                            <p class="text-muted">37,990,000 ₫</p>
-                                            <p class="settime">02:00:30</p>
+                                            <h4>{{this.ten}}</h4>
+                                            <p class="text-muted">{{this.giahientai}} ₫</p>
+                                            <p class="settime" style="color:red"></p>
+                                            <p style="color:blue">{{this.soluot}}<i class="fas fa-gavel"></i></p>
+                                            <p class="temp" hidden>{{this.datetimeproduct}}</p>
                                         </div>
                                     </div>
+                                    {{/each}}
 
-                                    <div class="col-md-2 col-sm-6 topbid-item">
-                                        <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
-                                            <div class="topbid-hover">
-                                                <div class="topbid-hover-content">
-                                                    <i class="fas fa-plus fa-3x"></i>
-                                                </div>
-                                            </div>
-                                            <img class="img-fluid"
-                                                src="https://product.hstatic.net/1000337134/product/1024e34a20f1da3c195ce4c_master_112c442a9817466eb1de8ac23fd6f593_master_027d12a707d944b38602059a3e40e665_master.jpg"
-                                                alt="">
-                                        </a>
-                                        <div class="topbid-caption">
-                                            <h4>MacBook Pro 15"2019</h4>
-                                            <p class="text-muted">66,000,000₫</p>
-                                            <p class="settime">21:12:19</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-sm-6 topbid-item ">
-                                        <a class="topbid-link" data-toggle="modal" href="#topbidModal1">
-                                            <div class="topbid-hover">
-                                                <div class="topbid-hover-content">
-                                                    <i class="fas fa-plus fa-3x"></i>
-                                                </div>
-                                            </div>
-                                            <img class="img-fluid"
-                                                src="https://product.hstatic.net/1000233206/product/msi-gt76-titan-dt-9sg-097vn_6e77dffe3a3448199c2ae3743e13a2e9_master.png"
-                                                alt="">
-                                        </a>
-                                        <div class="topbid-caption">
-                                            <h4> Laptop MSI GT76</h4>
-                                            <p class="text-muted">111,990,000₫</p>
-                                            <p class="settime">3 days</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-sm-6 topbid-item">
-                                        <a class="topbid-link" data-toggle="modal" href="#topbidModal2">
-                                            <div class="topbid-hover">
-                                                <div class="topbid-hover-content">
-                                                    <i class="fas fa-plus fa-3x"></i>
-                                                </div>
-                                            </div>
-                                            <img class="img-fluid"
-                                                src="https://minmobile.net/image/catalog/Samsung/Galaxy-Fold-5G/samsung-galaxy-fold-5g-gia-re-han-quoc-xach-tay-uy-tin-hai-phong.jpg"
-                                                alt="">
-                                        </a>
-                                        <div class="topbid-caption">
-                                            <h4><br>Samsung Galaxy Fold 5G</h4>
-                                            <p class="text-muted">49.900.000 đ</p>
-                                            <p class="settime">3 days</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-sm-6 topbid-item">
-                                        <a class="topbid-link" data-toggle="modal" href="#topbidModal3">
-                                            <div class="topbid-hover">
-                                                <div class="topbid-hover-content">
-                                                    <i class="fas fa-plus fa-3x"></i>
-                                                </div>
-                                            </div>
-                                            <img class="img-fluid"
-                                                src="https://img.nhabanhang.com/c/i/19086/aHR0cHM6Ly9zYWx0LnRpa2ljZG4uY29tL3RzL3Byb2R1Y3QvZGYvODkvNDYvNWZmZDA0YTYxYzljMjRhYzZiMWQ4Yzk4YjdhM2FiYTAuanBn.jpg"
-                                                alt="">
-                                        </a>
-                                        <div class="topbid-caption">
-                                            <h4>IPAD PRO 12.9 INCH </h4>
-                                            <p class="text-muted">35,990,000 đ</p>
-                                            <p class="settime">25:00:27</p>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </section>
@@ -263,6 +201,7 @@
 <!-- Javascrip create dialog for sign in sign up-->
 
 <script src="/javascripts/modal.js"></script>
+<script src="/javascripts/counttime.js"></script>
 
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
@@ -273,7 +212,8 @@
     var str = $('#currentwiiner').text();
     if (str != 'Nobody') {
         str = "***" + str.substr(-3);
-    }
-    $('#currentwiiner').text(str);
+        $('#currentwiiner').text(str);
+
+    } 
 </script>
 {{/section}}

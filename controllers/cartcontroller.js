@@ -147,14 +147,17 @@ class CartController {
             }
         }
         var numofbid = 0;
+        var numofbid = 0;
+        var biddingofproduct = {};
         await dbbidding.findOne({
-            idsanpham: id
+            idsanpham
         }).then(doc => {
             if (doc) {
-                console.log(doc);
                 numofbid = doc.soluot;
+                biddingofproduct = doc;
             }
         });
+
         //detail html
         var strtemp = "";
         var strghichu = product.ghichu;
@@ -174,6 +177,66 @@ class CartController {
                 msg: strtemp
             })
         }
+        //mask bid winner
+        var currentwinner = "";
+        if (biddingofproduct.currentwinner) {
+            currentwinner = biddingofproduct.currentwinner.toString();
+
+        } else {
+            currentwinner = "Nobody";
+        }
+        var nearproducts = [];
+        await dbproduct.find({
+            selling: true,
+            loai: product.loai
+        }).limit(5).then(docs => {
+            docs.forEach(element => {
+                nearproducts.push(element);
+            })
+        });
+
+        //bidding
+        for (var i = 0; i < nearproducts.length; i++) {
+            nearproducts[i].soluot = 0;
+            await dbbidding.findOne({
+                idsanpham: nearproducts[i]._id.toString()
+            }).then(doc => {
+                if (doc) {
+                    nearproducts[i].soluot = doc.soluot;
+                }
+            });
+        }
+
+        //countimer
+
+        for (var i = 0; i < nearproducts.length; i++) {
+
+            const time = nearproducts[i].datetime;
+            const c = now.diff(time, 'seconds');
+            if (c < 600) {
+                nearproducts[i].new = true;
+            }
+
+            if ((nearproducts[i].datetimeproduct * 24 * 3600 + nearproducts[i].moretime) > c) {
+                var temp = nearproducts[i].datetimeproduct * 24 * 3600 + nearproducts[i].moretime - c;
+                nearproducts[i].datetimeproduct = temp;
+            } else {
+                const entity = {
+                    selling: false
+                };
+
+                const myquery = {
+                    _id: nearproducts[i]._id
+                };
+                var options = {
+                    multi: true
+                };
+
+                await dbproduct.update(myquery, entity, options);
+                nearproducts[i].selling = false;
+
+            }
+        }
         res.render('detailproduct', {
             title: 'Detail product',
             product: product,
@@ -181,7 +244,8 @@ class CartController {
             isSeller,
             numofbid,
             checkdaugia,
-            arrdetails
+            arrdetails,
+            nearproducts
         });
 
     }
@@ -251,12 +315,14 @@ class CartController {
             }
         }
         var numofbid = 0;
+        var biddingofproduct = [];
         await dbbidding.findOne({
-            idsanpham: id
+            idsanpham
         }).then(doc => {
             if (doc) {
                 console.log(doc);
                 numofbid = doc.soluot;
+                biddingofproduct = doc;
             }
         })
         //detail html
@@ -278,6 +344,66 @@ class CartController {
                 msg: strtemp
             })
         }
+        //mask bid winner
+        var currentwinner = "";
+        if (biddingofproduct.currentwinner) {
+            currentwinner = biddingofproduct.currentwinner.toString();
+
+        } else {
+            currentwinner = "Nobody";
+        }
+        var nearproducts = [];
+        await dbproduct.find({
+            selling: true,
+            loai: product.loai
+        }).limit(5).then(docs => {
+            docs.forEach(element => {
+                nearproducts.push(element);
+            })
+        });
+
+        //bidding
+        for (var i = 0; i < nearproducts.length; i++) {
+            nearproducts[i].soluot = 0;
+            await dbbidding.findOne({
+                idsanpham: nearproducts[i]._id.toString()
+            }).then(doc => {
+                if (doc) {
+                    nearproducts[i].soluot = doc.soluot;
+                }
+            });
+        }
+
+        //countimer
+
+        for (var i = 0; i < nearproducts.length; i++) {
+
+            const time = nearproducts[i].datetime;
+            const c = now.diff(time, 'seconds');
+            if (c < 600) {
+                nearproducts[i].new = true;
+            }
+
+            if ((nearproducts[i].datetimeproduct * 24 * 3600 + nearproducts[i].moretime) > c) {
+                var temp = nearproducts[i].datetimeproduct * 24 * 3600 + nearproducts[i].moretime - c;
+                nearproducts[i].datetimeproduct = temp;
+            } else {
+                const entity = {
+                    selling: false
+                };
+
+                const myquery = {
+                    _id: nearproducts[i]._id
+                };
+                var options = {
+                    multi: true
+                };
+
+                await dbproduct.update(myquery, entity, options);
+                nearproducts[i].selling = false;
+
+            }
+        }
 
         res.render('detailproduct', {
             title: 'Detail product',
@@ -286,7 +412,8 @@ class CartController {
             isSeller,
             numofbid,
             checkdaugia,
-            arrdetails
+            arrdetails,
+            nearproducts
         });
     }
 }

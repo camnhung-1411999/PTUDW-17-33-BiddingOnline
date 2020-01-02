@@ -1,0 +1,27 @@
+<div class="modal fade" id="beforeaddtocart" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="width: 300px; margin: auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="exampleModalLongTitle">Thông báo!</h5>
+            </div>
+            <div class="modal-body">
+                <p id="setgia1">Mẫn</p>
+            </div>
+            <form method="POST">
+                <div class="modal-footer">
+                    <input class="btn btn-outline-secondary" formaction="/products/detailproduct/{{product._id}}/addtocart"
+                        type="submit" value="accept">
+                    <button class="btn btn-outline-secondary" data-dismiss="modal" id="product">cacel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $('#clickaddtocart').click(() => {
+        $('#setgia1').text("Xác nhận giá đấu là " + $('#giamuangay').text());
+    })
+</script>
