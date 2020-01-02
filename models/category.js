@@ -9,8 +9,9 @@ mongoose.connect(url, {
 var db = mongoose.connection;
 var categorySchema = new mongoose.Schema({
     _id: Object,
-    cate:String,
+    cate: String,
     idcat: String,
+}, {
     collection: "categories"
 });
 

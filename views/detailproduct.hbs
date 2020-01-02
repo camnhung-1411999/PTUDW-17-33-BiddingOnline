@@ -79,20 +79,17 @@
                             <div
                                 class="mb-4 border-full-2px-solid border-top-0 border-left-0 border-right-0 border-color-inverse">
                                 <h1>{{product.ten}}
-                                    <span class="far fa-heart" style="font-size: 2rem; color: red;" id="love"></span>
-
+                                    <P class="far fa-heart" style="font-size: 2rem; color: red;" data-toggle="modal"
+                                        data-target="#favorite" id="love"></P>
+                                    {{>notification-favorite}}
                                 </h1>
-                                <!-- favorite product <3 -->
-                                <input class="btn btn-outline-danger my-2 my-sm-0" type="submit"
-                                    value="Add to favorite">
                             </div>
-
                             <!--                   Price-->
                             <div class="row">
                                 <div class="col-md-6">
                                     <h6 class="text-muted font-size-08 text-uppercase ">Current bid:</h6>
                                     <h4>{{product.giahientai}} ₫</h4>
-                                    <p>Time: 59</p>
+                                    {{!-- <p>Time: 59</p> --}}
                                 </div>
                                 <div class="col-md-1"></div>
                                 <div class="col-md-4 ">
@@ -108,7 +105,6 @@
                                 <h6 class="font-size-04  mb-4 ">PLACE YOUR BID:</h6>
                                 <div class="mb-4"></div>
                             </div>
-
                             <div class="row text-muted ml-7">
                                 <div class="mb-5 ">
                                     <input id="giadau" type="number" placeholder="0" step="{{product.buocdaugia}}"
@@ -122,7 +118,6 @@
                                     <a class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal"
                                         data-target="#beforebid" id="clickbid">Bid</a>
                                     {{>notification-bid}}
-
                                 </div>
                             </div>
                             <input type="checkbox" class="subscribe-btn"> &nbsp;<span class="align-middle"><label
@@ -138,8 +133,6 @@
                                     cart</a>
                                 {{>notification}}
                                 {{>notification-addcart}}
-
-
                             </div>
 
                         </div>
@@ -157,7 +150,7 @@
                                     <div class="col-md-1"></div>
                                     {{#each nearproducts}}
                                     <div class="col-md-2 col-sm-6 topbid-item">
-                                        <a class="topbid-link" href="/products/detailproduct/id?id={{this._id}}">
+                                        <a class="topbid-link" href="/products/detailproduct/{{this._id}}">
                                             <div class="topbid-hover">
                                                 <div class="topbid-hover-content">
                                                     <i class="fas fa-plus fa-3x"></i>

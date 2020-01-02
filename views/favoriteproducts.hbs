@@ -1,3 +1,4 @@
+{{#section 'css'}}
 <!-- Custom fonts for this template -->
 <link href="/../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -8,10 +9,14 @@
 <link href="/stylesheets/agency.css" rel="stylesheet">
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 
 <link rel="stylesheet" href="/stylesheets/account.css">
-
+<!-- Bootstrap core CSS -->
+<link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+<!-- Custom styles for this template -->
+<link rel="stylesheet" href="/../stylesheets/mycart.css">
+{{/section}}
 
 <div id="page-top">
     {{>navProducts}}
@@ -21,48 +26,64 @@
         <div class="row profile">
             <div class="col-md-3">
                 {{>profile}}
-                <div class="col-md-9">
-                    <!-- favorite product -->
-                    <div>
-                        <h2 class="text-danger">Favorite product</h2>
-                        <div class="row profile-content" style="background-color:rgb(89, 0, 255)(111, 0, 255);">
-                            <img class="col-md-3" src="img/product/macbookpro_13.jpg" alt="" width="50px"
-                                height="100px">
-                            <h3 class="text-danger col-md-5">Macbook pro 13</h3>
-                            <h3 class=" text-danger col-md-3">Price:45,000,000 đ</h3>
+            </div>
+            <div class="col-md-9">
+                <div class="row" style="margin-top: 150px!important;">
+                    <h2 style="color:rgb(167, 167, 167);">My Watch list</h2>
 
-                        </div>
-                        <div class="row profile-content mt-3" style="background-color:rgb(89, 0, 255)(111, 0, 255);">
-                            <img class="col-md-3" src="img/product/macbookpro_13.jpg" alt="" width="50px"
-                                height="100px">
-                            <h3 class="text-danger col-md-5">Macbook pro 13</h3>
-                            <h3 class=" text-danger col-md-3">Price:45,000,000 đ</h3>
-                        </div>
-                        <div class="row profile-content" style="background-color:rgb(89, 0, 255)(111, 0, 255);">
-                            <img class="col-md-3" src="img/product/macbookpro_13.jpg" alt="" width="50px"
-                                height="100px">
-                            <h3 class="text-danger col-md-5">Macbook pro 13</h3>
-                            <h3 class=" text-danger col-md-3">Price:45,000,000 đ</h3>
-                        </div>
-                    </div>
-                    <div id="mycart">
-                        YOUR CART IS EMPTY.
-                    </div>
+
+                </div>
+                <div>
+                    <table class="table">
+                        <thead style="font-size:20px;">
+                            <tr>
+                                <th scope="col">Bidding cart</th>
+                                <th scope="col">Information product</th>
+                                <th scope="col">Bid Price</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        {{#each list}}
+                        <tbody>
+                            <tr>
+                                <th scope="row"><a href="/products/detailproduct/{{this.idsanpham}}"><img
+                                            src="{{this.image}}" alt="" style="width:50px; height:50px;"></a></th>
+                                <td style="width:450px;">{{this.ten}}<br>
+                                    <p style="color: blue;">Supplier:<span>{{this.user}}</span></p>
+                                </td>
+                                <td>{{this.giahientai}} đ</td>
+                                <td >{{#if this.selling}} Bidding {{else}} End Bid {{/if}}</td>
+                                
+                            </tr>
+                        </tbody>
+                        {{/each}}
+                    </table>
+
                 </div>
             </div>
         </div>
 
-
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="/../javascripts/product.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-        <script src="/../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="/../vendor/jquery/jquery.min.js"></script>
-
-
-        <script src="/../vendor/jquery-easing/jquery.easing.min.js"></script>
-        <script src="/../javascripts/agency.min.js"></script>
-        <script src="/../javascripts/account.js"></script>
     </div>
+
+</div>
+
+</div>
+
+{{#section 'js'}}
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/../javascripts/product.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/../vendor/jquery/jquery.min.js"></script>
+
+<script src="/../vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/../javascripts/agency.min.js"></script>
+<script src="/../javascripts/account.js"></script>
+</script>
+
+<script src="/javascripts/agency.min.js"></script>
+<script src="/../javascripts/mycart.js"></script>
+
+{{/section}}

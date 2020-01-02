@@ -7,6 +7,9 @@ const dbproduct = productmodels.getProduct;
 
 const cartmodels = require('../models/cart');
 const dbcart = cartmodels.getCart;
+
+const watchlistmodels = require('../models/watchlist');
+const dbwatchlist = watchlistmodels.getWatchlist;
 const moment = require('moment');
 
 class CartController {
@@ -415,6 +418,27 @@ class CartController {
             arrdetails,
             nearproducts
         });
+    }
+
+    async postAddWatchlist(req, res) {
+        var idsanpham = req.params.id;
+        var entity = {
+            idsanpham,
+            user: req.user.name
+        }
+        var checkwathlist = {};
+        await dbwatchlist.findOne({
+            idsanpham
+        }).then(doc => {
+            checkwathlist = doc;
+        })
+        if (checkwathlist) {
+            checkdaugia.msg = "Product is exists in your watchlist!";
+        } else {
+            watchlistmodels.insert(entity);
+        }
+
+        res.redirect('/products/detailproduct/' + req.params.id);
     }
 }
 

@@ -1,9 +1,9 @@
 // //favorite product
-var heart = document.querySelector('.far');
+// var heart = document.querySelector('.far');
 
-heart.addEventListener('click', function () {
-  this.classList.toggle('fas');
-}, false);
+// heart.addEventListener('click', function () {
+//   this.classList.toggle('fas');
+// }, false);
 // end
 
 (function ($) {

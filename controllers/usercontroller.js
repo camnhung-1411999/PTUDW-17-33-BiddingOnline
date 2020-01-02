@@ -15,6 +15,11 @@ const dbregisterseller = registerseller.getRegister;
 const category = require('../models/category');
 const dbcategory = category.getCategory;
 
+const watchlistcontroller = require('../models/watchlist');
+const dbwatchlist = watchlistcontroller.getWatchlist;
+
+const biddingcontroller = require('../models/bidding');
+const dbbidding = biddingcontroller.getBidding;
 const bcrypt = require('bcryptjs');
 
 var ObjectId = require('mongodb').ObjectId;
@@ -215,7 +220,7 @@ class userController {
         });
     }
 
-    showFavorites(req, res) {
+    async showFavorites(req, res) {
         var checkuser = false;
         var nameuser;
         if (req.user) {
@@ -226,11 +231,31 @@ class userController {
                 isSeller = false;
             }
         }
+        var arrfavorite = [];
+        await dbwatchlist.find({
+            user: req.user.name
+        }).then(docs => {
+            docs.forEach(element => {
+                arrfavorite.push(element);
+            });
+        });
+
+        var arrproduct = [];
+        for (var i = 0; i < arrfavorite.length; i++) {
+            await dbproduct.findOne({
+                _id: ObjectId(arrfavorite[i].idsanpham)
+            }).then(doc => {
+                arrproduct.push(doc);
+            })
+        }
+
+
         res.render('favoriteproducts', {
             title: 'Favorites',
             checkuser,
             nameuser,
             account: req.user,
+            list: arrproduct
         });
     }
     async showCart(req, res) {
@@ -271,6 +296,49 @@ class userController {
             nameuser,
             cart
         });
+    }
+    async showMyAutions(req, res) {
+        // var arr = [];
+        // await dbbidding.find({'bidding.user': "manhhh"}).then(docs=>{
+        //     docs.forEach(element=>{
+        //         arr.push(element);
+        //     })
+        // })
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
+        var arrbidding = [];
+        await dbbidding.find({
+            'bidding.user': req.user.name
+        }).then(docs => {
+            docs.forEach(element => {
+                arrbidding.push(element);
+            })
+        })
+
+        var arrproduct = [];
+        for (var i = 0; i < arrbidding.length; i++) {
+            await dbproduct.findOne({
+                _id: ObjectId(arrbidding[i].idsanpham)
+            }).then(doc => {
+                arrproduct.push(doc);
+            })
+        }
+
+        res.render('biddingproduct', {
+            title: "My Autions",
+            checkuser,
+            nameuser,
+            account: req.user,
+            list: arrproduct
+        })
     }
 
     showBid(req, res) {
@@ -400,7 +468,9 @@ class userController {
             var name = req.user.name;
         }
         var point;
-        await dbmanageuser.findOne({ name }).then(doc => {
+        await dbmanageuser.findOne({
+            name
+        }).then(doc => {
             point = doc.pointbid;
         });
 
@@ -418,7 +488,9 @@ class userController {
         var arrbid = [];
         var arrsell = [];
         var regist = [];
-        await dbmanageuser.find({type: false}).then(docs => {
+        await dbmanageuser.find({
+            type: false
+        }).then(docs => {
             docs.forEach(element => {
                 // if (element.type) {
                 //     arrsell.push(element);
@@ -456,13 +528,15 @@ class userController {
             // totalregist: regist.length,
         });
     }
-    async showListSell(req,res){
+    async showListSell(req, res) {
         // var arrbid = [];
         var arrsell = [];
         // var regist = [];
-        await dbmanageuser.find({type:true}).then(docs => {
+        await dbmanageuser.find({
+            type: true
+        }).then(docs => {
             docs.forEach(element => {
-                 arrsell.push(element);
+                arrsell.push(element);
             })
         });
 
@@ -494,11 +568,11 @@ class userController {
             // totalregist: regist.length,
         });
     }
-    async showRegister(req,res){
+    async showRegister(req, res) {
         // var arrbid = [];
         // var arrsell = [];
         var regist = [];
-       
+
 
         await dbregisterseller.find({}).then(docs => {
             docs.forEach(element => {
@@ -540,7 +614,9 @@ class userController {
         for (var i = 0; i < temp.length; i++) {
             var existpro = [];
             var temp2 = {};
-            await dbproduct.find({ loai: temp[i].idcat }).then(docs => {
+            await dbproduct.find({
+                loai: temp[i].idcat
+            }).then(docs => {
                 docs.forEach(elements => {
                     existpro.push(elements);
                 });
@@ -551,8 +627,7 @@ class userController {
                     cate: temp[i].cate,
                     check: false,
                 }
-            }
-            else {
+            } else {
                 temp2 = {
                     idcat: temp[i].idcat,
                     cate: temp[i].cate,
@@ -570,7 +645,9 @@ class userController {
     async setPostRegistConfirm(req, res) {
         var name = req.params.id;
         var acc = {};
-        await db.findOne({ name }).then(doc => {
+        await db.findOne({
+            name
+        }).then(doc => {
             acc = doc;
         })
         var myquery = {
@@ -584,22 +661,28 @@ class userController {
         }
         // usermodels.UpdateInfoAccount(changeAcc,iduser);
         await db.update(myquery, changeAcc, options);
-        await dbregisterseller.findOneAndRemove({ name });
+        await dbregisterseller.findOneAndRemove({
+            name
+        });
         res.redirect('/users/manageuser/register');
     }
     async setPostRegistDelete(req, res) {
         var name = req.params.id;
-        await dbregisterseller.findOneAndRemove({ name });
+        await dbregisterseller.findOneAndRemove({
+            name
+        });
         res.redirect('/users/manageuser/register');
     }
 
     async setPostDeleteCate(req, res) {
         var cate = req.body.cate;
-        await dbcategory.findOneAndRemove({ cate });
+        await dbcategory.findOneAndRemove({
+            cate
+        });
         res.redirect('/users/managecategory');
 
     }
-    async  setPostInsertCate(req, res) {
+    async setPostInsertCate(req, res) {
         var newcate = {
             cate: req.body.insert,
             idcat: req.body.idcat,
@@ -612,7 +695,9 @@ class userController {
     async setPostRenameCate(req, res) {
         var cate = req.body.oldcate;
         var findcate = {};
-        await dbcategory.findOne({ cate }).then(doc => {
+        await dbcategory.findOne({
+            cate
+        }).then(doc => {
             findcate = doc;
         })
         var myquery = {
@@ -637,39 +722,39 @@ module.exports = userController;
 
 // async setPostSignin(req, res) {
 
-    //     var arr = [];
-    //     var checkSignin = {
-    //         suname: req.body.username,
-    //         supass: req.body.password,
-    //     };
-    //     //kiểm tra pass
-    //     await db.find({
-    //         name: checkSignin.suname
-    //     }).then(function (docs) {
-    //         // arr.push(docs);
-    //         docs.forEach(element => {
-    //             arr.push(element);
-    //         })
-    //     });
-    //     console.log(arr);
-    //     if (arr.length === 0) {
-    //         res.render('signup_in', {
-    //             title: 'Sign in/ Sign up',
-    //             checksignin: true,
-    //             errsiname: "*Username wrong!"
-    //         });
-    //     } else {
-    //         bcrypt.compare(checkSignin.supass, arr[0].pass, (err, isMatch) => {
-    //             if(!isMatch){
-    //                 res.render('signup_in', {
-    //                     title: 'Sign in/ Sign up',
-    //                     checksignin: true,
-    //                     errsiname: "*Password wrong!"
-    //                 });
-    //             }
-    //             else if(checkSignin.user==="admin"){
-    //                 res.redirect('/admin');
-    //             }
-    //         });
-    //     }
-    // }
+//     var arr = [];
+//     var checkSignin = {
+//         suname: req.body.username,
+//         supass: req.body.password,
+//     };
+//     //kiểm tra pass
+//     await db.find({
+//         name: checkSignin.suname
+//     }).then(function (docs) {
+//         // arr.push(docs);
+//         docs.forEach(element => {
+//             arr.push(element);
+//         })
+//     });
+//     console.log(arr);
+//     if (arr.length === 0) {
+//         res.render('signup_in', {
+//             title: 'Sign in/ Sign up',
+//             checksignin: true,
+//             errsiname: "*Username wrong!"
+//         });
+//     } else {
+//         bcrypt.compare(checkSignin.supass, arr[0].pass, (err, isMatch) => {
+//             if(!isMatch){
+//                 res.render('signup_in', {
+//                     title: 'Sign in/ Sign up',
+//                     checksignin: true,
+//                     errsiname: "*Password wrong!"
+//                 });
+//             }
+//             else if(checkSignin.user==="admin"){
+//                 res.redirect('/admin');
+//             }
+//         });
+//     }
+// }

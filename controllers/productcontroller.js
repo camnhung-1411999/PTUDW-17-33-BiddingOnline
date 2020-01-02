@@ -207,7 +207,7 @@ class productController {
     }
 
     async showDetailProduct(req, res) {
-        var id = req.query.id;
+        var id = req.params.id;
         var product = {};
         await dbproduct.findOne({
             "_id": ObjectId(id)

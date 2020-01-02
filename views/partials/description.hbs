@@ -23,7 +23,7 @@
                 Number of Bid: {{numofbid}} <br>
             </div>
             <div class="tab-pane fade px-3 py-4 text-color-a2" id="detail" role="tabpanel">
-                <ul>
+                <ul class="list-group">
                     {{#each  arrdetails}}
                     <li> {{this.msg}}</li>
                     {{/each}}
@@ -35,7 +35,9 @@
                 + Đơn vị vận chuyển: Vận Chuyển Nhanh (Giao Hàng Nhanh)
             </div>
             <div class="tab-pane fade px-3 py-4 text-color-a2" id="seller" role="tabpanel">
-                <a href="/../rate-reviews/{{product.user}}"><h4>User: <span id="nameseller">{{product.user}}</span></a>
+                <a href="/../rate-reviews/{{product.user}}">
+                    <h4>User: <span id="nameseller">{{product.user}}</span>
+                </a>
                 </h4>
                 - Name seller: Nguyen Ngo Ngoc Nga <br>
                 - Point : {{rate}}
