@@ -570,8 +570,12 @@ class userController {
     async setPostRegistConfirm(req, res) {
         var name = req.body.user;
         var acc = {};
+        var manuser={};
         await db.findOne({ name }).then(doc => {
             acc = doc;
+        })
+        await dbmanageuser.findOne({ name }).then(doc => {
+            manuser = doc;
         })
         if(acc.length===0)
         {
@@ -588,6 +592,16 @@ class userController {
             var options = {
                 multi: true
             }
+            var myquery1={
+                _id:ObjectId(manuser._id)
+            }
+            var changMan={
+                type:true,
+            }
+            var options1={
+                multi:true,
+            }
+            await dbmanageuser.update(myquery1,changMan,options1);
             // usermodels.UpdateInfoAccount(changeAcc,iduser);
             await db.update(myquery, changeAcc, options);
             await dbregisterseller.findOneAndRemove({ name });
@@ -640,8 +654,12 @@ class userController {
     async setPostCancelSeller(req,res){
         var name = req.body.leveldown;
         var acc = {};
+        var manuser={};
         await db.findOne({ name }).then(doc => {
             acc = doc;
+        })
+        await dbmanageuser.findOne({ name }).then(doc => {
+            manuser = doc;
         })
         if(acc.length===0)
         {
@@ -660,6 +678,16 @@ class userController {
             }
             // usermodels.UpdateInfoAccount(changeAcc,iduser);
             await db.update(myquery, changeAcc, options);
+            var myquery1={
+                _id:ObjectId(manuser._id)
+            }
+            var changMan={
+                type:false,
+            }
+            var options1={
+                multi:true,
+            }
+            await dbmanageuser.update(myquery1,changMan,options1);
             await dbregisterseller.findOneAndRemove({ name });
             res.redirect('/users/manageuser/register');
         }
