@@ -9,9 +9,11 @@
                 </button>
             </div>
             <form method="post">
-                <div class="modal-footer">
+                <label for="">Enter username need delete</label>
+                <input type="text" name="id" class="btn btn-secondary" style="margin-left:10px!important;width:470px!important;">
+                <div class="modal-footer"> 
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <input type="submit" formaction="/../users/delete/{{this.name}}" class="btn btn-primary"
+                    <input type="submit" formaction="/../users/delete" class="btn btn-primary"
                         value="Yes">
                 </div>
             </form>

@@ -93,11 +93,11 @@ router.post('/changepassword', function (req, res) {
 router.post('/registerseller', (req, res) => {
   controllers.setPostRegisterSeller(req, res);
 });
-router.post('/confirm/:id', (req, res) => {
-  controllers.setPostRegistConfirm(req, res);
+router.post('/confirm',(req,res)=>{
+  controllers.setPostRegistConfirm(req,res);
 })
-router.post('/delete/:id', (req, res) => {
-  controllers.setPostRegistDelete(req, res);
+router.post('/delete',(req,res)=>{
+  controllers.setPostRegistDelete(req,res);
 })
 router.post('/deletecate', (req, res) => {
   console.log(req.params.id);
@@ -108,5 +108,8 @@ router.post('/insertcategory', (req, res) => {
 })
 router.post('/renamecate', (req, res) => {
   controllers.setPostRenameCate(req, res);
+})
+router.post('/cancel',(req,res)=>{
+  controllers.setPostCancelSeller(req,res);
 })
 module.exports = router;

@@ -643,34 +643,51 @@ class userController {
     }
     //----------post----------------------
     async setPostRegistConfirm(req, res) {
-        var name = req.params.id;
+        var name = req.body.user;
         var acc = {};
         await db.findOne({
             name
         }).then(doc => {
             acc = doc;
         })
-        var myquery = {
-            _id: ObjectId(acc._id)
+        await dbmanageuser.findOne({ name }).then(doc => {
+            manuser = doc;
+        })
+        if(acc.length===0)
+        {
+            res.redirect('/users/manageuser/register');
+
         }
-        var changeAcc = {
-            status: "Seller",
-        };
-        var options = {
-            multi: true
+        else{
+            var myquery = {
+                _id: ObjectId(acc._id)
+            }
+            var changeAcc = {
+                status: "Seller",
+            };
+            var options = {
+                multi: true
+            }
+            var myquery1={
+                _id:ObjectId(manuser._id)
+            }
+            var changMan={
+                type:true,
+            }
+            var options1={
+                multi:true,
+            }
+            await dbmanageuser.update(myquery1,changMan,options1);
+            // usermodels.UpdateInfoAccount(changeAcc,iduser);
+            await db.update(myquery, changeAcc, options);
+            await dbregisterseller.findOneAndRemove({ name });
+            res.redirect('/users/manageuser/register');
         }
-        // usermodels.UpdateInfoAccount(changeAcc,iduser);
-        await db.update(myquery, changeAcc, options);
-        await dbregisterseller.findOneAndRemove({
-            name
-        });
-        res.redirect('/users/manageuser/register');
+        
     }
     async setPostRegistDelete(req, res) {
-        var name = req.params.id;
-        await dbregisterseller.findOneAndRemove({
-            name
-        });
+        var name = req.body.id;
+        await dbregisterseller.findOneAndRemove({ name });
         res.redirect('/users/manageuser/register');
     }
 
@@ -713,6 +730,47 @@ class userController {
         // usermodels.UpdateInfoAccount(changeAcc,iduser);
         await dbcategory.update(myquery, changeCate, options);
         res.redirect('/users/managecategory');
+    }
+    async setPostCancelSeller(req,res){
+        var name = req.body.leveldown;
+        var acc = {};
+        var manuser={};
+        await db.findOne({ name }).then(doc => {
+            acc = doc;
+        })
+        await dbmanageuser.findOne({ name }).then(doc => {
+            manuser = doc;
+        })
+        if(acc.length===0)
+        {
+            res.redirect('/users/manageuser/register');
+
+        }
+        else{
+            var myquery = {
+                _id: ObjectId(acc._id)
+            }
+            var changeAcc = {
+                status: "Bidder",
+            };
+            var options = {
+                multi: true
+            }
+            // usermodels.UpdateInfoAccount(changeAcc,iduser);
+            await db.update(myquery, changeAcc, options);
+            var myquery1={
+                _id:ObjectId(manuser._id)
+            }
+            var changMan={
+                type:false,
+            }
+            var options1={
+                multi:true,
+            }
+            await dbmanageuser.update(myquery1,changMan,options1);
+            await dbregisterseller.findOneAndRemove({ name });
+            res.redirect('/users/manageuser/register');
+        }
     }
 
 }
