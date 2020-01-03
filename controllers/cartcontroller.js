@@ -43,6 +43,7 @@ class CartController {
         const now = moment(new Date());
         const time = product.datetime;
         const c = now.diff(time, 'seconds');
+        
         if (product.datetimeproduct * 24 * 3600 - c + product.moretime <= 0) {
             checkdaugia.ischecked = true;
             checkdaugia.msg = "Thời gian đấu giá sản phẩm này đã kết thúc.";

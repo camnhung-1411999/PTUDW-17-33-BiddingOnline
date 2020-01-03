@@ -30,7 +30,7 @@ var x = setInterval(function () {
         // $(settime[i]).text(days + ":" + hours + ":" + minutes + ":" + seconds);
         $(time[i]).text(distance - 1 + '');
         if (distance < 0) {
-            clearInterval(x);
+            // clearInterval(x);
             $(settime[i]).text("EXPIRED");
         }
     }
