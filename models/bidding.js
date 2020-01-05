@@ -13,6 +13,7 @@ var BiddingSchema = new mongoose.Schema({
     bidding: [],
     // datebid: Date,
     soluot: Number,
+    nameproduct:String,
     currentwinner: String,
     selling: Boolean,
 }, {

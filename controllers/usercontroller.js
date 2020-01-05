@@ -400,6 +400,21 @@ class userController {
             list: arrhistory
         })
     }
+    async showWonList(req,res){
+        var list=[];
+        await dbbidding.find({selling:false,currentwwinner:req.user.name}).then(docs=>{
+            list.push(docs);
+        });
+        for(var i=0;i<list.length;i++){
+            await dbproduct.findOne({_id:list[i].idsanpham.toString()}).then(doc=>{
+                list[i].nameproduct=doc.ten;
+            })
+        }
+        res.render('wonlist',{
+            title:"Won list",
+            list,
+        })
+    }
     async showMyProducts(req, res) {
         var checkuser = false;
         var nameuser;

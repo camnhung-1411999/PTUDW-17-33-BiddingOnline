@@ -69,7 +69,9 @@ router.get('/mybid', (req, res) => {
 router.get('/history',(req, res)=>{
     controllers.showHistory(req, res);
 })
-
+router.get('/wonlist',(req,res)=>{
+  controllers.showWonList(req,res);
+})
 router.get('/myproducts',(req, res)=>{
   controllers.showMyProducts(req,res);
 })

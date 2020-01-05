@@ -22,45 +22,39 @@
             <div class="col-md-3">
                 {{>profile}}
             </div>
-
             <div class="col-md-9">
-                <!-- detail infor -->
-                <div class="profile-content" id="detailinfor">
-                    <div class="container-fluid">
+                <div class="row" style="margin-top: 150px!important;">
 
-                        <h2 class="text-danger">Detail Information</h2>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Full Name</th>
-                                    <td>{{account.fullname}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="info">Email</th>
-                                    <td>{{account.email}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="info">Contact</th>
-                                    <td>{{account.phone}}</td>
-                                </tr>
-
-                                <tr>
-                                    <th class="info">Address</th>
-                                    <td>{{account.address}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="info">Birthday</th>
-                                    <td>{{account.birthday}}</td>
-                                </tr>
-                                <tr>
-                                    <th class="info">Status</th>
-                                    <td>{{account.status}}</td>
-                                </tr>
-
-                            </thead>
-
-                        </table>
+                    <div class="col-md-9">
+                        <h2 style="color:rgb(167, 167, 167);">My won list</h2>
                     </div>
+                    <!-- Modal -->
+
+
+                </div>
+                <div>
+                    <table class="table">
+                        <thead style="font-size:25px;">
+                            <tr>
+                                <th scope="col">Name product</th>
+                                <th scope="col">Number of bid</th>
+                                <th scope="col">Detail bidding</th>
+
+                            </tr>
+                        </thead>
+                        {{#each list}}
+                        <tbody>
+                            <tr>
+                                <th scope="row"><a
+                                        href="/products/detailproduct/{{this.idsanpham}}">{{this.nameproduct}}</a></th>
+                                <td style="width:200px;">{{this.soluot}}
+                                </td>
+                                <td>{{this.bidding}}</td>
+                            </tr>
+                        </tbody>
+                        {{/each}}
+                    </table>
+
                 </div>
             </div>
         </div>
