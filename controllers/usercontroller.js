@@ -208,9 +208,10 @@ class userController {
     }
     //for user
     //----------get-----------------------
-    showAccount(req, res) {
+    async showAccount(req, res) {
         var checkuser = false;
         var nameuser;
+        var rate=0;
         if (req.user) {
             checkuser = true;
             nameuser = req.user.name;
@@ -218,12 +219,25 @@ class userController {
             if (req.user.status != "Seller") {
                 isSeller = false;
             }
+            else{
+                await dbreview.findOne({user:req.user.name}).then(doc=>{
+                    rate=doc.rate;
+                })
+            }
         }
+        var pointbid=0;
+        await dbpointbid.findOne({user:req.user.name}).then(doc=>{
+           if(doc){
+            pointbid=doc.pluspoint-doc.minuspoint;
+           } 
+        });
         res.render('account', {
             title: 'Account',
             checkuser,
             nameuser,
             account: req.user,
+            pointbid,
+            rate,
         });
     }
 
@@ -296,6 +310,10 @@ class userController {
                 cart[i].seller = doc.user;
                 cart[i].image = doc.image[0];
             });
+            await dbbidding.findOne({idsanpham:cart[i].idsanpham}).then(doc=>{
+                cart[i].numbid=doc.bidding;
+                cart[i].num=doc.soluot;
+            })
         }
         res.render('mycart', {
             title: 'My cart',
@@ -332,6 +350,9 @@ class userController {
             }).then(doc => {
                 arrproduct.push(doc);
             })
+            if(arrbidding[i].currentwinner===req.user.name){
+                arrproduct[i].curwin=true;
+            }
         }
 
         res.render('biddingproduct', {
@@ -398,21 +419,6 @@ class userController {
             nameuser,
             account: req.user,
             list: arrhistory
-        })
-    }
-    async showWonList(req,res){
-        var list=[];
-        await dbbidding.find({selling:false,currentwwinner:req.user.name}).then(docs=>{
-            list.push(docs);
-        });
-        for(var i=0;i<list.length;i++){
-            await dbproduct.findOne({_id:list[i].idsanpham.toString()}).then(doc=>{
-                list[i].nameproduct=doc.ten;
-            })
-        }
-        res.render('wonlist',{
-            title:"Won list",
-            list,
         })
     }
     async showMyProducts(req, res) {

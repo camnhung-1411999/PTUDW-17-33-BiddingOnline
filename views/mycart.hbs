@@ -42,14 +42,14 @@
 
 
         </div>
-        <div>
-          <table class="table">
-            <thead style="font-size:25px;">
+        <div style="background-color: rgb(247, 247, 247);">
+          <table class="table" >
+            <thead style="font-size:20px;">
               <tr>
                 <th scope="col">Bidding cart</th>
                 <th scope="col">Information</th>
                 <th scope="col">Bid Price</th>
-                {{!-- <th scope="col">Status</th> --}}
+                <th scope="col">Detail bidding</th>
                 <th scope="col">Buy Price</th>
                 <th scope="col"></th>
               </tr>
@@ -63,6 +63,12 @@
                   <p style="color: blue;">Supplier:<span>{{this.seller}}</span></p>
                 </td>
                 <td>{{this.giadau}} đ</td>
+                <td>
+                  <p>total:{{this.num}}</p>
+                  {{#each this.numbid}}
+                  <p>+Bidder:{{this.user}}</p><p>- Price bid:{{this.giadau}}</p><p>- Date bid:{{this.datebid}}</p>
+                  {{/each}}
+                </td>
                 {{!-- <td>
                   <button type="button" class="btn btn-primary deletecart" data-toggle="modal"
                     data-target=".deletecart">

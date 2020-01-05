@@ -53,11 +53,15 @@
                                 </td>
                                 <td>{{this.giahientai}} đ</td>
                                 <td>{{#if this.selling}} Bidding {{else}} End Bid {{/if}}</td>
+                                <td>{{#if this.curwin}}
+                                    <i class="far fa-star" style="color: darkkhaki;"></i>
+                                    {{/if}}</td>
 
                             </tr>
                         </tbody>
                         {{/each}}
                     </table>
+                    <p>Note: Icon start meaning that you is current winner</p>
 
                 </div>
             </div>

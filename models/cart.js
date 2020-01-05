@@ -16,7 +16,9 @@ var CartSchema = new mongoose.Schema({
     datebuy: Date,
     tensp: String,
     seller: String,
-    image: String
+    image: String,
+    numbid:[],
+    num:Number,
 }, {
     collection: "cart"
 });
