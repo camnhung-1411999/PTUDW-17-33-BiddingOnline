@@ -26,8 +26,15 @@ router.get('/favorites', (req, res) => {
   controllers.showFavorites(req, res);
 })
 
+router.get('/manageproduct/:id',(req, res) => {
+    controllers.showProductCate(req,res);
+})
+
 router.get('/myauctions', (req, res) => {
-  controllers.showMyAutions(req,res);
+  controllers.showMyAutions(req, res);
+})
+router.get('/manageproduct/all', (req, res) => {
+  controllers.showManageProduct(req, res);
 })
 
 //post sign up
@@ -93,11 +100,14 @@ router.post('/changepassword', function (req, res) {
 router.post('/registerseller', (req, res) => {
   controllers.setPostRegisterSeller(req, res);
 });
-router.post('/confirm',(req,res)=>{
-  controllers.setPostRegistConfirm(req,res);
+router.post('/confirm', (req, res) => {
+  controllers.setPostRegistConfirm(req, res);
 })
-router.post('/delete',(req,res)=>{
-  controllers.setPostRegistDelete(req,res);
+router.post('/delete', (req, res) => {
+  controllers.setPostRegistDelete(req, res);
+});
+router.post('/deleteproduct',(req,res)=>{
+  controllers.setPostDeleteProduct(req,res);
 })
 router.post('/deletecate', (req, res) => {
   console.log(req.params.id);
@@ -109,7 +119,7 @@ router.post('/insertcategory', (req, res) => {
 router.post('/renamecate', (req, res) => {
   controllers.setPostRenameCate(req, res);
 })
-router.post('/cancel',(req,res)=>{
-  controllers.setPostCancelSeller(req,res);
+router.post('/cancel', (req, res) => {
+  controllers.setPostCancelSeller(req, res);
 })
 module.exports = router;

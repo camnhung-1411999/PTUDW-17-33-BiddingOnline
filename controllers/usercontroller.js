@@ -579,27 +579,38 @@ class userController {
                 regist.push(element);
             });
         });
-        // var checkbid = false;
-        // var checksell = false;
         var checkregist = false;
-        // if (arrbid.length === 0) {
-        //     checkbid = true;
-        // }
-        // if (arrsell.length === 0) {
-        //     checksell = true;
-        // }
         if (regist.length === 0) {
             checkregist = true;
         }
         res.render('register', {
             title: "Manage user",
-            // listbid: arrbid,
-            // listsell: arrsell,
             listregist: regist,
             // checkbid,
             // checksell,
             checkregist,
             totalregist: regist.length,
+        });
+    }
+    async showManageProduct(req, res) {
+        var listcate = [];
+        var product = [];
+        await dbcategory.find({}).then(docs => {
+            docs.forEach(element => {
+                listcate.push(element);
+            });
+        });
+        await dbproduct.find({}).then(docs => {
+            docs.forEach(element => {
+                product.push(element);
+            })
+        });
+
+
+        res.render('manageproduct', {
+            tittle: "Manage product",
+            product,
+            listcate,
         });
     }
     async showManageCategory(req, res) {
@@ -641,6 +652,35 @@ class userController {
             cate: arrCate,
         });
     }
+    async showProductCate(req, res) {
+        var idcat = req.params.id;
+        var listcate = [];
+        var product = [];
+        await dbcategory.find({}).then(docs => {
+            docs.forEach(element => {
+                listcate.push(element);
+            });
+        });
+        if(idcat==="all"){
+            await dbproduct.find({}).then(docs => {
+                docs.forEach(element => {
+                    product.push(element);
+                })
+            });
+        }
+        else{
+            await dbproduct.find({ loai: idcat }).then(docs => {
+                docs.forEach(element => {
+                    product.push(element);
+                })
+            });
+        }
+        res.render('manageproduct', {
+            tittle: "Manage product",
+            product,
+            listcate,
+        });
+    }
     //----------post----------------------
     async setPostRegistConfirm(req, res) {
         var name = req.body.user;
@@ -653,12 +693,11 @@ class userController {
         await dbmanageuser.findOne({ name }).then(doc => {
             manuser = doc;
         })
-        if(acc.length===0)
-        {
+        if (acc.length === 0) {
             res.redirect('/users/manageuser/register');
 
         }
-        else{
+        else {
             var myquery = {
                 _id: ObjectId(acc._id)
             }
@@ -668,29 +707,35 @@ class userController {
             var options = {
                 multi: true
             }
-            var myquery1={
-                _id:ObjectId(manuser._id)
+            var myquery1 = {
+                _id: ObjectId(manuser._id)
             }
-            var changMan={
-                type:true,
+            var changMan = {
+                type: true,
             }
-            var options1={
-                multi:true,
+            var options1 = {
+                multi: true,
             }
-            await dbmanageuser.update(myquery1,changMan,options1);
+            await dbmanageuser.update(myquery1, changMan, options1);
             // usermodels.UpdateInfoAccount(changeAcc,iduser);
             await db.update(myquery, changeAcc, options);
             await dbregisterseller.findOneAndRemove({ name });
             res.redirect('/users/manageuser/register');
         }
-        
+
     }
     async setPostRegistDelete(req, res) {
         var name = req.body.id;
         await dbregisterseller.findOneAndRemove({ name });
         res.redirect('/users/manageuser/register');
     }
-
+    async setPostDeleteProduct(req,res){
+        var nameproduct=req.body.namepro;
+        var nameseller=req.body.nameseller;
+        var result={}
+        await dbproduct.findOneAndRemove({ten:nameproduct,user:nameseller});
+        res.redirect('/users/manageproduct/all');
+    }
     async setPostDeleteCate(req, res) {
         var cate = req.body.cate;
         await dbcategory.findOneAndRemove({
@@ -731,22 +776,21 @@ class userController {
         await dbcategory.update(myquery, changeCate, options);
         res.redirect('/users/managecategory');
     }
-    async setPostCancelSeller(req,res){
+    async setPostCancelSeller(req, res) {
         var name = req.body.leveldown;
         var acc = {};
-        var manuser={};
+        var manuser = {};
         await db.findOne({ name }).then(doc => {
             acc = doc;
         })
         await dbmanageuser.findOne({ name }).then(doc => {
             manuser = doc;
         })
-        if(acc.length===0)
-        {
+        if (acc.length === 0) {
             res.redirect('/users/manageuser/register');
 
         }
-        else{
+        else {
             var myquery = {
                 _id: ObjectId(acc._id)
             }
@@ -758,16 +802,16 @@ class userController {
             }
             // usermodels.UpdateInfoAccount(changeAcc,iduser);
             await db.update(myquery, changeAcc, options);
-            var myquery1={
-                _id:ObjectId(manuser._id)
+            var myquery1 = {
+                _id: ObjectId(manuser._id)
             }
-            var changMan={
-                type:false,
+            var changMan = {
+                type: false,
             }
-            var options1={
-                multi:true,
+            var options1 = {
+                multi: true,
             }
-            await dbmanageuser.update(myquery1,changMan,options1);
+            await dbmanageuser.update(myquery1, changMan, options1);
             await dbregisterseller.findOneAndRemove({ name });
             res.redirect('/users/manageuser/register');
         }
