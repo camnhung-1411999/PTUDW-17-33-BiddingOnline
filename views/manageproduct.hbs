@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="/../stylesheets/agency.css" rel="stylesheet">
+<link href="/../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
+    type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+{{>navAdmin}}
+<div class="container-fluid" id="content" style="margin-top:100px !important ;">
+    <div class="row mx-auto w-90 mt-5 pt-5 pl-5">
+
+        <div class="col-2" style="margin-top:80px !important ;margin-right:30px !important ;">
+            {{>productMenu}}
+
+        </div>
+
+        <!-- List Bidder -->
+        <div class="col-8  bd-content">
+
+            <div id="titleProfileInfo" class="row ">
+                <h4 class="col mb-5"style="font-size:30px;color:rgb(159, 159, 160);">LIST PRODUCT</h4>
+                <button type="button" class="btn btn-primary" style="float: right!important; margin-bottom:50px;"
+                    data-toggle="modal" data-target="#ModalDelete">
+                    Delete product
+                </button>
+                {{>modaldeleteproduct}}
+            </div>
+
+            <table class="table table-sm txt-center table-hover" id="listStore">
+                <thead>
+                    <tr>
+                        <th scope="col">NAME PRODUCT</th>
+                        <th scope="col"></th>
+                        <th scope="col">PRICE </th>
+                        <th scope="col">NUMBER OF BIDDING</th>
+                        <th scope="col">SELLER</th>
+                    </tr>
+                </thead>
+
+                <tbody id="productList">
+                    {{#each product}}
+                    <tr>
+                        <td><img src="{{this.image}}" width="50px" height="50px"></td>
+                        <td>{{this.ten}}</td>
+                        <td>{{this.giamuangay}}</td>
+                        <td></td>
+                        <td>{{this.user}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/6b7afa5f4b.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>

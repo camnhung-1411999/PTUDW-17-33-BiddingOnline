@@ -579,27 +579,38 @@ class userController {
                 regist.push(element);
             });
         });
-        // var checkbid = false;
-        // var checksell = false;
         var checkregist = false;
-        // if (arrbid.length === 0) {
-        //     checkbid = true;
-        // }
-        // if (arrsell.length === 0) {
-        //     checksell = true;
-        // }
         if (regist.length === 0) {
             checkregist = true;
         }
         res.render('register', {
             title: "Manage user",
-            // listbid: arrbid,
-            // listsell: arrsell,
             listregist: regist,
             // checkbid,
             // checksell,
             checkregist,
             totalregist: regist.length,
+        });
+    }
+    async showManageProduct(req, res) {
+        var listcate = [];
+        var product = [];
+        await dbcategory.find({}).then(docs => {
+            docs.forEach(element => {
+                listcate.push(element);
+            });
+        });
+        await dbproduct.find({}).then(docs => {
+            docs.forEach(element => {
+                product.push(element);
+            })
+        });
+
+
+        res.render('manageproduct', {
+            tittle: "Manage product",
+            product,
+            listcate,
         });
     }
     async showManageCategory(req, res) {
@@ -639,6 +650,35 @@ class userController {
         res.render('managecategory', {
             title: "Manage Category",
             cate: arrCate,
+        });
+    }
+    async showProductCate(req, res) {
+        var idcat = req.params.id;
+        var listcate = [];
+        var product = [];
+        await dbcategory.find({}).then(docs => {
+            docs.forEach(element => {
+                listcate.push(element);
+            });
+        });
+        if(idcat==="all"){
+            await dbproduct.find({}).then(docs => {
+                docs.forEach(element => {
+                    product.push(element);
+                })
+            });
+        }
+        else{
+            await dbproduct.find({ loai: idcat }).then(docs => {
+                docs.forEach(element => {
+                    product.push(element);
+                })
+            });
+        }
+        res.render('manageproduct', {
+            tittle: "Manage product",
+            product,
+            listcate,
         });
     }
     //----------post----------------------
@@ -694,7 +734,13 @@ class userController {
         });
         res.redirect('/users/manageuser/register');
     }
-
+    async setPostDeleteProduct(req,res){
+        var nameproduct=req.body.namepro;
+        var nameseller=req.body.nameseller;
+        var result={}
+        await dbproduct.findOneAndRemove({ten:nameproduct,user:nameseller});
+        res.redirect('/users/manageproduct/all');
+    }
     async setPostDeleteCate(req, res) {
         var cate = req.body.cate;
         await dbcategory.findOneAndRemove({

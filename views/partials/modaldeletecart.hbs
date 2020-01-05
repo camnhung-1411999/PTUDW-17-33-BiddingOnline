@@ -9,10 +9,18 @@
                 </button>
             </div>
             <div class="modal-footer">
-                <form method="POST">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <input type="submit" class="btn btn-primary" formaction="/users/mycart/delete/{{this.idsanpham}}"
-                        value="Yes">
+                <form method="post">
+                    <label for="">Name product</label>
+                    <input type="text" name="namepro" class="btn btn-secondary"
+                        style="margin-left:10px!important;width:470px!important;">
+                    <label for="">Seller</label>
+                    <input type="text" name="nameseller" class="btn btn-secondary"
+                        style="margin-left:10px!important;width:470px!important;">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <input type="submit" formaction="/users/mycart/delete" class="btn btn-primary"
+                            value="Confirm">
+                    </div>
                 </form>
             </div>
         </div>
