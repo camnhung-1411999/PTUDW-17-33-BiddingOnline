@@ -55,15 +55,17 @@
                         <i class="fas fa-gavel"></i>
                         My Auctions </a>
                 </li>
+                {{#if isSeller}}
                 <li id="acc_product">
-                    <a href="#">
+                    <a href="/users/myproducts">
                         <i class="fas fa-clipboard-check"></i>
-                        My Product( of bidder) </a>
+                        My Product </a>
                 </li>
+                {{/if}}
                 <li>
                     <a href="/users/history">
                         <i class="fas fa-home"></i>
-                        My History</a>
+                        My Hisotry </a>
                 </li>
                 <li>
                     <a href="/">

@@ -400,6 +400,34 @@ class userController {
             list: arrhistory
         })
     }
+    async showMyProducts(req, res) {
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
+
+        var arrproduct = [];
+        await dbproduct.find({
+            user: req.user.name
+        }).then(docs => {
+            docs.forEach(element => {
+                arrproduct.push(element);
+            })
+        })
+        res.render('myproducts', {
+            title: "My Products",
+            checkuser,
+            nameuser,
+            account: req.user,
+            list: arrproduct
+        })
+    }
 
 
     showChangePassword(req, res) {
