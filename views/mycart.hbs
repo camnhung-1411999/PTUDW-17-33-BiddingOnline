@@ -51,7 +51,7 @@
                 <th scope="col">Bid Price</th>
                 {{!-- <th scope="col">Status</th> --}}
                 <th scope="col">Buy Price</th>
-                <th scope="col">Choice</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             {{#each cart}}
@@ -76,10 +76,11 @@
                 </td> --}}
 
                 <td class="temp">{{this.giaphaitra}} đ</td>
-
-                <td>
-                  <input type="checkbox" name="" id="" class="col text-center">
-                </td>
+                <form action="/users/mycart/buy/{{this.idsanpham}}" method="post">
+                  <td>
+                    <input class="btn btn-outline-primary" type="submit" value="Buy">
+                  </td>
+                </form>
               </tr>
             </tbody>
             {{/each}}

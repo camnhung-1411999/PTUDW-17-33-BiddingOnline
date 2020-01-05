@@ -26,8 +26,8 @@ router.get('/favorites', (req, res) => {
   controllers.showFavorites(req, res);
 })
 
-router.get('/manageproduct/:id',(req, res) => {
-    controllers.showProductCate(req,res);
+router.get('/manageproduct/:id', (req, res) => {
+  controllers.showProductCate(req, res);
 })
 
 router.get('/myauctions', (req, res) => {
@@ -72,6 +72,10 @@ router.get('/mycart', (req, res) => {
 router.get('/mybid', (req, res) => {
   controllers.showBid(req, res);
 })
+
+router.get('/history',(req, res)=>{
+    controllers.showHistory(req, res);
+})
 router.get('/manageuser', (req, res) => {
   controllers.showManageUser(req, res);
 });
@@ -90,9 +94,14 @@ router.get('/manageuser/register', (req, res) => {
   controllers.showRegister(req, res);
 })
 //post
-router.post('/mycart/delete/:id',(req, res)=>{
+router.post('/mycart/delete', (req, res) => {
   controllers.postDeleteMyCart(req, res);
 })
+router.post('/mycart/buy/:id', (req, res) => {
+  controllers.postBuyProductNow(req, res);
+})
+
+
 router.post('/account', function (req, res) {
   controllers.setPostAccount(req, res);
 });
@@ -108,8 +117,8 @@ router.post('/confirm', (req, res) => {
 router.post('/delete', (req, res) => {
   controllers.setPostRegistDelete(req, res);
 });
-router.post('/deleteproduct',(req,res)=>{
-  controllers.setPostDeleteProduct(req,res);
+router.post('/deleteproduct', (req, res) => {
+  controllers.setPostDeleteProduct(req, res);
 })
 router.post('/deletecate', (req, res) => {
   console.log(req.params.id);

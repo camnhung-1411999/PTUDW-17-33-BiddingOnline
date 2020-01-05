@@ -7,31 +7,32 @@ mongoose.connect(url, {
 });
 var db = mongoose.connection;
 
-var Pointbidchema = new mongoose.Schema({
+var HistorySchema = new mongoose.Schema({
     _id: Object,
     user: String,
-    pluspoint: Number,
-    minuspoint: Number,
-    reviews:[]
+    idsanpham: String,
+    status: String,
+    tensp: String,
+    seller: String,
+    image: String
 }, {
-    collection: "pointbidder"
+    collection: "history"
 });
 
-// ProductsSchema.index({loai :'text'});
-var Pointbidder = db.useDb("udweb-nhom7").model('Pointbidder', Pointbidchema);
+var History = db.useDb("udweb-nhom7").model('History', HistorySchema);
 
 module.exports = {
     insert: (entity) => {
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             var dbo = db.db("udweb-nhom7");
-            dbo.collection("pointbidder").insertOne(entity, function (err, res) {
+            dbo.collection("history").insertOne(entity, function (err, res) {
                 if (err) throw err;
                 console.log("1 document inserted");
                 db.close();
             });
         });
     },
-    getpointbidder: Pointbidder
+    getHistory: History
 
 }
