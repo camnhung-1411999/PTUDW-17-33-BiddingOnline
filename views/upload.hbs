@@ -6,10 +6,12 @@
 <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
     type='text/css'>
 <!-- Custom styles for this template -->
+<link rel="stylesheet" href="/../../../stylesheets/edittor.css">
 <link rel="stylesheet" href="/../../../stylesheets/upload.css">
-
 <link href="/../../../stylesheets/agency.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+{{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"> --}}
+
 <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
 
@@ -51,7 +53,7 @@
                     <input id="url2" name="url2" hidden></input>
 
 
-                </div> 
+                </div>
             </div>
 
 
@@ -133,11 +135,15 @@
                 </div>
             </div>
 
-            <div class="form-group">
+
+            {{!-- <div class="form-group">
                 <label for="note" class="col-md-4 col-form-label">Ghi chú</label>
 
                 <textarea class="form-control form-control-md" rows="5" placeholder="Thông tin về sản phẩm..."
                     name="ghichu" required></textarea>
+            </div> --}}
+            <div class="form-group">
+                {{>edittor}}
             </div>
             <div class="form-group">
                 <input type="checkbox"> Do you want to automatically extend time?
@@ -152,7 +158,8 @@
 </div>
 
 {{#section 'js'}}
-
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+</script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script
     src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
@@ -197,5 +204,7 @@
 <script src="/javascripts/agency.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 <script src="/../../../javascripts/import-new-products.js"></script>
+<script src="/../../../javascripts/edittor.js"></script>
+
 
 {{/section}}

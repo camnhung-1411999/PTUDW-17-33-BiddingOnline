@@ -10,6 +10,10 @@ const dbreviews = reviewsmodels.getReviews;
 const categoriesmodels = require('../models/category');
 const dbcategory = categoriesmodels.getCategory;
 
+const cartmodels = require('../models/cart');
+const dbcart = cartmodels.getCart;
+
+
 const moment = require('moment');
 var ObjectId = require('mongodb').ObjectId;
 const config = require('../config/default.json');
@@ -22,6 +26,92 @@ class productController {
         var limit = config.paginate.limit;
         var arrproduct = [];
         var total = 0;
+        const now = moment(new Date());
+        var arrendding = [];
+
+
+        await dbproduct.find({
+            selling: true
+        }).then(docs => {
+            docs.forEach(element => {
+                arrendding.push(element);
+            })
+        })
+        //check endding and update cart
+
+        for (var i = 0; i < arrendding.length; i++) {
+
+            const time = arrendding[i].datetime;
+            const c = now.diff(time, 'seconds');
+            if (c < 600) {
+                arrendding[i].new = true;
+            }
+
+            if ((arrendding[i].datetimeproduct * 24 * 3600 + arrendding[i].moretime) <= c) {
+
+
+                const entity = {
+                    selling: false
+                };
+
+                const myquery = {
+                    _id: arrendding[i]._id
+                };
+                var options = {
+                    multi: true
+                };
+
+
+
+                //upadte bidding
+                const filter = {
+                    idsanpham: arrendding[i]._id.toString()
+                };
+                const update = {
+                    selling: false
+                };
+                await dbbidding.update(filter, update, options);
+
+                //update cart
+                var pricebuy = 0,
+                    pricebid = 0;
+                var datetemp = "";
+                var arrtemp = {};
+                await dbbidding.findOne({
+                    idsanpham: arrendding[i]._id.toString()
+                }).then(doc => {
+                    arrtemp = doc;
+                });
+                if (arrtemp.currentwinner === arrtemp.bidding[arrtemp.bidding.length - 1].user) {
+                    var k = arrtemp.bidding.length - 1;
+                    datetemp = arrtemp.bidding[k].datebid;
+                    pricebid = arrtemp.bidding[k].giadau;
+                    pricebuy = arrtemp.bidding[k - 1].giadau + arrendding[i].buocdaugia;
+                } else {
+                    for (var i = arrtemp.soluot - 2; i >= 0; i--) {
+                        if (arrtemp.currentwinner === arrtemp.bidding[i].user) {
+                            datetemp = arrtemp.bidding[i].datebid;
+                            pricebid = arrtemp.bidding[i].giadau;
+                            pricebuy = arrtemp.bidding[i].giadau;
+                            break;
+                        }
+                    }
+                }
+
+                const entitycart = {
+                    user: arrtemp.currentwinner,
+                    idsanpham: arrtemp.idsanpham,
+                    giadau: pricebid,
+                    giaphaitra: pricebuy,
+                    dateadd: datetemp
+                }
+                cartmodels.insert(entitycart);
+
+                //update product
+                await dbproduct.update(myquery, entity, options);
+                arrendding[i].selling = false;
+            }
+        }
 
         var listCategories = [];
         await dbcategory.find({}).sort({
@@ -88,7 +178,6 @@ class productController {
         }
 
 
-        const now = moment(new Date());
 
         for (var i = 0; i < arrproduct.length; i++) {
 
@@ -112,6 +201,8 @@ class productController {
                 var options = {
                     multi: true
                 };
+
+
 
                 await dbproduct.update(myquery, entity, options);
                 arrproduct[i].selling = false;
