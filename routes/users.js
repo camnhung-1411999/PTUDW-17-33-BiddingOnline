@@ -26,15 +26,8 @@ router.get('/favorites', (req, res) => {
   controllers.showFavorites(req, res);
 })
 
-router.get('/manageproduct/:id', (req, res) => {
-  controllers.showProductCate(req, res);
-})
-
 router.get('/myauctions', (req, res) => {
   controllers.showMyAutions(req, res);
-})
-router.get('/manageproduct/all', (req, res) => {
-  controllers.showManageProduct(req, res);
 })
 
 //post sign up
@@ -79,6 +72,9 @@ router.get('/history',(req, res)=>{
 router.get('/manageuser', (req, res) => {
   controllers.showManageUser(req, res);
 });
+router.get('/manageproduct/:id',(req, res) => {
+  controllers.showProductCate(req,res);
+})
 router.get('/managecategory', (req, res) => {
   controllers.showManageCategory(req, res);
 })

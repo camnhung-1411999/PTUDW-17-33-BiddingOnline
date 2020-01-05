@@ -7,8 +7,6 @@ const dbcart = cartmodels.getCart;
 const productmodels = require('../models/products');
 const dbproduct = productmodels.getProduct;
 
-const manageusermodels = require('../models/admin');
-const dbmanageuser = manageusermodels.getManageUser;
 const registerseller = require('../models/registerseller');
 const dbregisterseller = registerseller.getRegister;
 
@@ -26,6 +24,8 @@ const dbpointbid = pointbidcontroller.getpointbidder;
 
 const historymodels = require('../models/history');
 const dbhistory = historymodels.getHistory;
+const reviewcontroller = require('../models/review');
+const dbreview = reviewcontroller.getReviews;
 
 const bcrypt = require('bcryptjs');
 
@@ -375,17 +375,21 @@ class userController {
         }
 
         var arrhistory = [];
-        await dbhistory.find({user: req.user.name}).then(docs=>{
-            docs.forEach(element=>{
+        await dbhistory.find({
+            user: req.user.name
+        }).then(docs => {
+            docs.forEach(element => {
                 arrhistory.push(element);
             })
         });
 
-        for(var i = 0 ;i<arrhistory.length;i++){
-            await dbproduct.findOne({_id: ObjectId(arrhistory[i].idsanpham)}).then(doc=>{
+        for (var i = 0; i < arrhistory.length; i++) {
+            await dbproduct.findOne({
+                _id: ObjectId(arrhistory[i].idsanpham)
+            }).then(doc => {
                 arrhistory[i].tensp = doc.ten;
                 arrhistory[i].seller = doc.user;
-                arrhistory[i].image  = doc.image[0];
+                arrhistory[i].image = doc.image[0];
             })
         }
         res.render('myhistory', {
@@ -505,11 +509,14 @@ class userController {
         if (req.user != undefined && req.user != null) {
             var name = req.user.name;
         }
-        var point;
-        await dbmanageuser.findOne({
-            name
+        var point = 0;
+        await dbpointbid.findOne({
+            user: name
         }).then(doc => {
-            point = doc.pointbid;
+            if (doc) {
+                point = doc.pluspoint - doc.minuspoint;
+
+            }
         });
 
         var entity = {
@@ -524,86 +531,120 @@ class userController {
     //----------get-----------------------
     async showManageUser(req, res) {
         var arrbid = [];
-        var arrsell = [];
-        var regist = [];
-        await dbmanageuser.find({
-            type: false
+        await db.find({
+            status: "Bidder"
         }).then(docs => {
             docs.forEach(element => {
-                // if (element.type) {
-                //     arrsell.push(element);
-                // }
-                // else
                 arrbid.push(element);
             })
         });
+        var regist = [];
 
-        // await dbregisterseller.find({}).then(docs => {
-        //     docs.forEach(element => {
-        //         regist.push(element);
-        //     });
-        // });
+
+        await dbregisterseller.find({}).then(docs => {
+            docs.forEach(element => {
+                regist.push(element);
+            });
+        });
+        for (var i = 0; i < arrbid.length; i++) {
+            arrbid[i].pluspoint = 0;
+            arrbid[i].minuspoint = 0;
+            arrbid[i].pointbid = 0;
+            await dbpointbid.findOne({
+                user: arrbid[i].name
+            }).then(doc => {
+                if (doc) {
+                    arrbid[i].pluspoint = doc.pluspoint;
+                    arrbid[i].minuspoint = doc.minuspoint;
+                    arrbid[i].pointbid = doc.pluspoint - doc.minuspoint;
+
+                }
+            })
+        }
         var checkbid = false;
         // var checksell = false;
         // var checkregist = false;
         if (arrbid.length === 0) {
             checkbid = true;
         }
-        // if (arrsell.length === 0) {
-        //     checksell = true;
-        // }
-        // if (regist.length === 0) {
-        //     checkregist = true;
-        // }
         res.render('bidder', {
             title: "Manage user",
             listbid: arrbid,
-            // listsell: arrsell,
-            // listregist: regist,
             checkbid,
-            // checksell,
-            // checkregist,
-            // totalregist: regist.length,
+            totalregist: regist.length,
         });
     }
     async showListSell(req, res) {
-        // var arrbid = [];
         var arrsell = [];
-        // var regist = [];
-        await dbmanageuser.find({
-            type: true
+        await db.find({
+            status: "Seller"
         }).then(docs => {
             docs.forEach(element => {
                 arrsell.push(element);
             })
         });
+        for (var i = 0; i < arrsell.length; i++) {
+            await dbproduct.find({
+                user: arrsell[i].name
+            }).then(docs => {
+                arrsell[i].totalproduct = docs.length;
+            })
+        }
 
-        // await dbregisterseller.find({}).then(docs => {
-        //     docs.forEach(element => {
-        //         regist.push(element);
-        //     });
-        // });
-        // var checkbid = false;
+        for (var i = 0; i < arrsell.length; i++) {
+            arrsell[i].pluspoint = 0;
+            arrsell[i].minuspoint = 0;
+            arrsell[i].pointbid = 0;
+            await dbpointbid.findOne({
+                user: arrsell[i].name
+            }).then(doc => {
+                if (doc) {
+                    arrsell[i].pluspoint = doc.pluspoint;
+                    arrsell[i].minuspoint = doc.minuspoint;
+                    arrsell[i].pointbid = doc.pluspoint - doc.minuspoint;
+
+                }
+            })
+        }
+
+        for (var i = 0; i < arrsell.length; i++) {
+            var rate = [];
+            await dbreview.find({
+                user: arrsell[i].name
+            }).then(docs => {
+                docs.forEach(element => {
+                    rate.push(element);
+                });
+            });
+            var temp = 0;
+            var count = 0;
+            for (var j = 0; j < rate.length; j++) {
+                if (rate[j].user === arrsell[i].name) {
+                    temp = temp + rate[j].rate;
+                    count = count + 1;
+                }
+            }
+            if (count === 0) {
+                count = 1;
+            }
+            temp = temp / count;
+            arrsell[i].rate = temp;
+        }
         var checksell = false;
-        // var checkregist = false;
-        // if (arrbid.length === 0) {
-        //     checkbid = true;
-        // }
         if (arrsell.length === 0) {
             checksell = true;
         }
-        // if (regist.length === 0) {
-        //     checkregist = true;
-        // }
+        var regist = [];
+        await dbregisterseller.find({}).then(docs => {
+            docs.forEach(element => {
+                regist.push(element);
+            });
+        });
         res.render('seller', {
             title: "Manage user",
-            // listbid: arrbid,
             listsell: arrsell,
-            // listregist: regist,
-            // checkbid,
             checksell,
-            // checkregist,
-            // totalregist: regist.length,
+            totalregist: regist.length
         });
     }
     async showRegister(req, res) {
@@ -628,27 +669,6 @@ class userController {
             // checksell,
             checkregist,
             totalregist: regist.length,
-        });
-    }
-    async showManageProduct(req, res) {
-        var listcate = [];
-        var product = [];
-        await dbcategory.find({}).then(docs => {
-            docs.forEach(element => {
-                listcate.push(element);
-            });
-        });
-        await dbproduct.find({}).then(docs => {
-            docs.forEach(element => {
-                product.push(element);
-            })
-        });
-
-
-        res.render('manageproduct', {
-            tittle: "Manage product",
-            product,
-            listcate,
         });
     }
     async showManageCategory(req, res) {
@@ -714,6 +734,19 @@ class userController {
                 })
             });
         }
+        for (var i = 0; i < product.length; i++) {
+            product[i].soluot = 0;
+            await dbbidding.findOne({
+                idsanpham: product[i]._id.toString()
+            }).then(doc => {
+                if (doc) {
+                    product[i].soluot = doc.soluot;
+
+                }
+            })
+        }
+
+        console.log(product);
         res.render('manageproduct', {
             tittle: "Manage product",
             product,
@@ -729,11 +762,6 @@ class userController {
         }).then(doc => {
             acc = doc;
         })
-        await dbmanageuser.findOne({
-            name
-        }).then(doc => {
-            manuser = doc;
-        })
         if (acc.length === 0) {
             res.redirect('/users/manageuser/register');
 
@@ -747,16 +775,6 @@ class userController {
             var options = {
                 multi: true
             }
-            var myquery1 = {
-                _id: ObjectId(manuser._id)
-            }
-            var changMan = {
-                type: true,
-            }
-            var options1 = {
-                multi: true,
-            }
-            await dbmanageuser.update(myquery1, changMan, options1);
             // usermodels.UpdateInfoAccount(changeAcc,iduser);
             await db.update(myquery, changeAcc, options);
             await dbregisterseller.findOneAndRemove({
@@ -826,19 +844,13 @@ class userController {
     async setPostCancelSeller(req, res) {
         var name = req.body.leveldown;
         var acc = {};
-        var manuser = {};
         await db.findOne({
             name
         }).then(doc => {
             acc = doc;
         })
-        await dbmanageuser.findOne({
-            name
-        }).then(doc => {
-            manuser = doc;
-        })
         if (acc.length === 0) {
-            res.redirect('/users/manageuser/register');
+            res.redirect('/users/manageuser/listsell');
 
         } else {
             var myquery = {
@@ -852,20 +864,7 @@ class userController {
             }
             // usermodels.UpdateInfoAccount(changeAcc,iduser);
             await db.update(myquery, changeAcc, options);
-            var myquery1 = {
-                _id: ObjectId(manuser._id)
-            }
-            var changMan = {
-                type: false,
-            }
-            var options1 = {
-                multi: true,
-            }
-            await dbmanageuser.update(myquery1, changMan, options1);
-            await dbregisterseller.findOneAndRemove({
-                name
-            });
-            res.redirect('/users/manageuser/register');
+            res.redirect('/users/manageuser/listsell');
         }
     }
 
