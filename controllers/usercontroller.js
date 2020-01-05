@@ -650,15 +650,15 @@ class userController {
         }).then(doc => {
             acc = doc;
         })
-        await dbmanageuser.findOne({ name }).then(doc => {
+        await dbmanageuser.findOne({
+            name
+        }).then(doc => {
             manuser = doc;
         })
-        if(acc.length===0)
-        {
+        if (acc.length === 0) {
             res.redirect('/users/manageuser/register');
 
-        }
-        else{
+        } else {
             var myquery = {
                 _id: ObjectId(acc._id)
             }
@@ -668,26 +668,30 @@ class userController {
             var options = {
                 multi: true
             }
-            var myquery1={
-                _id:ObjectId(manuser._id)
+            var myquery1 = {
+                _id: ObjectId(manuser._id)
             }
-            var changMan={
-                type:true,
+            var changMan = {
+                type: true,
             }
-            var options1={
-                multi:true,
+            var options1 = {
+                multi: true,
             }
-            await dbmanageuser.update(myquery1,changMan,options1);
+            await dbmanageuser.update(myquery1, changMan, options1);
             // usermodels.UpdateInfoAccount(changeAcc,iduser);
             await db.update(myquery, changeAcc, options);
-            await dbregisterseller.findOneAndRemove({ name });
+            await dbregisterseller.findOneAndRemove({
+                name
+            });
             res.redirect('/users/manageuser/register');
         }
-        
+
     }
     async setPostRegistDelete(req, res) {
         var name = req.body.id;
-        await dbregisterseller.findOneAndRemove({ name });
+        await dbregisterseller.findOneAndRemove({
+            name
+        });
         res.redirect('/users/manageuser/register');
     }
 
@@ -731,22 +735,24 @@ class userController {
         await dbcategory.update(myquery, changeCate, options);
         res.redirect('/users/managecategory');
     }
-    async setPostCancelSeller(req,res){
+    async setPostCancelSeller(req, res) {
         var name = req.body.leveldown;
         var acc = {};
-        var manuser={};
-        await db.findOne({ name }).then(doc => {
+        var manuser = {};
+        await db.findOne({
+            name
+        }).then(doc => {
             acc = doc;
         })
-        await dbmanageuser.findOne({ name }).then(doc => {
+        await dbmanageuser.findOne({
+            name
+        }).then(doc => {
             manuser = doc;
         })
-        if(acc.length===0)
-        {
+        if (acc.length === 0) {
             res.redirect('/users/manageuser/register');
 
-        }
-        else{
+        } else {
             var myquery = {
                 _id: ObjectId(acc._id)
             }
@@ -758,19 +764,64 @@ class userController {
             }
             // usermodels.UpdateInfoAccount(changeAcc,iduser);
             await db.update(myquery, changeAcc, options);
-            var myquery1={
-                _id:ObjectId(manuser._id)
+            var myquery1 = {
+                _id: ObjectId(manuser._id)
             }
-            var changMan={
-                type:false,
+            var changMan = {
+                type: false,
             }
-            var options1={
-                multi:true,
+            var options1 = {
+                multi: true,
             }
-            await dbmanageuser.update(myquery1,changMan,options1);
-            await dbregisterseller.findOneAndRemove({ name });
+            await dbmanageuser.update(myquery1, changMan, options1);
+            await dbregisterseller.findOneAndRemove({
+                name
+            });
             res.redirect('/users/manageuser/register');
         }
+    }
+
+
+    //post my cart
+    postDeleteMyCart(req, res) {
+        res.send(req.params.id);
+        // var checkuser = false;
+        // var nameuser;
+        // if (req.user) {
+        //     checkuser = true;
+        //     nameuser = req.user.name;
+        //     var isSeller = true;
+        //     if (req.user.status != "Seller") {
+        //         isSeller = false;
+        //     }
+        // }
+
+        // var cart = [];
+        // await dbcart.find({
+        //     user: req.user.name
+        // }).then(docs => {
+        //     docs.forEach(element => {
+        //         cart.push(element);
+        //     })
+        // });
+
+        // // ObjectId;
+
+        // for (var i = 0; i < cart.length; i++) {
+        //     await dbproduct.findOne({
+        //         _id: ObjectId(cart[i].idsanpham)
+        //     }).then(doc => {
+        //         cart[i].tensp = doc.ten;
+        //         cart[i].seller = doc.user;
+        //         cart[i].image = doc.image[0];
+        //     });
+        // }
+        // res.render('mycart', {
+        //     title: 'My cart',
+        //     checkuser,
+        //     nameuser,
+        //     cart
+        // });
     }
 
 }

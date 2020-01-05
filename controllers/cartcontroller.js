@@ -8,6 +8,9 @@ const dbproduct = productmodels.getProduct;
 const cartmodels = require('../models/cart');
 const dbcart = cartmodels.getCart;
 
+const pointbidmodels = require('../models/pointbidder');
+const dbpointbid = pointbidmodels.getpointbidder;
+
 const watchlistmodels = require('../models/watchlist');
 const dbwatchlist = watchlistmodels.getWatchlist;
 const moment = require('moment');
@@ -17,229 +20,368 @@ class CartController {
 
         var idsanpham = req.params.id;
         var giadau = req.body.giadau;
+        console.log(giadau);
         var user = req.user.name;
+        var pointbiduser = {};
+        await dbpointbid.findOne({
+            user
+        }).then(doc => {
+            pointbiduser = doc;
+        });
 
+        var checkcanbid = true;
+        var pointbid = 0;
+
+        if (pointbiduser && (pointbiduser.minuspoint + pointbiduser.pluspoint) > 9) {
+            pointbid = pointbiduser.minuspoint / (pointbiduser.pluspoint + pointbiduser.minuspoint);
+            if (pointbid > 0.2) {
+                checkcanbid = false;
+            }
+
+        }
         var bid = {};
         var product = {};
         var checkdaugia = {
             ischecked: false,
             msg: ""
         };
+        if (checkcanbid) {
+            await dbbidding.findOne({
+                idsanpham
+            }).then(doc => {
+                bid = doc;
+            });
 
-        await dbbidding.findOne({
-            idsanpham
-        }).then(doc => {
-            bid = doc;
-        });
+            var o_id = new ObjectId(idsanpham);
 
-        var o_id = new ObjectId(idsanpham);
+            await dbproduct.findOne({
+                _id: o_id
+            }).then(doc => {
+                product = doc;
+            });
 
-        await dbproduct.findOne({
-            _id: o_id
-        }).then(doc => {
-            product = doc;
-        });
+            const now = moment(new Date());
+            const time = product.datetime;
+            const c = now.diff(time, 'seconds');
 
-        const now = moment(new Date());
-        const time = product.datetime;
-        const c = now.diff(time, 'seconds');
-        
-        if (product.datetimeproduct * 24 * 3600 - c + product.moretime <= 0) {
-            checkdaugia.ischecked = true;
-            checkdaugia.msg = "Thời gian đấu giá sản phẩm này đã kết thúc.";
-        } else {
-            var giatoithieu = 0;
-            if (bid === null) {
-                giatoithieu = product.giahientai;
+            if (product.datetimeproduct * 24 * 3600 - c + product.moretime <= 0) {
+                checkdaugia.ischecked = true;
+                checkdaugia.msg = "Time bidding this product has ended.";
             } else {
-                giatoithieu = bid.bidding[bid.bidding.length - 1].giadau;
-            }
-
-            if (giadau >= giatoithieu) {
-                var today = new Date();
-                var dd = today.getDate();
-                var mm = today.getMonth() + 1; //January is 0!
-                var hh = today.getHours();
-                var ii = today.getMinutes();
-                var yyyy = today.getFullYear();
-                if (dd < 10) {
-                    dd = '0' + dd;
-                }
-                if (mm < 10) {
-                    mm = '0' + mm;
-                }
-                if (hh < 10) {
-                    hh = '0' + hh;
-                }
-                if (ii < 10) {
-                    ii = '0' + ii;
-                }
-                var today = yyyy + '/' + mm + '/' + dd + " " + hh + ":" + ii;
+                var giatoithieu = 0;
                 if (bid === null) {
-                    var entity = {
-                        idsanpham,
-                        bidding: [{
+                    giatoithieu = product.giahientai;
+                } else {
+                    giatoithieu = bid.bidding[bid.bidding.length - 1].giadau;
+                }
+                if (giadau >= giatoithieu) {
+                    var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth() + 1; //January is 0!
+                    var hh = today.getHours();
+                    var ii = today.getMinutes();
+                    var yyyy = today.getFullYear();
+                    if (dd < 10) {
+                        dd = '0' + dd;
+                    }
+                    if (mm < 10) {
+                        mm = '0' + mm;
+                    }
+                    if (hh < 10) {
+                        hh = '0' + hh;
+                    }
+                    if (ii < 10) {
+                        ii = '0' + ii;
+                    }
+                    var today = yyyy + '/' + mm + '/' + dd + " " + hh + ":" + ii;
+                    if (bid === null) {
+                        var entity = {
+                            idsanpham,
+                            bidding: [{
+                                giadau,
+                                user,
+                                datebid: today,
+                            }],
+                            soluot: 1,
+                            currentwinner: user,
+                            selling: true
+                        }
+                        biddingmodels.insert(entity);
+                    } else {
+                        bid.bidding.push({
                             giadau,
                             user,
                             datebid: today,
-                        }],
-                        soluot: 1,
-                        currentwinner: user,
-                        selling: true
-                    }
-                    biddingmodels.insert(entity);
-                } else {
-                    bid.bidding.push({
-                        giadau,
-                        user,
-                        datebid: today,
-                    });
-                    bid.bidding[bid.bidding.length - 1]._id = undefined;
-                    bid.soluot += 1;
+                        });
+                        bid.bidding[bid.bidding.length - 1]._id = undefined;
+                        bid.soluot += 1;
 
-                    for (var i = bid.bidding.length - 1; i >= 0; i--) {
-                        if (i === 0) {
-                            bid.currentwinner = bid.bidding[0].user;
-                            break;
+                        for (var i = bid.bidding.length - 1; i >= 0; i--) {
+                            if (i === 0) {
+                                bid.currentwinner = bid.bidding[0].user;
+                                break;
+                            }
+                            if (bid.bidding[i].giadau > bid.bidding[i - 1].giadau) {
+                                bid.currentwinner = bid.bidding[i].user;
+                                break;
+                            }
                         }
-                        if (bid.bidding[i].giadau > bid.bidding[i - 1].giadau) {
-                            bid.currentwinner = bid.bidding[i].user;
-                            break;
+
+                        var myquery = {
+                            _id: bid._id
+                        };
+                        var options = {
+                            multi: true
                         }
+                        await dbbidding.update(myquery, bid, options);
+                    }
+                    checkdaugia.ischecked = true;
+                    checkdaugia.msg = "Bid successful!";
+
+                    const now = moment(new Date());
+                    const time = product.datetime;
+                    const c = now.diff(time, 'seconds');
+                    if (product.datetimeproduct * 24 * 3600 - c + product.moretime <= 5 * 60) {
+                        product.moretime = product.moretime + 10 * 60;
                     }
 
                     var myquery = {
-                        _id: bid._id
+                        _id: product._id
                     };
                     var options = {
                         multi: true
                     }
-                    await dbbidding.update(myquery, bid, options);
+                    var update = {
+                        moretime: product.moretime
+                    }
+
+                    await dbproduct.update(myquery, update, options);
+                } else {
+                    checkdaugia.ischecked = true;
+                    checkdaugia.msg = "The bid must be higher than the previous bidder";
                 }
-                checkdaugia.ischecked = true;
-                checkdaugia.msg = "Đấu giá thành công";
+            }
 
-                const now = moment(new Date());
-                const time = product.datetime;
-                const c = now.diff(time, 'seconds');
-                if (product.datetimeproduct * 24 * 3600 - c + product.moretime <= 5 * 60) {
-                    product.moretime = product.moretime + 10 * 60;
+
+            var checkuser = false;
+            var isSeller = true;
+            if (req.user) {
+                checkuser = true;
+                if (req.user.status != "Seller") {
+                    isSeller = false;
                 }
-
-                var myquery = {
-                    _id: product._id
-                };
-                var options = {
-                    multi: true
-                }
-                var update = {
-                    moretime: product.moretime
-                }
-
-                await dbproduct.update(myquery, update, options);
-            } else {
-                checkdaugia.msg = "Mức giá đấu phải cao hơn người đã đấu trước đó";
             }
-        }
-
-        var checkuser = false;
-        var isSeller = true;
-        if (req.user) {
-            checkuser = true;
-            if (req.user.status != "Seller") {
-                isSeller = false;
-            }
-        }
-        var numofbid = 0;
-        var numofbid = 0;
-        var biddingofproduct = {};
-        await dbbidding.findOne({
-            idsanpham
-        }).then(doc => {
-            if (doc) {
-                numofbid = doc.soluot;
-                biddingofproduct = doc;
-            }
-        });
-
-        //detail html
-        var strtemp = "";
-        var strghichu = product.ghichu;
-        var arrdetails = [];
-        for (var i = 0; i < strghichu.length; i++) {
-            if (strghichu[i] === '.' || strghichu[i] === ',') {
-                arrdetails.push({
-                    msg: strtemp
-                });
-                strtemp = "";
-            } else {
-                strtemp += strghichu[i];
-            }
-        }
-        if (strtemp) {
-            arrdetails.push({
-                msg: strtemp
-            })
-        }
-        //mask bid winner
-        var currentwinner = "";
-        if (biddingofproduct.currentwinner) {
-            currentwinner = biddingofproduct.currentwinner.toString();
-
-        } else {
-            currentwinner = "Nobody";
-        }
-        var nearproducts = [];
-        await dbproduct.find({
-            selling: true,
-            loai: product.loai
-        }).limit(5).then(docs => {
-            docs.forEach(element => {
-                nearproducts.push(element);
-            })
-        });
-
-        //bidding
-        for (var i = 0; i < nearproducts.length; i++) {
-            nearproducts[i].soluot = 0;
+            var numofbid = 0;
+            var numofbid = 0;
+            var biddingofproduct = {};
             await dbbidding.findOne({
-                idsanpham: nearproducts[i]._id.toString()
+                idsanpham
             }).then(doc => {
                 if (doc) {
-                    nearproducts[i].soluot = doc.soluot;
+                    numofbid = doc.soluot;
+                    biddingofproduct = doc;
                 }
             });
-        }
 
-        //countimer
-
-        for (var i = 0; i < nearproducts.length; i++) {
-
-            const time = nearproducts[i].datetime;
-            const c = now.diff(time, 'seconds');
-            if (c < 600) {
-                nearproducts[i].new = true;
+            //detail html
+            var strtemp = "";
+            var strghichu = product.ghichu;
+            var arrdetails = [];
+            for (var i = 0; i < strghichu.length; i++) {
+                if (strghichu[i] === '.' || strghichu[i] === ',') {
+                    arrdetails.push({
+                        msg: strtemp
+                    });
+                    strtemp = "";
+                } else {
+                    strtemp += strghichu[i];
+                }
             }
+            if (strtemp) {
+                arrdetails.push({
+                    msg: strtemp
+                })
+            }
+            //mask bid winner
+            var currentwinner = "";
+            if (biddingofproduct.currentwinner) {
+                currentwinner = biddingofproduct.currentwinner.toString();
 
-            if ((nearproducts[i].datetimeproduct * 24 * 3600 + nearproducts[i].moretime) > c) {
-                var temp = nearproducts[i].datetimeproduct * 24 * 3600 + nearproducts[i].moretime - c;
-                nearproducts[i].datetimeproduct = temp;
             } else {
-                const entity = {
-                    selling: false
-                };
-
-                const myquery = {
-                    _id: nearproducts[i]._id
-                };
-                var options = {
-                    multi: true
-                };
-
-                await dbproduct.update(myquery, entity, options);
-                nearproducts[i].selling = false;
-
+                currentwinner = "Nobody";
             }
+            var nearproducts = [];
+            await dbproduct.find({
+                selling: true,
+                loai: product.loai
+            }).limit(5).then(docs => {
+                docs.forEach(element => {
+                    nearproducts.push(element);
+                })
+            });
+
+            //bidding
+            for (var i = 0; i < nearproducts.length; i++) {
+                nearproducts[i].soluot = 0;
+                await dbbidding.findOne({
+                    idsanpham: nearproducts[i]._id.toString()
+                }).then(doc => {
+                    if (doc) {
+                        nearproducts[i].soluot = doc.soluot;
+                    }
+                });
+            }
+
+            //countimer
+
+            for (var i = 0; i < nearproducts.length; i++) {
+
+                const time = nearproducts[i].datetime;
+                const c = now.diff(time, 'seconds');
+                if (c < 600) {
+                    nearproducts[i].new = true;
+                }
+
+                if ((nearproducts[i].datetimeproduct * 24 * 3600 + nearproducts[i].moretime) > c) {
+                    var temp = nearproducts[i].datetimeproduct * 24 * 3600 + nearproducts[i].moretime - c;
+                    nearproducts[i].datetimeproduct = temp;
+                } else {
+                    const entity = {
+                        selling: false
+                    };
+
+                    const myquery = {
+                        _id: nearproducts[i]._id
+                    };
+                    var options = {
+                        multi: true
+                    };
+
+                    await dbproduct.update(myquery, entity, options);
+                    nearproducts[i].selling = false;
+
+                }
+            }
+
+
+        } else {
+            checkdaugia.msg = "Your rating is lower than the specified";
+            await dbbidding.findOne({
+                idsanpham
+            }).then(doc => {
+                bid = doc;
+            });
+
+            var o_id = new ObjectId(idsanpham);
+
+            await dbproduct.findOne({
+                _id: o_id
+            }).then(doc => {
+                product = doc;
+            });
+
+            const now = moment(new Date());
+
+            var checkuser = false;
+            var isSeller = true;
+            if (req.user) {
+                checkuser = true;
+                if (req.user.status != "Seller") {
+                    isSeller = false;
+                }
+            }
+            var numofbid = 0;
+            var numofbid = 0;
+            var biddingofproduct = {};
+            await dbbidding.findOne({
+                idsanpham
+            }).then(doc => {
+                if (doc) {
+                    numofbid = doc.soluot;
+                    biddingofproduct = doc;
+                }
+            });
+
+            //detail html
+            var strtemp = "";
+            var strghichu = product.ghichu;
+            var arrdetails = [];
+            for (var i = 0; i < strghichu.length; i++) {
+                if (strghichu[i] === '.' || strghichu[i] === ',') {
+                    arrdetails.push({
+                        msg: strtemp
+                    });
+                    strtemp = "";
+                } else {
+                    strtemp += strghichu[i];
+                }
+            }
+            if (strtemp) {
+                arrdetails.push({
+                    msg: strtemp
+                })
+            }
+            //mask bid winner
+            var currentwinner = "";
+            if (biddingofproduct.currentwinner) {
+                currentwinner = biddingofproduct.currentwinner.toString();
+
+            } else {
+                currentwinner = "Nobody";
+            }
+            var nearproducts = [];
+            await dbproduct.find({
+                selling: true,
+                loai: product.loai
+            }).limit(5).then(docs => {
+                docs.forEach(element => {
+                    nearproducts.push(element);
+                })
+            });
+
+            //bidding
+            for (var i = 0; i < nearproducts.length; i++) {
+                nearproducts[i].soluot = 0;
+                await dbbidding.findOne({
+                    idsanpham: nearproducts[i]._id.toString()
+                }).then(doc => {
+                    if (doc) {
+                        nearproducts[i].soluot = doc.soluot;
+                    }
+                });
+            }
+
+            //countimer
+
+            for (var i = 0; i < nearproducts.length; i++) {
+
+                const time = nearproducts[i].datetime;
+                const c = now.diff(time, 'seconds');
+                if (c < 600) {
+                    nearproducts[i].new = true;
+                }
+
+                if ((nearproducts[i].datetimeproduct * 24 * 3600 + nearproducts[i].moretime) > c) {
+                    var temp = nearproducts[i].datetimeproduct * 24 * 3600 + nearproducts[i].moretime - c;
+                    nearproducts[i].datetimeproduct = temp;
+                } else {
+                    const entity = {
+                        selling: false
+                    };
+
+                    const myquery = {
+                        _id: nearproducts[i]._id
+                    };
+                    var options = {
+                        multi: true
+                    };
+
+                    await dbproduct.update(myquery, entity, options);
+                    nearproducts[i].selling = false;
+
+                }
+            }
+
         }
         res.render('detailproduct', {
             title: 'Detail product',
@@ -251,7 +393,6 @@ class CartController {
             arrdetails,
             nearproducts
         });
-
     }
 
     async postAddToCart(req, res) {
@@ -268,7 +409,7 @@ class CartController {
         const c = now.diff(time, 'seconds');
         if (product.datetimeproduct * 24 * 3600 - c + product.moretime <= 0) {
             checkdaugia.ischecked = true;
-            checkdaugia.msg = "Thời gian đấu giá sản phẩm này đã kết thúc.";
+            checkdaugia.msg = "Time bidding this product has ended.";
         } else {
             var today = new Date();
             var dd = today.getDate();
@@ -296,7 +437,7 @@ class CartController {
             var giaphaitra = giadau;
             var checkdaugia = {
                 ischecked: true,
-                msg: "Thêm vào giỏ hàng thành công"
+                msg: "Add to your cart successful!"
             };
             var entity = {
                 user: req.user.name,
@@ -427,6 +568,10 @@ class CartController {
             idsanpham,
             user: req.user.name
         }
+        var checkdaugia = {
+            ischecked: false,
+            msg: ""
+        };
         var checkwathlist = {};
         await dbwatchlist.findOne({
             idsanpham

@@ -4,24 +4,22 @@
         <div class="modal-content">
             <div class="modal-header">
 
-                <h5 class="modal-title" id="exampleModalLongTitle">Thông báo!</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Ring Ring!</h5>
             </div>
             <div class="modal-body">
-                <p id="setgia">Thông báo!</p>
+                <p id="setgia">Ring Ring!</p>
             </div>
-            <form method="POST">
-                <div class="modal-footer">
-                    <input class="btn btn-outline-primary" formaction="/products/detailproduct/{{product._id}}/bid"
-                        type="submit" value="accept">
-                    <button class="btn btn-outline-danger" data-dismiss="modal" id="product">cacel</button>
-                </div>
-            </form>
+            <div class="modal-footer">
+                <input class="btn btn-outline-primary" formaction="/products/detailproduct/{{product._id}}/bid"
+                    type="submit" value="accept">
+                <button class="btn btn-outline-danger" data-dismiss="modal" id="product">cacel</button>
+            </div>
         </div>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
     $('#clickbid').click(() => {
-        $('#setgia').text("Xác nhận giá đấu là "+ $('#giadau').val()+" đ");
+        $('#setgia').text("Confirm price bidding is " + $('#giadau').val() + " đ");
     })
 </script>

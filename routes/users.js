@@ -83,7 +83,9 @@ router.get('/manageuser/register', (req, res) => {
   controllers.showRegister(req, res);
 })
 //post
-
+router.post('/mycart/delete/:id',(req, res)=>{
+  controllers.postDeleteMyCart(req, res);
+})
 router.post('/account', function (req, res) {
   controllers.setPostAccount(req, res);
 });
