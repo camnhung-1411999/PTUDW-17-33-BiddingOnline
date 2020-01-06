@@ -133,5 +133,5 @@ router.post('/renamecate', (req, res) => {
 })
 router.post('/cancel', (req, res) => {
   controllers.setPostCancelSeller(req, res);
-})
+});
 module.exports = router;

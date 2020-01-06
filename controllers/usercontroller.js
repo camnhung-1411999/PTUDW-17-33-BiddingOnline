@@ -211,8 +211,8 @@ class userController {
     async showAccount(req, res) {
         var checkuser = false;
         var nameuser;
-        var rate=0;
-        var count=0;
+        var rate = 0;
+        var count = 0;
         if (req.user) {
             checkuser = true;
             nameuser = req.user.name;
@@ -220,27 +220,26 @@ class userController {
             if (req.user.status != "Seller") {
                 isSeller = false;
             }
-            else{
-                await dbreview.find({user:req.user.name}).then(docs=>{
-                    docs.forEach(element=>{
-                        rate=rate+ element.rate;
-                        count=count+1;
+            else {
+                await dbreview.find({ user: req.user.name }).then(docs => {
+                    docs.forEach(element => {
+                        rate = rate + element.rate;
+                        count = count + 1;
                     });
                     console.log(rate);
                 })
-                if(count===0)
-                {
-                    count=1;
+                if (count === 0) {
+                    count = 1;
                 }
-                rate=rate/count;
+                rate = rate / count;
             }
         }
 
-        var pointbid=0;
-        await dbpointbid.findOne({user:req.user.name}).then(doc=>{
-           if(doc){
-            pointbid=doc.pluspoint-doc.minuspoint;
-           } 
+        var pointbid = 0;
+        await dbpointbid.findOne({ user: req.user.name }).then(doc => {
+            if (doc) {
+                pointbid = doc.pluspoint - doc.minuspoint;
+            }
         });
         res.render('account', {
             title: 'Account',
@@ -322,9 +321,9 @@ class userController {
                 cart[i].seller = doc.user;
                 cart[i].image = doc.image[0];
             });
-            await dbbidding.findOne({idsanpham:cart[i].idsanpham}).then(doc=>{
-                cart[i].numbid=doc.bidding;
-                cart[i].num=doc.soluot;
+            await dbbidding.findOne({ idsanpham: cart[i].idsanpham }).then(doc => {
+                cart[i].numbid = doc.bidding;
+                cart[i].num = doc.soluot;
             })
         }
         res.render('mycart', {
@@ -362,8 +361,8 @@ class userController {
             }).then(doc => {
                 arrproduct.push(doc);
             })
-            if(arrbidding[i].currentwinner===req.user.name){
-                arrproduct[i].curwin=true;
+            if (arrbidding[i].currentwinner === req.user.name) {
+                arrproduct[i].curwin = true;
             }
         }
 
@@ -587,7 +586,35 @@ class userController {
         await registerseller.insert(entity);
         res.redirect('/');
     }
+    // async setPostDeleteBidding(req, res) {
+    //     var idpro = req.params.idpro;
+    //     var idbid = req.params.idbidder;
+    //     var newListBid = [];
+    //     var oldlist = [];
+    //     var acc={};
+    //     await dbbidding.findOne({ idsanpham: idpro }).then(doc => {
+    //         oldlist = doc.bidding;
+    //         acc=doc;
+    //     });
+    //     for (var i = 0; i < oldlist.length; i++) {
+    //         if (oldlist[i].user != idbid) {
+    //             newListBid.push(oldlist[i]);
+    //         }
+    //     }
+    //     var myquery = {
+    //         _id: ObjectId(acc._id)
+    //     }
+    //     var changeAcc = {
+    //         bidding:newListBid,
+    //     };
+    //     var options = {
+    //         multi: true
+    //     }
+    //     // usermodels.UpdateInfoAccount(changeAcc,iduser);
+    //     await dbbidding.update(myquery, changeAcc, options);
+    //     res.redirect('products/detailproduct/'+idpro);
 
+    // }
     //for admin
     //----------get-----------------------
     async showManageUser(req, res) {

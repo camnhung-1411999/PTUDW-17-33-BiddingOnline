@@ -13,6 +13,8 @@ const dbcategory = categoriesmodels.getCategory;
 const cartmodels = require('../models/cart');
 const dbcart = cartmodels.getCart;
 
+const pointbidcontroller = require('../models/pointbidder');
+const dbpointbid = pointbidcontroller.getpointbidder;
 
 const moment = require('moment');
 var ObjectId = require('mongodb').ObjectId;
@@ -313,6 +315,11 @@ class productController {
                 isSeller = false;
             }
         }
+        var isMine = false;
+        if (product.user === req.user.name) {
+            isMine = true;
+        }
+        console.log(isMine);
 
         //comment
         var reviews = [];
@@ -347,25 +354,25 @@ class productController {
             }
         });
 
-        //detail html
-        // var strtemp = "";
-        // var strghichu = product.ghichu;
-        // var arrdetails = [];
-        // for (var i = 0; i < strghichu.length; i++) {
-        //     if (strghichu[i] === '.' || strghichu[i] === ',') {
-        //         arrdetails.push({
-        //             msg: strtemp
-        //         });
-        //         strtemp = "";
-        //     } else {
-        //         strtemp += strghichu[i];
-        //     }
-        // }
-        // if (strtemp) {
-        //     arrdetails.push({
-        //         msg: strtemp
-        //     })
-        // }
+        // show list bidder
+        var listbid = [];
+        await dbbidding.findOne({ idsanpham: id }).then(doc => {
+            if (doc) {
+                listbid = doc.bidding;
+            }
+
+        });
+        for (var i = 0; i < listbid.length; i++) {
+            await dbpointbid.findOne({ user: listbid[i].user }).then(doc => {
+                if (doc) {
+                    listbid[i].point = doc.pluspoint - doc.minuspoint;
+
+                }
+                else {
+                    listbid[i].point = 0;
+                }
+            })
+        }
 
         //mask bid winner
         var currentwinner = "";
@@ -432,7 +439,9 @@ class productController {
         if (!avgrate) {
             avgrate = 0;
         }
-
+        // product.idsanpham = product._id.toString();
+        // console.log(id);
+        id = id + "";
         res.render('detailproduct', {
             title: 'Detail product',
             product: product,
@@ -444,7 +453,9 @@ class productController {
             numreviews: reviews.length,
             // arrdetails,
             currentwinner,
-            nearproducts
+            nearproducts,
+            listbid,
+            isMine,
         });
     }
 
