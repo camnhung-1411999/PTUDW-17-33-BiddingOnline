@@ -348,24 +348,24 @@ class productController {
         });
 
         //detail html
-        var strtemp = "";
-        var strghichu = product.ghichu;
-        var arrdetails = [];
-        for (var i = 0; i < strghichu.length; i++) {
-            if (strghichu[i] === '.' || strghichu[i] === ',') {
-                arrdetails.push({
-                    msg: strtemp
-                });
-                strtemp = "";
-            } else {
-                strtemp += strghichu[i];
-            }
-        }
-        if (strtemp) {
-            arrdetails.push({
-                msg: strtemp
-            })
-        }
+        // var strtemp = "";
+        // var strghichu = product.ghichu;
+        // var arrdetails = [];
+        // for (var i = 0; i < strghichu.length; i++) {
+        //     if (strghichu[i] === '.' || strghichu[i] === ',') {
+        //         arrdetails.push({
+        //             msg: strtemp
+        //         });
+        //         strtemp = "";
+        //     } else {
+        //         strtemp += strghichu[i];
+        //     }
+        // }
+        // if (strtemp) {
+        //     arrdetails.push({
+        //         msg: strtemp
+        //     })
+        // }
 
         //mask bid winner
         var currentwinner = "";
@@ -442,7 +442,7 @@ class productController {
             reviews,
             numofbid,
             numreviews: reviews.length,
-            arrdetails,
+            // arrdetails,
             currentwinner,
             nearproducts
         });
