@@ -22,13 +22,32 @@
 <div>
     {{!-- {{>navProducts}} --}}
 
-    <div class="container" style="margin-top: 150px;">
+    <div class="navigation">
+        <div class="row">
+            <div class="col-8">
+                <p class="nameweb" href="/">Bidding Together</p>
+            </div>
+            <div class="col-4 tab">
+                {{#if checkuser}}
+                <a class="rightnav" style="border: black;" href="/users/account">{{nameuser}}</a>
+                <a class="rightnav" style="border: black;" href="/users/signup">Log out</a>
+                {{/if}}
+            </div>
+        </div>
+
+
+
+
+    </div>
+    {{!--  end nav--}}
+
+    <div class="container" style="margin-top: 50px;">
         <p class="h2 text-center">Add bidding</p>
         <form onsubmit="return validate();" method="post">
 
             <div class="form-group row">
                 <div class="col-md-12">
-                    <label for="process" class=" col-form-label">Chọn ảnh sản phẩm</label><br>
+                    <label for="process" class=" col-form-label">Choose file picture for your product</label><br>
 
                     {{!-- <progress class="col-md-12" value="0" id="process" max="100">0%</progress> --}}
                     <input id="photo" class="file" type="file" name="mainimage" value="" onchange="getfile()">
@@ -37,7 +56,7 @@
 
                 </div>
                 <div class="col-md-12">
-                    <label for="process" class=" col-form-label">Chọn ảnh sản phẩm</label><br>
+                    <label for="process" class=" col-form-label">Choose file picture for your product</label><br>
 
                     {{!-- <progress class="col-md-12" value="0" id="process" max="100">0%</progress> --}}
                     <input id="photo1" class="file" type="file" name="mainimage" value="" onchange="getfile1()">
@@ -46,7 +65,7 @@
 
                 </div>
                 <div class="col-md-12">
-                    <label for="process" class=" col-form-label">Chọn ảnh sản phẩm</label><br>
+                    <label for="process" class=" col-form-label">Choose file picture for your product</label><br>
 
                     {{!-- <progress class="col-md-12" value="0" id="process" max="100">0%</progress> --}}
                     <input id="photo2" class="file" type="file" name="mainimage" value="" onchange="getfile2()">

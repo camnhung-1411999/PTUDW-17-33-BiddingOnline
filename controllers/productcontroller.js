@@ -261,6 +261,7 @@ class productController {
             title: 'Upload product',
             checkuser,
             isSeller,
+            nameuser:req.user.name,
         });
     }
 

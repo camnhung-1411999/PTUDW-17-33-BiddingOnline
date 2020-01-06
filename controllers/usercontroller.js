@@ -302,7 +302,8 @@ class userController {
             checkuser,
             nameuser,
             account: req.user,
-            list: arrproduct
+            list: arrproduct,
+            isSeller
         });
     }
     async showCart(req, res) {
@@ -347,7 +348,8 @@ class userController {
             title: 'My cart',
             checkuser,
             nameuser,
-            cart
+            cart,
+            isSeller,
         });
     }
     async showMyAutions(req, res) {
@@ -393,7 +395,8 @@ class userController {
             checkuser,
             nameuser,
             account: req.user,
-            list: arrproduct
+            list: arrproduct,
+            isSeller,
         })
     }
 
@@ -413,6 +416,7 @@ class userController {
             title: 'My Bid',
             checkuser,
             nameuser,
+            isSeller,
         });
     }
     async showHistory(req, res) {
@@ -451,7 +455,8 @@ class userController {
             checkuser,
             nameuser,
             account: req.user,
-            list: arrhistory
+            list: arrhistory,
+            isSeller
         })
     }
     async showMyProducts(req, res) {
@@ -479,7 +484,8 @@ class userController {
             checkuser,
             nameuser,
             account: req.user,
-            list: arrproduct
+            list: arrproduct,
+            isSeller,
         })
     }
 
