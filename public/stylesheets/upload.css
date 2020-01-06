@@ -1,95 +1,4 @@
-/* html,body
-{
-    width: 500px;
-    margin: auto;
-}
-.container
-{
-    width: 500px;
-    margin: 20px auto;
-}
 
-.preview
-{
-    padding: 10px;
-    position: relative;
-}
-
-.preview i
-{
-    color: white;
-    font-size: 35px;
-    transform: translate(50px,130px);
-}
-
-.preview-img
-{
-    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.7);
-}
-
-.browse-button
-{
-    width: 100px;
-    height: 100px;
-    position: absolute; 
-    top: 10px;
-    left: 132px;
-    background: linear-gradient(180deg, transparent, black);
-    opacity: 0;
-    transition: 0.3s ease;
-}
-
-
-.browse-button:hover
-{
-    opacity: 1;
-}
-
-.browse-input
-{
-    width: 100px;
-    height: 100px;
-    border-radius: 100%;
-    transform: translate(-1px,-26px);
-    opacity: 0;
-}
-
-.form-group
-{
-    width:  500px;
-    margin: 10px auto;
-}
-
-.form-group input
-{
-    transition: 0.3s linear;
-}
-
-
-.form-group input:focus
-{
-    border: 1px solid crimson;
-    box-shadow: 0 0 0 0;
-}
-.form-group textarea
-{
-    transition: 0.3s linear;
-}
-
-
-.form-group textarea:focus
-{
-    border: 1px solid crimson;
-    box-shadow: 0 0 0 0;
-}
-
-.Error
-{
-    color: crimson;
-    font-size: 13px;
-} */
-
-/* Copy this code in your css file. */
 
 html,body
 {
@@ -174,4 +83,34 @@ html,body
 .Back
 {
     font-size: 25px;
+}
+.navigation{
+    height: 100px;
+    background-color: black;
+    width: 1400px !important;
+    margin-left: -500px !important;
+
+}
+.nameweb{
+    margin-left: 200px;
+    padding-top: 20px;
+    font-size: 30px;
+    color: rgb(236, 240, 12);
+}
+.navigation .tab{
+    font-size: 20px;
+    margin-top: 40px;
+    padding-left: 50px;
+}
+.tab p{
+    
+
+}
+.rightnav{
+    color: rgb(248, 247, 247) !important;
+    font-size: 20px;
+    margin-right: 20px;
+}
+.rightnav:hover{
+    color: rgb(219, 240, 34) !important;
 }

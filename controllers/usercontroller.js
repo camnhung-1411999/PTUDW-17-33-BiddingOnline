@@ -302,7 +302,8 @@ class userController {
             checkuser,
             nameuser,
             account: req.user,
-            list: arrproduct
+            list: arrproduct,
+            isSeller
         });
     }
     async showCart(req, res) {
@@ -339,15 +340,19 @@ class userController {
             await dbbidding.findOne({
                 idsanpham: cart[i].idsanpham
             }).then(doc => {
-                cart[i].numbid = doc.bidding;
-                cart[i].num = doc.soluot;
+                if (doc) {
+                    cart[i].numbid = doc.bidding;
+                    cart[i].num = doc.soluot;
+                }
+
             })
         }
         res.render('mycart', {
             title: 'My cart',
             checkuser,
             nameuser,
-            cart
+            cart,
+            isSeller,
         });
     }
     async showMyAutions(req, res) {
@@ -393,7 +398,8 @@ class userController {
             checkuser,
             nameuser,
             account: req.user,
-            list: arrproduct
+            list: arrproduct,
+            isSeller,
         })
     }
 
@@ -413,6 +419,7 @@ class userController {
             title: 'My Bid',
             checkuser,
             nameuser,
+            isSeller,
         });
     }
     async showHistory(req, res) {
@@ -451,7 +458,8 @@ class userController {
             checkuser,
             nameuser,
             account: req.user,
-            list: arrhistory
+            list: arrhistory,
+            isSeller
         })
     }
     async showMyProducts(req, res) {
@@ -479,7 +487,8 @@ class userController {
             checkuser,
             nameuser,
             account: req.user,
-            list: arrproduct
+            list: arrproduct,
+            isSeller,
         })
     }
 
