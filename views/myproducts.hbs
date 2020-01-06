@@ -37,10 +37,7 @@
                         </button>
                         {{>modaldeletecart}}
                     </div>
-
                     <!-- Modal -->
-
-
                 </div>
                 <div>
                     <table class="table">
@@ -49,16 +46,15 @@
                                 <th scope="col">Bidding cart</th>
                                 <th scope="col">Information</th>
                                 <th scope="col">Bid Price</th>
-                                {{!-- <th scope="col">Status</th> --}}
                                 <th scope="col">Status</th>
-                                <th scope="col"></th>
+                                <th scope="col">Edit</th>
                             </tr>
                         </thead>
                         {{#each list}}
                         <tbody>
                             <tr>
-                                <th scope="row"><a href="/products/detailproduct/{{this._id}}"><img
-                                            src="{{this.image}}" alt="" style="width:50px; height:50px;"></a></th>
+                                <th scope="row"><a href="/products/detailproduct/{{this._id}}"><img src="{{this.image}}"
+                                            alt="" style="width:50px; height:50px;"></a></th>
                                 <td style="width:200px;">{{this.ten}}
                                 </td>
                                 <td>{{this.giahientai}} đ</td>
@@ -67,7 +63,9 @@
                                 {{else}}
                                 <td>End Bid</td>
                                 {{/if}}
-
+                                <td><a href="/products/{{this._id}}/edit">
+                                        <i class="fas fa-edit" style="color: green;"></i>
+                                    </a></td>
                             </tr>
                         </tbody>
                         {{/each}}
@@ -84,11 +82,10 @@
 
 
 {{#section 'js'}}
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src=" https://code.jquery.com/jquery-3.4.1.min.js"> </script>
 </script>
-<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-
+<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js">
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -101,6 +98,5 @@
 <!-- Custom scripts for this template -->
 <script src="/javascripts/agency.min.js"></script>
 <script src="/../javascripts/mycart.js"></script>
-
 
 {{/section}}

@@ -1,0 +1,41 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="/../../../stylesheets/edittor.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+{{/section}}
+
+<div class="text-center mt-4 border-right" style="font-size: 24px;">Additional description information for the product
+</div>
+<div class="text-center mt-4 border-right" style="font-size: 24px;">
+    {{product.ten}}
+</div>
+<form action="" method="post">
+    <div>
+        {{>edittor}}
+    </div class="ustify-content-center">
+    <div class="row mt-4">
+        <div class="col-md-4"></div>
+        <input type="submit" class="btn btn-outline-primary" formaction="/products/{{product.idsanpham}}/edit"
+            value="Update">
+        <div class="col-md-2"></div>
+        <input type="submit" class="btn btn-outline-danger" formaction="/products/{{product.idsanpham}}/cancel"
+            value="Cancel">
+    </div>
+</form>
+<div>
+    <br><br>
+    <br><br>
+    <br><br>
+</div>
+{{#section 'js'}}
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="/../../../javascripts/edittor.js"></script>
+<script src="/../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="/javascripts/agency.min.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+{{/section}}

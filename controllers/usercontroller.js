@@ -211,25 +211,28 @@ class userController {
     async showAccount(req, res) {
         var checkuser = false;
         var nameuser;
-        var rate=0;
+        var rate = 0;
         if (req.user) {
             checkuser = true;
             nameuser = req.user.name;
             var isSeller = true;
             if (req.user.status != "Seller") {
                 isSeller = false;
-            }
-            else{
-                await dbreview.findOne({user:req.user.name}).then(doc=>{
-                    rate=doc.rate;
+            } else {
+                await dbreview.findOne({
+                    user: req.user.name
+                }).then(doc => {
+                    rate = doc.rate;
                 })
             }
         }
-        var pointbid=0;
-        await dbpointbid.findOne({user:req.user.name}).then(doc=>{
-           if(doc){
-            pointbid=doc.pluspoint-doc.minuspoint;
-           } 
+        var pointbid = 0;
+        await dbpointbid.findOne({
+            user: req.user.name
+        }).then(doc => {
+            if (doc) {
+                pointbid = doc.pluspoint - doc.minuspoint;
+            }
         });
         res.render('account', {
             title: 'Account',
@@ -310,9 +313,11 @@ class userController {
                 cart[i].seller = doc.user;
                 cart[i].image = doc.image[0];
             });
-            await dbbidding.findOne({idsanpham:cart[i].idsanpham}).then(doc=>{
-                cart[i].numbid=doc.bidding;
-                cart[i].num=doc.soluot;
+            await dbbidding.findOne({
+                idsanpham: cart[i].idsanpham
+            }).then(doc => {
+                cart[i].numbid = doc.bidding;
+                cart[i].num = doc.soluot;
             })
         }
         res.render('mycart', {
@@ -344,16 +349,22 @@ class userController {
         })
 
         var arrproduct = [];
-        for (var i = 0; i < arrbidding.length; i++) {
+        console.log(arrbidding.length);
+        for (var i = 0; i < arrbidding.length; i++) { //5pt
             await dbproduct.findOne({
                 _id: ObjectId(arrbidding[i].idsanpham)
             }).then(doc => {
-                arrproduct.push(doc);
+                if (doc) { //3pt
+                    arrproduct.push(doc);
+                }
             })
-            if(arrbidding[i].currentwinner===req.user.name){
-                arrproduct[i].curwin=true;
+            console.log(arrproduct.length);
+            if (arrbidding[i].currentwinner === req.user.name) {
+                arrproduct[i].curwin = true;
             }
+            arrproduct[i].idsanpham = arrproduct[i]._id.toString();
         }
+        console.log(arrproduct);
 
         res.render('biddingproduct', {
             title: "My Autions",

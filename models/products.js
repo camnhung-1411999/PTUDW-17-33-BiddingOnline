@@ -24,6 +24,8 @@ var ProductsSchema = new mongoose.Schema({
     user: String,
     soluot: Number,
     curwin:Boolean,
+    idsanpham:String,
+    moreghichu: []
 }, {
     collection: "product"
 });

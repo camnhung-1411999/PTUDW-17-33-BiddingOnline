@@ -296,7 +296,6 @@ class productController {
             neartimeout: thoigiansaphet
         });
     }
-
     async showDetailProduct(req, res) {
         var id = req.params.id;
         var product = {};
@@ -346,26 +345,6 @@ class productController {
                 biddingofproduct = doc;
             }
         });
-
-        //detail html
-        // var strtemp = "";
-        // var strghichu = product.ghichu;
-        // var arrdetails = [];
-        // for (var i = 0; i < strghichu.length; i++) {
-        //     if (strghichu[i] === '.' || strghichu[i] === ',') {
-        //         arrdetails.push({
-        //             msg: strtemp
-        //         });
-        //         strtemp = "";
-        //     } else {
-        //         strtemp += strghichu[i];
-        //     }
-        // }
-        // if (strtemp) {
-        //     arrdetails.push({
-        //         msg: strtemp
-        //     })
-        // }
 
         //mask bid winner
         var currentwinner = "";
@@ -432,7 +411,6 @@ class productController {
         if (!avgrate) {
             avgrate = 0;
         }
-
         res.render('detailproduct', {
             title: 'Detail product',
             product: product,
@@ -447,7 +425,20 @@ class productController {
             nearproducts
         });
     }
-
+    async showEditEdittor(req, res) {
+        var idsanpham = req.params.id;
+        var product = {};
+        await dbproduct.findOne({
+            _id: ObjectId(idsanpham)
+        }).then(doc => {
+            product = doc;
+            product.idsanpham = idsanpham;
+        })
+        res.render('editedittor', {
+            title: "Edit Infor Product",
+            product
+        })
+    }
     //post
     postUpload(req, res) {
         var img = [];
@@ -486,7 +477,6 @@ class productController {
             title: 'Upload product'
         });
     }
-
     async postSearch(req, res) {
         var category = req.params.id;
 
@@ -882,6 +872,89 @@ class productController {
             next_value: +page + 1,
             thongbao,
         });
+    }
+
+    async postEditInforProduct(req, res) {
+        var idsanpham = req.params.id;
+        var texthtml = req.body.ghichu;
+        if (texthtml) {
+            var product = {};
+            await dbproduct.findOne({
+                _id: ObjectId(idsanpham)
+            }).then(doc => {
+                product = doc;
+            })
+            if (product.moreghichu) {
+
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1; //January is 0!
+                var hh = today.getHours();
+                var ii = today.getMinutes();
+
+                var yyyy = today.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+                if (hh < 10) {
+                    hh = '0' + hh;
+                }
+                if (ii < 10) {
+                    ii = '0' + ii;
+                }
+                var today = yyyy + '/' + mm + '/' + dd + " " + hh + ":" + ii;
+                var entity = {
+                    date: today,
+                    ghichu: texthtml
+                }
+                const filter = {
+                    _id: product._id
+                }
+                product.moreghichu.push(entity);
+                await dbproduct.findOneAndUpdate(filter, product);
+            } else {
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1; //January is 0!
+                var hh = today.getHours();
+                var ii = today.getMinutes();
+
+                var yyyy = today.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+                if (hh < 10) {
+                    hh = '0' + hh;
+                }
+                if (ii < 10) {
+                    ii = '0' + ii;
+                }
+                var today = yyyy + '/' + mm + '/' + dd + " " + hh + ":" + ii;
+                var entity = {
+                    date: today,
+                    ghichu: texthtml
+                }
+                const filter = {
+                    _id: product._id
+                }
+                var arrghichu = [];
+                arrghichu.push(entity);
+                product.moreghichu = arrghichu;
+                await dbproduct.findOneAndUpdate(filter, product);
+                console.log(product);
+            }
+        }
+        res.redirect('/users/myproducts');
+    }
+
+    async postCancelInforProduct(req, res) {
+        redirect('/users/myproducts')
     }
 
 }

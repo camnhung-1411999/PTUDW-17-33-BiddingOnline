@@ -35,6 +35,10 @@ router.get('/detailproduct/:id', ensureAuthenticated, function (req, res) {
 router.get('/topbidding', (req, res) => {
    controllers.showTopBidding(req, res);
 });
+
+router.get('/:id/edit',(req,res)=>{
+   controllers.showEditEdittor(req,res);
+})
 //review
 router.get('/reviews/:id', (req, res) => {
    res.render('reviewandrate', {
@@ -59,9 +63,16 @@ router.post('/detailproduct/:id/addtocart', (req, res) => {
    controllersCart.postAddToCart(req, res);
 })
 
-
 router.post('/detailproduct/:id/watchlist',(req, res)=>{
    controllersCart.postAddWatchlist(req,res);
 })
+
+router.post('/:id/edit',(req,res)=>{
+   controllers.postEditInforProduct(req,res);
+});
+router.post('/:id/cacel',(req,res)=>{
+   controllers.postCancelInforProduct(req,res);
+});
+
 
 module.exports = router;
