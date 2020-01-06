@@ -16,6 +16,9 @@ const dbcart = cartmodels.getCart;
 const pointbidcontroller = require('../models/pointbidder');
 const dbpointbid = pointbidcontroller.getpointbidder;
 
+const usermodels = require('../models/user');
+const dbuser = usermodels.getAccount;
+
 const moment = require('moment');
 var ObjectId = require('mongodb').ObjectId;
 const config = require('../config/default.json');
@@ -30,7 +33,6 @@ class productController {
         var total = 0;
         const now = moment(new Date());
         var arrendding = [];
-
 
         await dbproduct.find({
             selling: true
@@ -62,8 +64,6 @@ class productController {
                 var options = {
                     multi: true
                 };
-
-
 
                 //upadte bidding
                 const filter = {
@@ -112,6 +112,13 @@ class productController {
                 //update product
                 await dbproduct.update(myquery, entity, options);
                 arrendding[i].selling = false;
+                await dbuser.findOne({
+                    name: arrendding[i].user
+                }).then(doc => {
+                    if (doc) {
+                        usermodels.sendemail(req, res, doc.email, "Thông báo", "Sản phẩm của bạn đã kết thúc đấu giá!");
+                    }
+                })
             }
         }
 
@@ -261,7 +268,7 @@ class productController {
             title: 'Upload product',
             checkuser,
             isSeller,
-            nameuser:req.user.name,
+            nameuser: req.user.name,
         });
     }
 
@@ -442,21 +449,27 @@ class productController {
             avgrate = 0;
         }
 
-        res.render('detailproduct', {
-            title: 'Detail product',
-            product: product,
-            checkuser,
-            isSeller,
-            rate: avgrate,
-            reviews,
-            numofbid,
-            numreviews: reviews.length,
-            // arrdetails,
-            currentwinner,
-            nearproducts,
-            listbid,
-            isMine,
-        });
+        for (var i = 0; i < listbid.length; i++)
+        {
+            listbid[i].idsanpham = id+"";
+        }
+
+            res.render('detailproduct', {
+                title: 'Detail product',
+                product: product,
+                checkuser,
+                isSeller,
+                rate: avgrate,
+                reviews,
+                numofbid,
+                numreviews: reviews.length,
+                // arrdetails,
+                currentwinner,
+                nearproducts,
+                listbid,
+                isMine,
+                id,
+            });
     }
     async showEditEdittor(req, res) {
         var idsanpham = req.params.id;
@@ -473,6 +486,34 @@ class productController {
         })
     }
     //post
+    async postDeleteBidding(req,res){
+        var idpro=req.params.idpro;
+        var user=req.params.namebid;
+        var listbid=[];
+        var bid={};
+        await dbbidding.findOne({idsanpham:idpro}).then(doc=>{
+            listbid=doc.bidding;
+            bid=doc;
+        });
+        var templistbid=[];
+        for(var i=0;i<listbid.length;i++){
+            if(listbid[i].user!=user){
+                templistbid.push(listbid[i]);
+            }
+        }
+        var myquery = {
+            _id: ObjectId(bid._id),
+        }
+        var changeAcc = {
+            bidding:templistbid,
+        };
+        var options = {
+            multi: true
+        }
+        // usermodels.UpdateInfoAccount(changeAcc,iduser);
+        await dbbidding.update(myquery, changeAcc, options);
+        res.redirect("/products/detailproduct/"+idpro);
+    }
     postUpload(req, res) {
         var img = [];
         img.push(req.body.url);

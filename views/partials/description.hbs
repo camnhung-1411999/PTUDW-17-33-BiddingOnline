@@ -59,21 +59,23 @@
 
                         </tr>
                     </thead>
-                    {{#if isMine}}
-                    {{#each listbid}}
-                    <tbody>
-                        <tr>
-                            <th scope="row" class="namebid">{{this.user}}</th>
-                            <td>{{this.point}}</td>
-                            <td><a href="/../rate-reviews/{{this.user}}">All Reviews</a></td>
-                            <td>
-                                <input type="button" value="Delete">
-                            </td>
-                        </tr>
-                    </tbody>
-                    {{/each}}
-                    {{else}}
-                    {{#each listbid}}
+                    <form action="" method="post">
+                        {{#if isMine}}
+                        {{#each listbid}}
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="namebid">{{this.user}}</th>
+                                <td>{{this.point}}</td>
+                                <td><a href="/../rate-reviews/{{this.user}}">All Reviews</a></td>
+                                <td>
+                                    <input type="submit" formaction="/products/detailproduct/{{this.idsanpham}}/{{this.user}}/delete" value="Delete">
+                                </td>
+                            </tr>
+                        </tbody>
+                        {{/each}}
+                        {{else}}
+                        {{#each listbid}}
+                    </form>
                     <tbody>
                         <tr>
                             <th scope="row" class="namebid">{{this.user}}</th>

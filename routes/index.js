@@ -6,8 +6,7 @@ const dbproduct = productmodels.getProduct;
 var ObjectId = require('mongodb').ObjectId;
 const biddingmodels = require('../models/bidding');
 const dbbidding = biddingmodels.getBidding;
-
-router.get('/', async function (req, res, next) {
+router.get('/', async function (req, res) {
 
   var checkuser = false;
   var username;

@@ -1,6 +1,7 @@
 const usermodels = require('../models/user');
 const db = usermodels.getAccount;
 
+
 const cartmodels = require('../models/cart');
 const dbcart = cartmodels.getCart;
 
@@ -25,7 +26,7 @@ const dbpointbid = pointbidcontroller.getpointbidder;
 const historymodels = require('../models/history');
 const dbhistory = historymodels.getHistory;
 const reviewcontroller = require('../models/review');
-const dbreview = reviewcontroller.getReviews;
+const dbreview = reviewcontroller.getReviews; 
 
 const bcrypt = require('bcryptjs');
 
@@ -899,6 +900,7 @@ class userController {
             await dbregisterseller.findOneAndRemove({
                 name
             });
+            usermodels.sendemail(req, res, acc.email,"Thành công","Đã được xác nhận trở thành seller!");
             res.redirect('/users/manageuser/register');
         }
 
@@ -908,6 +910,8 @@ class userController {
         await dbregisterseller.findOneAndRemove({
             name
         });
+        usermodels.sendemail(req, res, acc.email,"Thất bại","Đăng kí thành seller thất bại!");
+
         res.redirect('/users/manageuser/register');
     }
     async setPostDeleteProduct(req, res) {
@@ -918,6 +922,11 @@ class userController {
             ten: nameproduct,
             user: nameseller
         });
+        var acc={};
+        await db.findOne({name:nameseller}).then(doc=>{
+            acc=doc;
+        });
+        usermodels.sendemail(req, res, acc.email,"Thông báo","Một sản phẩm của bạn đã bị xóa!");
         res.redirect('/users/manageproduct/all');
     }
     async setPostDeleteCate(req, res) {
@@ -983,6 +992,7 @@ class userController {
             }
             // usermodels.UpdateInfoAccount(changeAcc,iduser);
             await db.update(myquery, changeAcc, options);
+            usermodels.sendemail(req, res, acc.email,"Thông báo","Bạn bị hạ cấp thành bidder, bạn sẽ không đực hưởng các chế độ của seller!");
             res.redirect('/users/manageuser/listsell');
         }
     }

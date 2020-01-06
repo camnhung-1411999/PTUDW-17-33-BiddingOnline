@@ -73,6 +73,7 @@ router.post('/:id/edit',(req,res)=>{
 router.post('/:id/cacel',(req,res)=>{
    controllers.postCancelInforProduct(req,res);
 });
-
-
+router.post("/detailproduct/:idpro/:namebid/delete",(req,res)=>{
+   controllers.postDeleteBidding(req,res);
+})
 module.exports = router;

@@ -15,6 +15,7 @@ const watchlistmodels = require('../models/watchlist');
 const dbwatchlist = watchlistmodels.getWatchlist;
 const moment = require('moment');
 
+const usermodels = require('../models/user');
 class CartController {
     async postBid(req, res) {
 
@@ -137,7 +138,7 @@ class CartController {
                     }
                     checkdaugia.ischecked = true;
                     checkdaugia.msg = "Bid successful!";
-
+                    usermodels.sendemail(req, res, req.user.email, "Thông báo", "Tham gia đấu giá thành công!");
                     const now = moment(new Date());
                     const time = product.datetime;
                     const c = now.diff(time, 'seconds');
@@ -448,7 +449,6 @@ class CartController {
             }
 
             cartmodels.insert(entity);
-
             //check user
             var checkuser = false;
             var isSeller = true;

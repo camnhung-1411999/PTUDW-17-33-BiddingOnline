@@ -64,7 +64,7 @@ module.exports = {
         });
     },
     getAccount: Account,
-    sendemail: (req, res, next, email, subject, html) => {
+    sendemail: (req, res, email, subject, html) => {
         var smtpTransport = nodemailer.createTransport({
             service: "Gmail",
             auth: {
