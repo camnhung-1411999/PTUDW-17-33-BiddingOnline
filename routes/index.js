@@ -81,9 +81,6 @@ router.get('/', async function (req, res) {
 
   const now = moment(new Date(), 'YYYY/MM/DD HH:ii');
 
-  // console.log(moment(giacaonhat[0].datetime));
-  // var timeeee = new Date();
-  //  console.log(timeeee.getTime());
   for (var i = 0; i < giacaonhat.length; i++) {
     const time = moment(giacaonhat[i].datetime, 'YYYY/MM/DD HH:ii');
     const c = now.diff(time, 'seconds');
@@ -132,7 +129,6 @@ router.get('/', async function (req, res) {
     });
 
   }
-
   res.render('home', {
     title: 'Home',
     checkuser,
