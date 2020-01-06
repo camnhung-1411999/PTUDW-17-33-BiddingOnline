@@ -27,6 +27,16 @@ class productController {
 
     //:id/categories
     async showProduct(req, res) {
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
         var category = req.params.id;
         var limit = config.paginate.limit;
         var arrproduct = [];
@@ -252,6 +262,8 @@ class productController {
             page_numbers,
             prev_value: +page - 1,
             next_value: +page + 1,
+            checkuser,
+            nameuser,
 
         });
     };
@@ -307,6 +319,16 @@ class productController {
         });
     }
     async showDetailProduct(req, res) {
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
         var id = req.params.id;
         var product = {};
         await dbproduct.findOne({
@@ -469,9 +491,21 @@ class productController {
                 listbid,
                 isMine,
                 id,
+                checkuser,
+                nameuser,
             });
     }
     async showEditEdittor(req, res) {
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
         var idsanpham = req.params.id;
         var product = {};
         await dbproduct.findOne({
@@ -482,7 +516,9 @@ class productController {
         })
         res.render('editedittor', {
             title: "Edit Infor Product",
-            product
+            product,
+            checkuser,
+            nameuser,
         })
     }
     //post

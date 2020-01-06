@@ -4,7 +4,26 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 {{/section}}
+<div class="navigation">
+    <div class="row">
+        <div class="col-8 aaa">
+  
+            <a class="nameweb" href="/" style="text-decoration: none;">Bidding Together</a>
+        </div>
+        <div class="col-4 tab">
+            {{#if checkuser}}
+            <a class="rightnav" style="border: black;" href="/../products/all/categories">Category</a>
+            <a class="rightnav" style="border: black;" href="/users/account">{{nameuser}}</a>
+            <a class="rightnav" style="border: black;" href="/users/signup">Log out</a>
+            {{/if}}
+        </div>
+    </div>
 
+
+
+
+</div>
+{{!--  end nav--}}
 <div class="text-center mt-4 border-right" style="font-size: 24px;">Additional description information for the product
 </div>
 <div class="text-center mt-4 border-right" style="font-size: 24px;">
