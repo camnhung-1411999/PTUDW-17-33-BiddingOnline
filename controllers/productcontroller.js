@@ -708,7 +708,7 @@ class productController {
                             });
                             total = await dbproduct.find({
                                 selling: true,
-                                loai: categoriesmodels[i].idcat
+                                loai: listCategories[i].idcat
                             }).count();
                         }
                     }
