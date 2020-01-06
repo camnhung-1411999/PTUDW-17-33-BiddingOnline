@@ -506,9 +506,7 @@ class productController {
 
 
         productmodels.insert(entity);
-        res.render('upload', {
-            title: 'Upload product'
-        });
+        res.redirect('/users/myproducts')
     }
     async postSearch(req, res) {
         var category = req.params.id;

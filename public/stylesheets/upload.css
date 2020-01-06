@@ -100,7 +100,7 @@ html,body
 .navigation .tab{
     font-size: 20px;
     margin-top: 40px;
-    padding-left: 130px;
+    padding-left: 50px;
 }
 .tab p{
     
@@ -109,7 +109,7 @@ html,body
 .rightnav{
     color: rgb(248, 247, 247) !important;
     font-size: 20px;
-    margin-right: 70px;
+    margin-right: 20px;
 }
 .rightnav:hover{
     color: rgb(219, 240, 34) !important;
