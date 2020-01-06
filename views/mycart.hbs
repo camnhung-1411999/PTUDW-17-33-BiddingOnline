@@ -66,7 +66,7 @@
                 <td>
                   <p>total:{{this.num}}</p>
                   {{#each this.numbid}}
-                  <p>+Bidder:{{this.user}}</p><p>- Price bid:{{this.giadau}}</p><p>- Date bid:{{this.datebid}}</p>
+                  <p class="nameuser">{{this.user}}</p><p>- Price bid:{{this.giadau}}</p><p>- Date bid:{{this.datebid}}</p>
                   {{/each}}
                 </td>
                 {{!-- <td>
@@ -120,6 +120,13 @@
 <!-- Custom scripts for this template -->
 <script src="/javascripts/agency.min.js"></script>
 <script src="/../javascripts/mycart.js"></script>
+<script>
+    var str = $('.nameuser');
 
+    for(var i = 0; i< str.length;i++){
+    $(str[i]).text("***" + $(str[i]).text().substr(-3));
+    }
+    
+</script>
 
 {{/section}}

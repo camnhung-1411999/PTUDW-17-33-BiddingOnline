@@ -212,6 +212,7 @@ class userController {
         var checkuser = false;
         var nameuser;
         var rate=0;
+        var count=0;
         if (req.user) {
             checkuser = true;
             nameuser = req.user.name;
@@ -220,11 +221,21 @@ class userController {
                 isSeller = false;
             }
             else{
-                await dbreview.findOne({user:req.user.name}).then(doc=>{
-                    rate=doc.rate;
+                await dbreview.find({user:req.user.name}).then(docs=>{
+                    docs.forEach(element=>{
+                        rate=rate+ element.rate;
+                        count=count+1;
+                    });
+                    console.log(rate);
                 })
+                if(count===0)
+                {
+                    count=1;
+                }
+                rate=rate/count;
             }
         }
+
         var pointbid=0;
         await dbpointbid.findOne({user:req.user.name}).then(doc=>{
            if(doc){
@@ -238,6 +249,7 @@ class userController {
             account: req.user,
             pointbid,
             rate,
+            isSeller,
         });
     }
 
