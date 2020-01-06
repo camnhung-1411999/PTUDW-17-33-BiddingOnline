@@ -340,8 +340,11 @@ class userController {
             await dbbidding.findOne({
                 idsanpham: cart[i].idsanpham
             }).then(doc => {
-                cart[i].numbid = doc.bidding;
-                cart[i].num = doc.soluot;
+                if (doc) {
+                    cart[i].numbid = doc.bidding;
+                    cart[i].num = doc.soluot;
+                }
+
             })
         }
         res.render('mycart', {
