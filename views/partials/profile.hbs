@@ -36,7 +36,7 @@
                 <li id="acc_favorite">
                     <a href="/users/favorites">
                         <i class="fas fa-heart-broken"></i>
-                        Favorite Product </a>
+                        Watch list </a>
                 </li>
                 <li id="acc_cart">
                     <a href="/users/mycart">
@@ -53,19 +53,25 @@
                 <li id="acc_auction">
                     <a href="/users/myauctions">
                         <i class="fas fa-gavel"></i>
-                        My Auctions </a>
+                        Bidding list </a>
                 </li>
+                {{#if isSeller}}
                 <li id="acc_product">
-                    <a href="#">
+                    <a href="/users/myproducts">
                         <i class="fas fa-clipboard-check"></i>
-                        My Product( of bidder) </a>
+                        My Product </a>
+                </li>
+                {{/if}}
+                <li>
+                    <a href="/users/history">
+                        <i class="fas fa-history"></i>
+                        My Hisotry </a>
                 </li>
                 <li>
                     <a href="/">
                         <i class="fas fa-home"></i>
                         Home </a>
                 </li>
-
             </ul>
         </div>
         <!-- END MENU -->

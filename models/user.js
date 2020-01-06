@@ -17,6 +17,11 @@ var accountSchema = new mongoose.Schema({
     address: String,
     status: String,
     birthday:String,
+    pluspoint:Number,
+    minuspoint:Number,
+    pointbid:Number,
+    rate:Number,
+    totalproduct:Number,
 }, {
     collection: "account"
 });

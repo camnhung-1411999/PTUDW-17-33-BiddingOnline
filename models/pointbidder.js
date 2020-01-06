@@ -11,7 +11,8 @@ var Pointbidchema = new mongoose.Schema({
     _id: Object,
     user: String,
     pluspoint: Number,
-    minuspoint: Number
+    minuspoint: Number,
+    reviews:[]
 }, {
     collection: "pointbidder"
 });

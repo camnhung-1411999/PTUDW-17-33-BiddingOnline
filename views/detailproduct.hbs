@@ -65,8 +65,11 @@
                             <div
                                 class="mb-4 border-full-2px-solid border-top-0 border-left-0 border-right-0 border-color-inverse">
                                 <h1>{{product.ten}}
-                                    <P class="far fa-heart" style="font-size: 2rem; color: red;" data-toggle="modal"
-                                        data-target="#favorite" id="love"></P>
+
+                                    <button data-toggle="modal" class="btn btn-outline-danger my-2 my-sm-0"
+                                        data-target="#favorite" id="love123">favorite
+                                        <i class="fas fa-heart" style=" color: red;"></i>
+                                    </button>
                                     {{>notification-favorite}}
                                 </h1>
                             </div>
@@ -91,21 +94,25 @@
                                 <h6 class="font-size-04  mb-4 ">PLACE YOUR BID:</h6>
                                 <div class="mb-4"></div>
                             </div>
-                            <div class="row text-muted ml-7">
-                                <div class="mb-5 ">
-                                    <input id="giadau" type="number" placeholder="0" step="{{product.buocdaugia}}"
-                                        min="{{product.giahientai}}" max="10000000000" value="{{product.giahientai}}"
-                                        name="giadau">
+                            <form method="post">
+
+                                <div class="row text-muted ml-7">
+                                    <div class="mb-5 ">
+                                        <input id="giadau" type="number" placeholder="0" step="{{product.buocdaugia}}"
+                                            min="{{product.giahientai}}" max="10000000000"
+                                            value="{{product.giahientai}}" name="giadau">
+                                    </div>
+                                    <div class="mb-4">
+                                        <h3 class="font-size-04 ">VND</h3>
+                                    </div>
+                                    <div class="mb-4 ml-3 font-size-04">
+                                        <a class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal"
+                                            data-target="#beforebid" id="clickbid">Bid</a>
+                                        {{>notification-bid}}
+                                    </div>
                                 </div>
-                                <div class="mb-4">
-                                    <h3 class="font-size-04 ">VND</h3>
-                                </div>
-                                <div class="mb-4 ml-3 font-size-04">
-                                    <a class="btn btn-outline-primary my-2 my-sm-0" data-toggle="modal"
-                                        data-target="#beforebid" id="clickbid">Bid</a>
-                                    {{>notification-bid}}
-                                </div>
-                            </div>
+                            </form>
+
                             <input type="checkbox" class="subscribe-btn"> &nbsp;<span class="align-middle"><label
                                     for="subscribe-btn">Do you want to buy this product right now?</label></span>
                             <div id="text">
@@ -117,8 +124,9 @@
                                     data-target="#beforeaddtocart" id="clickaddtocart">Add
                                     to
                                     cart</a>
-                                {{>notification}}
+                                {{!-- {{>notification}} --}}
                                 {{>notification-addcart}}
+
                             </div>
 
                         </div>

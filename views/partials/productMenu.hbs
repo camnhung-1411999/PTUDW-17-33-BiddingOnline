@@ -1,0 +1,15 @@
+<div class="card shadow">
+    <h5 class="card-header">
+        Categories
+    </h5>
+
+    <div class="list-group list-group-flush">
+        {{#each listcate}}
+        <a href="/users/manageproduct/{{this.idcat}}"
+            class="list-group-item list-group-item-action {{#if this.isActive}} active {{/if}}" id="category{{this.idcat}}">
+            {{this.cate}}</a>
+        {{/each}}
+
+    </div>
+
+</div>

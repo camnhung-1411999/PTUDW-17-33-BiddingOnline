@@ -7,8 +7,6 @@ const dbcart = cartmodels.getCart;
 const productmodels = require('../models/products');
 const dbproduct = productmodels.getProduct;
 
-const manageusermodels = require('../models/admin');
-const dbmanageuser = manageusermodels.getManageUser;
 const registerseller = require('../models/registerseller');
 const dbregisterseller = registerseller.getRegister;
 
@@ -20,6 +18,15 @@ const dbwatchlist = watchlistcontroller.getWatchlist;
 
 const biddingcontroller = require('../models/bidding');
 const dbbidding = biddingcontroller.getBidding;
+
+const pointbidcontroller = require('../models/pointbidder');
+const dbpointbid = pointbidcontroller.getpointbidder;
+
+const historymodels = require('../models/history');
+const dbhistory = historymodels.getHistory;
+const reviewcontroller = require('../models/review');
+const dbreview = reviewcontroller.getReviews;
+
 const bcrypt = require('bcryptjs');
 
 var ObjectId = require('mongodb').ObjectId;
@@ -201,9 +208,10 @@ class userController {
     }
     //for user
     //----------get-----------------------
-    showAccount(req, res) {
+    async showAccount(req, res) {
         var checkuser = false;
         var nameuser;
+        var rate=0;
         if (req.user) {
             checkuser = true;
             nameuser = req.user.name;
@@ -211,12 +219,25 @@ class userController {
             if (req.user.status != "Seller") {
                 isSeller = false;
             }
+            else{
+                await dbreview.findOne({user:req.user.name}).then(doc=>{
+                    rate=doc.rate;
+                })
+            }
         }
+        var pointbid=0;
+        await dbpointbid.findOne({user:req.user.name}).then(doc=>{
+           if(doc){
+            pointbid=doc.pluspoint-doc.minuspoint;
+           } 
+        });
         res.render('account', {
             title: 'Account',
             checkuser,
             nameuser,
             account: req.user,
+            pointbid,
+            rate,
         });
     }
 
@@ -289,6 +310,10 @@ class userController {
                 cart[i].seller = doc.user;
                 cart[i].image = doc.image[0];
             });
+            await dbbidding.findOne({idsanpham:cart[i].idsanpham}).then(doc=>{
+                cart[i].numbid=doc.bidding;
+                cart[i].num=doc.soluot;
+            })
         }
         res.render('mycart', {
             title: 'My cart',
@@ -298,12 +323,7 @@ class userController {
         });
     }
     async showMyAutions(req, res) {
-        // var arr = [];
-        // await dbbidding.find({'bidding.user': "manhhh"}).then(docs=>{
-        //     docs.forEach(element=>{
-        //         arr.push(element);
-        //     })
-        // })
+
         var checkuser = false;
         var nameuser;
         if (req.user) {
@@ -330,6 +350,9 @@ class userController {
             }).then(doc => {
                 arrproduct.push(doc);
             })
+            if(arrbidding[i].currentwinner===req.user.name){
+                arrproduct[i].curwin=true;
+            }
         }
 
         res.render('biddingproduct', {
@@ -359,6 +382,74 @@ class userController {
             nameuser,
         });
     }
+    async showHistory(req, res) {
+
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
+
+        var arrhistory = [];
+        await dbhistory.find({
+            user: req.user.name
+        }).then(docs => {
+            docs.forEach(element => {
+                arrhistory.push(element);
+            })
+        });
+
+        for (var i = 0; i < arrhistory.length; i++) {
+            await dbproduct.findOne({
+                _id: ObjectId(arrhistory[i].idsanpham)
+            }).then(doc => {
+                arrhistory[i].tensp = doc.ten;
+                arrhistory[i].seller = doc.user;
+                arrhistory[i].image = doc.image[0];
+            })
+        }
+        res.render('myhistory', {
+            title: "My History",
+            checkuser,
+            nameuser,
+            account: req.user,
+            list: arrhistory
+        })
+    }
+    async showMyProducts(req, res) {
+        var checkuser = false;
+        var nameuser;
+        if (req.user) {
+            checkuser = true;
+            nameuser = req.user.name;
+            var isSeller = true;
+            if (req.user.status != "Seller") {
+                isSeller = false;
+            }
+        }
+
+        var arrproduct = [];
+        await dbproduct.find({
+            user: req.user.name
+        }).then(docs => {
+            docs.forEach(element => {
+                arrproduct.push(element);
+            })
+        })
+        res.render('myproducts', {
+            title: "My Products",
+            checkuser,
+            nameuser,
+            account: req.user,
+            list: arrproduct
+        })
+    }
+
 
     showChangePassword(req, res) {
         var checkuser = false;
@@ -467,11 +558,14 @@ class userController {
         if (req.user != undefined && req.user != null) {
             var name = req.user.name;
         }
-        var point;
-        await dbmanageuser.findOne({
-            name
+        var point = 0;
+        await dbpointbid.findOne({
+            user: name
         }).then(doc => {
-            point = doc.pointbid;
+            if (doc) {
+                point = doc.pluspoint - doc.minuspoint;
+
+            }
         });
 
         var entity = {
@@ -486,86 +580,120 @@ class userController {
     //----------get-----------------------
     async showManageUser(req, res) {
         var arrbid = [];
-        var arrsell = [];
-        var regist = [];
-        await dbmanageuser.find({
-            type: false
+        await db.find({
+            status: "Bidder"
         }).then(docs => {
             docs.forEach(element => {
-                // if (element.type) {
-                //     arrsell.push(element);
-                // }
-                // else
                 arrbid.push(element);
             })
         });
+        var regist = [];
 
-        // await dbregisterseller.find({}).then(docs => {
-        //     docs.forEach(element => {
-        //         regist.push(element);
-        //     });
-        // });
+
+        await dbregisterseller.find({}).then(docs => {
+            docs.forEach(element => {
+                regist.push(element);
+            });
+        });
+        for (var i = 0; i < arrbid.length; i++) {
+            arrbid[i].pluspoint = 0;
+            arrbid[i].minuspoint = 0;
+            arrbid[i].pointbid = 0;
+            await dbpointbid.findOne({
+                user: arrbid[i].name
+            }).then(doc => {
+                if (doc) {
+                    arrbid[i].pluspoint = doc.pluspoint;
+                    arrbid[i].minuspoint = doc.minuspoint;
+                    arrbid[i].pointbid = doc.pluspoint - doc.minuspoint;
+
+                }
+            })
+        }
         var checkbid = false;
         // var checksell = false;
         // var checkregist = false;
         if (arrbid.length === 0) {
             checkbid = true;
         }
-        // if (arrsell.length === 0) {
-        //     checksell = true;
-        // }
-        // if (regist.length === 0) {
-        //     checkregist = true;
-        // }
         res.render('bidder', {
             title: "Manage user",
             listbid: arrbid,
-            // listsell: arrsell,
-            // listregist: regist,
             checkbid,
-            // checksell,
-            // checkregist,
-            // totalregist: regist.length,
+            totalregist: regist.length,
         });
     }
     async showListSell(req, res) {
-        // var arrbid = [];
         var arrsell = [];
-        // var regist = [];
-        await dbmanageuser.find({
-            type: true
+        await db.find({
+            status: "Seller"
         }).then(docs => {
             docs.forEach(element => {
                 arrsell.push(element);
             })
         });
+        for (var i = 0; i < arrsell.length; i++) {
+            await dbproduct.find({
+                user: arrsell[i].name
+            }).then(docs => {
+                arrsell[i].totalproduct = docs.length;
+            })
+        }
 
-        // await dbregisterseller.find({}).then(docs => {
-        //     docs.forEach(element => {
-        //         regist.push(element);
-        //     });
-        // });
-        // var checkbid = false;
+        for (var i = 0; i < arrsell.length; i++) {
+            arrsell[i].pluspoint = 0;
+            arrsell[i].minuspoint = 0;
+            arrsell[i].pointbid = 0;
+            await dbpointbid.findOne({
+                user: arrsell[i].name
+            }).then(doc => {
+                if (doc) {
+                    arrsell[i].pluspoint = doc.pluspoint;
+                    arrsell[i].minuspoint = doc.minuspoint;
+                    arrsell[i].pointbid = doc.pluspoint - doc.minuspoint;
+
+                }
+            })
+        }
+
+        for (var i = 0; i < arrsell.length; i++) {
+            var rate = [];
+            await dbreview.find({
+                user: arrsell[i].name
+            }).then(docs => {
+                docs.forEach(element => {
+                    rate.push(element);
+                });
+            });
+            var temp = 0;
+            var count = 0;
+            for (var j = 0; j < rate.length; j++) {
+                if (rate[j].user === arrsell[i].name) {
+                    temp = temp + rate[j].rate;
+                    count = count + 1;
+                }
+            }
+            if (count === 0) {
+                count = 1;
+            }
+            temp = temp / count;
+            arrsell[i].rate = temp;
+        }
         var checksell = false;
-        // var checkregist = false;
-        // if (arrbid.length === 0) {
-        //     checkbid = true;
-        // }
         if (arrsell.length === 0) {
             checksell = true;
         }
-        // if (regist.length === 0) {
-        //     checkregist = true;
-        // }
+        var regist = [];
+        await dbregisterseller.find({}).then(docs => {
+            docs.forEach(element => {
+                regist.push(element);
+            });
+        });
         res.render('seller', {
             title: "Manage user",
-            // listbid: arrbid,
             listsell: arrsell,
-            // listregist: regist,
-            // checkbid,
             checksell,
-            // checkregist,
-            // totalregist: regist.length,
+            totalregist: regist.length
         });
     }
     async showRegister(req, res) {
@@ -579,22 +707,12 @@ class userController {
                 regist.push(element);
             });
         });
-        // var checkbid = false;
-        // var checksell = false;
         var checkregist = false;
-        // if (arrbid.length === 0) {
-        //     checkbid = true;
-        // }
-        // if (arrsell.length === 0) {
-        //     checksell = true;
-        // }
         if (regist.length === 0) {
             checkregist = true;
         }
         res.render('register', {
             title: "Manage user",
-            // listbid: arrbid,
-            // listsell: arrsell,
             listregist: regist,
             // checkbid,
             // checksell,
@@ -641,6 +759,49 @@ class userController {
             cate: arrCate,
         });
     }
+    async showProductCate(req, res) {
+        var idcat = req.params.id;
+        var listcate = [];
+        var product = [];
+        await dbcategory.find({}).then(docs => {
+            docs.forEach(element => {
+                listcate.push(element);
+            });
+        });
+        if (idcat === "all") {
+            await dbproduct.find({}).then(docs => {
+                docs.forEach(element => {
+                    product.push(element);
+                })
+            });
+        } else {
+            await dbproduct.find({
+                loai: idcat
+            }).then(docs => {
+                docs.forEach(element => {
+                    product.push(element);
+                })
+            });
+        }
+        for (var i = 0; i < product.length; i++) {
+            product[i].soluot = 0;
+            await dbbidding.findOne({
+                idsanpham: product[i]._id.toString()
+            }).then(doc => {
+                if (doc) {
+                    product[i].soluot = doc.soluot;
+
+                }
+            })
+        }
+
+        console.log(product);
+        res.render('manageproduct', {
+            tittle: "Manage product",
+            product,
+            listcate,
+        });
+    }
     //----------post----------------------
     async setPostRegistConfirm(req, res) {
         var name = req.body.user;
@@ -650,15 +811,10 @@ class userController {
         }).then(doc => {
             acc = doc;
         })
-        await dbmanageuser.findOne({ name }).then(doc => {
-            manuser = doc;
-        })
-        if(acc.length===0)
-        {
+        if (acc.length === 0) {
             res.redirect('/users/manageuser/register');
 
-        }
-        else{
+        } else {
             var myquery = {
                 _id: ObjectId(acc._id)
             }
@@ -668,29 +824,32 @@ class userController {
             var options = {
                 multi: true
             }
-            var myquery1={
-                _id:ObjectId(manuser._id)
-            }
-            var changMan={
-                type:true,
-            }
-            var options1={
-                multi:true,
-            }
-            await dbmanageuser.update(myquery1,changMan,options1);
             // usermodels.UpdateInfoAccount(changeAcc,iduser);
             await db.update(myquery, changeAcc, options);
-            await dbregisterseller.findOneAndRemove({ name });
+            await dbregisterseller.findOneAndRemove({
+                name
+            });
             res.redirect('/users/manageuser/register');
         }
-        
+
     }
     async setPostRegistDelete(req, res) {
         var name = req.body.id;
-        await dbregisterseller.findOneAndRemove({ name });
+        await dbregisterseller.findOneAndRemove({
+            name
+        });
         res.redirect('/users/manageuser/register');
     }
-
+    async setPostDeleteProduct(req, res) {
+        var nameproduct = req.body.namepro;
+        var nameseller = req.body.nameseller;
+        var result = {}
+        await dbproduct.findOneAndRemove({
+            ten: nameproduct,
+            user: nameseller
+        });
+        res.redirect('/users/manageproduct/all');
+    }
     async setPostDeleteCate(req, res) {
         var cate = req.body.cate;
         await dbcategory.findOneAndRemove({
@@ -731,22 +890,18 @@ class userController {
         await dbcategory.update(myquery, changeCate, options);
         res.redirect('/users/managecategory');
     }
-    async setPostCancelSeller(req,res){
+    async setPostCancelSeller(req, res) {
         var name = req.body.leveldown;
         var acc = {};
-        var manuser={};
-        await db.findOne({ name }).then(doc => {
+        await db.findOne({
+            name
+        }).then(doc => {
             acc = doc;
         })
-        await dbmanageuser.findOne({ name }).then(doc => {
-            manuser = doc;
-        })
-        if(acc.length===0)
-        {
-            res.redirect('/users/manageuser/register');
+        if (acc.length === 0) {
+            res.redirect('/users/manageuser/listsell');
 
-        }
-        else{
+        } else {
             var myquery = {
                 _id: ObjectId(acc._id)
             }
@@ -758,61 +913,110 @@ class userController {
             }
             // usermodels.UpdateInfoAccount(changeAcc,iduser);
             await db.update(myquery, changeAcc, options);
-            var myquery1={
-                _id:ObjectId(manuser._id)
-            }
-            var changMan={
-                type:false,
-            }
-            var options1={
-                multi:true,
-            }
-            await dbmanageuser.update(myquery1,changMan,options1);
-            await dbregisterseller.findOneAndRemove({ name });
-            res.redirect('/users/manageuser/register');
+            res.redirect('/users/manageuser/listsell');
         }
+    }
+
+
+    //post my cart
+    async postDeleteMyCart(req, res) {
+        var namepro = req.body.namepro;
+        var nameseller = req.body.nameseller;
+        var product = {};
+        await dbproduct.findOne({
+            ten: namepro,
+            user: nameseller
+        }).then(doc => {
+            product = doc;
+        })
+        await dbcart.deleteOne({
+            idsanpham: product._id.toString()
+        });
+
+        var pointbidder = {};
+        await dbpointbid.findOne({
+            user: req.user.name
+        }).then(doc => {
+            pointbidder = doc;
+        });
+        var review = {
+            msg: "Đấu giá thằng mà không mua",
+            user: product.user,
+            idsanpham: product._id.toString()
+        }
+
+        if (pointbidder) {
+            if (pointbidder) {
+
+                var myquery = {
+                    user: req.user.name
+                }
+                var minuspoint = pointbidder.minuspoint;
+                var arr = [];
+                arr = pointbidder.reviews;
+                arr.push(review);
+                console.log(arr);
+                var change = {
+                    minuspoint: minuspoint + 1,
+                    reviews: arr
+                };
+                console.log(change);
+                var options = {
+                    multi: true
+                }
+                await dbpointbid.update(myquery, change, options);
+            } else {
+                entity = {
+                    user: req.user.name,
+                    pluspoint: 0,
+                    minuspoint: 1,
+                    reviews: [review]
+                }
+                pointbidcontroller.insert(entity);
+            }
+
+
+            // _id: Object,
+            // user: String,
+            // idsanpham: String,
+
+            // status: String
+            var entity = {
+                user: req.user.name,
+                idsanpham: product._id.toString(),
+                status: "cancel"
+            }
+            historymodels.insert(entity);
+        }
+
+        res.redirect('/users/mycart');
+
+    }
+    async postBuyProductNow(req, res) {
+        var idsanpham = req.params.id;
+        var product = {};
+        await dbproduct.findOne({
+            _id: ObjectId(idsanpham)
+        }).then(doc => {
+            product = doc;
+        });
+        //history
+        var entity = {
+            user: req.user.name,
+            idsanpham: idsanpham,
+            status: "purchased"
+        }
+
+        historymodels.insert(entity);
+
+        await dbcart.deleteOne({
+            idsanpham: product._id.toString()
+        });
+
+        res.redirect('/users/mycart');
     }
 
 }
 
 
 module.exports = userController;
-
-// async setPostSignin(req, res) {
-
-//     var arr = [];
-//     var checkSignin = {
-//         suname: req.body.username,
-//         supass: req.body.password,
-//     };
-//     //kiểm tra pass
-//     await db.find({
-//         name: checkSignin.suname
-//     }).then(function (docs) {
-//         // arr.push(docs);
-//         docs.forEach(element => {
-//             arr.push(element);
-//         })
-//     });
-//     console.log(arr);
-//     if (arr.length === 0) {
-//         res.render('signup_in', {
-//             title: 'Sign in/ Sign up',
-//             checksignin: true,
-//             errsiname: "*Username wrong!"
-//         });
-//     } else {
-//         bcrypt.compare(checkSignin.supass, arr[0].pass, (err, isMatch) => {
-//             if(!isMatch){
-//                 res.render('signup_in', {
-//                     title: 'Sign in/ Sign up',
-//                     checksignin: true,
-//                     errsiname: "*Password wrong!"
-//                 });
-//             }
-//             else if(checkSignin.user==="admin"){
-//                 res.redirect('/admin');
-//             }
-//         });
-//     }
-// }

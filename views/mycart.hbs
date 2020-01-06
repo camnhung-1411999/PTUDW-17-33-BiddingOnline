@@ -11,109 +11,95 @@
   type='text/css'>
 {{!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> --}}
 <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
-
-
+<link rel="stylesheet" href="/stylesheets/account.css">
 <!-- Custom styles for this template -->
 <link href="/stylesheets/agency.css" rel="stylesheet">
 <link rel="stylesheet" href="/../stylesheets/mycart.css">
 {{/section}}
+<div id="page-top">
+  {{>navProducts}}
 
-{{>navProducts}}
-<div class="container">
-  {{!-- my cart --}}
 
-  <div class="row" style="margin-top: 150px!important;">
-    <h2 style="color:rgb(167, 167, 167);">My Cart</h2>
+  <div class="container">
+    <div class="row profile">
+      <div class="col-md-3">
+        {{>profile}}
+      </div>
+      <div class="col-md-9">
+        <div class="row" style="margin-top: 150px!important;">
 
-    <div>
-      <table class="table">
-        <thead style="font-size:25px;">
-          <tr>
-            <th scope="col">Bidding cart</th>
-            <th scope="col">Information product</th>
-            <th scope="col">Bid Price</th>
-            <th scope="col">Status</th>
-            <th scope="col">Buy Price</th>
-            <th scope="col">Choice</th>
-          </tr>
-        </thead>
-        {{#each cart}}
-        <tbody>
-          <tr>
-            <th scope="row"><a href="/products/detailproduct/{{this.idsanpham}}"><img src="{{this.image}}" alt=""
-                  style="width:50px; height:50px;"></a></th>
-            <td style="width:450px;">{{this.tensp}}<br>
-              <p style="color: blue;">Supplier:<span>{{this.seller}}</span></p>
-            </td>
-            <td>{{this.giadau}} đ</td>
-            <td>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                Delete
-              </button>
+          <div class="col-md-9">
+            <h2 style="color:rgb(167, 167, 167);">My Cart</h2>
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deletecart">
+              Delete your cart
+            </button>
+            {{>modaldeletecart}}
+          </div>
 
-              <!-- Modal -->
-              {{>modaldeletecart}}
-            </td>
+          <!-- Modal -->
 
-            <td>{{this.giaphaitra}} đ</td>
 
-            <td>
-              <input type="checkbox" name="" id="" class="col text-center">
-            </td>
-          </tr>
-        </tbody>
-        {{/each}}
-      </table>
+        </div>
+        <div style="background-color: rgb(247, 247, 247);">
+          <table class="table" >
+            <thead style="font-size:20px;">
+              <tr>
+                <th scope="col">Bidding cart</th>
+                <th scope="col">Information</th>
+                <th scope="col">Bid Price</th>
+                <th scope="col">Detail bidding</th>
+                <th scope="col">Buy Price</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            {{#each cart}}
+            <tbody>
+              <tr>
+                <th scope="row"><a href="/products/detailproduct/{{this.idsanpham}}"><img src="{{this.image}}" alt=""
+                      style="width:50px; height:50px;"></a></th>
+                <td style="width:200px;">{{this.tensp}}<br>
+                  <p style="color: blue;">Supplier:<span>{{this.seller}}</span></p>
+                </td>
+                <td>{{this.giadau}} đ</td>
+                <td>
+                  <p>total:{{this.num}}</p>
+                  {{#each this.numbid}}
+                  <p>+Bidder:{{this.user}}</p><p>- Price bid:{{this.giadau}}</p><p>- Date bid:{{this.datebid}}</p>
+                  {{/each}}
+                </td>
+                {{!-- <td>
+                  <button type="button" class="btn btn-primary deletecart" data-toggle="modal"
+                    data-target=".deletecart">
+                    Delete
+                    <p class="temp" hidden>{{this.idsanpham}}</p>
 
+                  </button>
+
+                  <!-- Modal -->
+                  {{>modaldeletecart}}
+                </td> --}}
+
+                <td class="temp">{{this.giaphaitra}} đ</td>
+                <form action="/users/mycart/buy/{{this.idsanpham}}" method="post">
+                  <td>
+                    <input class="btn btn-outline-primary" type="submit" value="Buy">
+                  </td>
+                </form>
+              </tr>
+            </tbody>
+            {{/each}}
+          </table>
+
+        </div>
+      </div>
     </div>
-  </div>
-
-  {{!-- Total --}}
-  <div class="row">
-    <div class="col-6"></div>
-    <div class="col-2"></div>
-    <div class="col-2">
-      {{!-- <table>
-          <tr>
-            <th style="width:200px;">SubToTal</th>
-            <th style="float: left;">20000000</th>
-          </tr>
-          <tr>
-            <th style="width:200px;">Tax(2%)</th>
-            <th style="float: left;">3000</th>
-          </tr>
-          <tr>
-            <th style="width:200px;">Shipping</th>
-            <th style="float: left;">41000</th>
-          </tr>
-          <tr>
-            <th style="width:200px;">Grand total</th>
-            <th style="float: left;">20044000</th>
-          </tr>
-        </table> --}}
-      <p>SubToTal</p>
-      <p>Tax(2%)</p>
-      <p>Shipping</p>
-      <p>Grand total</p>
-    </div>
-    <div class="col-2">
-      <p>21000000</p>
-      <p>3000</p>
-      <p>245000</p>
-      <p>21243000</p>
-    </div>
-
-  </div>
-
-
-  <div class="row order">
-    <button class="btn btn-primary">Order</button>
-  </div>
-  <div style="height: 100px;">
 
   </div>
 
 </div>
+
 
 
 {{#section 'js'}}
@@ -134,5 +120,6 @@
 <!-- Custom scripts for this template -->
 <script src="/javascripts/agency.min.js"></script>
 <script src="/../javascripts/mycart.js"></script>
+
 
 {{/section}}

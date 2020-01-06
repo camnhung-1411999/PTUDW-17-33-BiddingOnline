@@ -1,0 +1,49 @@
+{{!-- <div class="modal fade" id="favorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="width: 300px; margin: auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="exampleModalLongTitle">Ring Ring!</h5>
+            </div>
+            <div class="modal-body">
+                <h5>Add to watch list?</h5>
+            </div>
+            <form method="POST">
+                <div class="modal-footer">
+                    <input class="btn btn-outline-primary"
+                        formaction="/products/detailproduct/{{product._id}}/watchlist" type="submit" value="accept">
+                    <button class="btn btn-outline-danger" data-dismiss="modal" id="product">cacel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> --}}
+
+<div class="modal fade" id="favorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="width: 300px; margin: auto;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="exampleModalLongTitle">Ring Ring!</h5>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 20px;" id="setaddtowatch"></p>
+            </div>
+            <form method="POST">
+                <div class="modal-footer">
+                    <input class="btn btn-outline-primary"
+                        formaction="/products/detailproduct/{{product._id}}/watchlist" type="submit" value="accept">
+                    <button class="btn btn-outline-danger" data-dismiss="modal" id="product">cacel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $('#love123').click(() => {
+        $('#setaddtowatch').text("Add to watch list");
+    })
+</script>

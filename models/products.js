@@ -22,7 +22,8 @@ var ProductsSchema = new mongoose.Schema({
     ghichu: String,
     selling: Boolean,
     user: String,
-    soluot: Number
+    soluot: Number,
+    curwin:Boolean,
 }, {
     collection: "product"
 });

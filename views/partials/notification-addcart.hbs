@@ -4,15 +4,15 @@
         <div class="modal-content">
             <div class="modal-header">
 
-                <h5 class="modal-title" id="exampleModalLongTitle">Thông báo!</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Ring Ring!</h5>
             </div>
             <div class="modal-body">
                 <p id="setgia1">Mẫn</p>
             </div>
             <form method="POST">
                 <div class="modal-footer">
-                    <input class="btn btn-outline-primary" formaction="/products/detailproduct/{{product._id}}/addtocart"
-                        type="submit" value="accept">
+                    <input class="btn btn-outline-primary"
+                        formaction="/products/detailproduct/{{product._id}}/addtocart" type="submit" value="accept">
                     <button class="btn btn-outline-danger" data-dismiss="modal" id="product">cacel</button>
                 </div>
             </form>
@@ -20,8 +20,9 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 <script>
     $('#clickaddtocart').click(() => {
-        $('#setgia1').text("Xác nhận giá đấu là " + $('#giamuangay').text());
+        $('#setgia1').text("Confirm buy now with " + $('#giamuangay').text());
     })
 </script>

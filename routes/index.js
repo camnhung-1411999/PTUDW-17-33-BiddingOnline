@@ -65,11 +65,11 @@ router.get('/', async function (req, res) {
     })
   });
 
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < giacaonhat.length; i++) {
     giacaonhat[i].soluot = 0;
   }
 
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < giacaonhat.length; i++) {
     await dbbidding.findOne({
       idsanpham: giacaonhat[i]._id.toString()
     }).then(doc => {

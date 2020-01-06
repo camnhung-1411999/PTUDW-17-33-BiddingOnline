@@ -49,9 +49,25 @@
                                     <td>{{account.address}}</td>
                                 </tr>
                                 <tr>
+                                    <th class="info">Birthday</th>
+                                    <td>{{account.birthday}}</td>
+                                </tr>
+                                <tr>
                                     <th class="info">Status</th>
                                     <td>{{account.status}}</td>
                                 </tr>
+                                <tr>
+                                    <th class="info">Point Bid</th>
+                                    <td>{{pointbid}}</td>
+                                </tr>
+                                {{#if isSeller}}
+                                 <tr>
+                                    <th class="info">Rate</th>
+                                    <td>{{rate}}<br>
+                                    <a href="/../rateandreviews/{{account.name}}">All review</a>
+                                    </td>
+                                </tr>
+                                {{/if}}
 
                             </thead>
 
