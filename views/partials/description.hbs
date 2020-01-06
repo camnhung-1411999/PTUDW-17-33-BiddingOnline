@@ -8,7 +8,7 @@
                 <a class="nav-link text-color-a1" data-toggle="tab" href="#detail" role="tab">Details</a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link text-color-a1" data-toggle="tab" href="#shipping" role="tab">Shipping</a>
+                <a class="nav-link text-color-a1" data-toggle="tab" href="#shipping" role="tab">List bidder</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-color-a1" data-toggle="tab" href="#seller" role="tab">Seller</a>
@@ -21,6 +21,11 @@
                 Date Start: {{product.datetime}}<br>
                 Date End: sau {{product.datetimeproduct}} day(s)<br>
                 Number of Bid: {{numofbid}} <br>
+                Shipping:<br>
+                + Standard Express<br>
+                + Giao Hàng Tiết Kiệm<br>
+                + Giao Hàng Nhanh
+
             </div>
             <div class="tab-pane fade px-3 py-4 text-color-a2" id="detail" role="tabpanel">
                 {{!-- <ul class="list-group"> --}}
@@ -43,16 +48,49 @@
                 {{!-- {{product.ghichu}} --}}
             </div>
             <div class="tab-pane fade px-3 py-4 text-color-a2" id="shipping" role="tabpanel">
-                + Đơn vị vận chuyển: Vận chuyển nhanh quốc tế (Standard Express)<br>
-                + Đơn vị vận chuyển: Vận Chuyển Nhanh (Giao Hàng Tiết Kiệm)<br>
-                + Đơn vị vận chuyển: Vận Chuyển Nhanh (Giao Hàng Nhanh)
+
+                <table class="table">
+                    <thead style="font-size:25px;">
+                        <tr>
+                            <th scope="col">List bidder is bidding</th>
+                            <th scope="col">Point bidder</th>
+                            <th scope="col">Reviews</th>
+                            <th scope="col"></th>
+
+                        </tr>
+                    </thead>
+                    {{#if isMine}}
+                    {{#each listbid}}
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="namebid">{{this.user}}</th>
+                            <td>{{this.point}}</td>
+                            <td><a href="/../rate-reviews/{{this.user}}">All Reviews</a></td>
+                            <td>
+                                <input type="button" value="Delete">
+                            </td>
+                        </tr>
+                    </tbody>
+                    {{/each}}
+                    {{else}}
+                    {{#each listbid}}
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="namebid">{{this.user}}</th>
+                            <td>{{this.point}}</td>
+                            <td><a href="/../rate-reviews/{{this.user}}">All Reviews</a></td>
+                        </tr>
+                    </tbody>
+                    {{/each}}
+                    {{/if}}
+                </table>
+
             </div>
             <div class="tab-pane fade px-3 py-4 text-color-a2" id="seller" role="tabpanel">
                 <a href="/../rate-reviews/{{product.user}}">
                     <h4>User: <span id="nameseller">{{product.user}}</span>
                 </a>
                 </h4>
-                - Name seller: Nguyen Ngo Ngoc Nga <br>
                 - Point : {{rate}}
             </div>
 
@@ -79,4 +117,12 @@
         let a = getNodes($(temp[i]).text());
         $(temp[i]).html(a);
     }
+</script>
+<script>
+    var str = $('.namebid');
+
+    for (var i = 0; i < str.length; i++) {
+        $(str[i]).text("***" + $(str[i]).text().substr(-3));
+    }
+
 </script>
