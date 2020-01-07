@@ -197,15 +197,6 @@ class userController {
                                             birthday: checkInfor.birthday,
                                         }
                                         usermodels.insert(user);
-                                        const manageuser = {
-                                            name: checkInfor.name,
-                                            purchase: 0,
-                                            cacellate: 0,
-                                            type: false,
-                                            pointbid: 0,
-                                            pointsell: -1,
-                                        }
-                                        manageusermodels.insert(manageuser);
                                         res.redirect('/');
                                     });
                                 }
